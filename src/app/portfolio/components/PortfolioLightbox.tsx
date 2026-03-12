@@ -6,6 +6,7 @@ import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import type { PortfolioImage } from '@/types/sanity'
 import { getImageUrl } from '@/lib/sanity'
+import ImageSkeleton from './ImageSkeleton'
 
 interface PortfolioLightboxProps {
   images: PortfolioImage[]
@@ -19,12 +20,17 @@ export default function PortfolioLightbox({
   categoryRouteSlugs,
 }: PortfolioLightboxProps) {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
 
   const lightboxSlides = images.map((item) => ({
     src: getImageUrl(item.image),
     title: categoryDisplayNames[item.category] || item.category,
     description: item.location,
   }))
+
+  const handleImageLoad = (imageId: string) => {
+    setLoadedImages((prev) => new Set(prev).add(imageId))
+  }
 
   return (
     <>
@@ -34,6 +40,7 @@ export default function PortfolioLightbox({
           images.map((item, index) => {
             const imageUrl = getImageUrl(item.image)
             const displayCategory = categoryDisplayNames[item.category] || item.category
+            const isLoaded = loadedImages.has(item._id)
 
             return (
               <button
@@ -41,37 +48,27 @@ export default function PortfolioLightbox({
                 onClick={() => setLightboxIndex(index)}
                 className="break-inside-avoid relative group overflow-hidden bg-gray-100 cursor-pointer mb-6 w-full text-left border-0 p-0 outline-none hover:outline-none"
               >
-                <div className="relative w-full aspect-[3/4]">
+                <div className="relative w-full">
+                  {!isLoaded && <ImageSkeleton />}
                   {imageUrl && (
                     <Image
                       src={imageUrl}
                       alt={displayCategory}
-                      fill
+                      width={1200}
+                      height={1200}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                      className={`object-cover transition-transform duration-300 group-hover:brightness-110 w-full h-auto ${
+                        isLoaded ? 'opacity-100' : 'opacity-0'
+                      }`}
                       priority={item.featured}
+                      loading={item.featured ? 'eager' : 'lazy'}
+                      onLoadingComplete={() => handleImageLoad(item._id)}
                     />
                   )}
                 </div>
 
-                {/* Category Badge - Always Visible */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end">
-                  <span className="font-sans text-xs uppercase tracking-widest text-accent">
-                    {displayCategory}
-                  </span>
-                  {item.location && (
-                    <p className="font-sans text-xs text-gray-300">
-                      {item.location}
-                    </p>
-                  )}
-                </div>
-
-                {/* Hover Overlay - View in Fullscreen */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="bg-white/90 hover:bg-white text-secondary font-sans font-semibold text-sm uppercase tracking-widest px-6 py-2 transition-colors rounded">
-                    Ver en Grande
-                  </div>
-                </div>
+                {/* Subtle hover overlay */}
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300 pointer-events-none" />
               </button>
             )
           })
@@ -90,26 +87,6 @@ export default function PortfolioLightbox({
         index={lightboxIndex}
         close={() => setLightboxIndex(-1)}
         slides={lightboxSlides}
-        render={{
-          slide: (slide, offset, rect) => (
-            <div
-              style={{
-                width: rect.width,
-                height: rect.height,
-              }}
-            >
-              <img
-                src={slide.src}
-                alt={slide.title || 'Portfolio image'}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                }}
-              />
-            </div>
-          ),
-        }}
         styles={{
           container: { backgroundColor: 'rgba(0, 0, 0, 0.95)' },
         }}

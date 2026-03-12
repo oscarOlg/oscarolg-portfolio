@@ -2,8 +2,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar"; 
-import WhatsAppButton from "./components/WhatsAppButton";
+import Navbar from "./components/Navbar";
 
 // Initialize fonts
 const playfair = Playfair_Display({ subsets: ["latin"], variable: '--font-playfair' });
@@ -30,8 +29,6 @@ export default function RootLayout({
         <main className="flex-grow w-full">
           {children}
         </main>
-
-        <WhatsAppButton />
 
         {/* Global Footer */}
         <footer className="w-full py-12 text-center text-sm flex flex-col items-center border-t border-gray-200 mt-auto">

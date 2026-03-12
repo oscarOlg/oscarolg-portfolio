@@ -11,7 +11,8 @@
     "studio:build": "sanity build",
     "sanity:deploy": "sanity deploy",
     "seed": "node scripts/seed.mjs",
-    "upload-portfolio": "node scripts/upload-portfolio.mjs"
+    "upload-portfolio": "node scripts/upload-portfolio.mjs",
+    "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -24,6 +25,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sanity": "^5.14.1",
+    "styled-components": "^6.3.11",
     "yet-another-react-lightbox": "^3.29.1"
   },
   "devDependencies": {

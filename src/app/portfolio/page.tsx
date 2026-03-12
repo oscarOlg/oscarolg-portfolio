@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getPortfolioImages } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import PortfolioLightbox from "./components/PortfolioLightbox";
+import FloatingCTA from "./components/FloatingCTA";
 
 // Map Sanity category names to display names
 const categoryDisplayNames: Record<string, string> = {
@@ -38,39 +39,48 @@ export default async function PortfolioPage() {
   ).sort();
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
 
-      {/* Sub-navigation for Categories */}
-      <nav className="flex flex-wrap justify-center gap-6 md:gap-10 text-xs tracking-widest uppercase mb-16 text-gray-500">
-        <span className="text-secondary border-b border-accent pb-1 cursor-pointer">Todo</span>
-        {categories.map((category) => (
-          <Link
-            key={category}
-            href={`/portfolio/${categoryRouteSlugs[category] || category}`}
-            className="hover:text-secondary transition-colors cursor-pointer pb-1"
-          >
-            {categoryDisplayNames[category] || category}
-          </Link>
-        ))}
+      {/* Sticky Navigation */}
+      <nav className="sticky top-0 z-40 w-full bg-secondary border-y-2 border-accent py-6 px-6 md:px-12 shadow-lg">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-6 md:gap-10 text-xs tracking-widest uppercase text-secondary">
+          <span className="text-accent border-b-2 border-accent pb-1 cursor-pointer font-semibold">Todo</span>
+          {categories.map((category) => (
+            <Link
+              key={category}
+              href={`/portfolio/${categoryRouteSlugs[category] || category}`}
+              className="hover:text-accent transition-colors cursor-pointer pb-1"
+            >
+              {categoryDisplayNames[category] || category}
+            </Link>
+          ))}
+        </div>
       </nav>
 
-      {/* Portfolio Grid with Lightbox */}
-      <PortfolioLightbox
-        images={portfolioData}
-        categoryDisplayNames={categoryDisplayNames}
-        categoryRouteSlugs={categoryRouteSlugs}
-      />
+      {/* Main Content */}
+      <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
 
-      {/* Call to Action */}
-      <div className="mt-24 text-center">
-        <h3 className="font-serif text-2xl mb-6">¿Listo para crear tus propios recuerdos?</h3>
-        <Link
-          href="/contact"
-          className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-opacity-90 transition-all font-semibold"
-        >
-          Consultar Disponibilidad
-        </Link>
+        {/* Portfolio Grid with Lightbox */}
+        <PortfolioLightbox
+          images={portfolioData}
+          categoryDisplayNames={categoryDisplayNames}
+          categoryRouteSlugs={categoryRouteSlugs}
+        />
+
+        {/* Call to Action */}
+        <div className="mt-24 text-center">
+          <h3 className="font-serif text-2xl mb-6">¿Listo para crear tus propios recuerdos?</h3>
+          <Link
+            href="/contact"
+            className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-opacity-90 transition-all font-semibold"
+          >
+            Consultar Disponibilidad
+          </Link>
+        </div>
       </div>
+
+      {/* Floating CTA Buttons */}
+      <FloatingCTA />
 
     </div>
   );

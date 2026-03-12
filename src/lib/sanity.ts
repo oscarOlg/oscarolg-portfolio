@@ -14,7 +14,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false,
 })
 
 // GROQ queries for different content types
@@ -29,7 +29,7 @@ export const portfolioImagesQuery = `
     location,
     featured,
     image {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -51,7 +51,7 @@ export const portfolioImagesByCategoryQuery = (category: string) => `
     location,
     featured,
     image {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -72,7 +72,7 @@ export const featuredPortfolioImagesQuery = `
     category,
     location,
     image {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -127,7 +127,7 @@ export const testimonialsQuery = `
     rating,
     featured,
     image {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -146,7 +146,7 @@ export const featuredTestimonialsQuery = `
     text,
     rating,
     image {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -161,7 +161,7 @@ export const aboutContentQuery = `
     title,
     subtitle,
     mainImage {
-      asset {
+      asset-> {
         _id,
         url
       },
@@ -183,10 +183,17 @@ export const aboutContentQuery = `
  * @param image - The Sanity image object
  * @returns URL string for the image
  */
-export function getImageUrl(image: PortfolioImage['image'] | undefined): string {
+export function getImageUrl(image: PortfolioImage['image'] | undefined, width?: number, height?: number): string {
   if (!image?.asset) return ''
   try {
-    return imageUrlBuilder(client).image(image).url()
+    const builder = imageUrlBuilder(client).image(image)
+
+    // Add width and height if provided
+    if (width) builder.width(width)
+    if (height) builder.height(height)
+
+    // Add auto format and quality optimization
+    return builder.auto('format').quality(90).url()
   } catch (error) {
     console.error('Error building image URL:', error)
     return ''
