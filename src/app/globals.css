@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dominant: #F9F8F6;
+  --color-secondary: #2C2C2C;
+  --color-accent: #d1bfa7;
+  
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-lato);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-dominant);
+    color: var(--color-secondary);
+    margin: 0; /* Fuerzas a que no haya margen blanco */
+    padding: 0;
+    overflow-x: hidden; /* Evita que la página haga scroll hacia los lados */
+  }
+}
