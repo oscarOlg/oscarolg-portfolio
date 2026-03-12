@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# portfolio images (stored in Sanity CMS, not needed in repo)
+/portfolio-images/
