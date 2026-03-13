@@ -86,7 +86,7 @@ export default async function Home() {
                 return (
                   <AnimatedSection key={key} delay={i * 0.07}>
                     <Link
-                      href={`/portfolio/${key}`}
+                      href={`/portfolio?category=${key}`}
                       className="group relative block aspect-[3/4] overflow-hidden"
                     >
                       {imgUrl ? (
