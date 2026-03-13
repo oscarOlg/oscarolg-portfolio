@@ -107,7 +107,10 @@ const packages = [
     deliverables: 'Galería digital',
     popular: false,
     displayOrder: 4,
-    addOns: [],
+    addOns: [
+      { name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")', price: 1500 },
+      { name: 'Horas extra de cobertura', price: 1500, unit: 'por hora' },
+    ],
   },
 
   // ==================== RETRATOS ====================
@@ -127,6 +130,7 @@ const packages = [
     popular: false,
     displayOrder: 1,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -147,6 +151,7 @@ const packages = [
     popular: true,
     displayOrder: 2,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -167,6 +172,7 @@ const packages = [
     popular: false,
     displayOrder: 3,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -189,6 +195,7 @@ const packages = [
     popular: false,
     displayOrder: 1,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -209,6 +216,7 @@ const packages = [
     popular: true,
     displayOrder: 2,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -229,6 +237,7 @@ const packages = [
     popular: false,
     displayOrder: 3,
     addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -249,7 +258,9 @@ const packages = [
     deliverables: '15 fotos editadas',
     popular: false,
     displayOrder: 1,
-    addOns: [],
+    addOns: [
+      { name: 'Sesión en Estudio', price: 600 },
+    ],
   },
   {
     name: 'Documental de Vida',

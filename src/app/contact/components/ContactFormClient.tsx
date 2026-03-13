@@ -19,7 +19,7 @@ interface FormData {
   date: string;
   service: string;
   packageId: string;
-  selectedAddOns: string[]; // IDs of selected add-ons
+  selectedAddOns: Record<string, number>; // add-on name -> quantity
   message: string;
 }
 
@@ -35,7 +35,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     date: "",
     service: "",
     packageId: "",
-    selectedAddOns: [],
+    selectedAddOns: {},
     message: "",
   });
 
@@ -76,11 +76,11 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     if (!selectedPackage) return 0;
     let total = selectedPackage.price || 0;
 
-    // Add selected add-ons
-    formData.selectedAddOns.forEach((addOnName) => {
+    // Add selected add-ons with quantities
+    Object.entries(formData.selectedAddOns).forEach(([addOnName, quantity]) => {
       const addOn = selectedPackage.addOns?.find((a) => a.name === addOnName);
       if (addOn && addOn.price) {
-        total += addOn.price;
+        total += addOn.price * quantity;
       }
     });
 
@@ -105,8 +105,17 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
       text += `. `;
     }
 
-    if (formData.selectedAddOns.length > 0) {
-      text += `También me interesa agregar: ${formData.selectedAddOns.join(", ")}. `;
+    if (Object.keys(formData.selectedAddOns).length > 0) {
+      const addOnsText = Object.entries(formData.selectedAddOns)
+        .map(([addOnName, qty]) => {
+          const addOn = selectedPackage?.addOns?.find((a) => a.name === addOnName);
+          if (addOn?.unit) {
+            return `${addOnName} (${qty} ${addOn.unit})`;
+          }
+          return addOnName;
+        })
+        .join(", ");
+      text += `También me interesa agregar: ${addOnsText}. `;
     }
 
     if (date) text += `La fecha tentativa sería el ${date}. `;
@@ -134,7 +143,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
         ...prev,
         [id]: value,
         packageId: "",
-        selectedAddOns: [],
+        selectedAddOns: {},
       }));
     } else {
       setFormData((prev) => ({ ...prev, [id]: value }));
@@ -147,15 +156,18 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     setFormData((prev) => ({
       ...prev,
       packageId: value,
-      selectedAddOns: [],
+      selectedAddOns: {},
     }));
   };
 
-  const handleAddOnChange = (addOnName: string, checked: boolean) => {
+  const handleAddOnChange = (addOnName: string, quantity: number) => {
     setFormData((prev) => {
-      const newAddOns = checked
-        ? [...prev.selectedAddOns, addOnName]
-        : prev.selectedAddOns.filter((a) => a !== addOnName);
+      const newAddOns = { ...prev.selectedAddOns };
+      if (quantity > 0) {
+        newAddOns[addOnName] = quantity;
+      } else {
+        delete newAddOns[addOnName];
+      }
       return { ...prev, selectedAddOns: newAddOns };
     });
   };
@@ -167,12 +179,16 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     setErrorMessage("");
 
     try {
-      // Format add-ons with prices
-      const addOnDetails = formData.selectedAddOns
-        .map((name) => {
+      // Format add-ons with prices and quantities
+      const addOnDetails = Object.entries(formData.selectedAddOns)
+        .map(([name, quantity]) => {
           const addOn = selectedPackage?.addOns?.find((a) => a.name === name);
           if (addOn?.price) {
-            return `${name} ($${addOn.price.toLocaleString("es-MX")} MXN)`;
+            const totalAddOnPrice = addOn.price * quantity;
+            if (addOn.unit) {
+              return `${name} x${quantity} (${quantity} ${addOn.unit} @ $${addOn.price.toLocaleString("es-MX")} = $${totalAddOnPrice.toLocaleString("es-MX")} MXN)`;
+            }
+            return `${name} ($${totalAddOnPrice.toLocaleString("es-MX")} MXN)`;
           }
           return name;
         })
@@ -206,7 +222,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           date: "",
           service: "",
           packageId: "",
-          selectedAddOns: [],
+          selectedAddOns: {},
           message: "",
         });
         setSubmitStatus("idle");
@@ -365,27 +381,75 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
               <label className="font-sans uppercase tracking-widest text-xs text-gray-500">
                 Complementos
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {selectedPackage.addOns.map((addOn, idx) => (
-                  <label key={idx} className="flex items-center gap-3 cursor-pointer group">
-                    <input
-                      type="checkbox"
-                      checked={formData.selectedAddOns.includes(addOn.name)}
-                      onChange={(e) => handleAddOnChange(addOn.name, e.target.checked)}
-                      className="w-4 h-4 accent-secondary cursor-pointer flex-shrink-0"
-                    />
-                    <div className="flex-grow">
-                      <span className="font-sans text-sm text-gray-600 group-hover:text-secondary transition-colors">
-                        {addOn.name}
-                      </span>
-                      {addOn.price && addOn.price > 0 && (
-                        <span className="font-sans text-xs text-accent ml-2">
-                          +${addOn.price.toLocaleString("es-MX")} MXN
+              <div className="grid grid-cols-1 gap-4">
+                {selectedPackage.addOns.map((addOn, idx) => {
+                  const isSelected = addOn.name in formData.selectedAddOns;
+                  const quantity = formData.selectedAddOns[addOn.name] || 0;
+                  const hasUnit = !!addOn.unit;
+
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 p-3 border border-gray-200 rounded hover:bg-gray-50 transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={(e) =>
+                          handleAddOnChange(addOn.name, e.target.checked ? 1 : 0)
+                        }
+                        className="w-4 h-4 accent-secondary cursor-pointer flex-shrink-0"
+                      />
+                      <div className="flex-grow min-w-0">
+                        <span className="font-sans text-sm text-gray-700">
+                          {addOn.name}
                         </span>
+                        {addOn.price && addOn.price > 0 && (
+                          <span className="font-sans text-xs text-accent ml-2">
+                            ${addOn.price.toLocaleString("es-MX")} MXN
+                            {hasUnit && ` / ${addOn.unit}`}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Quantity Input - Only show if selected and has unit */}
+                      {isSelected && hasUnit && (
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleAddOnChange(addOn.name, Math.max(1, quantity - 1))
+                            }
+                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                          >
+                            −
+                          </button>
+                          <input
+                            type="number"
+                            min="1"
+                            value={quantity}
+                            onChange={(e) =>
+                              handleAddOnChange(
+                                addOn.name,
+                                Math.max(1, parseInt(e.target.value) || 1)
+                              )
+                            }
+                            className="w-10 text-center border border-gray-300 rounded py-1 text-sm"
+                          />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleAddOnChange(addOn.name, quantity + 1)
+                            }
+                            className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                          >
+                            +
+                          </button>
+                        </div>
                       )}
                     </div>
-                  </label>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}

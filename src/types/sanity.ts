@@ -105,6 +105,7 @@ export interface ServicePackage {
     _type?: 'object'
     name: string
     price: number
+    unit?: string
   }>
   popular: boolean
   displayOrder?: number
