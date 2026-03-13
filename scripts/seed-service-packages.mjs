@@ -26,6 +26,11 @@ const client = createClient({
   useCdn: false,
 });
 
+// Helper function to generate unique keys
+function generateKey(str) {
+  return Math.random().toString(36).substr(2, 9);
+}
+
 // All service packages data
 const packages = [
   // ==================== BODAS ====================
@@ -399,9 +404,18 @@ async function seedPackages() {
     let count = 0;
 
     packages.forEach((pkg) => {
+      // Add _key to each add-on
+      const packageWithKeys = {
+        ...pkg,
+        addOns: pkg.addOns?.map((addOn) => ({
+          ...addOn,
+          _key: generateKey(),
+        })) || [],
+      };
+
       createTransaction.create({
         _type: 'servicePackage',
-        ...pkg,
+        ...packageWithKeys,
       });
       count++;
     });
