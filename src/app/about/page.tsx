@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-// Arrow icon component can be imported from a library like lucide-react or heroicons in the future
-// import { ArrowUpRight } from "lucide-react"; 
+import Socials from "../components/Socials";
 
 export default function AboutPage() {
   return (
@@ -55,10 +54,7 @@ export default function AboutPage() {
             </Link>
             
             {/* Social Links */}
-            <div className="flex gap-4 font-sans text-xs tracking-widest uppercase text-gray-500">
-              <a href="#" className="hover:text-accent transition-colors">Instagram</a>
-              <a href="#" className="hover:text-accent transition-colors">Facebook</a>
-            </div>
+            <Socials containerClassName="flex gap-5" itemClassName="hover:text-accent transition-colors text-gray-500" />
           </div>
 
         </div>

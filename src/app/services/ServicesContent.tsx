@@ -17,7 +17,7 @@ import EditorialPackages from "./components/EditorialPackages";
 export enum ServiceTab {
   WEDDINGS = "weddings",
   MATERNITY = "maternity",
-  INDIVIDUAL = "individual",
+  PORTRAIT = "portrait",
   COUPLE = "couple",
   COMMERCIAL = "commercial",
   EDITORIAL = "editorial"
@@ -85,9 +85,9 @@ export default function ServicesContent() {
         </AccordionItem>
 
         <AccordionItem 
-          id={ServiceTab.INDIVIDUAL} 
-          title="Retrato Individual" 
-          isOpen={openTab === ServiceTab.INDIVIDUAL} 
+          id={ServiceTab.PORTRAIT} 
+          title="Retratos" 
+          isOpen={openTab === ServiceTab.PORTRAIT} 
           onToggle={toggleTab}
         >
           <IndividualPackages />

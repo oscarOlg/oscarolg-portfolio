@@ -17,11 +17,12 @@ export const servicePackageType = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Wedding Packages', value: 'wedding'},
-          {title: 'Individual/Portrait', value: 'individual'},
-          {title: 'Couples', value: 'couples'},
-          {title: 'Family', value: 'family'},
-          {title: 'Event', value: 'event'},
+          {title: 'Bodas', value: 'weddings'},
+          {title: 'Retratos', value: 'portrait'},
+          {title: 'Parejas', value: 'couples'},
+          {title: 'Maternidad', value: 'maternity'},
+          {title: 'Comercial', value: 'commercial'},
+          {title: 'Editorial', value: 'editorial'},
         ],
       },
       validation: (Rule) => Rule.required(),

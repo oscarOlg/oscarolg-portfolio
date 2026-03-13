@@ -1,0 +1,44 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+/**
+ * Client component for above-the-fold hero animations.
+ * Uses mount-time animation (not scroll-triggered) so it plays on initial load.
+ */
+export default function HeroContent() {
+  return (
+    <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 text-center">
+      <motion.h2
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg mb-8"
+      >
+        Fotografía que captura{" "}
+        <span className="italic text-accent">la esencia de tu historia</span>
+      </motion.h2>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col sm:flex-row items-center gap-4"
+      >
+        <Link
+          href="/portfolio"
+          className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-white hover:-translate-y-1 transition-all duration-300 font-bold border border-accent"
+        >
+          Ver mi portafolio
+        </Link>
+        <Link
+          href="/contact"
+          className="inline-block bg-transparent text-white font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 font-semibold border border-white/60"
+        >
+          Cotizar sesión
+        </Link>
+      </motion.div>
+    </div>
+  );
+}

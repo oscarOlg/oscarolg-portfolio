@@ -172,10 +172,11 @@ export default function ContactContent() {
                   <option value="" disabled>Selecciona una opción</option>
                   <option value="Boda Completa">Boda Completa</option>
                   <option value="Boda Civil / Íntima">Boda Civil / Íntima</option>
-                  <option value="Evento Social">Evento Social</option>
-                  <option value="Retrato Individual">Retrato Individual</option>
+                  <option value="Retrato">Retrato</option>
                   <option value="Retrato de Pareja">Retrato de Pareja</option>
-                  <option value="Retratos Familiares">Retratos Familiares</option>
+                  <option value="Maternidad">Maternidad</option>
+                  <option value="Comercial">Comercial / Branding</option>
+                  <option value="Editorial">Editorial / Moda</option>
                   <option value="Otro">Otro (Especificar abajo)</option>
                 </select>
               </div>

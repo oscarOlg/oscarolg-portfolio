@@ -41,12 +41,12 @@ export const portfolioImageType = defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Weddings', value: 'weddings'},
-          {title: 'Portraits', value: 'portraits'},
-          {title: 'Events', value: 'events'},
-          {title: 'Quinceañeras', value: 'quinceaneras'},
-          {title: 'Couples', value: 'couples'},
-          {title: 'Families', value: 'families'},
+          {title: 'Bodas', value: 'weddings'},
+          {title: 'Retratos', value: 'portraits'},
+          {title: 'Parejas', value: 'couples'},
+          {title: 'Comercial', value: 'commercial'},
+          {title: 'Editorial', value: 'editorial'},
+          {title: 'Maternidad', value: 'maternity'},
         ],
       },
       validation: (Rule) => Rule.required(),

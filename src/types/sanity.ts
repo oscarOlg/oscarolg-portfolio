@@ -11,6 +11,13 @@ export interface SanityImageAsset {
   asset: {
     _id: string
     url: string
+    metadata?: {
+      dimensions?: {
+        width: number
+        height: number
+        aspectRatio: number
+      }
+    }
   }
   hotspot?: {
     x: number
@@ -62,7 +69,7 @@ export interface PortfolioImage {
     current: string
   }
   description?: string
-  category: 'weddings' | 'portraits' | 'events' | 'quinceaneras' | 'couples' | 'commercial' | 'editorial' | 'maternity'
+  category: 'weddings' | 'portraits' | 'couples' | 'commercial' | 'editorial' | 'maternity'
   location?: string
   image: SanityImageAsset
   featured: boolean

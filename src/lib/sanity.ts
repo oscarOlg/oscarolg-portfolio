@@ -31,7 +31,14 @@ export const portfolioImagesQuery = `
     image {
       asset-> {
         _id,
-        url
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
       },
       hotspot,
     },
@@ -53,7 +60,14 @@ export const portfolioImagesByCategoryQuery = (category: string) => `
     image {
       asset-> {
         _id,
-        url
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
       },
       hotspot,
     },
@@ -74,7 +88,14 @@ export const featuredPortfolioImagesQuery = `
     image {
       asset-> {
         _id,
-        url
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
       },
       hotspot,
     },
@@ -222,6 +243,49 @@ export async function getPortfolioImages(): Promise<PortfolioImage[]> {
   } catch (error) {
     console.error('Error fetching portfolio images:', error)
     return []
+  }
+}
+
+/**
+ * Fetch a single portfolio image by its slug.
+ * Use this to pin a specific photo anywhere on the site.
+ * @example getPortfolioImageBySlug('couples-dscf0721')
+ */
+export async function getPortfolioImageBySlug(slug: string): Promise<PortfolioImage | null> {
+  try {
+    const query = `*[_type == "portfolioImage" && slug.current == $slug][0] {
+      _id, title, slug, description, category, location, featured,
+      image { asset-> { _id, url, metadata { dimensions { width, height, aspectRatio } } }, hotspot },
+      displayOrder, publishedAt
+    }`
+    const image = await client.fetch<PortfolioImage>(query, { slug })
+    return image || null
+  } catch (error) {
+    console.error(`Error fetching portfolio image by slug "${slug}":`, error)
+    return null
+  }
+}
+
+/**
+ * Fetch photos that have a specific displayOrder value within a category.
+ * Use this to pick exactly which photo shows as a cover/hero for a category.
+ * @example getPortfolioImageByOrder('weddings', 1)  → hero wedding photo
+ */
+export async function getPortfolioImageByOrder(
+  category: string,
+  order: number
+): Promise<PortfolioImage | null> {
+  try {
+    const query = `*[_type == "portfolioImage" && category == $category && displayOrder == $order][0] {
+      _id, title, slug, description, category, location, featured,
+      image { asset-> { _id, url, metadata { dimensions { width, height, aspectRatio } } }, hotspot },
+      displayOrder, publishedAt
+    }`
+    const image = await client.fetch<PortfolioImage>(query, { category, order })
+    return image || null
+  } catch (error) {
+    console.error(`Error fetching portfolio image for ${category} order ${order}:`, error)
+    return null
   }
 }
 

@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function InvestmentSection() {
+interface Props {
+  leftImageUrl?: string;
+  rightImageUrl?: string;
+}
+
+export default function InvestmentSection({ leftImageUrl, rightImageUrl }: Props) {
   return (
     <section className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-dominant">
       
@@ -34,19 +39,19 @@ export default function InvestmentSection() {
       {/* Lado Derecho: Composición Editorial */}
       <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex gap-4 md:gap-6">
         <div className="relative w-1/2 h-[80%] mt-auto shadow-sm overflow-hidden group">
-          <Image 
-            src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=2070&auto=format&fit=crop" 
-            fill 
-            className="object-cover group-hover:scale-105 transition-transform duration-700" 
-            alt="Detalle de evento" 
+          <Image
+            src={leftImageUrl ?? "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"}
+            fill
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            alt="Fotografía de sesión"
           />
         </div>
         <div className="relative w-1/2 h-[90%] shadow-sm overflow-hidden group">
-          <Image 
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" 
-            fill 
-            className="object-cover group-hover:scale-105 transition-transform duration-700" 
-            alt="Fotografía de retrato" 
+          <Image
+            src={rightImageUrl ?? "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"}
+            fill
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            alt="Fotografía de retrato"
           />
         </div>
       </div>

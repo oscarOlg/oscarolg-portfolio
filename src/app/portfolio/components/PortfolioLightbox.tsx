@@ -6,7 +6,6 @@ import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import type { PortfolioImage } from '@/types/sanity'
 import { getImageUrl } from '@/lib/sanity'
-import ImageSkeleton from './ImageSkeleton'
 
 interface PortfolioLightboxProps {
   images: PortfolioImage[]
@@ -41,6 +40,8 @@ export default function PortfolioLightbox({
             const imageUrl = getImageUrl(item.image)
             const displayCategory = categoryDisplayNames[item.category] || item.category
             const isLoaded = loadedImages.has(item._id)
+            const dimensions = item.image.asset?.metadata?.dimensions
+            const aspectRatio = dimensions?.aspectRatio ?? 0.8 // Default to 4:5 portrait if no data
 
             return (
               <button
@@ -48,21 +49,25 @@ export default function PortfolioLightbox({
                 onClick={() => setLightboxIndex(index)}
                 className="break-inside-avoid relative group overflow-hidden bg-gray-100 cursor-pointer mb-6 w-full text-left border-0 p-0 outline-none hover:outline-none"
               >
-                <div className="relative w-full">
-                  {!isLoaded && <ImageSkeleton />}
+                <div
+                  className="relative w-full overflow-hidden"
+                  style={{ aspectRatio: String(aspectRatio) }}
+                >
+                  {!isLoaded && (
+                    <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-gray-100 to-gray-200" />
+                  )}
                   {imageUrl && (
                     <Image
                       src={imageUrl}
                       alt={displayCategory}
-                      width={1200}
-                      height={1200}
+                      fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={`object-cover transition-transform duration-300 group-hover:brightness-110 w-full h-auto ${
+                      className={`object-cover transition-all duration-500 group-hover:brightness-110 ${
                         isLoaded ? 'opacity-100' : 'opacity-0'
                       }`}
                       priority={item.featured}
                       loading={item.featured ? 'eager' : 'lazy'}
-                      onLoadingComplete={() => handleImageLoad(item._id)}
+                      onLoad={() => handleImageLoad(item._id)}
                     />
                   )}
                 </div>
