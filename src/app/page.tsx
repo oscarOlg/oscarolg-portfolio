@@ -46,23 +46,13 @@ export default async function Home() {
       {/* ── 1. HERO ── */}
       <section className="relative w-full h-[100dvh] flex items-center justify-center">
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          {heroImage ? (
             <Image
               src={getImageUrl(heroImage.image, 1800)}
               alt={heroImage.title}
               fill
-              className="object-cover grayscale"
+              className="object-cover"
               priority
             />
-          ) : (
-            <Image
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop"
-              alt="Fotografía de boda"
-              fill
-              className="object-cover grayscale"
-              priority
-            />
-          )}
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
