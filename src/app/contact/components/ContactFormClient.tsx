@@ -348,17 +348,12 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
                       </div>
                       {pkg.features && pkg.features.length > 0 && (
                         <ul className="font-sans text-xs text-gray-600 mt-1 space-y-0.5">
-                          {pkg.features.slice(0, 2).map((feat, i) => (
+                          {pkg.features.map((feat, i) => (
                             <li key={i} className="flex items-start gap-1">
                               <span className="text-accent">•</span>
                               <span>{feat}</span>
                             </li>
                           ))}
-                          {pkg.features.length > 2 && (
-                            <li className="text-accent text-xs">
-                              +{pkg.features.length - 2} más...
-                            </li>
-                          )}
                         </ul>
                       )}
                     </div>

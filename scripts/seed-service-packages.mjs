@@ -82,10 +82,11 @@ const packages = [
     price: 12000,
     description: 'Cobertura de 10 horas',
     features: [
-      'Sesión de Compromiso incluida en locación',
+      'Sesión de Compromiso pre-boda en locación',
       'Getting Ready: Momentos previos íntimos',
-      'Ceremonia y Recepción',
       'Sesión de retratos (mismo día de la boda)',
+      'Cobertura de la Ceremonia',
+      'Cobertura de la Recepción',
     ],
     duration: 10,
     deliverables: '50-60 fotos editadas por hora de cobertura',
@@ -104,7 +105,6 @@ const packages = [
     description: 'Hasta 3 horas de cobertura',
     features: [
       'Documentación de la ceremonia',
-      'Firmas',
       'Fotografías familiares',
       'Sesión de retratos de pareja',
     ],
@@ -177,7 +177,7 @@ const packages = [
     popular: false,
     displayOrder: 3,
     addOns: [
-      { name: 'Sesión en Estudio', price: 600 },
+      { name: 'Sesión en Estudio', price: 1200 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -221,7 +221,7 @@ const packages = [
     popular: true,
     displayOrder: 2,
     addOns: [
-      { name: 'Sesión en Estudio', price: 600 },
+      { name: 'Sesión en Estudio', price: 1200 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -242,7 +242,7 @@ const packages = [
     popular: false,
     displayOrder: 3,
     addOns: [
-      { name: 'Sesión en Estudio', price: 600 },
+      { name: 'Sesión en Estudio', price: 1200 },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -283,7 +283,9 @@ const packages = [
     deliverables: '30 fotos editadas',
     popular: true,
     displayOrder: 2,
-    addOns: [],
+    addOns: [
+      { name: 'Sesión en Estudio', price: 1200 },
+    ],
   },
 
   // ==================== COMERCIAL ====================
