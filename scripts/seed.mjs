@@ -204,7 +204,7 @@ const individualPackages = [
   },
 ]
 
-// COUPLES PACKAGES
+// PAREJAS Y GRUPALES PACKAGES
 const couplesPackages = [
   {
     _type: 'servicePackage',

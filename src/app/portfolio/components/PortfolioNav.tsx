@@ -3,7 +3,7 @@ import Link from "next/link";
 export const PORTFOLIO_CATEGORIES = [
   { key: "weddings",   label: "Bodas" },
   { key: "portraits",  label: "Retratos" },
-  { key: "couples",    label: "Parejas" },
+  { key: "couples",    label: "Parejas y Grupales" },
   { key: "commercial", label: "Comercial" },
   { key: "editorial",  label: "Editorial" },
   { key: "maternity",  label: "Maternidad" },

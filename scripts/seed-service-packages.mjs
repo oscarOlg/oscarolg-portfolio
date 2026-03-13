@@ -183,7 +183,7 @@ const packages = [
     ],
   },
 
-  // ==================== PAREJAS ====================
+  // ==================== PAREJAS Y GRUPALES ====================
   {
     name: 'Esencial',
     category: 'couples',
@@ -231,7 +231,7 @@ const packages = [
     category: 'couples',
     tier: 'deluxe',
     price: 2500,
-    description: 'Sesión Cinematográfica',
+    description: 'Memoria Documental',
     features: [
       'Sesión de 2 horas en locación',
       'Hasta 3 cambios de vestuario',

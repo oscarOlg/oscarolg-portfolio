@@ -6,7 +6,8 @@ export default function CouplePackages() {
     <>
       <div className="mb-10 mt-8 text-center max-w-3xl mx-auto">
         <p className="font-sans text-base text-gray-600 leading-relaxed">
-          Ideal para sesiones de compromiso (pre-boda), aniversarios, o simplemente para celebrar su historia de amor. Dirigimos la sesión para capturar la conexión genuina entre ustedes.
+          Diseñado para celebrar la conexión con tus personas favoritas. Ya sea un retrato de pareja, memorias familiares o una sesión con tu grupo de amigos, creamos un ambiente relajado para capturar la dinámica y esencia genuina que los une.
+          <span className="italic text-sm text-gray-400 mt-2 block">*Todos los paquetes incluyen cobertura base para 2 personas. Aplica costo extra a partir del tercer integrante.</span>
         </p>
       </div>
 
@@ -24,7 +25,7 @@ export default function CouplePackages() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
-              <span>1 cambio de vestuario</span>
+              <span>Cobertura para 2 personas (1 cambio de vestuario)</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
@@ -49,7 +50,7 @@ export default function CouplePackages() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
-              <span>Hasta 2 cambios de vestuario</span>
+              <span>Cobertura para 2 personas (Hasta 2 cambios de vestuario)</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
@@ -65,7 +66,7 @@ export default function CouplePackages() {
         {/* Paquete Premium */}
         <div className="border border-gray-100 p-8 flex flex-col">
           <h3 className="font-serif text-2xl mb-2">Premium</h3>
-          <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mb-6">Sesión Cinematográfica</p>
+          <p className="font-sans text-xs uppercase tracking-widest text-gray-400 mb-6">Memoria Documental</p>
           <ul className="font-sans text-sm text-gray-600 space-y-3 mb-8 flex-grow">
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
@@ -73,7 +74,7 @@ export default function CouplePackages() {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
-              <span>Hasta 3 cambios de vestuario</span>
+              <span>Cobertura para 2 personas (Hasta 3 cambios de vestuario)</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-accent flex-shrink-0 mt-0.5">•</span> 
@@ -92,6 +93,10 @@ export default function CouplePackages() {
         <div>
           <h4 className="font-serif text-xl mb-4 text-secondary">Complementos</h4>
           <div className="flex justify-between items-start sm:items-center border-b border-gray-100 pb-3 mb-3 gap-4">
+            <span className="font-sans text-sm text-gray-600">Persona o mascota extra</span>
+            <span className="font-sans font-semibold text-secondary whitespace-nowrap mt-0.5 sm:mt-0">$250 MXN / c.u.</span>
+          </div>
+          <div className="flex justify-between items-start sm:items-center border-b border-gray-100 pb-3 mb-3 gap-4">
             <span className="font-sans text-sm text-gray-600">Fotografía extra editada</span>
             <span className="font-sans font-semibold text-secondary whitespace-nowrap mt-0.5 sm:mt-0">$150 MXN / c.u.</span>
           </div>
@@ -105,7 +110,7 @@ export default function CouplePackages() {
         <div className="bg-gray-50 p-6 flex flex-col justify-center">
           <h4 className="font-serif text-xl mb-3 text-secondary">¿Buscan fotos en estudio?</h4>
           <p className="font-sans text-sm text-gray-600 mb-0">
-            Cualquiera de estas sesiones puede realizarse en estudio fotográfico profesional. El costo de renta se cotiza por separado según disponibilidad y el estudio de tu elección (inversión promedio de <b>$600 MXN por hora</b>).
+            Cualquiera de estas sesiones puede realizarse en estudio fotográfico profesional. El costo de renta se cotiza por separado según disponibilidad y el estudio de su elección (inversión promedio de <b>$600 MXN por hora</b>).
           </p>
         </div>
       </div>
@@ -125,7 +130,7 @@ export default function CouplePackages() {
           <div>
             <span className="block font-serif text-4xl text-accent mb-4">1</span>
             <h4 className="font-sans uppercase tracking-widest text-xs mb-3">Idea</h4>
-            <p className="font-sans text-xs text-gray-400">Platicamos sobre su estilo y la vibra que buscan para sus fotos.</p>
+            <p className="font-sans text-xs text-gray-400">Platicamos sobre su estilo, dinámica y la vibra que buscan para sus fotos.</p>
           </div>
           <div>
             <span className="block font-serif text-4xl text-accent mb-4">2</span>
@@ -135,8 +140,8 @@ export default function CouplePackages() {
           <div>
             <span className="block font-serif text-4xl text-accent mb-4">3</span>
             <h4 className="font-sans uppercase tracking-widest text-xs mb-3">La Sesión</h4>
-            <p className="font-sans text-xs text-gray-400">Dirección de pose natural para documentar su amor de forma auténtica.</p>
-          </div>
+            <p className="font-sans text-xs text-gray-400">Dirección de pose natural para documentar su conexión de forma auténtica.</p>
+          </div>Ideal para sesiones de compromiso (pre-boda), aniversarios, retrato familiar o simplemente para documentar la conexión con los tuyos. Dirigimos la sesión para capturar la esencia genuina de su vínculo.
           <div>
             <span className="block font-serif text-4xl text-accent mb-4">4</span>
             <h4 className="font-sans uppercase tracking-widest text-xs mb-3">Entrega</h4>

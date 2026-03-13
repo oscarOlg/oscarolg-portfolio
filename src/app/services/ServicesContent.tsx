@@ -84,7 +84,7 @@ export default function ServicesContent() {
 
         <AccordionItem 
           id={ServiceTab.COUPLE} 
-          title="Retrato de Pareja" 
+          title="Parejas y Grupales" 
           isOpen={openTab === ServiceTab.COUPLE} 
           onToggle={toggleTab}
         >

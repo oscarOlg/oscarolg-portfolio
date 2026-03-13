@@ -43,7 +43,7 @@ export const portfolioImageType = defineType({
         list: [
           {title: 'Bodas', value: 'weddings'},
           {title: 'Retratos', value: 'portraits'},
-          {title: 'Parejas', value: 'couples'},
+          {title: 'Parejas y Grupales', value: 'couples'},
           {title: 'Comercial', value: 'commercial'},
           {title: 'Editorial', value: 'editorial'},
           {title: 'Maternidad', value: 'maternity'},

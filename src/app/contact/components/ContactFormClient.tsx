@@ -44,7 +44,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     const serviceMap: Record<string, string> = {
       weddings: "Bodas",
       portrait: "Retrato",
-      couples: "Retrato de Pareja",
+      couples: "Parejas y Grupales",
       maternity: "Maternidad",
       commercial: "Comercial / Branding",
       editorial: "Editorial / Moda",

@@ -19,7 +19,7 @@ export const servicePackageType = defineType({
         list: [
           {title: 'Bodas', value: 'weddings'},
           {title: 'Retratos', value: 'portrait'},
-          {title: 'Parejas', value: 'couples'},
+          {title: 'Parejas y Grupales', value: 'couples'},
           {title: 'Maternidad', value: 'maternity'},
           {title: 'Comercial', value: 'commercial'},
           {title: 'Editorial', value: 'editorial'},
