@@ -2,6 +2,9 @@
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
 
+// Revalidate services data every 60 seconds (ISR with fresh Sanity data)
+export const revalidate = 60;
+
 export default function ServicesPage() {
   return (
     <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12">

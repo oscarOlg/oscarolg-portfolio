@@ -8,6 +8,10 @@ import PortfolioNav, {
 } from "./components/PortfolioNav";
 import FloatingCTA from "./components/FloatingCTA";
 
+// Revalidate portfolio data every 60 seconds
+// This enables ISR: page cached for 60s, then revalidated with fresh Sanity data
+export const revalidate = 60;
+
 // Map Sanity category names to display names
 const categoryDisplayNames: Record<string, string> = Object.fromEntries(
   PORTFOLIO_CATEGORIES.map(({ key, label }) => [key, label])

@@ -51,7 +51,7 @@ export default async function Home() {
               src={getImageUrl(heroImage.image, 1800)}
               alt={heroImage.title}
               fill
-              className="object-cover"
+              className="object-cover grayscale"
               priority
             />
           ) : (
