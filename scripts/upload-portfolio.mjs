@@ -10,7 +10,6 @@
 import { createClient } from '@sanity/client'
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 // Load environment variables from .env.local
 const envPath = path.join(process.cwd(), '.env.local')
@@ -33,8 +32,6 @@ const client = createClient({
   apiVersion: '2024-03-01',
 })
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 const portfolioImagesDir = path.join(process.cwd(), 'portfolio-images')
 
 // Valid image extensions

@@ -50,7 +50,7 @@ export interface BlockContent {
   markDefs?: Array<{
     _type: string
     _key?: string
-    [key: string]: any
+    [key: string]: unknown
   }>
   level?: number
   listItem?: 'bullet' | 'number'

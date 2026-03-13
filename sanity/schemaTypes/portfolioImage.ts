@@ -68,7 +68,6 @@ export const portfolioImageType = defineType({
         {name: 'aperture', type: 'string', title: 'Aperture'},
         {name: 'shutterSpeed', type: 'string', title: 'Shutter Speed'},
       ],
-      collapsed: false,
     }),
     defineField({
       name: 'featured',

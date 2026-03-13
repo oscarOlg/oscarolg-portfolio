@@ -9,9 +9,11 @@ export const PORTFOLIO_CATEGORIES = [
   { key: "maternity",  label: "Maternidad" },
 ] as const;
 
+export type PortfolioCategoryKey = (typeof PORTFOLIO_CATEGORIES)[number]["key"];
+
 interface PortfolioNavProps {
   /** Pass "all" for the main /portfolio page, or a category key for subcategory pages */
-  activeCategory: "all" | (typeof PORTFOLIO_CATEGORIES)[number]["key"];
+  activeCategory: "all" | PortfolioCategoryKey;
 }
 
 export default function PortfolioNav({ activeCategory }: PortfolioNavProps) {
@@ -34,7 +36,7 @@ export default function PortfolioNav({ activeCategory }: PortfolioNavProps) {
         {PORTFOLIO_CATEGORIES.map(({ key, label }) => (
           <Link
             key={key}
-            href={`/portfolio/${key}`}
+            href={`/portfolio?category=${key}`}
             className={linkClass(activeCategory === key)}
           >
             {label}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import type { PortfolioImage } from '@/types/sanity'
@@ -10,13 +11,11 @@ import { getImageUrl } from '@/lib/sanity'
 interface PortfolioLightboxProps {
   images: PortfolioImage[]
   categoryDisplayNames: Record<string, string>
-  categoryRouteSlugs: Record<string, string>
 }
 
 export default function PortfolioLightbox({
   images,
   categoryDisplayNames,
-  categoryRouteSlugs,
 }: PortfolioLightboxProps) {
   const [lightboxIndex, setLightboxIndex] = useState(-1)
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
@@ -44,37 +43,43 @@ export default function PortfolioLightbox({
             const aspectRatio = dimensions?.aspectRatio ?? 0.8 // Default to 4:5 portrait if no data
 
             return (
-              <button
+              <motion.div
                 key={item._id}
-                onClick={() => setLightboxIndex(index)}
-                className="break-inside-avoid relative group overflow-hidden bg-gray-100 cursor-pointer mb-6 w-full text-left border-0 p-0 outline-none hover:outline-none"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: Math.min(index * 0.025, 0.25), ease: [0.22, 1, 0.36, 1] }}
+                className="break-inside-avoid mb-6"
               >
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{ aspectRatio: String(aspectRatio) }}
+                <motion.button
+                  onClick={() => setLightboxIndex(index)}
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="relative group overflow-hidden bg-gray-100 cursor-pointer w-full text-left border-0 p-0 outline-none hover:outline-none shadow-sm hover:shadow-md"
                 >
-                  {!isLoaded && (
-                    <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-gray-100 to-gray-200" />
-                  )}
-                  {imageUrl && (
-                    <Image
-                      src={imageUrl}
-                      alt={displayCategory}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={`object-cover transition-all duration-500 group-hover:brightness-110 ${
-                        isLoaded ? 'opacity-100' : 'opacity-0'
-                      }`}
-                      priority={item.featured}
-                      loading={item.featured ? 'eager' : 'lazy'}
-                      onLoad={() => handleImageLoad(item._id)}
-                    />
-                  )}
-                </div>
-
-                {/* Subtle hover overlay */}
-                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300 pointer-events-none" />
-              </button>
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{ aspectRatio: String(aspectRatio) }}
+                  >
+                    {!isLoaded && (
+                      <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-gray-100 to-gray-200" />
+                    )}
+                    {imageUrl && (
+                      <Image
+                        src={imageUrl}
+                        alt={displayCategory}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className={`object-cover transition-all duration-700 ease-out group-hover:scale-[1.02] ${
+                          isLoaded ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        priority={item.featured}
+                        loading={item.featured ? 'eager' : 'lazy'}
+                        onLoad={() => handleImageLoad(item._id)}
+                      />
+                    )}
+                  </div>
+                </motion.button>
+              </motion.div>
             )
           })
         ) : (

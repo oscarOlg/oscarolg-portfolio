@@ -1,9 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getPortfolioImages } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import PortfolioLightbox from "./components/PortfolioLightbox";
-import PortfolioNav, { PORTFOLIO_CATEGORIES } from "./components/PortfolioNav";
+import PortfolioNav, {
+  PORTFOLIO_CATEGORIES,
+  type PortfolioCategoryKey,
+} from "./components/PortfolioNav";
 import FloatingCTA from "./components/FloatingCTA";
 
 // Map Sanity category names to display names
@@ -11,27 +13,46 @@ const categoryDisplayNames: Record<string, string> = Object.fromEntries(
   PORTFOLIO_CATEGORIES.map(({ key, label }) => [key, label])
 );
 
-// Map category keys to route slugs (keys and slugs are identical)
-const categoryRouteSlugs: Record<string, string> = Object.fromEntries(
-  PORTFOLIO_CATEGORIES.map(({ key }) => [key, key])
-);
+interface PortfolioPageProps {
+  searchParams?: Promise<{
+    category?: string | string[];
+  }> | {
+    category?: string | string[];
+  };
+}
 
-export default async function PortfolioPage() {
+const isPortfolioCategory = (value: string): value is PortfolioCategoryKey =>
+  PORTFOLIO_CATEGORIES.some((category) => category.key === value);
+
+export default async function PortfolioPage({ searchParams }: PortfolioPageProps) {
   const portfolioData: PortfolioImage[] = await getPortfolioImages();
+
+  const resolvedSearchParams = await searchParams;
+
+  const categoryParam = Array.isArray(resolvedSearchParams?.category)
+    ? resolvedSearchParams?.category[0]
+    : resolvedSearchParams?.category;
+
+  const activeCategory: "all" | PortfolioCategoryKey =
+    categoryParam && isPortfolioCategory(categoryParam) ? categoryParam : "all";
+
+  const filteredImages =
+    activeCategory === "all"
+      ? portfolioData
+      : portfolioData.filter((image) => image.category === activeCategory);
 
   return (
     <div className="w-full flex flex-col items-center">
 
-      <PortfolioNav activeCategory="all" />
+      <PortfolioNav activeCategory={activeCategory} />
 
       {/* Main Content */}
       <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
 
         {/* Portfolio Grid with Lightbox */}
         <PortfolioLightbox
-          images={portfolioData}
+          images={filteredImages}
           categoryDisplayNames={categoryDisplayNames}
-          categoryRouteSlugs={categoryRouteSlugs}
         />
 
         {/* Call to Action */}
@@ -47,7 +68,7 @@ export default async function PortfolioPage() {
       </div>
 
       {/* Floating CTA Buttons */}
-      <FloatingCTA />
+      <FloatingCTA category={activeCategory === "all" ? undefined : activeCategory} />
 
     </div>
   );

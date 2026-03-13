@@ -2,7 +2,6 @@
 "use client";
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import AccordionItem from "./components/AccordionItem"; 
@@ -33,23 +32,13 @@ export default function ServicesContent() {
     return Object.values(ServiceTab).includes(tab as ServiceTab);
   };
 
-  const [openTab, setOpenTab] = useState<ServiceTab | null>(
-    isValidTab(tabParam) ? tabParam : ServiceTab.WEDDINGS
-  );
-
-  useEffect(() => {
-    if (isValidTab(tabParam)) {
-      setOpenTab(tabParam);
-    }
-  }, [tabParam]);
+  const openTab: ServiceTab | null = isValidTab(tabParam) ? tabParam : ServiceTab.WEDDINGS;
 
   const toggleTab = (tabId: string) => {
     const selectedTab = tabId as ServiceTab;
     if (openTab === selectedTab) {
-      setOpenTab(null);
       router.replace(pathname, { scroll: false });
     } else {
-      setOpenTab(selectedTab);
       router.replace(`${pathname}?tab=${selectedTab}`, { scroll: false });
     }
   };

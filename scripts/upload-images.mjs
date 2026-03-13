@@ -31,11 +31,6 @@ const client = createClient({
   apiVersion: '2024-03-01',
 })
 
-// Helper function to generate unique keys
-function generateKey() {
-  return Math.random().toString(36).substr(2, 9)
-}
-
 async function uploadImage(imagePath, category, displayOrder) {
   try {
     // Read the image file

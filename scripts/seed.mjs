@@ -537,7 +537,7 @@ async function seed() {
       await client.delete({ query: '*[_type == "aboutContent"]' })
       await client.delete({ query: '*[_type == "testimonial"]' })
       console.log('✅ Cleaned up existing data\n')
-    } catch (e) {
+    } catch {
       // Ignore errors if there's no data to delete
     }
 

@@ -1,6 +1,6 @@
 // src/components/Socials.tsx
 import React from "react";
-import { FacebookIcon, InstagramIcon, WhatsappIcon, EmailIcon } from "./Icons";
+import { InstagramIcon, WhatsappIcon, EmailIcon } from "./Icons";
 
 const socialsData = [
     { name: "Email", url: "mailto:oscar.olg.photo@gmail.com", icon: <EmailIcon /> },

@@ -12,6 +12,7 @@
     "sanity:deploy": "sanity deploy",
     "seed": "node scripts/seed.mjs",
     "upload-portfolio": "node scripts/upload-portfolio.mjs",
+    "sync-portfolio-category": "node scripts/sync-portfolio-category.mjs",
     "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs"
   },
   "dependencies": {

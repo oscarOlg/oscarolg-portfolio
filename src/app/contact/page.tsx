@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Socials from "../components/Socials";
 
@@ -19,9 +19,7 @@ export default function ContactContent() {
     message: "",
   });
 
-  const [generatedMessage, setGeneratedMessage] = useState("");
-
-  useEffect(() => {
+  const generatedMessage = useMemo(() => {
     const { name, date, service, pkg, complements, message } = formData;
     
     let text = `¡Hola Oscar! Soy ${name || "[Tu Nombre]"}. `;
@@ -44,7 +42,7 @@ export default function ContactContent() {
       text += `\n\nTe comparto más detalles sobre mi idea:\n${message}`;
     }
 
-    setGeneratedMessage(text);
+    return text;
   }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
