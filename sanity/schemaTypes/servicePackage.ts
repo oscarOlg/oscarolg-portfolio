@@ -64,6 +64,8 @@ export const servicePackageType = defineType({
           fields: [
             {name: 'name', type: 'string', title: 'Add-On Name'},
             {name: 'price', type: 'number', title: 'Additional Price'},
+            {name: 'unit', type: 'string', title: 'Unit (Optional)', description: 'e.g., "per hour", "per photo"'},
+            {name: 'description', type: 'string', title: 'Description (Optional)'},
           ],
         },
       ],
@@ -78,6 +80,27 @@ export const servicePackageType = defineType({
       title: 'Deliverables',
       type: 'string',
       description: 'e.g., "50-75 edited photos", "8x10 prints", "Digital gallery access"',
+    }),
+    defineField({
+      name: 'isSpecialVariant',
+      title: 'Special Variant',
+      type: 'boolean',
+      description: 'e.g., Wedding Civil/Íntima or Editorial TFP variants',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'variantType',
+      title: 'Variant Type',
+      type: 'string',
+      hidden: true,
+      options: {
+        list: [
+          {title: 'Wedding Civil/Íntima', value: 'wedding_civil'},
+          {title: 'Editorial TFP', value: 'editorial_tfp'},
+          {title: 'Commercial Custom', value: 'commercial_custom'},
+          {title: 'Other', value: 'other'},
+        ],
+      },
     }),
     defineField({
       name: 'popular',

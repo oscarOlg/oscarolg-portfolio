@@ -48,14 +48,14 @@ export const SERVICES: ServiceTypeConfig[] = [
   },
   {
     key: 'commercial',
-    name: 'Comercial y Branding',
+    name: 'Comercial',
     component: 'CommercialPackages',
     portfolio_category: 'commercial',
     order: 5,
   },
   {
     key: 'editorial',
-    name: 'Moda y Editorial',
+    name: 'Editorial',
     component: 'EditorialPackages',
     portfolio_category: 'editorial',
     order: 6,

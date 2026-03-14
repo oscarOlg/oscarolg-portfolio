@@ -45,7 +45,7 @@ export default function ServicesContent() {
         </div>
       </div>
 
-      {/* ======================= ACCORDEONS (DYNAMICALLY GENERATED) ======================= */}
+      {/* ======================= ACCORDEONS (DYNAMICALLY GENERATED FROM CONFIG) ======================= */}
       <div className="flex flex-col gap-6 w-full">
         {SERVICES.map((service) => {
           const Component = getServiceComponent(service.component);
