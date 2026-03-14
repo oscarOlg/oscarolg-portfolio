@@ -58,7 +58,6 @@ export interface BlockContent {
 
 /**
  * Portfolio Image Document
- * Represents a single photograph in the portfolio
  */
 export interface PortfolioImage {
   _id: string
@@ -93,27 +92,87 @@ export interface ServicePackage {
   _id: string
   _type: 'servicePackage'
   name: string
-  category: 'wedding' | 'individual' | 'couples' | 'maternity' | 'commercial' | 'editorial' | 'event'
+  category: string
   tier?: 'essential' | 'premium' | 'deluxe'
-  price: number | null
-  duration?: number | null
+  price: number
+  /** Set false to hide the price on the services page (e.g., editorial) */
+  showPrice?: boolean
+  /** Text before the price, e.g., "A partir de" */
+  pricePrefix?: string
+  /** Subtitle shown under the package name */
   description: string
-  features: string[]
-  deliverables: string
+  /** Bullet-point feature list */
+  features?: string[]
+  /** Paragraph body text instead of bullet list (TFP / narrative cards).
+   *  Separate two paragraphs with a blank line — the second renders in italics. */
+  bodyText?: string
+  popular?: boolean
+  /** Custom badge label — defaults to "Más Popular" when popular=true */
+  badgeLabel?: string
+  /** Per-package CTA override — falls back to serviceConfig.ctaButtonText */
+  ctaText?: string
+  /** 'filled' (default) or 'outline' (border-only button) */
+  ctaVariant?: 'filled' | 'outline'
+  /** When true, renders as a special highlight card outside the main grid */
+  isSpecialVariant?: boolean
+  variantType?: 'wedding_civil' | 'editorial_tfp' | 'other'
   addOns?: Array<{
     _key: string
-    _type?: 'object'
     name: string
     price: number
     unit?: string
+    description?: string
   }>
-  popular: boolean
+  duration?: number | null
+  deliverables?: string
   displayOrder?: number
 }
 
 /**
+ * Service Configuration Document
+ * One per service — controls all content shown in that service's accordion panel
+ */
+export interface ServiceConfig {
+  _id: string
+  _type: 'serviceConfig'
+  serviceKey: string
+  displayName: string
+  /** Intro paragraph above the package grid */
+  introText?: string
+  gridColumns: 2 | 3
+  hasAddOns?: boolean
+  /** Items listed in the Complementos section */
+  complementos?: Array<{
+    _key: string
+    name: string
+    price: number
+    unit?: string
+    note?: string
+  }>
+  /** 'none' | 'right_panel' | 'full_width_centered' */
+  infoCardVariant?: 'none' | 'right_panel' | 'full_width_centered'
+  infoCardHeading?: string
+  infoCardContent?: string
+  /** Optional accent block (e.g., "Presupuestos a la Medida" in commercial) */
+  customBlockHeading?: string
+  customBlockContent?: string
+  hasGlobalBenefits?: boolean
+  globalBenefitsHeading?: string
+  globalBenefitsText?: string
+  hasProcess?: boolean
+  processTitle?: string
+  processSteps?: Array<{
+    _key: string
+    number: number
+    heading: string
+    description: string
+  }>
+  /** Default CTA for packages without a per-package override */
+  ctaButtonText?: string
+}
+
+/**
  * About Content Document
- * Single document containing photographer bio and information
  */
 export interface AboutContent {
   _id: string
@@ -129,7 +188,6 @@ export interface AboutContent {
 
 /**
  * Testimonial Document
- * Client review or testimonial
  */
 export interface Testimonial {
   _id: string
@@ -146,7 +204,6 @@ export interface Testimonial {
 
 /**
  * Grouped service packages by category
- * Useful for rendering service sections
  */
 export interface ServiceCategory {
   name: string

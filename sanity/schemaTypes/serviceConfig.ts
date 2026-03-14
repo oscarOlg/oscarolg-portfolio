@@ -1,192 +1,193 @@
 import {defineField, defineType} from 'sanity'
-import { getSanityCategoryOptions } from '../../src/config/services'
 
-/**
- * SERVICE CONFIGURATION TYPE
- * Defines metadata for each service (weddings, portrait, couples, etc.)
- * Controls which sections appear, layout variations, and service-specific content
- */
 export const serviceConfigType = defineType({
   name: 'serviceConfig',
-  title: 'Service Configuration',
+  title: 'Configuración de Servicio',
   type: 'document',
   fields: [
+    // ── Identidad ────────────────────────────────────────────────────────────
     defineField({
       name: 'serviceKey',
-      title: 'Service Key',
+      title: 'Clave del Servicio',
       type: 'string',
-      description: 'Must match key in src/config/services.ts (weddings, portrait, couples, etc.)',
+      description: 'Debe coincidir con una clave en src/config/services.ts',
       options: {
         list: [
-          {title: 'Weddings', value: 'weddings'},
-          {title: 'Portrait', value: 'portrait'},
-          {title: 'Couples', value: 'couples'},
-          {title: 'Maternity', value: 'maternity'},
-          {title: 'Commercial', value: 'commercial'},
+          {title: 'Bodas', value: 'weddings'},
+          {title: 'Retratos', value: 'portrait'},
+          {title: 'Parejas y Grupales', value: 'couples'},
+          {title: 'Maternidad', value: 'maternity'},
+          {title: 'Comercial', value: 'commercial'},
           {title: 'Editorial', value: 'editorial'},
         ],
       },
       validation: (Rule) => Rule.required(),
     }),
-
     defineField({
       name: 'displayName',
-      title: 'Display Name (Spanish)',
+      title: 'Nombre para Mostrar',
       type: 'string',
+      description: 'Nombre del servicio tal como aparece en la página (ej. "Bodas", "Retratos")',
       validation: (Rule) => Rule.required(),
     }),
 
+    // ── Introducción ─────────────────────────────────────────────────────────
     defineField({
-      name: 'hasAddOns',
-      title: 'Has Add-ons Section',
-      type: 'boolean',
-      description: 'Show add-ons section in service page',
-      initialValue: true,
+      name: 'introText',
+      title: 'Párrafo de Introducción (opcional)',
+      type: 'text',
+      rows: 3,
+      description: 'Párrafo corto que aparece encima de la cuadrícula de paquetes. Dejar vacío para Bodas.',
     }),
 
-    defineField({
-      name: 'hasProcess',
-      title: 'Has Process Section',
-      type: 'boolean',
-      description: 'Show numbered workflow/process section',
-      initialValue: true,
-    }),
-
-    defineField({
-      name: 'hasGlobalBenefits',
-      title: 'Has Global Benefits Section',
-      type: 'boolean',
-      description: 'Show inclusions/benefits for all packages',
-      initialValue: true,
-    }),
-
+    // ── Diseño ───────────────────────────────────────────────────────────────
     defineField({
       name: 'gridColumns',
-      title: 'Package Grid Columns',
+      title: 'Columnas en la Cuadrícula de Paquetes',
       type: 'number',
       options: {
         list: [
-          {title: '2 Columns', value: 2},
-          {title: '3 Columns', value: 3},
+          {title: '2 Columnas', value: 2},
+          {title: '3 Columnas', value: 3},
         ],
+        layout: 'radio',
       },
       initialValue: 3,
     }),
 
+    // ── Complementos ─────────────────────────────────────────────────────────
     defineField({
-      name: 'globalBenefitsHeading',
-      title: 'Global Benefits Heading',
-      type: 'string',
-      initialValue: 'Inclusiones en todos los paquetes',
+      name: 'hasAddOns',
+      title: 'Mostrar Sección de Complementos',
+      type: 'boolean',
+      description: 'Muestra la tabla de complementos debajo de la cuadrícula de paquetes',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'complementos',
+      title: 'Complementos (página de servicios)',
+      type: 'array',
+      description: 'Elementos listados en la sección "Complementos" en la página de servicios. Independientes de los add-ons usados en el formulario de contacto.',
+      of: [
+        {
+          type: 'object',
+          name: 'complemento',
+          title: 'Complemento',
+          fields: [
+            {name: 'name', type: 'string', title: 'Nombre'},
+            {name: 'price', type: 'number', title: 'Precio (MXN)'},
+            {name: 'unit', type: 'string', title: 'Unidad (opcional)', description: 'Ej.: "hr", "c.u."'},
+            {name: 'note', type: 'string', title: 'Nota (opcional)', description: 'Ej.: "Incluida en el paquete Premium"'},
+          ],
+        },
+      ],
     }),
 
+    // ── Tarjeta Informativa ───────────────────────────────────────────────────
     defineField({
-      name: 'globalBenefitsText',
-      title: 'Global Benefits Text',
+      name: 'infoCardVariant',
+      title: 'Tipo de Tarjeta Informativa',
+      type: 'string',
+      description: 'Controla cómo se muestra la tarjeta informativa. "Panel derecho" aparece junto a los complementos. "Centrada a ancho completo" aparece debajo de la cuadrícula.',
+      options: {
+        list: [
+          {title: 'Ninguna', value: 'none'},
+          {title: 'Panel derecho (junto a complementos)', value: 'right_panel'},
+          {title: 'Centrada a ancho completo (debajo de la cuadrícula)', value: 'full_width_centered'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'none',
+    }),
+    defineField({
+      name: 'infoCardHeading',
+      title: 'Título de la Tarjeta Informativa',
+      type: 'string',
+      hidden: ({document}) => document?.infoCardVariant === 'none',
+    }),
+    defineField({
+      name: 'infoCardContent',
+      title: 'Contenido de la Tarjeta Informativa',
+      type: 'text',
+      rows: 3,
+      hidden: ({document}) => document?.infoCardVariant === 'none',
+    }),
+
+    // ── Bloque Personalizado (ej. "Presupuestos a la Medida") ────────────────
+    defineField({
+      name: 'customBlockHeading',
+      title: 'Título del Bloque Personalizado (opcional)',
+      type: 'string',
+      description: 'Usado para bloques destacados como "Presupuestos a la Medida" en el servicio Comercial',
+    }),
+    defineField({
+      name: 'customBlockContent',
+      title: 'Contenido del Bloque Personalizado (opcional)',
       type: 'text',
       rows: 4,
-      description: 'Shared benefits across all packages in this service',
     }),
 
+    // ── Beneficios Globales ───────────────────────────────────────────────────
+    defineField({
+      name: 'hasGlobalBenefits',
+      title: 'Mostrar Sección de Beneficios Globales',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'globalBenefitsHeading',
+      title: 'Título de Beneficios Globales',
+      type: 'string',
+      initialValue: 'Inclusiones en todos los paquetes',
+      hidden: ({document}) => !document?.hasGlobalBenefits,
+    }),
+    defineField({
+      name: 'globalBenefitsText',
+      title: 'Texto de Beneficios Globales',
+      type: 'text',
+      rows: 3,
+      hidden: ({document}) => !document?.hasGlobalBenefits,
+    }),
+
+    // ── Proceso de Trabajo ────────────────────────────────────────────────────
+    defineField({
+      name: 'hasProcess',
+      title: 'Mostrar Sección de Proceso de Trabajo',
+      type: 'boolean',
+      initialValue: true,
+    }),
     defineField({
       name: 'processTitle',
-      title: 'Process Section Title',
+      title: 'Título de la Sección de Proceso',
       type: 'string',
-      initialValue: 'Cómo funciona',
+      hidden: ({document}) => !document?.hasProcess,
     }),
-
     defineField({
       name: 'processSteps',
-      title: 'Process Steps',
+      title: 'Pasos del Proceso',
       type: 'array',
+      hidden: ({document}) => !document?.hasProcess,
       of: [
         {
           type: 'object',
           name: 'processStep',
-          title: 'Process Step',
+          title: 'Paso',
           fields: [
-            {
-              name: 'number',
-              title: 'Step Number',
-              type: 'number',
-            },
-            {
-              name: 'heading',
-              title: 'Heading',
-              type: 'string',
-            },
-            {
-              name: 'description',
-              title: 'Description',
-              type: 'text',
-              rows: 2,
-            },
+            {name: 'number', type: 'number', title: 'Número de Paso'},
+            {name: 'heading', type: 'string', title: 'Título'},
+            {name: 'description', type: 'text', rows: 2, title: 'Descripción'},
           ],
         },
       ],
-      description: 'Leave empty to hide process section',
     }),
 
-    defineField({
-      name: 'specialSections',
-      title: 'Special Sections',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'specialSection',
-          title: 'Special Section',
-          fields: [
-            {
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-            },
-            {
-              name: 'position',
-              title: 'Position',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'After Packages', value: 'after_packages'},
-                  {title: 'After Add-ons', value: 'after_addons'},
-                  {title: 'After Benefits', value: 'after_benefits'},
-                ],
-              },
-            },
-            {
-              name: 'content',
-              title: 'Content (HTML)',
-              type: 'text',
-              rows: 6,
-            },
-          ],
-        },
-      ],
-      description: 'E.g., Wedding civil variant, commercial custom pricing card',
-    }),
-
+    // ── Botón CTA por Defecto ─────────────────────────────────────────────────
     defineField({
       name: 'ctaButtonText',
-      title: 'CTA Button Text',
+      title: 'Texto del Botón CTA por Defecto',
       type: 'string',
-      description: 'E.g., "Reservar" or "Cotizar" or "Proponer Colaboración"',
+      description: 'Usado para paquetes que no tienen un texto de CTA propio. Ej.: "Reservar", "Cotizar"',
       initialValue: 'Reservar',
-    }),
-
-    defineField({
-      name: 'infoCardHeading',
-      title: 'Info Card Heading (Optional)',
-      type: 'string',
-      description: 'For services with studio info or custom pricing explanation (Couples, Maternity, Commercial)',
-    }),
-
-    defineField({
-      name: 'infoCardContent',
-      title: 'Info Card Content',
-      type: 'text',
-      rows: 3,
-      description: 'Content for right-side info box',
     }),
   ],
 

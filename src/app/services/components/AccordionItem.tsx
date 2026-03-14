@@ -14,11 +14,11 @@ export default function AccordionItem({ id, title, isOpen, onToggle, children }:
     <div className="border border-gray-200 bg-white shadow-sm">
       <button 
         onClick={() => onToggle(id)}
-        className="w-full flex justify-between items-center p-8 hover:bg-gray-50 cursor-pointer transition-colors"
+        className="w-full flex justify-between items-center p-8 hover:bg-gray-50 cursor-pointer transition-colors group"
       >
-        <h2 className="font-serif text-3xl text-secondary">{title}</h2>
-        <span className={`text-2xl font-light transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
-          +
+        <h2 className="font-serif text-2xl text-secondary">{title}</h2>
+        <span className={`text-secondary transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : "rotate-0"}`}>
+          ▼
         </span>
       </button>
       
@@ -27,7 +27,7 @@ export default function AccordionItem({ id, title, isOpen, onToggle, children }:
           isOpen ? "max-h-[4000px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="p-8 pt-0 border-t border-gray-100">
+        <div className="p-8 pt-0 border-t border-gray-200">
           {children}
         </div>
       </div>

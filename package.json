@@ -12,6 +12,8 @@
     "sanity:deploy": "sanity deploy",
     "seed": "node scripts/seed.mjs",
     "seed:packages": "node scripts/seed-service-packages.mjs",
+    "seed:serviceconfig": "node scripts/seed-service-config.mjs",
+    "seed:services": "npm run seed:serviceconfig && npm run seed:packages",
     "upload-portfolio": "node scripts/upload-portfolio.mjs",
     "sync-portfolio-category": "node scripts/sync-portfolio-category.mjs",
     "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs"

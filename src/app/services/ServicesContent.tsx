@@ -5,20 +5,27 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 import AccordionItem from "./components/AccordionItem";
+import ServicePackageTemplate from "./components/ServicePackageTemplate";
 import { SERVICES, type ServiceKey } from "@/config/services";
-import { getServiceComponent } from "@/config/component-registry";
+import { getImageUrl } from "@/lib/sanity";
+import type { ServiceConfig, ServicePackage, PortfolioImage } from "@/types/sanity";
 
-export default function ServicesContent() {
+interface Props {
+  configByKey: Record<string, ServiceConfig>;
+  packagesByService: Record<string, ServicePackage[]>;
+  heroImage: PortfolioImage | null;
+}
+
+export default function ServicesContent({ configByKey, packagesByService, heroImage }: Props) {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const router = useRouter();
   const pathname = usePathname();
 
-  const isValidTab = (tab: string | null): tab is ServiceKey => {
-    return SERVICES.some((s) => s.key === tab);
-  };
+  const isValidTab = (tab: string | null): tab is ServiceKey =>
+    SERVICES.some((s) => s.key === tab);
 
-  const openTab: ServiceKey | null = isValidTab(tabParam) ? tabParam : "weddings";
+  const openTab: ServiceKey | null = isValidTab(tabParam) ? tabParam : null;
 
   const toggleTab = (tabId: string) => {
     if (openTab === tabId) {
@@ -28,28 +35,38 @@ export default function ServicesContent() {
     }
   };
 
+  const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1200) : null;
+
   return (
     <div className="flex flex-col w-full">
-      {/* ======================= HEADER VISUAL ======================= */}
+      {/* ── Header visual ── */}
       <div className="w-full mb-16 flex flex-col items-center text-center">
         <p className="font-sans text-base md:text-lg text-gray-600 max-w-4xl leading-relaxed mb-8 px-4">
           Memorias visuales pensadas para perdurar. Selecciona el tipo de sesión o cobertura que buscas para descubrir los detalles, inclusiones y el valor de tu inversión.
         </p>
-        <div className="relative w-full h-64 shadow-sm overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"
-            alt="Detalle de fotografía elegante"
-            fill
-            className="object-cover grayscale transition-all duration-700"
-          />
+        <div className="relative w-full h-64 shadow-sm overflow-hidden rounded-none">
+          {heroImageUrl ? (
+            <Image
+              src={heroImageUrl}
+              alt={heroImage?.title || "Detalle de fotografía elegante"}
+              fill
+              className="object-cover transition-all duration-700"
+              priority
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-100" />
+          )}
         </div>
       </div>
 
-      {/* ======================= ACCORDEONS (DYNAMICALLY GENERATED FROM CONFIG) ======================= */}
+      {/* ── Accordeones (generados desde Sanity) ── */}
       <div className="flex flex-col gap-6 w-full">
         {SERVICES.map((service) => {
-          const Component = getServiceComponent(service.component);
-          if (!Component) return null;
+          const config = configByKey[service.key];
+          const packages = packagesByService[service.key] ?? [];
+
+          // If this service hasn't been configured in Sanity yet, skip it
+          if (!config) return null;
 
           return (
             <AccordionItem
@@ -59,7 +76,7 @@ export default function ServicesContent() {
               isOpen={openTab === service.key}
               onToggle={toggleTab}
             >
-              <Component />
+              <ServicePackageTemplate config={config} packages={packages} />
             </AccordionItem>
           );
         })}

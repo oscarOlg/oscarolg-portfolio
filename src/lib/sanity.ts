@@ -1,6 +1,6 @@
 import {createClient} from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
-import type { PortfolioImage, ServicePackage, AboutContent, Testimonial } from '@/types/sanity'
+import type { PortfolioImage, ServicePackage, ServiceConfig, AboutContent, Testimonial } from '@/types/sanity'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -112,12 +112,20 @@ export const servicePackagesQuery = `
     category,
     tier,
     price,
+    showPrice,
+    pricePrefix,
     description,
     features,
+    bodyText,
+    popular,
+    badgeLabel,
+    ctaText,
+    ctaVariant,
+    isSpecialVariant,
+    variantType,
     addOns,
     duration,
     deliverables,
-    popular,
     displayOrder
   }
 `
@@ -129,13 +137,69 @@ export const servicePackagesByCategoryQuery = (category: string) => `
     category,
     tier,
     price,
+    showPrice,
+    pricePrefix,
     description,
     features,
+    bodyText,
+    popular,
+    badgeLabel,
+    ctaText,
+    ctaVariant,
+    isSpecialVariant,
+    variantType,
     addOns,
     duration,
     deliverables,
-    popular,
     displayOrder
+  }
+`
+
+export const serviceConfigsQuery = `
+  *[_type == "serviceConfig"] | order(serviceKey) {
+    _id,
+    serviceKey,
+    displayName,
+    introText,
+    gridColumns,
+    hasAddOns,
+    complementos,
+    infoCardVariant,
+    infoCardHeading,
+    infoCardContent,
+    customBlockHeading,
+    customBlockContent,
+    hasGlobalBenefits,
+    globalBenefitsHeading,
+    globalBenefitsText,
+    hasProcess,
+    processTitle,
+    processSteps,
+    ctaButtonText
+  }
+`
+
+export const serviceConfigByKeyQuery = (serviceKey: string) => `
+  *[_type == "serviceConfig" && serviceKey == "${serviceKey}"][0] {
+    _id,
+    serviceKey,
+    displayName,
+    introText,
+    gridColumns,
+    hasAddOns,
+    complementos,
+    infoCardVariant,
+    infoCardHeading,
+    infoCardContent,
+    customBlockHeading,
+    customBlockContent,
+    hasGlobalBenefits,
+    globalBenefitsHeading,
+    globalBenefitsText,
+    hasProcess,
+    processTitle,
+    processSteps,
+    ctaButtonText
   }
 `
 
@@ -334,7 +398,7 @@ export async function getServicePackages(): Promise<ServicePackage[]> {
 
 /**
  * Fetch service packages filtered by category
- * @param category - The service category (wedding, commercial, maternity, etc.)
+ * @param category - The service category (weddings, commercial, maternity, etc.)
  */
 export async function getServicePackagesByCategory(category: string): Promise<ServicePackage[]> {
   try {
@@ -344,6 +408,34 @@ export async function getServicePackagesByCategory(category: string): Promise<Se
   } catch (error) {
     console.error(`Error fetching service packages for category ${category}:`, error)
     return []
+  }
+}
+
+/**
+ * Fetch all service configurations
+ */
+export async function getServiceConfigs(): Promise<ServiceConfig[]> {
+  try {
+    const configs = await client.fetch<ServiceConfig[]>(serviceConfigsQuery)
+    return configs || []
+  } catch (error) {
+    console.error('Error fetching service configs:', error)
+    return []
+  }
+}
+
+/**
+ * Fetch a service configuration by its service key
+ * @param serviceKey - e.g., 'weddings', 'portrait', 'couples'
+ */
+export async function getServiceConfigByKey(serviceKey: string): Promise<ServiceConfig | null> {
+  try {
+    const query = serviceConfigByKeyQuery(serviceKey)
+    const config = await client.fetch<ServiceConfig>(query)
+    return config || null
+  } catch (error) {
+    console.error(`Error fetching service config for key "${serviceKey}":`, error)
+    return null
   }
 }
 
