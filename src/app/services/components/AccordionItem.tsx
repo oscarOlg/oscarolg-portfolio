@@ -13,6 +13,7 @@ export default function AccordionItem({ id, title, isOpen, onToggle, children }:
   return (
     <div className="border border-gray-200 bg-white shadow-sm">
       <button 
+        id={`accordion-${id}`}
         onClick={() => onToggle(id)}
         className="w-full flex justify-between items-center p-8 hover:bg-gray-50 cursor-pointer transition-colors group"
       >

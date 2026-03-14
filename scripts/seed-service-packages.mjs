@@ -87,9 +87,8 @@ const packages = [
     features: [
       'Sesión de Compromiso pre-boda en locación',
       'Getting Ready: Momentos previos íntimos',
-      'Cobertura de la Ceremonia',
-      'Cobertura de la Recepción',
       'Sesión de retratos (mismo día de la boda)',
+      'Cobertura de la Ceremonia y Recepción',
     ],
     popular: false,
     displayOrder: 3,

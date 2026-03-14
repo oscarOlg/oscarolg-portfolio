@@ -20,8 +20,8 @@ function PackageCard({
   const showPrice = pkg.showPrice !== false;
   const bodyParagraphs = pkg.bodyText ? pkg.bodyText.split(/\n\n+/) : null;
   const cardClass = isPopular
-    ? "border-2 border-accent p-8 flex flex-col relative shadow-md hover:shadow-lg transition-shadow duration-300"
-    : "border border-gray-200 p-8 flex flex-col hover:border-gray-300 transition-colors duration-300";
+    ? "border-2 border-accent p-8 flex flex-col relative shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[360px]"
+    : "border border-gray-200 p-8 flex flex-col hover:border-gray-300 transition-colors duration-300 min-h-[360px]";
 
   return (
     <div className={cardClass}>

@@ -36,6 +36,7 @@ const configs = [
   {
     serviceKey: 'weddings',
     displayName: 'Bodas',
+    introText: 'Tu boda es el reflejo de tu historia. Documentamos cada momento con sensibilidad editorial, enfocándonos en las emociones genuinas, los detalles que brillan y la magia de celebrar el amor en tu día.',
     gridColumns: 3,
     hasAddOns: true,
     complementos: [

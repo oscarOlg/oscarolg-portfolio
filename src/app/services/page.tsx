@@ -1,7 +1,7 @@
 // src/app/services/page.tsx
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug } from "@/lib/sanity";
+import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
 import { SERVICES } from "@/config/services";
 
 // Revalidate every 60 seconds (ISR with fresh Sanity data)
@@ -14,6 +14,19 @@ export default async function ServicesPage() {
     getServicePackages(),
     getPortfolioImageBySlug("weddings-dscf8029"),
   ]);
+
+  // Fetch featured images for each service category in parallel
+  const serviceImagesPromises = SERVICES.map((service) =>
+    getPortfolioImagesByCategory(service.portfolio_category).then((images) => ({
+      serviceKey: service.key,
+      image: images[0] || null, // Get first image as featured
+    }))
+  );
+
+  const serviceImagesResults = await Promise.all(serviceImagesPromises);
+  const serviceImagesByKey = Object.fromEntries(
+    serviceImagesResults.map((result) => [result.serviceKey, result.image])
+  );
 
   // Group packages by their service category
   const packagesByService: Record<string, typeof allPackages> = {};
@@ -41,6 +54,7 @@ export default async function ServicesPage() {
           configByKey={configByKey}
           packagesByService={packagesByService}
           heroImage={heroImage}
+          serviceImagesByKey={serviceImagesByKey}
         />
       </Suspense>
     </div>
