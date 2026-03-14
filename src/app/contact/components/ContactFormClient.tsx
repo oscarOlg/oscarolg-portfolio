@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import emailjs from "@emailjs/browser";
 import type { ServicePackage } from "@/types/sanity";
+import { SERVICES } from "@/config/services";
 
 // Initialize EmailJS
 emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
@@ -39,22 +40,16 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     message: "",
   });
 
-  // Get services—map from Sanity category values to display names
+  // Get services from centralized config
   const services = useMemo(() => {
-    const serviceMap: Record<string, string> = {
-      weddings: "Bodas",
-      portrait: "Retrato",
-      couples: "Parejas y Grupales",
-      maternity: "Maternidad",
-      commercial: "Comercial / Branding",
-      editorial: "Editorial / Moda",
-    };
-    
     const uniqueCategories = [...new Set(allPackages.map((p) => p.category))];
-    return uniqueCategories.map((cat) => ({
-      value: cat,
-      label: serviceMap[cat] || cat,
-    }));
+    return uniqueCategories
+      .map((cat) => {
+        const config = SERVICES.find((s) => s.key === cat);
+        return config
+          ? { value: cat, label: config.name }
+          : { value: cat, label: cat };
+      });
   }, [allPackages]);
 
   // Get packages for selected service

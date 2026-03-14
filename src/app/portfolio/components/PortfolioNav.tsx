@@ -1,15 +1,12 @@
 import Link from "next/link";
+import { SERVICES } from "@/config/services";
 
-export const PORTFOLIO_CATEGORIES = [
-  { key: "weddings",   label: "Bodas" },
-  { key: "portraits",  label: "Retratos" },
-  { key: "couples",    label: "Parejas y Grupales" },
-  { key: "commercial", label: "Comercial" },
-  { key: "editorial",  label: "Editorial" },
-  { key: "maternity",  label: "Maternidad" },
-] as const;
+export const PORTFOLIO_CATEGORIES = SERVICES.map((service) => ({
+  key: service.portfolio_category,
+  label: service.name,
+}));
 
-export type PortfolioCategoryKey = (typeof PORTFOLIO_CATEGORIES)[number]["key"];
+export type PortfolioCategoryKey = typeof SERVICES[number]['portfolio_category'];
 
 interface PortfolioNavProps {
   /** Pass "all" for the main /portfolio page, or a category key for subcategory pages */

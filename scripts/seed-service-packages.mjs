@@ -201,6 +201,7 @@ const packages = [
     displayOrder: 1,
     addOns: [
       { name: 'Sesión en Estudio', price: 600 },
+      { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -222,6 +223,7 @@ const packages = [
     displayOrder: 2,
     addOns: [
       { name: 'Sesión en Estudio', price: 1200 },
+      { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],
@@ -243,6 +245,7 @@ const packages = [
     displayOrder: 3,
     addOns: [
       { name: 'Sesión en Estudio', price: 1200 },
+      { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
       { name: 'Hora extra de sesión', price: 1000 },
     ],

@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import { getSanityPortfolioCategoryOptions } from '../../src/config/services'
 
 export const portfolioImageType = defineType({
   name: 'portfolioImage',
@@ -40,14 +41,7 @@ export const portfolioImageType = defineType({
       title: 'Category',
       type: 'string',
       options: {
-        list: [
-          {title: 'Bodas', value: 'weddings'},
-          {title: 'Retratos', value: 'portraits'},
-          {title: 'Parejas y Grupales', value: 'couples'},
-          {title: 'Comercial', value: 'commercial'},
-          {title: 'Editorial', value: 'editorial'},
-          {title: 'Maternidad', value: 'maternity'},
-        ],
+        list: getSanityPortfolioCategoryOptions(),
       },
       validation: (Rule) => Rule.required(),
     }),

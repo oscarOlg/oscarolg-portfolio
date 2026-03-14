@@ -141,7 +141,7 @@ export default function CouplePackages() {
             <span className="block font-serif text-4xl text-accent mb-4">3</span>
             <h4 className="font-sans uppercase tracking-widest text-xs mb-3">La Sesión</h4>
             <p className="font-sans text-xs text-gray-400">Dirección de pose natural para documentar su conexión de forma auténtica.</p>
-          </div>Ideal para sesiones de compromiso (pre-boda), aniversarios, retrato familiar o simplemente para documentar la conexión con los tuyos. Dirigimos la sesión para capturar la esencia genuina de su vínculo.
+          </div>
           <div>
             <span className="block font-serif text-4xl text-accent mb-4">4</span>
             <h4 className="font-sans uppercase tracking-widest text-xs mb-3">Entrega</h4>

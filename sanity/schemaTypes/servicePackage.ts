@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import { getSanityCategoryOptions } from '../../src/config/services'
 
 export const servicePackageType = defineType({
   name: 'servicePackage',
@@ -16,14 +17,7 @@ export const servicePackageType = defineType({
       title: 'Service Category',
       type: 'string',
       options: {
-        list: [
-          {title: 'Bodas', value: 'weddings'},
-          {title: 'Retratos', value: 'portrait'},
-          {title: 'Parejas y Grupales', value: 'couples'},
-          {title: 'Maternidad', value: 'maternity'},
-          {title: 'Comercial', value: 'commercial'},
-          {title: 'Editorial', value: 'editorial'},
-        ],
+        list: getSanityCategoryOptions(),
       },
       validation: (Rule) => Rule.required(),
     }),
