@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import emailjs from "@emailjs/browser";
 import type { ServicePackage } from "@/types/sanity";
 import { SERVICES } from "@/config/services";
+import { calculateTotalPrice } from "@/lib/pricing";
 
 // Initialize EmailJS
 emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
@@ -67,20 +68,10 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
   }, [formData.packageId, allPackages]);
 
   // Calculate total price
-  const totalPrice = useMemo(() => {
-    if (!selectedPackage) return 0;
-    let total = selectedPackage.price || 0;
-
-    // Add selected add-ons with quantities
-    Object.entries(formData.selectedAddOns).forEach(([addOnName, quantity]) => {
-      const addOn = selectedPackage.addOns?.find((a) => a.name === addOnName);
-      if (addOn && addOn.price) {
-        total += addOn.price * quantity;
-      }
-    });
-
-    return total;
-  }, [selectedPackage, formData.selectedAddOns]);
+  const totalPrice = useMemo(
+    () => calculateTotalPrice(selectedPackage, formData.selectedAddOns),
+    [selectedPackage, formData.selectedAddOns],
+  );
 
   // Generate message for social sharing
   const generatedMessage = useMemo(() => {
