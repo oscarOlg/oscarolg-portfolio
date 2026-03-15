@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
+import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getServiceThumbnails } from "@/lib/sanity";
 import { SERVICES } from "@/config/services";
 
 export const metadata: Metadata = {
@@ -19,25 +19,13 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function ServicesPage() {
-  // Fetch configs, packages, and hero image in parallel
-  const [configs, allPackages, heroImage] = await Promise.all([
+  // All data fetched in a single parallel batch (was: 2 sequential batches of 3+6 queries)
+  const [configs, allPackages, heroImage, serviceImagesByKey] = await Promise.all([
     getServiceConfigs(),
     getServicePackages(),
     getPortfolioImageBySlug("weddings-dscf8029"),
+    getServiceThumbnails(SERVICES),
   ]);
-
-  // Fetch featured images for each service category in parallel
-  const serviceImagesPromises = SERVICES.map((service) =>
-    getPortfolioImagesByCategory(service.portfolio_category).then((images) => ({
-      serviceKey: service.key,
-      image: images[0] || null, // Get first image as featured
-    }))
-  );
-
-  const serviceImagesResults = await Promise.all(serviceImagesPromises);
-  const serviceImagesByKey = Object.fromEntries(
-    serviceImagesResults.map((result) => [result.serviceKey, result.image])
-  );
 
   // Group packages by their service category
   const packagesByService: Record<string, typeof allPackages> = {};

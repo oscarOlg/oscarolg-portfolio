@@ -509,3 +509,29 @@ export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
     return []
   }
 }
+
+/**
+ * Fetch one thumbnail image per service category in a single GROQ query.
+ * Replaces N separate getPortfolioImagesByCategory calls on the services page.
+ * @param services - Array of { key, portfolio_category } from SERVICES config
+ * @returns Map of serviceKey → minimal PortfolioImage (only _id + image fields populated)
+ */
+export async function getServiceThumbnails(
+  services: Array<{ key: string; portfolio_category: string }>
+): Promise<Record<string, PortfolioImage | null>> {
+  const projections = services
+    .map(
+      (s) =>
+        `"${s.key}": *[_type == "portfolioImage" && category == "${s.portfolio_category}"] | order(displayOrder, publishedAt desc) [0] { _id, image { asset-> { _id, url } } }`
+    )
+    .join(', ');
+  try {
+    const result = await client.fetch<Record<string, PortfolioImage | null>>(
+      `{ ${projections} }`
+    );
+    return result || {};
+  } catch (error) {
+    console.error('Error fetching service thumbnails:', error);
+    return {};
+  }
+}

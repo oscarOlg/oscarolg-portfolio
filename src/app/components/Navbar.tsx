@@ -54,13 +54,25 @@ export default function Navbar() {
   const isHome = pathname === "/";
 
   useEffect(() => {
+    let debounceTimer: ReturnType<typeof setTimeout>;
+
     const checkScroll = () => setScrolled(window.scrollY > 60);
+
+    const handleScroll = () => {
+      checkScroll();
+      // Fallback for older iOS (pre-16.4) where scrollend doesn't fire:
+      // re-check 150ms after the last scroll event so momentum settle is caught.
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(checkScroll, 150);
+    };
+
     checkScroll(); // sync state on mount (handles page reload mid-scroll)
-    window.addEventListener("scroll", checkScroll, { passive: true });
-    window.addEventListener("scrollend", checkScroll, { passive: true }); // catches iOS momentum settle
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scrollend", checkScroll, { passive: true }); // Safari 16.4+
     return () => {
-      window.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scrollend", checkScroll);
+      clearTimeout(debounceTimer);
     };
   }, []);
 
