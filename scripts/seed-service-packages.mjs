@@ -273,7 +273,7 @@ const packages = [
   // ══════════════════════════════════════════════════════════════════════════
   // MATERNIDAD
   // ══════════════════════════════════════════════════════════════════════════
-  {
+    {
     name: 'Esencial',
     category: 'maternity',
     tier: 'essential',
@@ -285,6 +285,13 @@ const packages = [
       'Participación de pareja o un familiar(opcional)',
       '1 solo vestuario (Sin cambios durante la sesión)',
       '15 fotografías editadas profesionalmente',
+    ],
+    popular: false,
+    displayOrder: 1,
+    duration: 1,
+    deliverables: '15 fotos editadas',
+    addOns: [
+      { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
     ],
   },
   {

@@ -1,7 +1,6 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
 import Link from 'next/link';
 import PortfolioLightbox from './PortfolioLightbox';
 import PortfolioNav, {
@@ -24,7 +23,6 @@ export default function PortfolioClient({
   categoryDisplayNames,
 }: PortfolioClientProps) {
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
 
   // Get active category from URL
   const categoryParam = searchParams?.get('category');
@@ -44,11 +42,7 @@ export default function PortfolioClient({
       {/* Main Content */}
       <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
         {/* Show loading state with fade effect when switching categories */}
-        <div
-          className={`w-full transition-opacity duration-300 ${
-            isPending ? 'opacity-50' : 'opacity-100'
-          }`}
-        >
+        <div className="w-full">
           <PortfolioLightbox
             images={filteredImages}
             categoryDisplayNames={categoryDisplayNames}

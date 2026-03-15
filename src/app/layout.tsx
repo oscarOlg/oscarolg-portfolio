@@ -113,12 +113,12 @@ export default function RootLayout({
                   Ciudad Juárez, México
                 </p>
                 <a
-                  href="https://wa.me/526566956875"
+                  href="https://wa.me/525519689471"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-sans text-sm text-secondary/80 hover:text-accent transition-colors mb-5"
                 >
-                  WhatsApp: +52 656 695 6875
+                  WhatsApp: +52 55 1968 9471
                 </a>
                 <Socials
                   containerClassName="flex gap-5"

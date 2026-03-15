@@ -18,6 +18,29 @@ interface Props {
   serviceImagesByKey: Record<string, PortfolioImage | null>;
 }
 
+function ChevronIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <motion.svg
+      width="14"
+      height="8"
+      viewBox="0 0 14 8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      animate={{ rotate: isOpen ? 180 : 0 }}
+      transition={{ duration: 0.25, ease: "easeInOut" }}
+    >
+      <path
+        d="M1 1L7 7L13 1"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </motion.svg>
+  );
+}
+
 export default function ServicesContent({ configByKey, packagesByService, heroImage, serviceImagesByKey }: Props) {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
@@ -56,8 +79,6 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
   const config = configByKey[selectedService];
   const packages = packagesByService[selectedService] ?? [];
   const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1200) : null;
-  const selectedServiceImage = serviceImagesByKey[selectedService];
-  const selectedServiceImageUrl = selectedServiceImage ? getImageUrl(selectedServiceImage.image, 600) : null;
 
   if (!config) return null;
 
@@ -99,13 +120,8 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
               <span>
                 {selectedServiceName}
               </span>
-              <div className="flex items-center gap-2">
-                <span className="font-sans text-xs text-gray-400 italic whitespace-nowrap">
-                  Haz click para cambiar
-                </span>
-                <span className={`transition-all duration-300 text-base font-bold ${isDropdownOpen ? "rotate-180 scale-110" : "rotate-0"}`}>
-                  ▼
-                </span>
+              <div className="flex items-center">
+                <ChevronIcon isOpen={isDropdownOpen} />
               </div>
             </motion.button>
 
@@ -132,7 +148,9 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                             ? "bg-secondary text-dominant font-bold shadow-sm"
                             : "text-secondary hover:bg-gray-100 hover:shadow-sm"
                         } ${idx < SERVICES.length - 1 ? "border-b border-gray-300" : ""}`}
-                        whileHover={{ backgroundColor: selectedService === service.key ? undefined : "rgb(243, 244, 246)" }}
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.045, duration: 0.18, ease: "easeOut" }}
                       >
                         {serviceImageUrl && (
                           <div className="relative w-12 h-12 flex-shrink-0 border border-gray-300 overflow-hidden rounded-sm group-hover:shadow-md transition-shadow">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { getServicePackages, getImageUrl, getPortfolioImageBySlug } from "@/lib/sanity";
-import type { ServicePackage, PortfolioImage } from "@/types/sanity";
 import ContactPageClient from "./components/ContactPageClient";
 
 export const metadata: Metadata = {

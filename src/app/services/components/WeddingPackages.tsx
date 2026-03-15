@@ -91,7 +91,7 @@ export default function WeddingPackages() {
             <span className="font-sans font-semibold text-secondary whitespace-nowrap mt-0.5 sm:mt-0">$2,500 MXN</span>
           </div>
           <div className="flex justify-between items-start sm:items-center border-b border-gray-100 pb-3 mb-3 gap-4">
-            <span className="font-sans text-sm text-gray-600">Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")</span>
+            <span className="font-sans text-sm text-gray-600">{'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")'}</span>
             <span className="font-sans font-semibold text-secondary whitespace-nowrap mt-0.5 sm:mt-0">$1,500 MXN</span>
           </div>
           <div className="flex justify-between items-start sm:items-center border-b border-gray-100 pb-3 gap-4">

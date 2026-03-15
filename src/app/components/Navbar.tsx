@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 
 const navLinks = [
@@ -12,6 +13,39 @@ const navLinks = [
   { href: "/contact", label: "Contacto" },
 ];
 
+function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <motion.svg
+      width="22"
+      height="14"
+      viewBox="0 0 22 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <motion.line
+        x1="0" y1="1" x2="22" y2="1"
+        stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"
+        animate={isOpen ? { x1: 2, y1: 0, x2: 20, y2: 14 } : { x1: 0, y1: 1, x2: 22, y2: 1 }}
+        transition={{ duration: 0.28, ease: "easeInOut" }}
+      />
+      <motion.line
+        x1="0" y1="7" x2="22" y2="7"
+        stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"
+        style={{ transformOrigin: "11px 7px" }}
+        animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+        transition={{ duration: 0.15, ease: "easeInOut" }}
+      />
+      <motion.line
+        x1="0" y1="13" x2="22" y2="13"
+        stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"
+        animate={isOpen ? { x1: 2, y1: 14, x2: 20, y2: 0 } : { x1: 0, y1: 13, x2: 22, y2: 13 }}
+        transition={{ duration: 0.28, ease: "easeInOut" }}
+      />
+    </motion.svg>
+  );
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,19 +53,12 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
-  // Track scroll position for homepage transparency
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Transparent only on homepage when at the very top and menu is closed
   const isTransparent = isHome && !scrolled && !isMobileMenuOpen;
 
   const isActive = (href: string) =>
@@ -45,30 +72,20 @@ export default function Navbar() {
           : "bg-dominant/85 backdrop-blur-md text-secondary border-gray-200/60 shadow-sm"
       }`}
     >
-      {/* ── Main bar: h-16, true 3-column grid so nav links are always centered ── */}
-      <div className="h-16 px-6 md:px-12 grid grid-cols-[1fr_auto_1fr] items-center max-w-7xl mx-auto w-full">
+      {/* ── Main bar ── */}
+      <div className="h-16 px-6 md:px-12 flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
 
-        {/* COL 1 LEFT — Brand + hamburger */}
-        <div className="flex items-center gap-4">
-          <button
-            className="md:hidden font-sans text-xs uppercase tracking-widest border border-current px-3 py-1.5 hover:bg-current hover:text-dominant transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? "✕" : "≡"}
-          </button>
-          <Link href="/" className="flex flex-col leading-none">
-            <span className="font-serif text-xl md:text-2xl tracking-widest uppercase drop-shadow-sm">
-              Oscar Olg
-            </span>
-            <span className="font-sans font-light text-[9px] tracking-[0.28em] uppercase mt-0.5 opacity-70">
-              Photography
-            </span>
-          </Link>
-        </div>
+        {/* LEFT — Brand */}
+        <Link href="/" className="flex flex-col leading-none">
+          <span className="font-serif text-xl md:text-2xl tracking-widest uppercase drop-shadow-sm">
+            Oscar Olg
+          </span>
+          <span className="font-sans font-light text-[9px] tracking-[0.28em] uppercase mt-0.5 opacity-70">
+            Photography
+          </span>
+        </Link>
 
-        {/* COL 2 CENTER — Nav links (desktop only) */}
+        {/* CENTER — Nav links (desktop only) */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
           {navLinks.map(({ href, label }) => (
             <Link
@@ -85,43 +102,67 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* COL 3 RIGHT — Socials (desktop) | empty on mobile */}
+        {/* RIGHT — Socials (desktop) | Hamburger (mobile) */}
         <div className="hidden md:flex items-center justify-end">
           <Socials
             containerClassName="flex gap-5"
             itemClassName="hover:text-accent transition-colors"
           />
         </div>
+        <button
+          className="md:hidden p-2 -mr-2 hover:text-accent transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <HamburgerIcon isOpen={isMobileMenuOpen} />
+        </button>
       </div>
 
       {/* ── Mobile dropdown ── */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-dominant text-secondary ${
-          isMobileMenuOpen
-            ? "max-h-96 opacity-100 border-t border-gray-200 shadow-lg"
-            : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="flex flex-col px-6 py-6 gap-0">
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`font-sans text-sm uppercase tracking-widest border-b border-gray-200 py-4 transition-colors ${
-                isActive(href) ? "text-accent" : "hover:text-accent"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-          <div className="pt-6 pb-2">
-            <Socials
-              containerClassName="flex gap-6"
-              itemClassName="hover:text-accent transition-colors text-gray-500"
-            />
-          </div>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="md:hidden bg-dominant text-secondary border-t border-gray-200/70 shadow-lg overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="flex flex-col px-6 py-6 gap-0">
+              {navLinks.map(({ href, label }, i) => (
+                <motion.div
+                  key={href}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.055, duration: 0.22, ease: "easeOut" }}
+                >
+                  <Link
+                    href={href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block font-sans text-sm uppercase tracking-widest border-b border-gray-200/70 py-4 transition-colors ${
+                      isActive(href) ? "text-accent" : "hover:text-accent"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                className="pt-6 pb-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: navLinks.length * 0.055 + 0.08, duration: 0.2 }}
+              >
+                <Socials
+                  containerClassName="flex gap-6"
+                  itemClassName="hover:text-accent transition-colors text-secondary/50"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
