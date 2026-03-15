@@ -88,9 +88,13 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
         {/* ── Service Selector Dropdown (Inside Card) ── */}
         <div className="flex justify-center px-8 md:px-12 pt-8">
           <div ref={dropdownRef} className="relative w-full md:w-11/12 lg:w-5/6">
-            <button
+            <motion.button
+              key={selectedService}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="w-full flex justify-between items-center px-6 py-4 bg-dominant border-2 border-gray-300 text-secondary font-serif text-lg font-bold hover:border-accent transition-all duration-200 cursor-pointer"
+              initial={{ scale: 0.98, opacity: 0.9 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
               <span>
                 {selectedServiceName}
@@ -103,7 +107,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                   ▼
                 </span>
               </div>
-            </button>
+            </motion.button>
 
             {/* Dropdown Menu with Thumbnails */}
             <AnimatePresence>
@@ -151,9 +155,18 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
         </div>
 
         {/* ── Packages Grid ── */}
-        <div className="px-8 md:px-12 pb-8">
-          <ServicePackageTemplate config={config} packages={packages} />
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedService}
+            className="px-8 md:px-12 pb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <ServicePackageTemplate config={config} packages={packages} />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

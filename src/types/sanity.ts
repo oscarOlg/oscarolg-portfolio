@@ -177,13 +177,10 @@ export interface ServiceConfig {
 export interface AboutContent {
   _id: string
   _type: 'aboutContent'
-  title: string
-  subtitle?: string
+  heading: string
   mainImage?: SanityImageAsset
-  bio: BlockContent[]
-  yearsExperience?: number
-  specializations?: string[]
-  cta?: string
+  paragraphs?: string[]
+  ctaText?: string
 }
 
 /**
@@ -210,4 +207,27 @@ export interface ServiceCategory {
   slug: string
   displayName: string
   packages: ServicePackage[]
+}
+
+/**
+ * Homepage Content Document
+ */
+export interface HomepageContent {
+  _id: string
+  _type: 'homepageContent'
+  heroHeading?: string
+  heroHeadingItalic?: string
+  heroCta1Text?: string
+  heroCta2Text?: string
+  workSectionHeading?: string
+  workSectionSubtitle?: string
+  workSectionViewMoreText?: string
+  workSectionViewAllText?: string
+  investmentHeading?: string
+  investmentParagraph1?: string
+  investmentParagraph2?: string
+  investmentCtaText?: string
+  finalCtaHeading?: string
+  finalCtaLocation?: string
+  finalCtaButtonText?: string
 }

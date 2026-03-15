@@ -1,6 +1,6 @@
 import {createClient} from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
-import type { PortfolioImage, ServicePackage, ServiceConfig, AboutContent, Testimonial } from '@/types/sanity'
+import type { PortfolioImage, ServicePackage, ServiceConfig, AboutContent, HomepageContent, Testimonial } from '@/types/sanity'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -243,8 +243,7 @@ export const featuredTestimonialsQuery = `
 
 export const aboutContentQuery = `
   *[_type == "aboutContent"][0] {
-    title,
-    subtitle,
+    heading,
     mainImage {
       asset-> {
         _id,
@@ -252,10 +251,28 @@ export const aboutContentQuery = `
       },
       hotspot,
     },
-    bio,
-    yearsExperience,
-    specializations,
-    cta
+    paragraphs,
+    ctaText
+  }
+`
+
+export const homepageContentQuery = `
+  *[_type == "homepageContent"][0] {
+    heroHeading,
+    heroHeadingItalic,
+    heroCta1Text,
+    heroCta2Text,
+    workSectionHeading,
+    workSectionSubtitle,
+    workSectionViewMoreText,
+    workSectionViewAllText,
+    investmentHeading,
+    investmentParagraph1,
+    investmentParagraph2,
+    investmentCtaText,
+    finalCtaHeading,
+    finalCtaLocation,
+    finalCtaButtonText
   }
 `
 
@@ -449,6 +466,19 @@ export async function getAboutContent(): Promise<AboutContent | null> {
     return about || null
   } catch (error) {
     console.error('Error fetching about content:', error)
+    return null
+  }
+}
+
+/**
+ * Fetch homepage text content from Sanity
+ */
+export async function getHomepageContent(): Promise<HomepageContent | null> {
+  try {
+    const content = await client.fetch<HomepageContent>(homepageContentQuery)
+    return content || null
+  } catch (error) {
+    console.error('Error fetching homepage content:', error)
     return null
   }
 }

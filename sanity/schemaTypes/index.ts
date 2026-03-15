@@ -2,7 +2,8 @@ import {portfolioImageType} from './portfolioImage'
 import {servicePackageType} from './servicePackage'
 import {serviceConfigType} from './serviceConfig'
 import {testimonialType} from './testimonial'
-import {aboutContentType, blockContentType} from './aboutContent'
+import {aboutContentType} from './aboutContent'
+import {homepageContentType} from './homepageContent'
 
 export const schemaTypes = [
   portfolioImageType,
@@ -10,5 +11,5 @@ export const schemaTypes = [
   serviceConfigType,
   testimonialType,
   aboutContentType,
-  blockContentType,
+  homepageContentType,
 ]

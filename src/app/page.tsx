@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPortfolioImageBySlug, getPortfolioImages, getImageUrl } from "@/lib/sanity";
+import { getPortfolioImageBySlug, getPortfolioImages, getImageUrl, getHomepageContent } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import InvestmentSection from "./components/InvestmentSection";
 import HeroContent from "./components/HeroContent";
@@ -12,11 +12,14 @@ const HOME_IMAGE_SLUGS = {
   investmentRight: "weddings-dscf1937",
 } as const;
 
+export const revalidate = 60;
+
 export default async function Home() {
-  const [allImages, pinnedInvestmentLeft, pinnedInvestmentRight] = await Promise.all([
+  const [allImages, pinnedInvestmentLeft, pinnedInvestmentRight, homepageContent] = await Promise.all([
     getPortfolioImages(),
     getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentLeft),
     getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentRight),
+    getHomepageContent(),
   ]);
 
   // First image per category for the cards
@@ -40,6 +43,8 @@ export default async function Home() {
   const investLeft = pinnedInvestmentLeft ?? fallbackInvestLeft;
   const investRight = pinnedInvestmentRight ?? fallbackInvestRight;
 
+  const hp = homepageContent;
+
   return (
     <div className="flex flex-col w-full">
 
@@ -56,7 +61,12 @@ export default async function Home() {
           <div className="absolute inset-0 bg-black/45" />
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
-        <HeroContent />
+        <HeroContent
+          heading={hp?.heroHeading}
+          headingItalic={hp?.heroHeadingItalic}
+          cta1Text={hp?.heroCta1Text}
+          cta2Text={hp?.heroCta2Text}
+        />
       </section>
 
       {/* ── 2. PORTFOLIO CATEGORIES GRID ── */}
@@ -64,10 +74,10 @@ export default async function Home() {
         <AnimatedSection>
           <div className="max-w-7xl mx-auto">
             <h2 className="font-serif text-3xl md:text-4xl text-dominant text-center mb-3">
-              Mi Trabajo
+              {hp?.workSectionHeading ?? "Mi Trabajo"}
             </h2>
             <p className="font-sans text-xs text-dominant/60 text-center tracking-widest uppercase mb-16">
-              Explora por tipo de sesión
+              {hp?.workSectionSubtitle ?? "Explora por tipo de sesión"}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
               {PORTFOLIO_CATEGORIES.map(({ key, label }, i) => {
@@ -96,7 +106,7 @@ export default async function Home() {
                           {label}
                         </span>
                         <span className="font-sans text-xs text-white/0 group-hover:text-white/80 uppercase tracking-widest translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                          Ver más →
+                          {hp?.workSectionViewMoreText ?? "Ver más →"}
                         </span>
                       </div>
                     </Link>
@@ -109,7 +119,7 @@ export default async function Home() {
                 href="/portfolio"
                 className="font-sans text-xs text-dominant/70 uppercase tracking-widest border-b border-dominant/40 pb-1 hover:text-dominant hover:border-dominant transition-colors"
               >
-                Ver todo el portafolio →
+                {hp?.workSectionViewAllText ?? "Ver todo el portafolio →"}
               </Link>
             </div>
           </div>
@@ -121,6 +131,10 @@ export default async function Home() {
         <InvestmentSection
           leftImageUrl={investLeft ? getImageUrl(investLeft.image, 900) : undefined}
           rightImageUrl={investRight ? getImageUrl(investRight.image, 900) : undefined}
+          heading={hp?.investmentHeading}
+          paragraph1={hp?.investmentParagraph1}
+          paragraph2={hp?.investmentParagraph2}
+          ctaText={hp?.investmentCtaText}
         />
       </AnimatedSection>
 
@@ -128,16 +142,16 @@ export default async function Home() {
       <AnimatedSection>
         <section className="w-full bg-accent py-28 px-6 text-center">
           <h2 className="font-serif text-3xl md:text-4xl text-secondary mb-5 max-w-xl mx-auto leading-tight">
-            ¿Listo para crear algo hermoso e irrepetible?
+            {hp?.finalCtaHeading ?? "¿Listo para crear algo hermoso e irrepetible?"}
           </h2>
           <p className="font-sans text-xs text-secondary/60 uppercase tracking-widest mb-12">
-            Ciudad Juárez &amp; México
+            {hp?.finalCtaLocation ?? "Ciudad Juárez & México"}
           </p>
           <Link
             href="/contact"
             className="inline-block bg-secondary text-dominant font-sans uppercase tracking-widest text-sm py-4 px-12 hover:bg-white hover:text-secondary transition-all duration-300 font-semibold"
           >
-            Reservar fecha
+            {hp?.finalCtaButtonText ?? "Reservar fecha"}
           </Link>
         </section>
       </AnimatedSection>

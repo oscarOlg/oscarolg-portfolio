@@ -3,11 +3,23 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+interface Props {
+  heading?: string;
+  headingItalic?: string;
+  cta1Text?: string;
+  cta2Text?: string;
+}
+
 /**
  * Client component for above-the-fold hero animations.
  * Uses mount-time animation (not scroll-triggered) so it plays on initial load.
  */
-export default function HeroContent() {
+export default function HeroContent({
+  heading = "Fotografía que captura",
+  headingItalic = "la esencia de tu historia",
+  cta1Text = "Ver mi portafolio",
+  cta2Text = "Cotizar sesión",
+}: Props) {
   return (
     <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 text-center">
       <motion.h2
@@ -16,8 +28,8 @@ export default function HeroContent() {
         transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight drop-shadow-lg mb-8"
       >
-        Fotografía que captura{" "}
-        <span className="italic text-accent">la esencia de tu historia</span>
+        {heading}{" "}
+        <span className="italic text-accent">{headingItalic}</span>
       </motion.h2>
 
       <motion.div
@@ -30,13 +42,13 @@ export default function HeroContent() {
           href="/portfolio"
           className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-white hover:-translate-y-1 transition-all duration-300 font-bold border border-accent"
         >
-          Ver mi portafolio
+          {cta1Text}
         </Link>
         <Link
           href="/contact"
           className="inline-block bg-transparent text-white font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 font-semibold border border-white/60"
         >
-          Cotizar sesión
+          {cta2Text}
         </Link>
       </motion.div>
     </div>

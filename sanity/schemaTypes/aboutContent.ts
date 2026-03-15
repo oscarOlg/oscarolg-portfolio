@@ -2,79 +2,36 @@ import {defineField, defineType} from 'sanity'
 
 export const aboutContentType = defineType({
   name: 'aboutContent',
-  title: 'About Page Content',
+  title: 'Página Acerca De',
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Page Title',
+      name: 'heading',
+      title: 'Título Principal (H1)',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'string',
     }),
     defineField({
       name: 'mainImage',
-      title: 'Main Image',
+      title: 'Fotografía de Perfil',
       type: 'image',
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'bio',
-      title: 'Photographer Bio',
-      type: 'blockContent',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'yearsExperience',
-      title: 'Years of Experience',
-      type: 'number',
-    }),
-    defineField({
-      name: 'specializations',
-      title: 'Specializations',
+      name: 'paragraphs',
+      title: 'Párrafos del Cuerpo',
       type: 'array',
-      of: [{type: 'string'}],
-      description: 'e.g., Weddings, Portraits, Events',
+      of: [{type: 'text'}],
+      description: 'Cada entrada es un párrafo separado. El orden aquí es el orden en pantalla.',
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
-      name: 'cta',
-      title: 'Call to Action Text',
+      name: 'ctaText',
+      title: 'Texto del Botón CTA',
       type: 'string',
-      description: 'Button/closing text (e.g., "Let\'s create something beautiful together")',
+      description: 'Ej.: "Hablemos de tu proyecto"',
     }),
-  ],
-})
-
-// Block content for rich text
-export const blockContentType = defineType({
-  name: 'blockContent',
-  title: 'Block Content',
-  type: 'array',
-  of: [
-    {
-      title: 'Block',
-      type: 'block',
-      styles: [
-        {title: 'Normal', value: 'normal'},
-        {title: 'H1', value: 'h1'},
-        {title: 'H2', value: 'h2'},
-        {title: 'H3', value: 'h3'},
-        {title: 'Quote', value: 'blockquote'},
-      ],
-      lists: [{title: 'Bullet', value: 'bullet'}],
-    },
-    {
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
   ],
 })

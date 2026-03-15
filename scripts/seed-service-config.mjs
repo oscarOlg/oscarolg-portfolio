@@ -59,7 +59,7 @@ const configs = [
     hasGlobalBenefits: true,
     globalBenefitsHeading: 'Inclusiones en todos los paquetes',
     globalBenefitsText:
-      'Entrega garantizada de galería digital amplia (aprox. 50 a 60 fotos por hora de cobertura). Todas las fotografías son editadas profesionalmente y entregadas en Alta Resolución (para impresión) y optimizadas para Redes Sociales. Respaldadas en nuestra plataforma en la nube de forma gratuita por 6 meses.',
+      'Entrega garantizada de galería digital amplia (aprox. 50 a 60 fotos por hora de cobertura). Todas las fotografías son editadas profesionalmente y entregadas en Alta Resolución (para impresión) y optimizadas para Redes Sociales. Respaldadas en la nube de forma gratuita por 6 meses.',
     hasProcess: true,
     processTitle: 'El proceso hacia tu Gran Día',
     processSteps: [
@@ -78,7 +78,7 @@ const configs = [
     serviceKey: 'portrait',
     displayName: 'Retratos',
     introText:
-      'Ya sea que busques celebrar tu cumpleaños, documentar tu graduación, renovar tu marca personal o capturar una tarde casual con tu pareja. Estas colecciones están diseñadas para adaptarse a tu visión.',
+      'Ya sea que busques celebrar tu cumpleaños, documentar tu graduación, renovar tu marca personal o un proyecto personal. Estas colecciones están diseñadas para adaptarse a tu visión.',
     gridColumns: 3,
     hasAddOns: true,
     complementos: [
@@ -86,9 +86,8 @@ const configs = [
       { name: 'Hora extra de sesión', price: 1000 },
     ],
     infoCardVariant: 'right_panel',
-    infoCardHeading: '¿Buscas fotos en estudio?',
-    infoCardContent:
-      'Cualquiera de estos paquetes puede realizarse en estudio fotográfico. El costo de la renta del estudio se cotiza por separado dependiendo de la locación elegida.',
+    infoCardHeading: '¿Deseas tu sesión en estudio fotográfico?',
+    infoCardContent: 'Cualquiera de nuestras sesiones puede realizarse en estudio fotográfico profesional. Contamos con diferentes opciones en la ciudad. El costo de renta se cotiza por separado según disponibilidad (inversión promedio de $600 MXN por hora).',
     hasGlobalBenefits: true,
     globalBenefitsHeading: 'Inclusiones en todas las sesiones',
     globalBenefitsText:
@@ -121,9 +120,8 @@ const configs = [
       { name: 'Hora extra de sesión', price: 1000 },
     ],
     infoCardVariant: 'right_panel',
-    infoCardHeading: '¿Buscan fotos en estudio?',
-    infoCardContent:
-      'Cualquiera de estas sesiones puede realizarse en estudio fotográfico profesional. El costo de renta se cotiza por separado según disponibilidad y el estudio de su elección (inversión promedio de $600 MXN por hora).',
+    infoCardHeading: '¿Deseas tu sesión en estudio fotográfico?',
+    infoCardContent: 'Cualquiera de nuestras sesiones puede realizarse en estudio fotográfico profesional. Contamos con diferentes opciones en la ciudad. El costo de renta se cotiza por separado según disponibilidad (inversión promedio de $600 MXN por hora).',
     hasGlobalBenefits: true,
     globalBenefitsHeading: 'Inclusiones en todas las sesiones',
     globalBenefitsText:
@@ -150,9 +148,8 @@ const configs = [
     gridColumns: 2,
     hasAddOns: false,
     infoCardVariant: 'full_width_centered',
-    infoCardHeading: '¿Deseas una sesión más íntima en estudio?',
-    infoCardContent:
-      'La fotografía de maternidad en estudio ofrece un look elegante y atemporal. Contamos con opciones de estudios profesionales en la ciudad. El costo de renta se cotiza por separado (promedio de $600 MXN por hora).',
+    infoCardHeading: '¿Deseas tu sesión en estudio fotográfico?',
+    infoCardContent: 'Cualquiera de nuestras sesiones puede realizarse en estudio fotográfico profesional. Contamos con diferentes opciones en la ciudad. El costo de renta se cotiza por separado según disponibilidad (inversión promedio de $600 MXN por hora).',
     hasGlobalBenefits: true,
     globalBenefitsHeading: 'Inclusiones en todas las sesiones',
     globalBenefitsText:

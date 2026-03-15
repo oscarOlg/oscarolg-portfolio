@@ -104,7 +104,7 @@ const packages = [
     name: 'Boda Civil / Íntima',
     category: 'weddings',
     tier: 'essential',
-    price: 3500,
+    price: 4000,
     showPrice: true,
     description: 'Hasta 3 horas de cobertura',
     bodyText:
@@ -134,7 +134,7 @@ const packages = [
     description: 'Sesión Express',
     features: [
       'Hasta 45 minutos de sesión en locación',
-      '1 cambio de vestuario',
+      '1 solo vestuario (Sin cambios durante la sesión)',
       '10 fotografías editadas profesionalmente',
     ],
     popular: false,
@@ -157,13 +157,13 @@ const packages = [
     features: [
       'Hasta 1 hora de sesión en locación',
       'Hasta 2 cambios de vestuario',
-      '15 fotografías editadas profesionalmente',
+      '20 fotografías editadas profesionalmente',
     ],
     popular: true,
     badgeLabel: 'Más Popular',
     displayOrder: 2,
     duration: 1,
-    deliverables: '15 fotos editadas',
+    deliverables: '20 fotos editadas',
     addOns: [
       { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
@@ -180,12 +180,12 @@ const packages = [
     features: [
       'Hasta 2 horas de sesión creativa',
       'Hasta 3 cambios de vestuario',
-      '20 fotografías editadas profesionalmente',
+      '30 fotografías editadas profesionalmente',
     ],
     popular: false,
     displayOrder: 3,
     duration: 2,
-    deliverables: '20 fotos editadas',
+    deliverables: '30 fotos editadas',
     addOns: [
       { name: 'Sesión en Estudio', price: 1200, description: 'Costo de renta del estudio (sesión de 2h)' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
@@ -204,8 +204,9 @@ const packages = [
     showPrice: true,
     description: 'Sesión Casual',
     features: [
+      'Base de 2 personas (+ $250 MXN por integrante extra)',
       'Sesión de 1 hora en locación',
-      'Cobertura para 2 personas (1 cambio de vestuario)',
+      '1 solo vestuario (Sin cambios durante la sesión)',
       '15 fotografías editadas profesionalmente',
     ],
     popular: false,
@@ -227,6 +228,7 @@ const packages = [
     showPrice: true,
     description: 'La experiencia completa',
     features: [
+      'Base de 2 personas (+ $250 MXN por integrante extra)',
       'Sesión de 2 horas en locación',
       'Hasta 2 cambios de vestuario',
       '20 fotografías editadas profesionalmente',
@@ -251,6 +253,7 @@ const packages = [
     showPrice: true,
     description: 'Memoria Documental',
     features: [
+      'Base de 2 personas (+ $250 MXN por integrante extra)',
       'Sesión de 2 horas en locación',
       'Hasta 3 cambios de vestuario',
       '30 fotografías editadas profesionalmente',
@@ -279,14 +282,9 @@ const packages = [
     description: 'El brillo de la espera',
     features: [
       'Sesión de 1 hora en locación',
+      'Participación de pareja o un familiar(opcional)',
+      '1 solo vestuario (Sin cambios durante la sesión)',
       '15 fotografías editadas profesionalmente',
-    ],
-    popular: false,
-    displayOrder: 1,
-    duration: 1,
-    deliverables: '15 fotos editadas',
-    addOns: [
-      { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
     ],
   },
   {
@@ -298,15 +296,15 @@ const packages = [
     description: 'Maternidad y Familia',
     features: [
       'Sesión extendida de 2 horas en locación',
-      'Participación de pareja e hijos',
+      'Participación de pareja e hijos(hasta 3 familiares)',
       'Hasta 2 cambios de vestuario',
-      '30 fotografías editadas profesionalmente',
+      '25 fotografías editadas profesionalmente',
     ],
     popular: true,
     badgeLabel: 'Experiencia Completa',
     displayOrder: 2,
     duration: 2,
-    deliverables: '30 fotos editadas',
+    deliverables: '25 fotos editadas',
     addOns: [
       { name: 'Sesión en Estudio', price: 1200, description: 'Costo de renta del estudio (sesión de 2h)' },
     ],
