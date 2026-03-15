@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Playfair_Display, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import NavbarSpacer from "./components/NavbarSpacer";
@@ -138,6 +139,7 @@ export default function RootLayout({
         </footer>
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
