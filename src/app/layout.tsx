@@ -12,8 +12,29 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: '--font-playfa
 const lato = Lato({ weight: ['300', '400', '700'], subsets: ["latin"], variable: '--font-lato' });
 
 export const metadata: Metadata = {
-  title: "Oscar Sanchez | Fotógrafo",
-  description: "Fotografía de Bodas, Eventos y Retrato en Ciudad Juárez",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  title: {
+    template: '%s | Oscar Sanchez Fotógrafo',
+    default: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
+  },
+  description: 'Fotógrafo profesional en Ciudad Juárez. Especializado en bodas, retratos, parejas y maternidad. Capturando momentos que merecen perdurar.',
+  openGraph: {
+    siteName: 'Oscar Sanchez Fotógrafo',
+    locale: 'es_MX',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Oscar Sanchez — Fotógrafo en Ciudad Juárez',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-image.jpg'],
+  },
 };
 
 const footerLinks = [

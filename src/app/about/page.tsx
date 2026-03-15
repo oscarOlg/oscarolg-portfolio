@@ -1,7 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import Socials from "../components/Socials";
 import { getAboutContent } from "@/lib/sanity";
+
+export const metadata: Metadata = {
+  title: 'Acerca de',
+  description: 'Conoce a Oscar Sanchez, fotógrafo en Ciudad Juárez especializado en bodas, retratos y parejas. Su promesa: confianza y tranquilidad absoluta durante todo el proceso.',
+  openGraph: {
+    title: 'Acerca de | Oscar Sanchez Fotógrafo',
+    description: 'Fotógrafo radicado en Ciudad Juárez. Documentando momentos que merecen perdurar.',
+    url: '/about',
+  },
+};
 
 export const revalidate = 60;
 

@@ -1,8 +1,19 @@
 // src/app/services/page.tsx
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
 import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
 import { SERVICES } from "@/config/services";
+
+export const metadata: Metadata = {
+  title: 'Servicios y Precios',
+  description: 'Paquetes fotográficos en Ciudad Juárez: bodas, retratos, parejas, maternidad, comercial y editorial. Precios claros y transparentes para cada sesión.',
+  openGraph: {
+    title: 'Servicios y Precios | Oscar Sanchez Fotógrafo',
+    description: 'Paquetes fotográficos en Ciudad Juárez. Bodas, retratos, parejas y más.',
+    url: '/services',
+  },
+};
 
 // Revalidate every 60 seconds (ISR with fresh Sanity data)
 export const revalidate = 60;

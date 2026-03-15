@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getPortfolioImageBySlug, getPortfolioImages, getImageUrl, getHomepageContent } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import InvestmentSection from "./components/InvestmentSection";
 import HeroContent from "./components/HeroContent";
 import AnimatedSection from "./components/AnimatedSection";
 import { PORTFOLIO_CATEGORIES } from "./portfolio/components/PortfolioNav";
+
+export const metadata: Metadata = {
+  title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
+  description: 'Fotógrafo profesional en Ciudad Juárez. Bodas, retratos, parejas y maternidad capturados con sensibilidad editorial. Tu historia merece perdurar.',
+  openGraph: {
+    title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
+    description: 'Bodas, retratos, parejas y maternidad. Fotografía editorial en Ciudad Juárez.',
+    url: '/',
+  },
+};
 
 const HOME_IMAGE_SLUGS = {
   investmentLeft: "maternity-dscf0179",

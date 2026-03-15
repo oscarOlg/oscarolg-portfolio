@@ -1,10 +1,21 @@
 import { getPortfolioImages } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import PortfolioClient from "./components/PortfolioClient";
 import {
   PORTFOLIO_CATEGORIES,
 } from "./components/PortfolioNav";
+
+export const metadata: Metadata = {
+  title: 'Portafolio',
+  description: 'Explora el trabajo fotográfico de Oscar Sanchez en Ciudad Juárez: bodas, retratos, parejas, maternidad, fotografía comercial y editorial.',
+  openGraph: {
+    title: 'Portafolio | Oscar Sanchez Fotógrafo',
+    description: 'Bodas, retratos, parejas, maternidad y más. Fotografía editorial en Ciudad Juárez.',
+    url: '/portfolio',
+  },
+};
 
 // Revalidate portfolio data every 60 seconds
 // This enables ISR: page cached for 60s, then revalidated with fresh Sanity data
