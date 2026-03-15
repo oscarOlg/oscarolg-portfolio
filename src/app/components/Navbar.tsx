@@ -54,9 +54,14 @@ export default function Navbar() {
   const isHome = pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const checkScroll = () => setScrolled(window.scrollY > 60);
+    checkScroll(); // sync state on mount (handles page reload mid-scroll)
+    window.addEventListener("scroll", checkScroll, { passive: true });
+    window.addEventListener("scrollend", checkScroll, { passive: true }); // catches iOS momentum settle
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("scrollend", checkScroll);
+    };
   }, []);
 
   const isTransparent = isHome && !scrolled && !isMobileMenuOpen;
