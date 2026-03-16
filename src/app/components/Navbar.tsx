@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-secondary/90 backdrop-blur-md text-dominant border-b border-white/10 shadow-md">
       {/* ── Main bar ── */}
-      <div className="h-16 px-6 md:px-12 flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
+      <div className="h-16 px-6 lg:px-12 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
 
         {/* LEFT — Brand */}
         <Link href="/" className="flex flex-col leading-none">
@@ -74,7 +74,7 @@ export default function Navbar() {
         </Link>
 
         {/* CENTER — Nav links (desktop only) */}
-        <nav className="hidden md:flex items-center gap-8" aria-label={lang === "en" ? "Main navigation" : "Navegación principal"}>
+        <nav className="hidden lg:flex items-center gap-8" aria-label={lang === "en" ? "Main navigation" : "Navegación principal"}>
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -91,7 +91,7 @@ export default function Navbar() {
         </nav>
 
         {/* RIGHT — Language toggle + Socials (desktop) | Hamburger (mobile) */}
-        <div className="hidden md:flex items-center justify-end gap-5">
+        <div className="hidden lg:flex items-center justify-end gap-5">
           {/* Language toggle */}
           <div className="flex items-center gap-1.5 font-sans text-[10px] uppercase tracking-[0.2em] pr-5 border-r border-white/20">
             <button
@@ -118,7 +118,7 @@ export default function Navbar() {
 
         {/* Hamburger (mobile) */}
         <button
-          className="md:hidden p-2 -mr-2 hover:text-accent transition-colors"
+          className="lg:hidden p-2 -mr-2 hover:text-accent transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
@@ -131,7 +131,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-secondary text-dominant border-t border-white/10 shadow-lg overflow-hidden"
+            className="lg:hidden bg-secondary text-dominant border-t border-white/10 shadow-lg overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
