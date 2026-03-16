@@ -1,38 +1,56 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage, pickLang } from "@/contexts/LanguageContext";
 
 interface Props {
   leftImageUrl?: string;
   rightImageUrl?: string;
   heading?: string;
+  headingEn?: string;
   paragraph1?: string;
+  paragraph1En?: string;
   paragraph2?: string;
+  paragraph2En?: string;
   ctaText?: string;
+  ctaTextEn?: string;
 }
 
 export default function InvestmentSection({
   leftImageUrl,
   rightImageUrl,
   heading = "La tranquilidad de estar en buenas manos.",
+  headingEn,
   paragraph1 = "Mi objetivo es transformar instantes efímeros en recuerdos tangibles. Te ofrezco calidad estética, calidez humana y tranquilidad absoluta para documentar los capítulos más importantes de tu vida.",
+  paragraph1En,
   paragraph2 = "Sé que planear un evento requiere tiempo y dedicación. Por eso, mi enfoque es brindarte la confianza de que tu historia será capturada con cuidado y profesionalismo. Encuentra opciones claras y diseñadas para adaptarse a tu visión, permitiéndote enfocarte únicamente en disfrutar.",
+  paragraph2En,
   ctaText = "Conocer paquetes y precios",
+  ctaTextEn,
 }: Props) {
+  const { lang } = useLanguage();
+
+  const displayHeading = pickLang(lang, heading, headingEn) ?? heading;
+  const displayP1 = pickLang(lang, paragraph1, paragraph1En) ?? paragraph1;
+  const displayP2 = pickLang(lang, paragraph2, paragraph2En) ?? paragraph2;
+  const displayCta = pickLang(lang, ctaText, ctaTextEn) ?? ctaText;
+
   return (
     <section className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-dominant">
 
       {/* Lado Izquierdo: Mensaje de Valor y CTA */}
       <div className="flex flex-col justify-center">
         <h2 className="font-serif text-4xl md:text-5xl leading-tight mb-8 text-secondary">
-          {heading}
+          {displayHeading}
         </h2>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-6">
-          {paragraph1}
+          {displayP1}
         </p>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-10">
-          {paragraph2}
+          {displayP2}
         </p>
 
         <div className="flex flex-col sm:flex-row items-start gap-6">
@@ -40,7 +58,7 @@ export default function InvestmentSection({
             href="/services"
             className="bg-secondary text-dominant font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-accent hover:-translate-y-1 transition-all duration-300 font-semibold w-full sm:w-auto text-center shadow-sm"
           >
-            {ctaText}
+            {displayCta}
           </Link>
         </div>
       </div>

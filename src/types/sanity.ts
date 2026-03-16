@@ -92,6 +92,7 @@ export interface ServicePackage {
   _id: string
   _type: 'servicePackage'
   name: string
+  nameEn?: string
   category: string
   tier?: 'essential' | 'premium' | 'deluxe'
   price: number
@@ -99,18 +100,24 @@ export interface ServicePackage {
   showPrice?: boolean
   /** Text before the price, e.g., "A partir de" */
   pricePrefix?: string
+  pricePrefixEn?: string
   /** Subtitle shown under the package name */
   description: string
+  descriptionEn?: string
   /** Bullet-point feature list */
   features?: string[]
+  featuresEn?: string[]
   /** Paragraph body text instead of bullet list (TFP / narrative cards).
    *  Separate two paragraphs with a blank line — the second renders in italics. */
   bodyText?: string
+  bodyTextEn?: string
   popular?: boolean
   /** Custom badge label — defaults to "Más Popular" when popular=true */
   badgeLabel?: string
+  badgeLabelEn?: string
   /** Per-package CTA override — falls back to serviceConfig.ctaButtonText */
   ctaText?: string
+  ctaTextEn?: string
   /** 'filled' (default) or 'outline' (border-only button) */
   ctaVariant?: 'filled' | 'outline'
   /** When true, renders as a special highlight card outside the main grid */
@@ -119,12 +126,14 @@ export interface ServicePackage {
   addOns?: Array<{
     _key: string
     name: string
+    nameEn?: string
     price: number
     unit?: string
     description?: string
   }>
   duration?: number | null
   deliverables?: string
+  deliverablesEn?: string
   displayOrder?: number
 }
 
@@ -137,38 +146,52 @@ export interface ServiceConfig {
   _type: 'serviceConfig'
   serviceKey: string
   displayName: string
+  displayNameEn?: string
   /** Intro paragraph above the package grid */
   introText?: string
+  introTextEn?: string
   gridColumns: 2 | 3
   hasAddOns?: boolean
   /** Items listed in the Complementos section */
   complementos?: Array<{
     _key: string
     name: string
+    nameEn?: string
     price: number
     unit?: string
     note?: string
+    noteEn?: string
   }>
   /** 'none' | 'right_panel' | 'full_width_centered' */
   infoCardVariant?: 'none' | 'right_panel' | 'full_width_centered'
   infoCardHeading?: string
+  infoCardHeadingEn?: string
   infoCardContent?: string
+  infoCardContentEn?: string
   /** Optional accent block (e.g., "Presupuestos a la Medida" in commercial) */
   customBlockHeading?: string
+  customBlockHeadingEn?: string
   customBlockContent?: string
+  customBlockContentEn?: string
   hasGlobalBenefits?: boolean
   globalBenefitsHeading?: string
+  globalBenefitsHeadingEn?: string
   globalBenefitsText?: string
+  globalBenefitsTextEn?: string
   hasProcess?: boolean
   processTitle?: string
+  processTitleEn?: string
   processSteps?: Array<{
     _key: string
     number: number
     heading: string
+    headingEn?: string
     description: string
+    descriptionEn?: string
   }>
   /** Default CTA for packages without a per-package override */
   ctaButtonText?: string
+  ctaButtonTextEn?: string
 }
 
 /**
@@ -178,9 +201,12 @@ export interface AboutContent {
   _id: string
   _type: 'aboutContent'
   heading: string
+  headingEn?: string
   mainImage?: SanityImageAsset
   paragraphs?: string[]
+  paragraphsEn?: string[]
   ctaText?: string
+  ctaTextEn?: string
 }
 
 /**
@@ -216,18 +242,33 @@ export interface HomepageContent {
   _id: string
   _type: 'homepageContent'
   heroHeading?: string
+  heroHeadingEn?: string
   heroHeadingItalic?: string
+  heroHeadingItalicEn?: string
   heroCta1Text?: string
+  heroCta1TextEn?: string
   heroCta2Text?: string
+  heroCta2TextEn?: string
   workSectionHeading?: string
+  workSectionHeadingEn?: string
   workSectionSubtitle?: string
+  workSectionSubtitleEn?: string
   workSectionViewMoreText?: string
+  workSectionViewMoreTextEn?: string
   workSectionViewAllText?: string
+  workSectionViewAllTextEn?: string
   investmentHeading?: string
+  investmentHeadingEn?: string
   investmentParagraph1?: string
+  investmentParagraph1En?: string
   investmentParagraph2?: string
+  investmentParagraph2En?: string
   investmentCtaText?: string
+  investmentCtaTextEn?: string
   finalCtaHeading?: string
+  finalCtaHeadingEn?: string
   finalCtaLocation?: string
+  finalCtaLocationEn?: string
   finalCtaButtonText?: string
+  finalCtaButtonTextEn?: string
 }

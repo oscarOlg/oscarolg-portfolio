@@ -12,6 +12,11 @@ export const aboutContentType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'headingEn',
+      title: 'Título Principal H1 (EN)',
+      type: 'string',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Fotografía de Perfil',
       type: 'image',
@@ -28,10 +33,22 @@ export const aboutContentType = defineType({
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
+      name: 'paragraphsEn',
+      title: 'Párrafos del Cuerpo (EN)',
+      type: 'array',
+      of: [{type: 'text'}],
+      description: 'English translation of body paragraphs. Same order as Spanish.',
+    }),
+    defineField({
       name: 'ctaText',
       title: 'Texto del Botón CTA',
       type: 'string',
       description: 'Ej.: "Hablemos de tu proyecto"',
+    }),
+    defineField({
+      name: 'ctaTextEn',
+      title: 'Texto del Botón CTA (EN)',
+      type: 'string',
     }),
   ],
 })

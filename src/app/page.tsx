@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { getPortfolioImageBySlug, getPortfolioImages, getImageUrl, getHomepageContent } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import InvestmentSection from "./components/InvestmentSection";
 import HeroContent from "./components/HeroContent";
 import AnimatedSection from "./components/AnimatedSection";
-import { PORTFOLIO_CATEGORIES } from "./portfolio/components/PortfolioNav";
+import WorkSection from "./components/WorkSection";
+import HomepageFinalCta from "./components/HomepageFinalCta";
 
 export const metadata: Metadata = {
   title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
@@ -34,9 +34,15 @@ export default async function Home() {
   ]);
 
   // First image per category for the cards
-  const categoryCover: Partial<Record<string, PortfolioImage>> = {};
+  const rawCoverMap: Partial<Record<string, PortfolioImage>> = {};
   for (const img of allImages) {
-    if (!categoryCover[img.category]) categoryCover[img.category] = img;
+    if (!rawCoverMap[img.category]) rawCoverMap[img.category] = img;
+  }
+
+  // Build categoryCover for WorkSection (pre-compute image URLs server-side)
+  const categoryCover: Record<string, { imageUrl: string }> = {};
+  for (const [cat, img] of Object.entries(rawCoverMap)) {
+    if (img) categoryCover[cat] = { imageUrl: getImageUrl(img.image, 800) };
   }
 
   // Hero: prefer a wedding photo, fallback to first image
@@ -74,68 +80,28 @@ export default async function Home() {
         </div>
         <HeroContent
           heading={hp?.heroHeading}
+          headingEn={hp?.heroHeadingEn}
           headingItalic={hp?.heroHeadingItalic}
+          headingItalicEn={hp?.heroHeadingItalicEn}
           cta1Text={hp?.heroCta1Text}
+          cta1TextEn={hp?.heroCta1TextEn}
           cta2Text={hp?.heroCta2Text}
+          cta2TextEn={hp?.heroCta2TextEn}
         />
       </section>
 
       {/* ── 2. PORTFOLIO CATEGORIES GRID ── */}
-      <section className="w-full bg-secondary py-24 px-6 md:px-12">
-        <AnimatedSection>
-          <div className="max-w-7xl mx-auto">
-            <h2 className="font-serif text-3xl md:text-4xl text-dominant text-center mb-3">
-              {hp?.workSectionHeading ?? "Mi Trabajo"}
-            </h2>
-            <p className="font-sans text-xs text-dominant/60 text-center tracking-widest uppercase mb-16">
-              {hp?.workSectionSubtitle ?? "Explora por tipo de sesión"}
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-              {PORTFOLIO_CATEGORIES.map(({ key, label }, i) => {
-                const img = categoryCover[key];
-                const imgUrl = img ? getImageUrl(img.image, 800) : "";
-                return (
-                  <AnimatedSection key={key} delay={i * 0.07}>
-                    <Link
-                      href={`/portfolio?category=${key}`}
-                      className="group relative block aspect-[3/4] overflow-hidden"
-                    >
-                      {imgUrl ? (
-                        <Image
-                          src={imgUrl}
-                          alt={label}
-                          fill
-                          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 768px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-secondary/40" />
-                      )}
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                        <span className="font-serif text-xl md:text-2xl text-white tracking-wide drop-shadow">
-                          {label}
-                        </span>
-                        <span className="font-sans text-xs text-white/0 group-hover:text-white/80 uppercase tracking-widest translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                          {hp?.workSectionViewMoreText ?? "Ver más →"}
-                        </span>
-                      </div>
-                    </Link>
-                  </AnimatedSection>
-                );
-              })}
-            </div>
-            <div className="text-center mt-14">
-              <Link
-                href="/portfolio"
-                className="font-sans text-xs text-dominant/70 uppercase tracking-widest border-b border-dominant/40 pb-1 hover:text-dominant hover:border-dominant transition-colors"
-              >
-                {hp?.workSectionViewAllText ?? "Ver todo el portafolio →"}
-              </Link>
-            </div>
-          </div>
-        </AnimatedSection>
-      </section>
+      <WorkSection
+        categoryCover={categoryCover}
+        headingEs={hp?.workSectionHeading}
+        headingEn={hp?.workSectionHeadingEn}
+        subtitleEs={hp?.workSectionSubtitle}
+        subtitleEn={hp?.workSectionSubtitleEn}
+        viewMoreEs={hp?.workSectionViewMoreText}
+        viewMoreEn={hp?.workSectionViewMoreTextEn}
+        viewAllEs={hp?.workSectionViewAllText}
+        viewAllEn={hp?.workSectionViewAllTextEn}
+      />
 
       {/* ── 3. INVESTMENT / TRUST SECTION ── */}
       <AnimatedSection>
@@ -143,29 +109,25 @@ export default async function Home() {
           leftImageUrl={investLeft ? getImageUrl(investLeft.image, 900) : undefined}
           rightImageUrl={investRight ? getImageUrl(investRight.image, 900) : undefined}
           heading={hp?.investmentHeading}
+          headingEn={hp?.investmentHeadingEn}
           paragraph1={hp?.investmentParagraph1}
+          paragraph1En={hp?.investmentParagraph1En}
           paragraph2={hp?.investmentParagraph2}
+          paragraph2En={hp?.investmentParagraph2En}
           ctaText={hp?.investmentCtaText}
+          ctaTextEn={hp?.investmentCtaTextEn}
         />
       </AnimatedSection>
 
       {/* ── 4. FINAL CTA ── */}
-      <AnimatedSection>
-        <section className="w-full bg-accent py-28 px-6 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-secondary mb-5 max-w-xl mx-auto leading-tight">
-            {hp?.finalCtaHeading ?? "¿Listo para crear algo hermoso e irrepetible?"}
-          </h2>
-          <p className="font-sans text-xs text-secondary/60 uppercase tracking-widest mb-12">
-            {hp?.finalCtaLocation ?? "Ciudad Juárez & México"}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-secondary text-dominant font-sans uppercase tracking-widest text-sm py-4 px-12 hover:bg-white hover:text-secondary transition-all duration-300 font-semibold"
-          >
-            {hp?.finalCtaButtonText ?? "Reservar fecha"}
-          </Link>
-        </section>
-      </AnimatedSection>
+      <HomepageFinalCta
+        headingEs={hp?.finalCtaHeading}
+        headingEn={hp?.finalCtaHeadingEn}
+        locationEs={hp?.finalCtaLocation}
+        locationEn={hp?.finalCtaLocationEn}
+        buttonTextEs={hp?.finalCtaButtonText}
+        buttonTextEn={hp?.finalCtaButtonTextEn}
+      />
 
     </div>
   );

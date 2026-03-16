@@ -5,6 +5,8 @@ import emailjs from "@emailjs/browser";
 import type { ServicePackage } from "@/types/sanity";
 import { SERVICES } from "@/config/services";
 import { calculateTotalPrice } from "@/lib/pricing";
+import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 // Initialize EmailJS
 emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
@@ -26,6 +28,9 @@ interface FormData {
 }
 
 export default function ContactFormClient({ allPackages, onMessageUpdate }: ContactFormProps) {
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === "en" ? obj.en : obj.es;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -48,10 +53,10 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
       .map((cat) => {
         const config = SERVICES.find((s) => s.key === cat);
         return config
-          ? { value: cat, label: config.name }
+          ? { value: cat, label: lang === "en" ? config.nameEn : config.name }
           : { value: cat, label: cat };
       });
-  }, [allPackages]);
+  }, [allPackages, lang]);
 
   // Get packages for selected service
   const availablePackages = useMemo(() => {
@@ -77,14 +82,14 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
   const generatedMessage = useMemo(() => {
     const { name, date, service, message } = formData;
 
-    let text = `¡Hola Oscar! Soy ${name || "[Tu Nombre]"}. `;
+    let text = `${tr(t.contact.msgHello)} ${name || tr(t.contact.msgDefaultName)}. `;
 
     if (service === "otro") {
-      text += `Me interesa otro tipo de servicio. `;
+      text += `${tr(t.contact.msgOtherService)} `;
     } else if (service && selectedPackage) {
-      // Get the Spanish display name for the service
       const serviceLabel = services.find(s => s.value === service)?.label || service;
-      text += `Me interesa el servicio de ${serviceLabel} con el paquete "${selectedPackage.name}" `;
+      const pkgName = pickLang(lang, selectedPackage.name, selectedPackage.nameEn) ?? selectedPackage.name;
+      text += `${tr(t.contact.msgInterestedIn)} ${serviceLabel} ${tr(t.contact.msgWithPackage)} "${pkgName}" `;
       if (selectedPackage.price) {
         text += `($${selectedPackage.price.toLocaleString("es-MX")} MXN)`;
       }
@@ -95,23 +100,24 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
       const addOnsText = Object.entries(formData.selectedAddOns)
         .map(([addOnName, qty]) => {
           const addOn = selectedPackage?.addOns?.find((a) => a.name === addOnName);
+          const displayName = pickLang(lang, addOnName, addOn?.nameEn) ?? addOnName;
           if (addOn?.unit) {
-            return `${addOnName} (${qty} ${addOn.unit})`;
+            return `${displayName} (${qty} ${addOn.unit})`;
           }
-          return addOnName;
+          return displayName;
         })
         .join(", ");
-      text += `También me interesa agregar: ${addOnsText}. `;
+      text += `${tr(t.contact.msgAddOns)} ${addOnsText}. `;
     }
 
-    if (date) text += `La fecha tentativa sería el ${date}. `;
+    if (date) text += `${tr(t.contact.msgDate)} ${date}. `;
 
     if (message) {
-      text += `\n\nTe comparto más detalles:\n${message}`;
+      text += `\n\n${tr(t.contact.msgDetails)}\n${message}`;
     }
 
     return text;
-  }, [formData, selectedPackage, services]);
+  }, [formData, selectedPackage, services, lang]);
 
   // Notify parent component when message changes
   React.useEffect(() => {
@@ -216,9 +222,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     } catch (error) {
       console.error("Email send error:", error);
       setSubmitStatus("error");
-      setErrorMessage(
-        "Hubo un error al enviar el email. Por favor intenta de nuevo o contacta directamente por WhatsApp."
-      );
+      setErrorMessage(tr(t.contact.errorMsg));
     } finally {
       setIsSubmitting(false);
     }
@@ -233,7 +237,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Nombre completo *
+                {tr(t.contact.nameLabel)}
               </label>
               <input
                 type="text"
@@ -246,7 +250,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="email" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Correo electrónico *
+                {tr(t.contact.emailLabel)}
               </label>
               <input
                 type="email"
@@ -262,7 +266,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
               <label htmlFor="phone" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Teléfono (Opcional)
+                {tr(t.contact.phoneLabel)}
               </label>
               <input
                 type="tel"
@@ -274,7 +278,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="date" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Fecha tentativa
+                {tr(t.contact.dateLabel)}
               </label>
               <input
                 type="date"
@@ -289,7 +293,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           {/* Service Selection */}
           <div className="flex flex-col gap-2">
             <label htmlFor="service" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-              Tipo de Servicio *
+              {tr(t.contact.serviceLabel)}
             </label>
             <select
               id="service"
@@ -298,13 +302,13 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
               required
               className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans text-gray-700 cursor-pointer appearance-none rounded-none"
             >
-              <option value="">Selecciona un servicio</option>
+              <option value="">{tr(t.contact.serviceDefault)}</option>
               {services.map((svc) => (
                 <option key={svc.value} value={svc.value}>
                   {svc.label}
                 </option>
               ))}
-              <option value="otro">Otro</option>
+              <option value="otro">{tr(t.contact.otherService)}</option>
             </select>
           </div>
 
@@ -312,7 +316,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           {formData.service && availablePackages.length > 0 && (
             <div className="flex flex-col gap-4 p-4 bg-accent/5 border border-accent/20">
               <label className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Paquete de interés *
+                {tr(t.contact.packageLabel)}
               </label>
               <div className="grid grid-cols-1 gap-3">
                 {availablePackages.map((pkg) => (
@@ -327,21 +331,27 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
                     />
                     <div className="flex-grow min-w-0">
                       <div className="font-sans font-semibold text-sm text-gray-700">
-                        {pkg.name}
+                        {pickLang(lang, pkg.name, pkg.nameEn) ?? pkg.name}
                       </div>
                       <div className="font-sans text-xs text-gray-500 mt-0.5">
-                        {pkg.description}
+                        {pickLang(lang, pkg.description, pkg.descriptionEn) ?? pkg.description}
                       </div>
-                      {pkg.features && pkg.features.length > 0 && (
+                      {(lang === "en" && pkg.featuresEn && pkg.featuresEn.length > 0
+                        ? pkg.featuresEn
+                        : pkg.features
+                      )?.length ? (
                         <ul className="font-sans text-xs text-gray-600 mt-1 space-y-0.5">
-                          {pkg.features.map((feat, i) => (
+                          {(lang === "en" && pkg.featuresEn && pkg.featuresEn.length > 0
+                            ? pkg.featuresEn
+                            : pkg.features ?? []
+                          ).map((feat, i) => (
                             <li key={i} className="flex items-start gap-1">
                               <span className="text-accent">•</span>
                               <span>{feat}</span>
                             </li>
                           ))}
                         </ul>
-                      )}
+                      ) : null}
                     </div>
                     {(pkg.price || 0) > 0 && (
                       <div className="whitespace-nowrap text-right flex-shrink-0">
@@ -360,7 +370,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           {selectedPackage && selectedPackage.addOns && selectedPackage.addOns.length > 0 && (
             <div className="flex flex-col gap-4">
               <label className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                Complementos
+                {tr(t.contact.addOnsLabel)}
               </label>
               <div className="grid grid-cols-1 gap-4">
                 {selectedPackage.addOns.map((addOn, idx) => {
@@ -383,7 +393,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
                       />
                       <div className="flex-grow min-w-0">
                         <span className="font-sans text-sm text-gray-700">
-                          {addOn.name}
+                          {pickLang(lang, addOn.name, addOn.nameEn) ?? addOn.name}
                         </span>
                         {addOn.price && addOn.price > 0 && (
                           <span className="font-sans text-xs text-accent ml-2">
@@ -440,7 +450,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
             <div className="bg-accent/10 border border-accent/20 p-4 rounded">
               <div className="flex justify-between items-center">
                 <span className="font-sans uppercase tracking-widest text-xs text-gray-600">
-                  Inversión estimada
+                  {tr(t.contact.investmentLabel)}
                 </span>
                 <span className="font-serif text-2xl font-bold text-secondary">
                   ${totalPrice.toLocaleString("es-MX")} MXN
@@ -452,7 +462,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           {/* Message */}
           <div className="flex flex-col gap-2 mt-4">
             <label htmlFor="message" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-              Cuéntame más sobre tu idea *
+              {tr(t.contact.messageLabel)}
             </label>
             <textarea
               id="message"
@@ -460,7 +470,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
               onChange={handleChange}
               required
               rows={4}
-              placeholder="Por favor comparte todos los detalles que gustes..."
+              placeholder={tr(t.contact.messagePlaceholder)}
               className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans resize-none placeholder:text-gray-400"
             ></textarea>
           </div>
@@ -468,7 +478,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           {/* Success / Error Messages */}
           {submitStatus === "success" && (
             <div className="bg-green-50 border border-green-200 p-4 text-green-800 text-sm font-sans">
-              ✓ ¡Mensaje enviado con éxito! Me pondré en contacto contigo muy pronto.
+              {tr(t.contact.successMsg)}
             </div>
           )}
 
@@ -510,7 +520,7 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Enviando...
+                {tr(t.contact.sendingButton)}
               </span>
             ) : submitStatus === "success" ? (
               <span className="flex items-center gap-2 justify-center md:justify-start">
@@ -525,10 +535,10 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                ¡Enviado!
+                {tr(t.contact.sentButton)}
               </span>
             ) : (
-              "Enviar por Email"
+              tr(t.contact.submitButton)
             )}
           </button>
         </form>

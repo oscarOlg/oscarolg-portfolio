@@ -14,6 +14,11 @@ export const servicePackageType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'nameEn',
+      title: 'Nombre del Paquete (EN)',
+      type: 'string',
+    }),
+    defineField({
       name: 'category',
       title: 'Categoría del Servicio',
       type: 'string',
@@ -56,11 +61,21 @@ export const servicePackageType = defineType({
       description: 'Texto que aparece antes del precio. Ej.: "A partir de"',
     }),
     defineField({
+      name: 'pricePrefixEn',
+      title: 'Prefijo del Precio (EN)',
+      type: 'string',
+    }),
+    defineField({
       name: 'description',
       title: 'Subtítulo / Descripción Corta',
       type: 'string',
       description: 'Texto que aparece debajo del nombre del paquete. Ej.: "Cobertura de 6 horas", "Sesión Express"',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'descriptionEn',
+      title: 'Subtítulo / Descripción Corta (EN)',
+      type: 'string',
     }),
     defineField({
       name: 'features',
@@ -70,11 +85,23 @@ export const servicePackageType = defineType({
       description: 'Dejar vacío si se usa el campo "Texto en Párrafo" en su lugar.',
     }),
     defineField({
+      name: 'featuresEn',
+      title: 'Características / Incluye (EN)',
+      type: 'array',
+      of: [{type: 'string'}],
+    }),
+    defineField({
       name: 'bodyText',
       title: 'Texto en Párrafo (formato narrativo)',
       type: 'text',
       rows: 4,
       description: 'Usar en lugar de viñetas para tarjetas editoriales o TFP. Separa dos párrafos con una línea en blanco — el segundo párrafo se muestra en cursiva.',
+    }),
+    defineField({
+      name: 'bodyTextEn',
+      title: 'Texto en Párrafo (EN)',
+      type: 'text',
+      rows: 4,
     }),
     defineField({
       name: 'popular',
@@ -91,10 +118,21 @@ export const servicePackageType = defineType({
       placeholder: 'Más Popular',
     }),
     defineField({
+      name: 'badgeLabelEn',
+      title: 'Texto de la Insignia (EN)',
+      type: 'string',
+      placeholder: 'Most Popular',
+    }),
+    defineField({
       name: 'ctaText',
       title: 'Texto del Botón CTA (por paquete)',
       type: 'string',
       description: 'Reemplaza el CTA del servicio para este paquete en específico. Dejar vacío para usar el valor por defecto del servicio.',
+    }),
+    defineField({
+      name: 'ctaTextEn',
+      title: 'Texto del Botón CTA (EN)',
+      type: 'string',
     }),
     defineField({
       name: 'ctaVariant',
@@ -119,6 +157,7 @@ export const servicePackageType = defineType({
           type: 'object',
           fields: [
             {name: 'name', type: 'string', title: 'Nombre del Complemento'},
+            {name: 'nameEn', type: 'string', title: 'Nombre del Complemento (EN)'},
             {name: 'price', type: 'number', title: 'Precio Adicional (MXN)'},
             {name: 'unit', type: 'string', title: 'Unidad (opcional)', description: 'Ej.: "por hora", "c.u."'},
             {name: 'description', type: 'string', title: 'Descripción (opcional)'},
@@ -156,6 +195,11 @@ export const servicePackageType = defineType({
       title: 'Entregables',
       type: 'string',
       description: 'Ej.: "50-60 fotos editadas por hora de cobertura"',
+    }),
+    defineField({
+      name: 'deliverablesEn',
+      title: 'Entregables (EN)',
+      type: 'string',
     }),
     defineField({
       name: 'displayOrder',

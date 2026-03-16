@@ -109,23 +109,38 @@ export const servicePackagesQuery = `
   *[_type == "servicePackage"] | order(displayOrder) {
     _id,
     name,
+    nameEn,
     category,
     tier,
     price,
     showPrice,
     pricePrefix,
+    pricePrefixEn,
     description,
+    descriptionEn,
     features,
+    featuresEn,
     bodyText,
+    bodyTextEn,
     popular,
     badgeLabel,
+    badgeLabelEn,
     ctaText,
+    ctaTextEn,
     ctaVariant,
     isSpecialVariant,
     variantType,
-    addOns,
+    addOns[] {
+      _key,
+      name,
+      nameEn,
+      price,
+      unit,
+      description
+    },
     duration,
     deliverables,
+    deliverablesEn,
     displayOrder
   }
 `
@@ -134,23 +149,38 @@ export const servicePackagesByCategoryQuery = (category: string) => `
   *[_type == "servicePackage" && category == "${category}"] | order(displayOrder) {
     _id,
     name,
+    nameEn,
     category,
     tier,
     price,
     showPrice,
     pricePrefix,
+    pricePrefixEn,
     description,
+    descriptionEn,
     features,
+    featuresEn,
     bodyText,
+    bodyTextEn,
     popular,
     badgeLabel,
+    badgeLabelEn,
     ctaText,
+    ctaTextEn,
     ctaVariant,
     isSpecialVariant,
     variantType,
-    addOns,
+    addOns[] {
+      _key,
+      name,
+      nameEn,
+      price,
+      unit,
+      description
+    },
     duration,
     deliverables,
+    deliverablesEn,
     displayOrder
   }
 `
@@ -160,22 +190,47 @@ export const serviceConfigsQuery = `
     _id,
     serviceKey,
     displayName,
+    displayNameEn,
     introText,
+    introTextEn,
     gridColumns,
     hasAddOns,
-    complementos,
+    complementos[] {
+      _key,
+      name,
+      nameEn,
+      price,
+      unit,
+      note,
+      noteEn
+    },
     infoCardVariant,
     infoCardHeading,
+    infoCardHeadingEn,
     infoCardContent,
+    infoCardContentEn,
     customBlockHeading,
+    customBlockHeadingEn,
     customBlockContent,
+    customBlockContentEn,
     hasGlobalBenefits,
     globalBenefitsHeading,
+    globalBenefitsHeadingEn,
     globalBenefitsText,
+    globalBenefitsTextEn,
     hasProcess,
     processTitle,
-    processSteps,
-    ctaButtonText
+    processTitleEn,
+    processSteps[] {
+      _key,
+      number,
+      heading,
+      headingEn,
+      description,
+      descriptionEn
+    },
+    ctaButtonText,
+    ctaButtonTextEn
   }
 `
 
@@ -184,22 +239,47 @@ export const serviceConfigByKeyQuery = (serviceKey: string) => `
     _id,
     serviceKey,
     displayName,
+    displayNameEn,
     introText,
+    introTextEn,
     gridColumns,
     hasAddOns,
-    complementos,
+    complementos[] {
+      _key,
+      name,
+      nameEn,
+      price,
+      unit,
+      note,
+      noteEn
+    },
     infoCardVariant,
     infoCardHeading,
+    infoCardHeadingEn,
     infoCardContent,
+    infoCardContentEn,
     customBlockHeading,
+    customBlockHeadingEn,
     customBlockContent,
+    customBlockContentEn,
     hasGlobalBenefits,
     globalBenefitsHeading,
+    globalBenefitsHeadingEn,
     globalBenefitsText,
+    globalBenefitsTextEn,
     hasProcess,
     processTitle,
-    processSteps,
-    ctaButtonText
+    processTitleEn,
+    processSteps[] {
+      _key,
+      number,
+      heading,
+      headingEn,
+      description,
+      descriptionEn
+    },
+    ctaButtonText,
+    ctaButtonTextEn
   }
 `
 
@@ -244,6 +324,7 @@ export const featuredTestimonialsQuery = `
 export const aboutContentQuery = `
   *[_type == "aboutContent"][0] {
     heading,
+    headingEn,
     mainImage {
       asset-> {
         _id,
@@ -252,27 +333,44 @@ export const aboutContentQuery = `
       hotspot,
     },
     paragraphs,
-    ctaText
+    paragraphsEn,
+    ctaText,
+    ctaTextEn
   }
 `
 
 export const homepageContentQuery = `
   *[_type == "homepageContent"][0] {
     heroHeading,
+    heroHeadingEn,
     heroHeadingItalic,
+    heroHeadingItalicEn,
     heroCta1Text,
+    heroCta1TextEn,
     heroCta2Text,
+    heroCta2TextEn,
     workSectionHeading,
+    workSectionHeadingEn,
     workSectionSubtitle,
+    workSectionSubtitleEn,
     workSectionViewMoreText,
+    workSectionViewMoreTextEn,
     workSectionViewAllText,
+    workSectionViewAllTextEn,
     investmentHeading,
+    investmentHeadingEn,
     investmentParagraph1,
+    investmentParagraph1En,
     investmentParagraph2,
+    investmentParagraph2En,
     investmentCtaText,
+    investmentCtaTextEn,
     finalCtaHeading,
+    finalCtaHeadingEn,
     finalCtaLocation,
-    finalCtaButtonText
+    finalCtaLocationEn,
+    finalCtaButtonText,
+    finalCtaButtonTextEn
   }
 `
 

@@ -9,6 +9,8 @@ export interface ServiceTypeConfig {
   key: string;
   /** Display name in Spanish */
   name: string;
+  /** Display name in English */
+  nameEn: string;
   /** Component file name (without .tsx) in src/app/services/components/ */
   component: string;
   /** Portfolio category key for filtering */
@@ -21,6 +23,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'weddings',
     name: 'Bodas',
+    nameEn: 'Weddings',
     component: 'WeddingPackages',
     portfolio_category: 'weddings',
     order: 1,
@@ -28,6 +31,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'portrait',
     name: 'Retratos',
+    nameEn: 'Portraits',
     component: 'IndividualPackages',
     portfolio_category: 'portraits',
     order: 2,
@@ -35,6 +39,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'couples',
     name: 'Parejas y Grupales',
+    nameEn: 'Couples & Groups',
     component: 'CouplePackages',
     portfolio_category: 'couples',
     order: 3,
@@ -42,6 +47,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'maternity',
     name: 'Maternidad',
+    nameEn: 'Maternity',
     component: 'MaternityPackages',
     portfolio_category: 'maternity',
     order: 4,
@@ -49,6 +55,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'commercial',
     name: 'Comercial',
+    nameEn: 'Commercial',
     component: 'CommercialPackages',
     portfolio_category: 'commercial',
     order: 5,
@@ -56,6 +63,7 @@ export const SERVICES: ServiceTypeConfig[] = [
   {
     key: 'editorial',
     name: 'Editorial',
+    nameEn: 'Editorial',
     component: 'EditorialPackages',
     portfolio_category: 'editorial',
     order: 6,

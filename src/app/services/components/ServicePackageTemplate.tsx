@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import type { ServicePackage, ServiceConfig } from "@/types/sanity";
+import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 function formatPrice(price: number) {
   return "$" + price.toLocaleString("es-MX");
@@ -14,11 +16,25 @@ function PackageCard({
   pkg: ServicePackage;
   defaultCta: string;
 }) {
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+
   const isPopular = pkg.popular;
-  const badgeLabel = pkg.badgeLabel || "Más Popular";
-  const ctaText = pkg.ctaText || defaultCta;
+  const badgeLabel = pickLang(lang, pkg.badgeLabel, pkg.badgeLabelEn) ?? tr(t.services.badgeDefault);
+  const ctaText = pickLang(lang, pkg.ctaText, pkg.ctaTextEn) ?? defaultCta;
   const showPrice = pkg.showPrice !== false;
-  const bodyParagraphs = pkg.bodyText ? pkg.bodyText.split(/\n\n+/) : null;
+
+  const displayBodyText = pickLang(lang, pkg.bodyText, pkg.bodyTextEn);
+  const bodyParagraphs = displayBodyText ? displayBodyText.split(/\n\n+/) : null;
+
+  const displayFeatures = (lang === 'en' && pkg.featuresEn && pkg.featuresEn.length > 0)
+    ? pkg.featuresEn
+    : pkg.features;
+
+  const displayName = pickLang(lang, pkg.name, pkg.nameEn) ?? pkg.name;
+  const displayDescription = pickLang(lang, pkg.description, pkg.descriptionEn) ?? pkg.description;
+  const displayPricePrefix = pickLang(lang, pkg.pricePrefix, pkg.pricePrefixEn);
+
   const cardClass = isPopular
     ? "border-2 border-accent p-8 flex flex-col relative shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[360px]"
     : "border border-gray-200 p-8 flex flex-col hover:border-gray-300 transition-colors duration-300 min-h-[360px]";
@@ -30,9 +46,9 @@ function PackageCard({
           {badgeLabel}
         </span>
       )}
-      <h3 className="font-serif text-2xl font-bold mb-3 text-secondary">{pkg.name}</h3>
+      <h3 className="font-serif text-2xl font-bold mb-3 text-secondary">{displayName}</h3>
       <p className="font-sans text-xs uppercase tracking-widest text-gray-500 mb-6">
-        {pkg.description}
+        {displayDescription}
       </p>
       {bodyParagraphs ? (
         <div className="flex-grow mb-8">
@@ -46,9 +62,9 @@ function PackageCard({
           )}
         </div>
       ) : (
-        pkg.features && pkg.features.length > 0 && (
+        displayFeatures && displayFeatures.length > 0 && (
           <ul className="font-sans text-sm text-gray-700 space-y-3 mb-8 flex-grow">
-            {pkg.features.map((feature, i) => (
+            {displayFeatures.map((feature, i) => (
               <li key={i} className="flex items-start gap-3">
                 <span className="text-accent flex-shrink-0 mt-1 font-bold">✓</span>
                 <span className="leading-snug">{feature}</span>
@@ -60,9 +76,9 @@ function PackageCard({
       <div className="mt-auto pt-4">
         {showPrice && (
           <div className="mb-6 p-4 bg-gray-50 border border-gray-100 rounded-sm">
-            {pkg.pricePrefix && (
+            {displayPricePrefix && (
               <p className="font-sans text-xs text-gray-500 mb-2 uppercase tracking-widest font-semibold">
-                {pkg.pricePrefix}
+                {displayPricePrefix}
               </p>
             )}
             <p className="font-serif text-3xl font-bold text-secondary">
@@ -99,21 +115,30 @@ function PackageCard({
 }
 
 function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
-  const ctaText = pkg.ctaText || "Cotizar";
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+
+  const ctaText = pickLang(lang, pkg.ctaText, pkg.ctaTextEn) ?? tr(t.services.cotizar);
+  const displayName = pickLang(lang, pkg.name, pkg.nameEn) ?? pkg.name;
+  const displayDescription = pickLang(lang, pkg.description, pkg.descriptionEn) ?? pkg.description;
+  const displayBodyText = pickLang(lang, pkg.bodyText, pkg.bodyTextEn);
+  const displayFeatures = (lang === 'en' && pkg.featuresEn && pkg.featuresEn.length > 0)
+    ? pkg.featuresEn
+    : pkg.features;
 
   return (
     <div className="bg-gray-50 p-6 border border-gray-200 flex flex-col justify-between">
       <div>
-        <h4 className="font-serif text-xl font-bold mb-2 text-secondary">{pkg.name}</h4>
+        <h4 className="font-serif text-xl font-bold mb-2 text-secondary">{displayName}</h4>
         <p className="font-sans text-xs uppercase tracking-widest text-gray-500 mb-3 font-semibold">
-          {pkg.description}
+          {displayDescription}
         </p>
-        {pkg.bodyText ? (
-          <p className="font-sans text-sm leading-relaxed text-gray-700 mb-4">{pkg.bodyText}</p>
+        {displayBodyText ? (
+          <p className="font-sans text-sm leading-relaxed text-gray-700 mb-4">{displayBodyText}</p>
         ) : (
-          pkg.features && pkg.features.length > 0 && (
+          displayFeatures && displayFeatures.length > 0 && (
             <ul className="font-sans text-sm text-gray-700 space-y-2 mb-4">
-              {pkg.features.map((f, i) => (
+              {displayFeatures.map((f, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="text-accent flex-shrink-0 mt-0.5 font-bold">✓</span>
                   <span>{f}</span>
@@ -147,7 +172,11 @@ interface Props {
 }
 
 export default function ServicePackageTemplate({ config, packages }: Props) {
-  const defaultCta = config.ctaButtonText || "Reservar";
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+
+  const defaultCta = pickLang(lang, config.ctaButtonText, config.ctaButtonTextEn)
+    ?? tr(t.services.defaultCtaFallback);
   const gridCols = config.gridColumns || 3;
 
   const gridPackages = packages
@@ -177,11 +206,21 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
       ? "grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 mt-8"
       : "grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10 mt-8";
 
+  const displayIntroText = pickLang(lang, config.introText, config.introTextEn);
+  const displayInfoCardHeading = pickLang(lang, config.infoCardHeading, config.infoCardHeadingEn);
+  const displayInfoCardContent = pickLang(lang, config.infoCardContent, config.infoCardContentEn);
+  const displayCustomBlockHeading = pickLang(lang, config.customBlockHeading, config.customBlockHeadingEn);
+  const displayCustomBlockContent = pickLang(lang, config.customBlockContent, config.customBlockContentEn);
+  const displayGlobalBenefitsHeading = pickLang(lang, config.globalBenefitsHeading, config.globalBenefitsHeadingEn)
+    ?? tr(t.services.globalBenefitsFallback);
+  const displayGlobalBenefitsText = pickLang(lang, config.globalBenefitsText, config.globalBenefitsTextEn);
+  const displayProcessTitle = pickLang(lang, config.processTitle, config.processTitleEn);
+
   return (
     <>
-      {config.introText && (
+      {displayIntroText && (
         <div className="mb-10 mt-8 text-center max-w-3xl mx-auto">
-          {config.introText.split("\n").map((line, i) =>
+          {displayIntroText.split("\n").map((line, i) =>
             line.startsWith("*") ? (
               <span key={i} className="italic text-sm text-gray-400 mt-2 block">
                 {line}
@@ -206,7 +245,7 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
           {hasComplementos && (
             <div className="border border-gray-200 p-6 bg-gray-50">
               <h4 className="font-serif text-lg font-bold mb-5 text-secondary uppercase tracking-wide">
-                Complementos
+                {tr(t.services.complementosHeading)}
               </h4>
               {config.complementos!.map((item, i) => (
                 <div
@@ -215,11 +254,11 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
                 >
                   <div className="flex-grow">
                     <span className="font-sans text-sm font-semibold text-secondary block">
-                      {item.name}
+                      {pickLang(lang, item.name, item.nameEn) ?? item.name}
                     </span>
-                    {item.note && (
+                    {(item.note || item.noteEn) && (
                       <span className="block text-xs italic text-accent font-semibold mt-1">
-                        {item.note}
+                        {pickLang(lang, item.note, item.noteEn) ?? item.note}
                       </span>
                     )}
                   </div>
@@ -243,10 +282,10 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
           {!specialVariants.length && hasRightPanel && (
             <div className="bg-gray-50 p-6 border border-gray-200 flex flex-col justify-center">
               <h4 className="font-serif text-lg font-bold mb-3 text-secondary">
-                {config.infoCardHeading}
+                {displayInfoCardHeading}
               </h4>
               <p className="font-sans text-sm leading-relaxed text-gray-700">
-                {config.infoCardContent}
+                {displayInfoCardContent}
               </p>
             </div>
           )}
@@ -256,32 +295,32 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
       {hasFullWidthCard && (
         <div className="bg-gray-50 p-8 text-center mb-10 border border-gray-200">
           <h4 className="font-serif text-xl font-bold mb-3 text-secondary">
-            {config.infoCardHeading}
+            {displayInfoCardHeading}
           </h4>
           <p className="font-sans text-sm leading-relaxed text-gray-700 max-w-2xl mx-auto">
-            {config.infoCardContent}
+            {displayInfoCardContent}
           </p>
         </div>
       )}
 
-      {config.customBlockHeading && config.customBlockContent && (
+      {displayCustomBlockHeading && displayCustomBlockContent && (
         <div className="bg-accent/5 border-l-4 border-accent p-6 mb-10">
           <h3 className="font-serif text-2xl font-bold text-secondary mb-3">
-            {config.customBlockHeading}
+            {displayCustomBlockHeading}
           </h3>
           <p className="font-sans text-sm md:text-base text-gray-700 max-w-3xl leading-relaxed">
-            {config.customBlockContent}
+            {displayCustomBlockContent}
           </p>
         </div>
       )}
 
-      {config.hasGlobalBenefits !== false && config.globalBenefitsText && (
+      {config.hasGlobalBenefits !== false && displayGlobalBenefitsText && (
         <div className="bg-secondary text-dominant p-8 mb-10 border border-secondary">
           <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3 font-bold">
-            {config.globalBenefitsHeading || "Inclusiones en todos los paquetes"}
+            {displayGlobalBenefitsHeading}
           </p>
           <p className="font-sans text-sm leading-relaxed">
-            {config.globalBenefitsText}
+            {displayGlobalBenefitsText}
           </p>
         </div>
       )}
@@ -291,7 +330,7 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
         config.processSteps.length > 0 && (
           <div className="bg-secondary text-dominant p-8 md:p-12">
             <h2 className="font-serif text-3xl md:text-4xl mb-12 text-center font-bold">
-              {config.processTitle}
+              {displayProcessTitle}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6">
               {config.processSteps.map((step, idx) => (
@@ -300,10 +339,10 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
                     {step.number}
                   </span>
                   <h4 className="font-sans uppercase tracking-widest text-sm font-bold mb-3">
-                    {step.heading}
+                    {pickLang(lang, step.heading, step.headingEn) ?? step.heading}
                   </h4>
                   <p className="font-sans text-xs leading-relaxed text-gray-300">
-                    {step.description}
+                    {pickLang(lang, step.description, step.descriptionEn) ?? step.description}
                   </p>
                   {idx < config.processSteps!.length - 1 && (
                     <div className="hidden md:block absolute w-20 h-0.5 bg-accent/30 ml-20 mt-8"></div>

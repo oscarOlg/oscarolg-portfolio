@@ -5,6 +5,8 @@ import Image from "next/image";
 import type { ServicePackage } from "@/types/sanity";
 import ContactFormClient from "./ContactFormClient";
 import QuickMessageBox from "./QuickMessageBox";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 interface ContactPageClientProps {
   packages: ServicePackage[];
@@ -15,8 +17,11 @@ export default function ContactPageClient({
   packages,
   contactImageUrl,
 }: ContactPageClientProps) {
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+
   const [generatedMessage, setGeneratedMessage] = useState(
-    "¡Hola Oscar! Soy [Tu Nombre]. \n\nTe comparto más detalles:\nmi idea es sobre..."
+    `${t.contact.msgHello.es} ${t.contact.msgDefaultName.es}. \n\n${t.contact.msgDetails.es}\n${t.contact.msgDefaultIdea.es}`
   );
 
   return (
@@ -24,17 +29,17 @@ export default function ContactPageClient({
       {/* ================= COLUMNA IZQUIERDA: IMAGEN E INFO ================= */}
       <div className="lg:w-5/12 flex flex-col">
         <h1 className="font-serif text-4xl md:text-5xl text-secondary mb-6">
-          Hablemos de tu visión
+          {tr(t.contact.heading)}
         </h1>
         <p className="font-sans text-base text-gray-600 leading-relaxed mb-10">
-          Me encantaría conocer los detalles de lo que estás planeando. Llena el formulario de la derecha o genera un mensaje rápido para enviármelo directamente por tus redes favoritas.
+          {tr(t.contact.intro)}
         </p>
 
         {/* Imagen Horizontal (aspect-video) */}
         <div className="relative w-full aspect-video mb-12 shadow-md">
           <Image
             src={contactImageUrl}
-            alt="Fotografía de contacto"
+            alt={tr(t.contact.imageAlt)}
             fill
             className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
             priority

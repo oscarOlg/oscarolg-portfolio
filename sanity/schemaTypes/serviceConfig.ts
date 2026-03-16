@@ -30,6 +30,11 @@ export const serviceConfigType = defineType({
       description: 'Nombre del servicio tal como aparece en la página (ej. "Bodas", "Retratos")',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'displayNameEn',
+      title: 'Nombre para Mostrar (EN)',
+      type: 'string',
+    }),
 
     // ── Introducción ─────────────────────────────────────────────────────────
     defineField({
@@ -38,6 +43,12 @@ export const serviceConfigType = defineType({
       type: 'text',
       rows: 3,
       description: 'Párrafo corto que aparece encima de la cuadrícula de paquetes. Dejar vacío para Bodas.',
+    }),
+    defineField({
+      name: 'introTextEn',
+      title: 'Párrafo de Introducción (EN)',
+      type: 'text',
+      rows: 3,
     }),
 
     // ── Diseño ───────────────────────────────────────────────────────────────
@@ -75,9 +86,11 @@ export const serviceConfigType = defineType({
           title: 'Complemento',
           fields: [
             {name: 'name', type: 'string', title: 'Nombre'},
+            {name: 'nameEn', type: 'string', title: 'Nombre (EN)'},
             {name: 'price', type: 'number', title: 'Precio (MXN)'},
             {name: 'unit', type: 'string', title: 'Unidad (opcional)', description: 'Ej.: "hr", "c.u."'},
             {name: 'note', type: 'string', title: 'Nota (opcional)', description: 'Ej.: "Incluida en el paquete Premium"'},
+            {name: 'noteEn', type: 'string', title: 'Nota (EN, opcional)'},
           ],
         },
       ],
@@ -106,8 +119,21 @@ export const serviceConfigType = defineType({
       hidden: ({document}) => document?.infoCardVariant === 'none',
     }),
     defineField({
+      name: 'infoCardHeadingEn',
+      title: 'Título de la Tarjeta Informativa (EN)',
+      type: 'string',
+      hidden: ({document}) => document?.infoCardVariant === 'none',
+    }),
+    defineField({
       name: 'infoCardContent',
       title: 'Contenido de la Tarjeta Informativa',
+      type: 'text',
+      rows: 3,
+      hidden: ({document}) => document?.infoCardVariant === 'none',
+    }),
+    defineField({
+      name: 'infoCardContentEn',
+      title: 'Contenido de la Tarjeta Informativa (EN)',
       type: 'text',
       rows: 3,
       hidden: ({document}) => document?.infoCardVariant === 'none',
@@ -121,8 +147,19 @@ export const serviceConfigType = defineType({
       description: 'Usado para bloques destacados como "Presupuestos a la Medida" en el servicio Comercial',
     }),
     defineField({
+      name: 'customBlockHeadingEn',
+      title: 'Título del Bloque Personalizado (EN)',
+      type: 'string',
+    }),
+    defineField({
       name: 'customBlockContent',
       title: 'Contenido del Bloque Personalizado (opcional)',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'customBlockContentEn',
+      title: 'Contenido del Bloque Personalizado (EN)',
       type: 'text',
       rows: 4,
     }),
@@ -142,8 +179,21 @@ export const serviceConfigType = defineType({
       hidden: ({document}) => !document?.hasGlobalBenefits,
     }),
     defineField({
+      name: 'globalBenefitsHeadingEn',
+      title: 'Título de Beneficios Globales (EN)',
+      type: 'string',
+      hidden: ({document}) => !document?.hasGlobalBenefits,
+    }),
+    defineField({
       name: 'globalBenefitsText',
       title: 'Texto de Beneficios Globales',
+      type: 'text',
+      rows: 3,
+      hidden: ({document}) => !document?.hasGlobalBenefits,
+    }),
+    defineField({
+      name: 'globalBenefitsTextEn',
+      title: 'Texto de Beneficios Globales (EN)',
       type: 'text',
       rows: 3,
       hidden: ({document}) => !document?.hasGlobalBenefits,
@@ -163,6 +213,12 @@ export const serviceConfigType = defineType({
       hidden: ({document}) => !document?.hasProcess,
     }),
     defineField({
+      name: 'processTitleEn',
+      title: 'Título de la Sección de Proceso (EN)',
+      type: 'string',
+      hidden: ({document}) => !document?.hasProcess,
+    }),
+    defineField({
       name: 'processSteps',
       title: 'Pasos del Proceso',
       type: 'array',
@@ -175,7 +231,9 @@ export const serviceConfigType = defineType({
           fields: [
             {name: 'number', type: 'number', title: 'Número de Paso'},
             {name: 'heading', type: 'string', title: 'Título'},
+            {name: 'headingEn', type: 'string', title: 'Título (EN)'},
             {name: 'description', type: 'text', rows: 2, title: 'Descripción'},
+            {name: 'descriptionEn', type: 'text', rows: 2, title: 'Descripción (EN)'},
           ],
         },
       ],
@@ -188,6 +246,11 @@ export const serviceConfigType = defineType({
       type: 'string',
       description: 'Usado para paquetes que no tienen un texto de CTA propio. Ej.: "Reservar", "Cotizar"',
       initialValue: 'Reservar',
+    }),
+    defineField({
+      name: 'ctaButtonTextEn',
+      title: 'Texto del Botón CTA por Defecto (EN)',
+      type: 'string',
     }),
   ],
 

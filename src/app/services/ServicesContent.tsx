@@ -10,6 +10,8 @@ import ServicePackageTemplate from "./components/ServicePackageTemplate";
 import { SERVICES, type ServiceKey } from "@/config/services";
 import { getImageUrl } from "@/lib/sanity";
 import type { ServiceConfig, ServicePackage, PortfolioImage } from "@/types/sanity";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 interface Props {
   configByKey: Record<string, ServiceConfig>;
@@ -48,12 +50,17 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
 
   const isValidTab = (tab: string | null): tab is ServiceKey =>
     SERVICES.some((s) => s.key === tab);
 
   const selectedService: ServiceKey = isValidTab(tabParam) ? tabParam : "weddings";
-  const selectedServiceName = SERVICES.find((s) => s.key === selectedService)?.name || "Bodas";
+  const selectedServiceObj = SERVICES.find((s) => s.key === selectedService);
+  const selectedServiceName = selectedServiceObj
+    ? (lang === 'en' ? selectedServiceObj.nameEn : selectedServiceObj.name)
+    : "Bodas";
 
   const handleSelectService = (serviceKey: ServiceKey) => {
     const scrollY = window.scrollY;
@@ -87,13 +94,13 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
       {/* ── Header visual ── */}
       <div className="w-full mb-16 flex flex-col items-center text-center">
         <p className="font-sans text-base md:text-lg text-gray-600 max-w-4xl leading-relaxed mb-8 px-4">
-          Memorias visuales pensadas para perdurar. Selecciona el tipo de sesión o cobertura que buscas para descubrir los detalles, inclusiones y el valor de tu inversión.
+          {tr(t.services.subheading)}
         </p>
         <div className="relative w-full h-64 shadow-sm overflow-hidden rounded-none">
           {heroImageUrl ? (
             <Image
               src={heroImageUrl}
-              alt={heroImage?.title || "Detalle de fotografía elegante"}
+              alt={heroImage?.title || tr(t.services.heroAlt)}
               fill
               className="object-cover transition-all duration-700"
               priority
@@ -138,7 +145,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                   {SERVICES.map((service, idx) => {
                     const serviceImage = serviceImagesByKey[service.key];
                     const serviceImageUrl = serviceImage ? getImageUrl(serviceImage.image, 80) : null;
-                    
+
                     return (
                       <motion.button
                         key={service.key}
@@ -156,13 +163,15 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                           <div className="relative w-12 h-12 flex-shrink-0 border border-gray-300 overflow-hidden rounded-sm group-hover:shadow-md transition-shadow">
                             <Image
                               src={serviceImageUrl}
-                              alt={service.name}
+                              alt={lang === 'en' ? service.nameEn : service.name}
                               fill
                               className="object-cover object-top"
                             />
                           </div>
                         )}
-                        <span className="flex-grow font-medium">{service.name}</span>
+                        <span className="flex-grow font-medium">
+                          {lang === 'en' ? service.nameEn : service.name}
+                        </span>
                       </motion.button>
                     );
                   })}

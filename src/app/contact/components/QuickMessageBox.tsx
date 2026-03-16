@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Socials from "../../components/Socials";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 interface QuickMessageBoxProps {
   message: string;
@@ -9,6 +11,8 @@ interface QuickMessageBoxProps {
 
 export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
   const [copied, setCopied] = useState(false);
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(message);
@@ -19,13 +23,13 @@ export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
   return (
     <div className="bg-accent/10 border border-accent/20 p-8 relative">
       <div className="absolute top-0 left-0 w-1 h-full bg-accent"></div>
-      <h3 className="font-serif text-2xl text-secondary mb-2">Envío Rápido por Redes</h3>
+      <h3 className="font-serif text-2xl text-secondary mb-2">{tr(t.contact.quickBoxHeading)}</h3>
       <p className="font-sans text-sm text-gray-600 mb-6">
         <span className="hidden lg:inline">
-          ¿Prefieres contactarme por WhatsApp o Instagram? A medida que llenes el formulario de la derecha, se generará un mensaje automático aquí. Solo cópialo y pégalo en nuestro chat.
+          {tr(t.contact.quickBoxDescDesktop)}
         </span>
         <span className="lg:hidden">
-          ¿Prefieres contactarme por WhatsApp o Instagram? A medida que llenes el formulario de abajo, se generará un mensaje automático aquí. Solo cópialo y pégalo en nuestro chat.
+          {tr(t.contact.quickBoxDescMobile)}
         </span>
       </p>
 
@@ -54,7 +58,7 @@ export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
                   d="M5 13l4 4L19 7"
                 ></path>
               </svg>
-              ¡Copiado al Portapapeles!
+              {tr(t.contact.copiedButton)}
             </>
           ) : (
             <>
@@ -72,7 +76,7 @@ export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
                   d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                 ></path>
               </svg>
-              Copiar Mensaje
+              {tr(t.contact.copyButton)}
             </>
           )}
         </button>

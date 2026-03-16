@@ -1,12 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { t } from '@/lib/translations'
 
 interface FloatingCTAProps {
   category?: string
 }
 
 export default function FloatingCTA({ category }: FloatingCTAProps) {
+  const { lang } = useLanguage()
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es
+
   const categoryMap: Record<string, string> = {
     weddings: 'bodas',
     portraits: 'retratos',
@@ -28,7 +33,7 @@ export default function FloatingCTA({ category }: FloatingCTAProps) {
         <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
-        Contactar
+        {tr(t.portfolio.floatingContact)}
       </Link>
 
       {/* Pricing Button */}
@@ -39,7 +44,7 @@ export default function FloatingCTA({ category }: FloatingCTAProps) {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        Precios
+        {tr(t.portfolio.floatingPrices)}
       </Link>
     </div>
   )

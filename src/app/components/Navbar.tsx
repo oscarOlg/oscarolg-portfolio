@@ -5,13 +5,8 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
-
-const navLinks = [
-  { href: "/portfolio", label: "Portafolio" },
-  { href: "/services", label: "Servicios y precios" },
-  { href: "/about", label: "Acerca de" },
-  { href: "/contact", label: "Contacto" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { t } from "@/lib/translations";
 
 function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
   return (
@@ -50,6 +45,16 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, setLang } = useLanguage();
+
+  const tr = (obj: { es: string; en: string }) => (lang === "en" ? obj.en : obj.es);
+
+  const navLinks = [
+    { href: "/portfolio", label: tr(t.nav.portfolio) },
+    { href: "/services",  label: tr(t.nav.services) },
+    { href: "/about",     label: tr(t.nav.about) },
+    { href: "/contact",   label: tr(t.nav.contact) },
+  ];
 
   const isHome = pathname === "/";
 
@@ -116,7 +121,7 @@ export default function Navbar() {
         </Link>
 
         {/* CENTER — Nav links (desktop only) */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
+        <nav className="hidden md:flex items-center gap-8" aria-label={lang === "en" ? "Main navigation" : "Navegación principal"}>
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -130,6 +135,25 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+
+          {/* Language toggle — desktop */}
+          <div className="flex items-center gap-1 font-sans text-[10px] uppercase tracking-[0.2em] pl-4 border-l border-current/30">
+            <button
+              onClick={() => setLang("es")}
+              className={`transition-opacity ${lang === "es" ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+              aria-label="Cambiar a Español"
+            >
+              ES
+            </button>
+            <span className="opacity-30">/</span>
+            <button
+              onClick={() => setLang("en")}
+              className={`transition-opacity ${lang === "en" ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+          </div>
         </nav>
 
         {/* RIGHT — Socials (desktop) | Hamburger (mobile) */}
@@ -178,11 +202,40 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+
+              {/* Language toggle — mobile */}
+              <motion.div
+                className="flex items-center gap-3 py-4 border-b border-gray-200/70"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.055, duration: 0.22, ease: "easeOut" }}
+              >
+                <button
+                  onClick={() => setLang("es")}
+                  className={`font-sans text-sm uppercase tracking-widest transition-colors ${
+                    lang === "es" ? "text-accent" : "opacity-50 hover:opacity-80"
+                  }`}
+                  aria-label="Cambiar a Español"
+                >
+                  ES
+                </button>
+                <span className="opacity-30 text-sm">/</span>
+                <button
+                  onClick={() => setLang("en")}
+                  className={`font-sans text-sm uppercase tracking-widest transition-colors ${
+                    lang === "en" ? "text-accent" : "opacity-50 hover:opacity-80"
+                  }`}
+                  aria-label="Switch to English"
+                >
+                  EN
+                </button>
+              </motion.div>
+
               <motion.div
                 className="pt-6 pb-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: navLinks.length * 0.055 + 0.08, duration: 0.2 }}
+                transition={{ delay: navLinks.length * 0.055 + 0.055 + 0.08, duration: 0.2 }}
               >
                 <Socials
                   containerClassName="flex gap-6"

@@ -9,6 +9,8 @@ import PortfolioNav, {
 } from './PortfolioNav';
 import FloatingCTA from '../components/FloatingCTA';
 import type { PortfolioImage } from '@/types/sanity';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { t } from '@/lib/translations';
 
 interface PortfolioClientProps {
   allImages: PortfolioImage[];
@@ -23,6 +25,8 @@ export default function PortfolioClient({
   categoryDisplayNames,
 }: PortfolioClientProps) {
   const searchParams = useSearchParams();
+  const { lang } = useLanguage();
+  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
 
   // Get active category from URL
   const categoryParam = searchParams?.get('category');
@@ -52,13 +56,13 @@ export default function PortfolioClient({
         {/* Call to Action */}
         <div className="mt-24 text-center">
           <h3 className="font-serif text-2xl mb-6">
-            ¿Listo para crear tus propios recuerdos?
+            {tr(t.portfolio.ctaHeading)}
           </h3>
           <Link
             href="/contact"
             className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-opacity-90 transition-all font-semibold"
           >
-            Consultar Disponibilidad
+            {tr(t.portfolio.ctaButton)}
           </Link>
         </div>
       </div>
