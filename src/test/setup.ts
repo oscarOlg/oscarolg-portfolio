@@ -1,5 +1,11 @@
 import '@testing-library/jest-dom';
 
+// ── Sanity env vars ───────────────────────────────────────────────────────────
+// src/lib/sanity.ts throws at module load time if these are missing.
+// Set them here so any test file that imports from sanity.ts won't throw.
+process.env.NEXT_PUBLIC_SANITY_PROJECT_ID = 'test-project-id';
+process.env.NEXT_PUBLIC_SANITY_DATASET = 'production';
+
 // ── IntersectionObserver mock ─────────────────────────────────────────────────
 // jsdom doesn't implement IntersectionObserver. The Navbar uses it to track when
 // a sentinel element exits the viewport. The stub is enough — tests don't test
