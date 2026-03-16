@@ -23,7 +23,8 @@
     "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs",
     "seed:about": "node scripts/seed-about.mjs",
     "upload:about-image": "node scripts/upload-about-image.mjs",
-    "seed:homepage": "node scripts/seed-homepage.mjs"
+    "seed:homepage": "node scripts/seed-homepage.mjs",
+    "translate:en": "node scripts/translate-en-fields.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
