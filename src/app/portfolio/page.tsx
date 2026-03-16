@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import PortfolioClient from "./components/PortfolioClient";
 import {
   PORTFOLIO_CATEGORIES,
-} from "./components/PortfolioNav";
+} from "./portfolioConfig";
 
 export const metadata: Metadata = {
   title: 'Portafolio',

@@ -7,9 +7,8 @@ process.env.NEXT_PUBLIC_SANITY_PROJECT_ID = 'test-project-id';
 process.env.NEXT_PUBLIC_SANITY_DATASET = 'production';
 
 // ── IntersectionObserver mock ─────────────────────────────────────────────────
-// jsdom doesn't implement IntersectionObserver. The Navbar uses it to track when
-// a sentinel element exits the viewport. The stub is enough — tests don't test
-// scroll-driven transparency because that requires a real viewport.
+// jsdom doesn't implement IntersectionObserver. Kept as a stub in case any
+// component or future test relies on it.
 
 class MockIntersectionObserver implements IntersectionObserver {
   readonly root: Element | Document | null = null;
@@ -30,9 +29,8 @@ Object.defineProperty(window, 'IntersectionObserver', {
 });
 
 // ── getBoundingClientRect mock ────────────────────────────────────────────────
-// jsdom returns all-zero rects. The Navbar calls
-// `sentinel.getBoundingClientRect().bottom <= 0` for its initial state sync;
-// returning bottom: 60 ensures that evaluates to false (not scrolled = transparent).
+// jsdom returns all-zero rects. Kept as a stub for any component that reads
+// element dimensions during tests.
 
 Element.prototype.getBoundingClientRect = function () {
   return {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -44,7 +44,6 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { lang, setLang } = useLanguage();
 
   const tr = (obj: { es: string; en: string }) => (lang === "en" ? obj.en : obj.es);
@@ -56,57 +55,11 @@ export default function Navbar() {
     { href: "/contact",   label: tr(t.nav.contact) },
   ];
 
-  const isHome = pathname === "/";
-
-  useEffect(() => {
-    // Use IntersectionObserver instead of scroll events.
-    //
-    // Why: scroll events are unreliable after momentum/fling gestures on iOS and
-    // Android — the browser may never fire a final event once the position settles.
-    // scrollend helps on newer browsers but still has gaps.
-    // Next.js soft navigation resets scrollY to 0 without firing any scroll event,
-    // so a scroll-listener approach permanently breaks transparency after nav changes.
-    //
-    // IntersectionObserver fires whenever the sentinel's intersection with the
-    // viewport changes — via user scroll, momentum settle, programmatic reset,
-    // or Next.js navigation — regardless of how it happened.
-
-    // Sentinel: 1×60px block at document (0,0), absolutely positioned so it is
-    // out of layout flow but still scrolls with the document.
-    const sentinel = document.createElement("div");
-    sentinel.setAttribute("aria-hidden", "true");
-    sentinel.style.cssText =
-      "position:absolute;top:0;left:0;width:1px;height:60px;pointer-events:none;";
-    document.body.prepend(sentinel);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(sentinel);
-
-    // Sync immediately — component may mount while page is already scrolled
-    setScrolled(sentinel.getBoundingClientRect().bottom <= 0);
-
-    return () => {
-      observer.disconnect();
-      sentinel.remove();
-    };
-  }, []);
-
-  const isTransparent = isHome && !scrolled && !isMobileMenuOpen;
-
   const isActive = (href: string) =>
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
-        isTransparent
-          ? "bg-transparent text-white border-transparent"
-          : "bg-dominant/85 backdrop-blur-md text-secondary border-gray-200/60 shadow-sm"
-      }`}
-    >
+    <header className="fixed top-0 left-0 w-full z-50 bg-secondary/90 backdrop-blur-md text-dominant border-b border-white/10 shadow-md">
       {/* ── Main bar ── */}
       <div className="h-16 px-6 md:px-12 flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
 
@@ -135,34 +88,35 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+        </nav>
 
-          {/* Language toggle — desktop */}
-          <div className="flex items-center gap-1 font-sans text-[10px] uppercase tracking-[0.2em] pl-4 border-l border-current/30">
+        {/* RIGHT — Language toggle + Socials (desktop) | Hamburger (mobile) */}
+        <div className="hidden md:flex items-center justify-end gap-5">
+          {/* Language toggle */}
+          <div className="flex items-center gap-1.5 font-sans text-[10px] uppercase tracking-[0.2em] pr-5 border-r border-white/20">
             <button
               onClick={() => setLang("es")}
-              className={`transition-opacity ${lang === "es" ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+              className={`transition-opacity ${lang === "es" ? "opacity-100" : "opacity-35 hover:opacity-65"}`}
               aria-label="Cambiar a Español"
             >
               ES
             </button>
-            <span className="opacity-30">/</span>
+            <span className="opacity-25">/</span>
             <button
               onClick={() => setLang("en")}
-              className={`transition-opacity ${lang === "en" ? "opacity-100" : "opacity-40 hover:opacity-70"}`}
+              className={`transition-opacity ${lang === "en" ? "opacity-100" : "opacity-35 hover:opacity-65"}`}
               aria-label="Switch to English"
             >
               EN
             </button>
           </div>
-        </nav>
-
-        {/* RIGHT — Socials (desktop) | Hamburger (mobile) */}
-        <div className="hidden md:flex items-center justify-end">
           <Socials
             containerClassName="flex gap-5"
             itemClassName="hover:text-accent transition-colors"
           />
         </div>
+
+        {/* Hamburger (mobile) */}
         <button
           className="md:hidden p-2 -mr-2 hover:text-accent transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -177,7 +131,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-dominant text-secondary border-t border-gray-200/70 shadow-lg overflow-hidden"
+            className="md:hidden bg-secondary text-dominant border-t border-white/10 shadow-lg overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -194,7 +148,7 @@ export default function Navbar() {
                   <Link
                     href={href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block font-sans text-sm uppercase tracking-widest border-b border-gray-200/70 py-4 transition-colors ${
+                    className={`block font-sans text-sm uppercase tracking-widest border-b border-white/10 py-4 transition-colors ${
                       isActive(href) ? "text-accent" : "hover:text-accent"
                     }`}
                   >
@@ -205,7 +159,7 @@ export default function Navbar() {
 
               {/* Language toggle — mobile */}
               <motion.div
-                className="flex items-center gap-3 py-4 border-b border-gray-200/70"
+                className="flex items-center gap-3 py-4 border-b border-white/10"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.055, duration: 0.22, ease: "easeOut" }}
@@ -213,17 +167,17 @@ export default function Navbar() {
                 <button
                   onClick={() => setLang("es")}
                   className={`font-sans text-sm uppercase tracking-widest transition-colors ${
-                    lang === "es" ? "text-accent" : "opacity-50 hover:opacity-80"
+                    lang === "es" ? "text-accent" : "opacity-40 hover:opacity-75"
                   }`}
                   aria-label="Cambiar a Español"
                 >
                   ES
                 </button>
-                <span className="opacity-30 text-sm">/</span>
+                <span className="opacity-25 text-sm">/</span>
                 <button
                   onClick={() => setLang("en")}
                   className={`font-sans text-sm uppercase tracking-widest transition-colors ${
-                    lang === "en" ? "text-accent" : "opacity-50 hover:opacity-80"
+                    lang === "en" ? "text-accent" : "opacity-40 hover:opacity-75"
                   }`}
                   aria-label="Switch to English"
                 >
@@ -239,7 +193,7 @@ export default function Navbar() {
               >
                 <Socials
                   containerClassName="flex gap-6"
-                  itemClassName="hover:text-accent transition-colors text-secondary/50"
+                  itemClassName="hover:text-accent transition-colors text-dominant/60"
                 />
               </motion.div>
             </div>
@@ -249,3 +203,4 @@ export default function Navbar() {
     </header>
   );
 }
+

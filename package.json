@@ -24,7 +24,8 @@
     "seed:about": "node scripts/seed-about.mjs",
     "upload:about-image": "node scripts/upload-about-image.mjs",
     "seed:homepage": "node scripts/seed-homepage.mjs",
-    "translate:en": "node scripts/translate-en-fields.mjs"
+    "translate:en": "node scripts/translate-en-fields.mjs",
+    "patch:en": "node scripts/patch-en-fields.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
