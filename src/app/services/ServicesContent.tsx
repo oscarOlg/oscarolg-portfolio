@@ -182,7 +182,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
         </div>
 
         {/* ── Packages Grid ── */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={selectedService}
             className="px-8 md:px-12 pb-8"

@@ -11,8 +11,8 @@ import HtmlLangUpdater from "./components/HtmlLangUpdater";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 // Initialize fonts
-const playfair = Playfair_Display({ subsets: ["latin"], variable: '--font-playfair' });
-const lato = Lato({ weight: ['300', '400', '700'], subsets: ["latin"], variable: '--font-lato' });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: '--font-playfair', display: 'optional' });
+const lato = Lato({ weight: ['300', '400', '700'], subsets: ["latin"], variable: '--font-lato', display: 'optional' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),

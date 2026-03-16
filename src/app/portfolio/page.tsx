@@ -29,14 +29,25 @@ const categoryDisplayNames: Record<string, string> = Object.fromEntries(
 // Loading fallback
 function PortfolioLoadingFallback() {
   return (
-    <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 w-full space-y-6">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="bg-secondary/20 aspect-[3/4] rounded-sm animate-pulse"
-          />
-        ))}
+    <div className="w-full">
+      {/* Match PortfolioNav bar to prevent height shift when real nav mounts */}
+      <div className="sticky top-16 z-40 w-full bg-dominant/85 backdrop-blur-sm shadow-lg border-b border-secondary/10">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-5 md:gap-7 lg:gap-10 px-6 md:px-12 py-4">
+          {[...Array(7)].map((_, i) => (
+            <div key={i} className="h-3.5 w-16 bg-secondary/15 rounded animate-pulse" />
+          ))}
+        </div>
+      </div>
+      {/* Image grid */}
+      <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+          {[...Array(9)].map((_, i) => (
+            <div
+              key={i}
+              className="bg-secondary/10 aspect-[3/4] rounded-sm animate-pulse break-inside-avoid"
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
