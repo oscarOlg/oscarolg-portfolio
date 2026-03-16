@@ -54,25 +54,38 @@ export default function Navbar() {
   const isHome = pathname === "/";
 
   useEffect(() => {
-    let debounceTimer: ReturnType<typeof setTimeout>;
+    // Use IntersectionObserver instead of scroll events.
+    //
+    // Why: scroll events are unreliable after momentum/fling gestures on iOS and
+    // Android — the browser may never fire a final event once the position settles.
+    // scrollend helps on newer browsers but still has gaps.
+    // Next.js soft navigation resets scrollY to 0 without firing any scroll event,
+    // so a scroll-listener approach permanently breaks transparency after nav changes.
+    //
+    // IntersectionObserver fires whenever the sentinel's intersection with the
+    // viewport changes — via user scroll, momentum settle, programmatic reset,
+    // or Next.js navigation — regardless of how it happened.
 
-    const checkScroll = () => setScrolled(window.scrollY > 60);
+    // Sentinel: 1×60px block at document (0,0), absolutely positioned so it is
+    // out of layout flow but still scrolls with the document.
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText =
+      "position:absolute;top:0;left:0;width:1px;height:60px;pointer-events:none;";
+    document.body.prepend(sentinel);
 
-    const handleScroll = () => {
-      checkScroll();
-      // Fallback for older iOS (pre-16.4) where scrollend doesn't fire:
-      // re-check 150ms after the last scroll event so momentum settle is caught.
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(checkScroll, 150);
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
 
-    checkScroll(); // sync state on mount (handles page reload mid-scroll)
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scrollend", checkScroll, { passive: true }); // Safari 16.4+
+    // Sync immediately — component may mount while page is already scrolled
+    setScrolled(sentinel.getBoundingClientRect().bottom <= 0);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scrollend", checkScroll);
-      clearTimeout(debounceTimer);
+      observer.disconnect();
+      sentinel.remove();
     };
   }, []);
 

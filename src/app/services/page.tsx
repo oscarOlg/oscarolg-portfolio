@@ -41,7 +41,7 @@ export default async function ServicesPage() {
   );
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12">
+    <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12">
       <Suspense
         fallback={
           <div className="text-center py-20 text-gray-500 font-sans tracking-widest uppercase text-sm">
