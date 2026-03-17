@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -45,6 +45,18 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { lang, setLang } = useLanguage();
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   const tr = (obj: { es: string; en: string }) => (lang === "en" ? obj.en : obj.es);
 
@@ -59,12 +71,12 @@ export default function Navbar() {
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-secondary/90 backdrop-blur-md text-dominant border-b border-white/10 shadow-md">
+    <header ref={headerRef} className="fixed top-0 left-0 w-full z-50 bg-secondary/90 backdrop-blur-md text-dominant border-b border-white/10 shadow-md">
       {/* ── Main bar ── */}
       <div className="h-16 px-6 lg:px-12 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
 
         {/* LEFT — Brand */}
-        <Link href="/" className="flex flex-col leading-none">
+        <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col leading-none">
           <span className="font-serif text-xl md:text-2xl tracking-widest uppercase drop-shadow-sm">
             Oscar Olg
           </span>
