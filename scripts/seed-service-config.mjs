@@ -38,23 +38,6 @@ const configs = [
     displayName: 'Bodas',
     introText: 'Tu boda es el reflejo de tu historia. Documentamos cada momento con sensibilidad editorial, enfocándonos en las emociones genuinas, los detalles que brillan y la magia de celebrar el amor en tu día.',
     gridColumns: 3,
-    hasAddOns: true,
-    complementos: [
-      {
-        name: 'Sesión de Compromiso (Pre-boda)',
-        price: 2500,
-        note: 'Incluida en el paquete Premium',
-      },
-      {
-        name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")',
-        price: 1500,
-      },
-      {
-        name: 'Horas extra de cobertura el día del evento',
-        price: 1500,
-        unit: 'hr',
-      },
-    ],
     infoCardVariant: 'none',
     hasGlobalBenefits: true,
     globalBenefitsHeading: 'Inclusiones en todos los paquetes',
@@ -80,11 +63,6 @@ const configs = [
     introText:
       'Ya sea que busques celebrar tu cumpleaños, documentar tu graduación, renovar tu marca personal o un proyecto personal. Estas colecciones están diseñadas para adaptarse a tu visión.',
     gridColumns: 3,
-    hasAddOns: true,
-    complementos: [
-      { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
-      { name: 'Hora extra de sesión', price: 1000 },
-    ],
     infoCardVariant: 'right_panel',
     infoCardHeading: '¿Deseas tu sesión en estudio fotográfico?',
     infoCardContent: 'Cualquiera de nuestras sesiones puede realizarse en estudio fotográfico profesional. Contamos con diferentes opciones en la ciudad. El costo de renta se cotiza por separado según disponibilidad (inversión promedio de $600 MXN por hora).',
@@ -113,12 +91,6 @@ const configs = [
     introText:
       'Diseñado para celebrar la conexión con tus personas favoritas. Ya sea un retrato de pareja, memorias familiares o una sesión con tu grupo de amigos, creamos un ambiente relajado para capturar la dinámica y esencia genuina que los une.\n*Todos los paquetes incluyen cobertura base para 2 personas. Aplica costo extra a partir del tercer integrante.',
     gridColumns: 3,
-    hasAddOns: true,
-    complementos: [
-      { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
-      { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
-      { name: 'Hora extra de sesión', price: 1000 },
-    ],
     infoCardVariant: 'right_panel',
     infoCardHeading: '¿Deseas tu sesión en estudio fotográfico?',
     infoCardContent: 'Cualquiera de nuestras sesiones puede realizarse en estudio fotográfico profesional. Contamos con diferentes opciones en la ciudad. El costo de renta se cotiza por separado según disponibilidad (inversión promedio de $600 MXN por hora).',
@@ -234,8 +206,7 @@ async function seedConfigs() {
       const doc = {
         _type: 'serviceConfig',
         ...cfg,
-        // Add _key to complementos and processSteps arrays
-        complementos: (cfg.complementos || []).map((c) => ({ _key: key(), ...c })),
+        // Add _key to processSteps arrays
         processSteps: (cfg.processSteps || []).map((s) => ({ _key: key(), ...s })),
       };
       // Remove undefined/null fields

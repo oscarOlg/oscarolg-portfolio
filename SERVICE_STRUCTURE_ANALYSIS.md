@@ -19,7 +19,7 @@ Analyzed 6 service component files to identify patterns, data structures, and va
 - **CTA Button** ("Reservar" / Book)
 
 ### Add-ons Section ("Complementos")
-- Sesión de Compromiso (Pre-boda) — $2,500 MXN *(note: included in Premium)*
+- Sesión de Compromiso (Pre-boda / Save the Date) — $2,500 MXN *(note: included in Premium)*
 - Set de 50 printed photos (4x6") + 2 enlargements (8x10") — $1,500 MXN
 - Extra coverage hours (day-of) — $1,500 MXN/hr
 

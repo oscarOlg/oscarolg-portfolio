@@ -1,25 +1,16 @@
 /**
- * Service package component registry
- * Maps component names from config to actual React components
- * This enables dynamic component loading based on the services config
+ * Service component registry (deprecated)
+ * 
+ * NOTE: This file is no longer used. All service packages are now rendered
+ * using the unified ServicePackageTemplate component which sources data
+ * from servicePackage.addOns (single source of truth).
+ * 
+ * The old component-based approach (WeddingPackages, IndividualPackages, etc.)
+ * has been consolidated into ServicePackageTemplate.tsx for maintainability.
  */
 
-import WeddingPackages from '@/app/services/components/WeddingPackages';
-import IndividualPackages from '@/app/services/components/IndividualPackages';
-import CouplePackages from '@/app/services/components/CouplePackages';
-import MaternityPackages from '@/app/services/components/MaternityPackages';
-import CommercialPackages from '@/app/services/components/CommercialPackages';
-import EditorialPackages from '@/app/services/components/EditorialPackages';
-
-export const SERVICE_COMPONENT_REGISTRY: Record<string, React.ComponentType> = {
-  WeddingPackages,
-  IndividualPackages,
-  CouplePackages,
-  MaternityPackages,
-  CommercialPackages,
-  EditorialPackages,
-};
+export const SERVICE_COMPONENT_REGISTRY: Record<string, React.ComponentType> = {};
 
 export function getServiceComponent(componentName: string): React.ComponentType | null {
-  return SERVICE_COMPONENT_REGISTRY[componentName] || null;
+  return null;
 }
