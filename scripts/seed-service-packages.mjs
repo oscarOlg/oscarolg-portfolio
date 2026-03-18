@@ -37,7 +37,7 @@ const packages = [
     name: 'Esencial',
     category: 'weddings',
     tier: 'essential',
-    price: 8000,
+    price: 7000,
     showPrice: true,
     description: 'Cobertura de 6 horas',
     features: [
@@ -58,7 +58,7 @@ const packages = [
     name: 'Clásico',
     category: 'weddings',
     tier: 'premium',
-    price: 10000,
+    price: 9000,
     showPrice: true,
     description: 'Cobertura de 8 horas',
     features: [
@@ -81,7 +81,7 @@ const packages = [
     name: 'Premium',
     category: 'weddings',
     tier: 'deluxe',
-    price: 12000,
+    price: 11000,
     showPrice: true,
     description: 'Cobertura de 10 horas',
     features: [

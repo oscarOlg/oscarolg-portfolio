@@ -65,12 +65,12 @@ export default function Footer() {
               {tr(t.footer.city)}
             </p>
             <a
-              href="https://wa.me/525519689471"
+              href="https://wa.me/526562932374"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans text-sm text-secondary/80 hover:text-accent transition-colors mb-5"
             >
-              WhatsApp: +52 55 1968 9471
+              WhatsApp: +52 656 293 2374
             </a>
             <Socials
               containerClassName="flex gap-5"
