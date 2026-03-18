@@ -37,7 +37,7 @@ const packages = [
     name: 'Esencial',
     category: 'weddings',
     tier: 'essential',
-    price: 7000,
+    price: 8000,
     showPrice: true,
     description: 'Cobertura de 6 horas',
     features: [
@@ -49,7 +49,7 @@ const packages = [
     duration: 6,
     deliverables: '50-60 fotos editadas por hora de cobertura',
     addOns: [
-      { name: 'Sesión de Compromiso (Pre-boda)', price: 2500 },
+      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500 },
       { name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")', price: 1500 },
       { name: 'Horas extra de cobertura', price: 1500, unit: 'por hora' },
     ],
@@ -58,7 +58,7 @@ const packages = [
     name: 'Clásico',
     category: 'weddings',
     tier: 'premium',
-    price: 9000,
+    price: 10000,
     showPrice: true,
     description: 'Cobertura de 8 horas',
     features: [
@@ -72,7 +72,7 @@ const packages = [
     duration: 8,
     deliverables: '50-60 fotos editadas por hora de cobertura',
     addOns: [
-      { name: 'Sesión de Compromiso (Pre-boda)', price: 2500 },
+      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500 },
       { name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")', price: 1500 },
       { name: 'Horas extra de cobertura', price: 1500, unit: 'por hora' },
     ],
@@ -81,11 +81,11 @@ const packages = [
     name: 'Premium',
     category: 'weddings',
     tier: 'deluxe',
-    price: 11000,
+    price: 12000,
     showPrice: true,
     description: 'Cobertura de 10 horas',
     features: [
-      'Sesión de Compromiso pre-boda en locación',
+      'Sesión de Compromiso (Pre-boda / Save the Date) en locación',
       'Getting Ready: Momentos previos íntimos',
       'Sesión de retratos (mismo día de la boda)',
       'Cobertura de la Ceremonia y Recepción',

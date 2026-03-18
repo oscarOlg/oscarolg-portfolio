@@ -187,10 +187,15 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
     .filter((p) => p.isSpecialVariant)
     .sort((a, b) => (a.displayOrder ?? 99) - (b.displayOrder ?? 99));
 
+  // Extract add-ons from first regular package for display
+  const packageAddOns = gridPackages.length > 0 && gridPackages[0].addOns 
+    ? gridPackages[0].addOns 
+    : [];
+
   const hasComplementos =
     config.hasAddOns !== false &&
-    Array.isArray(config.complementos) &&
-    config.complementos.length > 0;
+    Array.isArray(packageAddOns) &&
+    packageAddOns.length > 0;
 
   const hasRightPanel =
     config.infoCardVariant === "right_panel" && !!config.infoCardHeading;
@@ -247,7 +252,7 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
               <h4 className="font-serif text-lg font-bold mb-5 text-secondary uppercase tracking-wide">
                 {tr(t.services.complementosHeading)}
               </h4>
-              {config.complementos!.map((item, i) => (
+              {packageAddOns.map((item, i) => (
                 <div
                   key={item._key ?? i}
                   className="flex justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4 gap-4 last:border-b-0 last:pb-0 last:mb-0"
@@ -256,9 +261,9 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
                     <span className="font-sans text-sm font-semibold text-secondary block">
                       {pickLang(lang, item.name, item.nameEn) ?? item.name}
                     </span>
-                    {(item.note || item.noteEn) && (
+                    {item.description && (
                       <span className="block text-xs italic text-accent font-semibold mt-1">
-                        {pickLang(lang, item.note, item.noteEn) ?? item.note}
+                        {item.description}
                       </span>
                     )}
                   </div>

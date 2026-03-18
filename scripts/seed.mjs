@@ -74,7 +74,7 @@ const weddingPackages = [
     deliverables: '50-60 fotos editadas por hora',
     addOns: [
       {
-        name: 'Sesión de Compromiso (Pre-boda)',
+        name: 'Sesión de Compromiso (Pre-boda / Save the Date)',
         price: 2500,
       },
       {
