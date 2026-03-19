@@ -49,7 +49,7 @@ const packages = [
     duration: 6,
     deliverables: '50-60 fotos editadas por hora de cobertura',
     addOns: [
-      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500 },
+      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500, description: 'Incluido en paquete premium' },
       { name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")', price: 1500 },
       { name: 'Horas extra de cobertura', price: 1500, unit: 'por hora' },
     ],
@@ -72,7 +72,7 @@ const packages = [
     duration: 8,
     deliverables: '50-60 fotos editadas por hora de cobertura',
     addOns: [
-      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500 },
+      { name: 'Sesión de Compromiso (Pre-boda / Save the Date)', price: 2500, description: 'Incluido en paquete premium' },
       { name: 'Set de 50 fotografías impresas (4x6") + 2 ampliaciones (8x10")', price: 1500 },
       { name: 'Horas extra de cobertura', price: 1500, unit: 'por hora' },
     ],
