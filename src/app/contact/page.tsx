@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalidate every 60 seconds (ISR with fresh Sanity data)
+export const revalidate = 60;
+
 export default async function ContactPage() {
   // Fetch all service packages for the dynamic form
   const packages = await getServicePackages();
