@@ -1,12 +1,20 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getPortfolioImageBySlug, getPortfolioImages, getImageUrl, getHomepageContent } from "@/lib/sanity";
+import {
+  getPortfolioImageBySlug,
+  getPortfolioImages,
+  getImageUrl,
+  getHomepageContent,
+  getFeaturedTestimonials,
+} from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import InvestmentSection from "./components/InvestmentSection";
 import HeroContent from "./components/HeroContent";
 import AnimatedSection from "./components/AnimatedSection";
 import WorkSection from "./components/WorkSection";
 import HomepageFinalCta from "./components/HomepageFinalCta";
+import TestimonialsSection from "./components/TestimonialsSection";
+import LeadMagnetBanner from "./components/LeadMagnetBanner";
 
 export const metadata: Metadata = {
   title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
@@ -26,11 +34,12 @@ const HOME_IMAGE_SLUGS = {
 export const revalidate = 60;
 
 export default async function Home() {
-  const [allImages, pinnedInvestmentLeft, pinnedInvestmentRight, homepageContent] = await Promise.all([
+  const [allImages, pinnedInvestmentLeft, pinnedInvestmentRight, homepageContent, featuredTestimonials] = await Promise.all([
     getPortfolioImages(),
     getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentLeft),
     getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentRight),
     getHomepageContent(),
+    getFeaturedTestimonials(),
   ]);
 
   // First image per category for the cards
@@ -118,6 +127,12 @@ export default async function Home() {
           ctaTextEn={hp?.investmentCtaTextEn}
         />
       </AnimatedSection>
+
+      {featuredTestimonials.length > 0 && (
+        <TestimonialsSection testimonials={featuredTestimonials} />
+      )}
+
+      <LeadMagnetBanner />
 
       {/* ── 4. FINAL CTA ── */}
       <HomepageFinalCta
