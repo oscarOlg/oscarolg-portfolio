@@ -65,6 +65,25 @@ Current state notes:
 - Testimonial schema and fetch helpers already exist in codebase
 - Homepage does not render testimonials yet
 
+### Phase 2.3 Campaign Launch Assets (code)
+Status: Completed (code)
+- [x] Build wedding-first campaign links with UTM parameters
+
+Current state notes:
+- Added reusable campaign link generator in src/lib/campaign-links.ts
+- Current output provides 3 creative variants (creative_a, creative_b, creative_c)
+- Ad creative production and Ads Manager setup remain manual tasks
+
+### Phase 4.1 WhatsApp Nurture Templates (code)
+Status: Completed (code)
+- [x] Finalize 5-message sequence (Day 0, 3, 6, 8, 10)
+- [x] Prepare reusable message templates with placeholders
+- [x] Add response playbook for common objections
+
+Current state notes:
+- Added reusable templates in src/lib/whatsapp-sequence.ts
+- Automation provider selection and execution remain pending
+
 ## Execution Log
 - 2026-03-22: Baseline analysis completed against source plan and current codebase.
 - 2026-03-22: Implemented Phase 1.1 contact form quality gate and urgency messaging.
@@ -77,6 +96,10 @@ Current state notes:
 - 2026-03-22: Added contact form URL prefill support for service and package from landing-page CTAs.
 - 2026-03-22: Implemented Phase 2.2 UTM tracking on landing page views and CTA clicks.
 - 2026-03-22: Added UTM parameter propagation from landing-page CTAs to contact links for attribution continuity.
+- 2026-03-22: Implemented Phase 3 lead magnet page and CTA placement on homepage and service landing pages.
+- 2026-03-22: Added reusable UTM helper and social distribution links for Instagram/Facebook.
+- 2026-03-22: Implemented Phase 2.3 code assets: wedding campaign link generator with UTM variants.
+- 2026-03-22: Implemented Phase 4.1 code assets: 5-step WhatsApp nurture sequence and objection-response playbook templates.
 
 ## Environment Variables Required
 Add these keys to .env.local before production launch:

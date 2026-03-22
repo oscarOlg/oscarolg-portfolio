@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { SERVICES, getServiceByKey } from "@/config/services";
 import {
@@ -75,12 +76,14 @@ export default async function ServiceLandingPage({ params }: PageProps) {
 
   const landingTestimonials = getServiceScopedTestimonials(service, testimonials).slice(0, 3);
   return (
-    <LandingPageClient
-      serviceKey={service}
-      serviceCfg={serviceCfg}
-      packages={packages}
-      images={images}
-      testimonials={landingTestimonials}
-    />
+    <Suspense fallback={<div className="w-full min-h-[40vh]" />}>
+      <LandingPageClient
+        serviceKey={service}
+        serviceCfg={serviceCfg}
+        packages={packages}
+        images={images}
+        testimonials={landingTestimonials}
+      />
+    </Suspense>
   );
 }

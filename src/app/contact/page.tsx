@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getServicePackages, getImageUrl, getPortfolioImageBySlug } from "@/lib/sanity";
 import ContactPageClient from "./components/ContactPageClient";
 
@@ -23,5 +24,9 @@ export default async function ContactPage() {
   const contactImage = await getPortfolioImageBySlug("weddings-p-e-8ca09067dscf3244");
   const contactImageUrl = getImageUrl(contactImage?.image);
 
-  return <ContactPageClient packages={packages} contactImageUrl={contactImageUrl} />;
+  return (
+    <Suspense fallback={<div className="w-full min-h-[40vh]" />}>
+      <ContactPageClient packages={packages} contactImageUrl={contactImageUrl} />
+    </Suspense>
+  );
 }

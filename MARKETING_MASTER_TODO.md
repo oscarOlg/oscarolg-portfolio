@@ -192,10 +192,13 @@ Owner: Oscar Olg Photography
 - [ ] Production build smoke test: npm run build
 
 ### 2.3 Meta campaign launch prerequisites
-- [ ] Build wedding-first campaign links with UTM parameters
+- [x] Build wedding-first campaign links with UTM parameters
 - [ ] Prepare at least 3 ad creative variants
 - [ ] Confirm conversion objective setup in Ads Manager
 - [ ] Confirm pixel receives Lead event before launch
+
+Code refs:
+- Campaign links helper: src/lib/campaign-links.ts
 
 ### Phase 2 notes
 - Add service-specific objections and FAQ updates as they come from real leads.
@@ -232,9 +235,12 @@ Prepared UTM links for social distribution (copy when ready):
 ## Phase 4 - WhatsApp nurture system
 
 ### 4.1 Messaging sequence
-- [ ] Finalize 5-message sequence (Day 0, 3, 6, 8, 10)
-- [ ] Prepare reusable message templates with placeholders
-- [ ] Add response playbook for common objections
+- [x] Finalize 5-message sequence (Day 0, 3, 6, 8, 10)
+- [x] Prepare reusable message templates with placeholders
+- [x] Add response playbook for common objections
+
+Code refs:
+- Sequence + playbook templates: src/lib/whatsapp-sequence.ts
 
 ### 4.2 Execution model
 - [ ] Decide manual vs automation tool
