@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import NavbarSpacer from "./components/NavbarSpacer";
 import Footer from "./components/Footer";
 import HtmlLangUpdater from "./components/HtmlLangUpdater";
+import AnalyticsScripts from "./components/AnalyticsScripts";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 // Initialize fonts
@@ -63,6 +64,7 @@ export default function RootLayout({
           <Footer />
         </LanguageProvider>
 
+        <AnalyticsScripts />
         <Analytics />
         <SpeedInsights />
       </body>

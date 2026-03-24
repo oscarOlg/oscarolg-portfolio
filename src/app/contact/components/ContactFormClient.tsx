@@ -2,11 +2,13 @@
 
 import React, { useMemo, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useSearchParams } from "next/navigation";
 import type { ServicePackage } from "@/types/sanity";
 import { SERVICES } from "@/config/services";
 import { calculateTotalPrice } from "@/lib/pricing";
 import { useLanguage, pickLang } from "@/contexts/LanguageContext";
 import { t } from "@/lib/translations";
+import { event as gaEvent, fbEvent } from "@/lib/analytics";
 
 // Initialize EmailJS
 emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
@@ -28,6 +30,7 @@ interface FormData {
 }
 
 export default function ContactFormClient({ allPackages, onMessageUpdate }: ContactFormProps) {
+  const searchParams = useSearchParams();
   const { lang } = useLanguage();
   const tr = (obj: { es: string; en: string }) => lang === "en" ? obj.en : obj.es;
 
@@ -45,6 +48,27 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
     selectedAddOns: {},
     message: "",
   });
+
+  React.useEffect(() => {
+    const serviceParam = searchParams.get("service") || "";
+    const packageParam = searchParams.get("packageId") || "";
+
+    if (!serviceParam && !packageParam) return;
+
+    setFormData((prev) => {
+      const nextService = serviceParam || prev.service;
+      const selectedPackageFromQuery = packageParam
+        ? allPackages.find((p) => p._id === packageParam && p.category === nextService)
+        : null;
+
+      return {
+        ...prev,
+        service: nextService,
+        packageId: selectedPackageFromQuery?._id || (serviceParam ? "" : prev.packageId),
+        selectedAddOns: {},
+      };
+    });
+  }, [searchParams, allPackages]);
 
   // Get services from centralized config
   const services = useMemo(() => {
@@ -166,6 +190,13 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (formData.service && availablePackages.length > 0 && !formData.packageId) {
+      setSubmitStatus("error");
+      setErrorMessage(lang === "en" ? "Please select a package to continue" : "Por favor selecciona un paquete para continuar");
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
     setErrorMessage("");
@@ -203,6 +234,40 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
           message: formData.message,
         }
       );
+
+      const confirmationTemplateId = process.env.NEXT_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID || "";
+      if (confirmationTemplateId) {
+        try {
+          await emailjs.send(
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+            confirmationTemplateId,
+            {
+              to_email: formData.email,
+              from_name: "Oscar Olg Photography",
+              customer_name: formData.name,
+              service: formData.service,
+              package_name: selectedPackage?.name || "",
+              package_price: selectedPackage?.price ? `$${selectedPackage.price.toLocaleString("es-MX")} MXN` : "",
+            }
+          );
+        } catch (confirmationError) {
+          console.error("Customer confirmation email failed:", confirmationError);
+        }
+      }
+
+      gaEvent({
+        action: "form_submission",
+        category: "Contact",
+        label: formData.service || "unknown",
+        value: selectedPackage?.price || 0,
+      });
+
+      fbEvent("Lead", {
+        content_name: formData.service || "unknown",
+        content_category: formData.service || "unknown",
+        value: selectedPackage?.price || 0,
+        currency: "MXN",
+      });
 
       setSubmitStatus("success");
 
@@ -487,6 +552,12 @@ export default function ContactFormClient({ allPackages, onMessageUpdate }: Cont
               ✕ {errorMessage}
             </div>
           )}
+
+          <p className="text-xs text-gray-600 text-center">
+            {lang === "en"
+              ? "Dates are reserved on a first-come basis. Secure your date today."
+              : "Las fechas se reservan por orden de llegada. Asegura tu fecha hoy."}
+          </p>
 
           {/* Submit Button */}
           <button

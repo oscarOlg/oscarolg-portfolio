@@ -22,6 +22,7 @@
     "sync-portfolio-category": "node scripts/sync-portfolio-category.mjs",
     "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs",
     "seed:about": "node scripts/seed-about.mjs",
+    "seed:testimonials": "node scripts/seed-testimonials.mjs",
     "upload:about-image": "node scripts/upload-about-image.mjs",
     "seed:homepage": "node scripts/seed-homepage.mjs",
     "translate:en": "node scripts/translate-en-fields.mjs",
