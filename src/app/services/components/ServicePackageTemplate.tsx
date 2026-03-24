@@ -74,6 +74,16 @@ function PackageCard({
         )
       )}
       <div className="mt-auto pt-4">
+        {pkg.gift && (
+          <div className="mb-6 p-3 bg-accent/10 border border-accent/30 rounded-sm">
+            <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
+              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
+            </p>
+            <p className="font-sans text-sm text-secondary">
+              {pickLang(lang, pkg.gift, pkg.giftEn)}
+            </p>
+          </div>
+        )}
         {showPrice && (
           <div className="mb-6 p-4 bg-gray-50 border border-gray-100 rounded-sm">
             {displayPricePrefix && (
@@ -81,10 +91,22 @@ function PackageCard({
                 {displayPricePrefix}
               </p>
             )}
-            <p className="font-serif text-3xl font-bold text-secondary">
-              {formatPrice(pkg.price)}{" "}
-              <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
-            </p>
+            <div className="flex items-baseline gap-3 mb-2">
+              {pkg.originalPrice && pkg.originalPrice > 0 && (
+                <p className="font-serif text-lg text-gray-400 line-through">
+                  {formatPrice(pkg.originalPrice)} MXN
+                </p>
+              )}
+              <p className="font-serif text-3xl font-bold text-secondary">
+                {formatPrice(pkg.price)}{" "}
+                <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
+              </p>
+            </div>
+            {pkg.originalPrice && pkg.originalPrice > 0 && (
+              <p className="font-sans text-xs text-accent font-semibold">
+                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+              </p>
+            )}
           </div>
         )}
         {isPopular ? (
@@ -149,11 +171,35 @@ function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
         )}
       </div>
       <div>
+        {pkg.gift && (
+          <div className="mb-4 p-2 bg-accent/10 border border-accent/30 rounded-sm">
+            <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
+              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
+            </p>
+            <p className="font-sans text-xs text-secondary">
+              {pickLang(lang, pkg.gift, pkg.giftEn)}
+            </p>
+          </div>
+        )}
         {pkg.showPrice !== false && (
-          <p className="font-serif text-3xl font-bold text-secondary mb-4">
-            {formatPrice(pkg.price)}{" "}
-            <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
-          </p>
+          <div className="mb-4">
+            <div className="flex items-baseline gap-2 mb-1">
+              {pkg.originalPrice && pkg.originalPrice > 0 && (
+                <p className="font-serif text-lg text-gray-400 line-through">
+                  {formatPrice(pkg.originalPrice)} MXN
+                </p>
+              )}
+              <p className="font-serif text-3xl font-bold text-secondary">
+                {formatPrice(pkg.price)}{" "}
+                <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
+              </p>
+            </div>
+            {pkg.originalPrice && pkg.originalPrice > 0 && (
+              <p className="font-sans text-xs text-accent font-semibold">
+                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+              </p>
+            )}
+          </div>
         )}
         <Link
           href="/contact"
@@ -246,55 +292,63 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
       </div>
 
       {showPostPackagesRow && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-200 pt-8 mb-8">
-          {hasComplementos && (
-            <div className="border border-gray-200 p-6 bg-gray-50">
-              <h4 className="font-serif text-lg font-bold mb-5 text-secondary uppercase tracking-wide">
-                {tr(t.services.complementosHeading)}
-              </h4>
-              {packageAddOns.map((item, i) => (
-                <div
-                  key={item._key ?? i}
-                  className="flex justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4 gap-4 last:border-b-0 last:pb-0 last:mb-0"
-                >
-                  <div className="flex-grow">
-                    <span className="font-sans text-sm font-semibold text-secondary block">
-                      {pickLang(lang, item.name, item.nameEn) ?? item.name}
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-200 pt-8 mb-8">
+            {hasComplementos && (
+              <div className="border border-gray-200 p-6 bg-gray-50">
+                <h4 className="font-serif text-lg font-bold mb-5 text-secondary uppercase tracking-wide">
+                  {tr(t.services.complementosHeading)}
+                </h4>
+                {packageAddOns.map((item, i) => (
+                  <div
+                    key={item._key ?? i}
+                    className="flex justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4 gap-4 last:border-b-0 last:pb-0 last:mb-0"
+                  >
+                    <div className="flex-grow">
+                      <span className="font-sans text-sm font-semibold text-secondary block">
+                        {pickLang(lang, item.name, item.nameEn) ?? item.name}
+                      </span>
+                      {item.description && (
+                        <span className="block text-xs italic text-accent font-semibold mt-1">
+                          {item.description}
+                        </span>
+                      )}
+                    </div>
+                    <span className="font-sans font-bold text-secondary whitespace-nowrap mt-1 sm:mt-0">
+                      {formatPrice(item.price)} MXN
+                      {item.unit && (
+                        <span className="font-normal text-gray-500 ml-1">
+                          / {item.unit}
+                        </span>
+                      )}
                     </span>
-                    {item.description && (
-                      <span className="block text-xs italic text-accent font-semibold mt-1">
-                        {item.description}
-                      </span>
-                    )}
                   </div>
-                  <span className="font-sans font-bold text-secondary whitespace-nowrap mt-1 sm:mt-0">
-                    {formatPrice(item.price)} MXN
-                    {item.unit && (
-                      <span className="font-normal text-gray-500 ml-1">
-                        / {item.unit}
-                      </span>
-                    )}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
+            )}
+
+            {specialVariants.length > 0 && (
+              <SpecialVariantCard pkg={specialVariants[0]} />
+            )}
+
+            {!specialVariants.length && hasRightPanel && (
+              <div className="bg-gray-50 p-6 border border-gray-200 flex flex-col justify-center">
+                <h4 className="font-serif text-lg font-bold mb-3 text-secondary">
+                  {displayInfoCardHeading}
+                </h4>
+                <p className="font-sans text-sm leading-relaxed text-gray-700">
+                  {displayInfoCardContent}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {specialVariants.length > 1 && (
+            <div className="border-t border-gray-200 pt-8 mb-8">
+              <SpecialVariantCard pkg={specialVariants[1]} />
             </div>
           )}
-
-          {specialVariants.length > 0 && (
-            <SpecialVariantCard pkg={specialVariants[0]} />
-          )}
-
-          {!specialVariants.length && hasRightPanel && (
-            <div className="bg-gray-50 p-6 border border-gray-200 flex flex-col justify-center">
-              <h4 className="font-serif text-lg font-bold mb-3 text-secondary">
-                {displayInfoCardHeading}
-              </h4>
-              <p className="font-sans text-sm leading-relaxed text-gray-700">
-                {displayInfoCardContent}
-              </p>
-            </div>
-          )}
-        </div>
+        </>
       )}
 
       {hasFullWidthCard && (

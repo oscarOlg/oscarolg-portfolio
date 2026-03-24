@@ -113,6 +113,7 @@ export const servicePackagesQuery = `
     category,
     tier,
     price,
+    originalPrice,
     showPrice,
     pricePrefix,
     pricePrefixEn,
@@ -130,6 +131,8 @@ export const servicePackagesQuery = `
     ctaVariant,
     isSpecialVariant,
     variantType,
+    gift,
+    giftEn,
     addOns[] {
       _key,
       name,
@@ -153,6 +156,7 @@ export const servicePackagesByCategoryQuery = (category: string) => `
     category,
     tier,
     price,
+    originalPrice,
     showPrice,
     pricePrefix,
     pricePrefixEn,
@@ -170,6 +174,8 @@ export const servicePackagesByCategoryQuery = (category: string) => `
     ctaVariant,
     isSpecialVariant,
     variantType,
+    gift,
+    giftEn,
     addOns[] {
       _key,
       name,

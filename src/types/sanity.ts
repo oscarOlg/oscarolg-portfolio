@@ -96,6 +96,8 @@ export interface ServicePackage {
   category: string
   tier?: 'essential' | 'premium' | 'deluxe'
   price: number
+  /** Original / crossed-out price shown before the current price */
+  originalPrice?: number
   /** Set false to hide the price on the services page (e.g., editorial) */
   showPrice?: boolean
   /** Text before the price, e.g., "A partir de" */
@@ -134,6 +136,9 @@ export interface ServicePackage {
   duration?: number | null
   deliverables?: string
   deliverablesEn?: string
+  /** Included gift description (e.g., printed photos, photobook) */
+  gift?: string
+  giftEn?: string
   displayOrder?: number
 }
 
