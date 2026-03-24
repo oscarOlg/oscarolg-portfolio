@@ -48,6 +48,12 @@ export const servicePackageType = defineType({
       validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
+      name: 'originalPrice',
+      title: 'Precio Original / Tachado (MXN)',
+      type: 'number',
+      description: 'Precio anterior que se muestra tachado. Dejar vacío si no hay descuento.',
+    }),
+    defineField({
       name: 'showPrice',
       title: 'Mostrar Precio en la Página de Servicios',
       type: 'boolean',
@@ -200,6 +206,18 @@ export const servicePackageType = defineType({
       name: 'deliverablesEn',
       title: 'Entregables (EN)',
       type: 'string',
+    }),
+    defineField({
+      name: 'gift',
+      title: 'Regalo Incluido (opcional)',
+      type: 'string',
+      description: 'Describe el regalo que incluye el paquete. Ej.: "50 fotografías impresas (4x6") + 2 ampliaciones (8x10")"',
+    }),
+    defineField({
+      name: 'giftEn',
+      title: 'Regalo Incluido - EN (opcional)',
+      type: 'string',
+      description: 'English version of the included gift',
     }),
     defineField({
       name: 'displayOrder',
