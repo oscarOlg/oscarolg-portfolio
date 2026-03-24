@@ -162,7 +162,7 @@ export default function LandingPageClient({
         subtitle={
           lang === "en"
             ? "A clear process for a calm experience and share-ready results."
-            : "Un proceso claro para una experiencia comoda y resultados listos para compartir."
+            : "Proceso claro. Experiencia sin estres. Fotos que veras toda la vida."
         }
         benefits={content.benefits}
       />
@@ -170,7 +170,7 @@ export default function LandingPageClient({
       <section className="w-full px-6 md:px-12 py-20 bg-dominant">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-serif text-3xl md:text-5xl text-secondary text-center mb-10">
-            {lang === "en" ? "Featured gallery" : "Galeria destacada"}
+            {lang === "en" ? "Featured gallery" : "Galeria de trabajos"}
           </h2>
           {galleryImages.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -294,8 +294,8 @@ export default function LandingPageClient({
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="font-serif text-2xl md:text-3xl text-secondary mb-3">
             {lang === "en"
-              ? "Not ready to book yet?"
-              : "Aun no listas para reservar?"}
+              ? "Still deciding?"
+              : "¿Aun no decides?"}
           </h3>
           <p className="font-sans text-gray-700 mb-7 leading-relaxed">
             {lang === "en"

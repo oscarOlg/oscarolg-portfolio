@@ -56,7 +56,7 @@ export default function ServiceLandingHero({
             href="#service-packages"
             className="border border-dominant/70 text-dominant font-sans uppercase tracking-widest text-xs md:text-sm px-8 py-4 hover:bg-dominant hover:text-secondary transition-colors"
           >
-            {lang === "en" ? "See pricing" : "Ver precios"}
+            {lang === "en" ? "See pricing" : "Precios y detalles"}
           </a>
         </div>
       </div>

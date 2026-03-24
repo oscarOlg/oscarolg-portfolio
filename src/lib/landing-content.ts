@@ -37,21 +37,21 @@ export const landingContent: Record<string, BilingualContent> = {
   weddings: {
     es: {
       hero: {
-        headline: "Fotografia de bodas que cuenta tu historia",
-        subheadline: "Cobertura completa en Ciudad Juarez desde $7,990 MXN",
-        cta: "Ver paquetes",
+        headline: "Tu boda, contada con arte",
+        subheadline: "Cobertura artesanal desde $7,990 MXN. Fotos que duraran toda la vida.",
+        cta: "Ver paquetes y reservar",
       },
-      socialProof: "Fotografia editorial con atencion personalizada para cada pareja.",
+      socialProof: "Cada boda merece atencion genuina y fotografia que capture lo que importa.",
       benefits: [
-        { title: "Cobertura completa", description: "Desde preparativos hasta el cierre de la fiesta." },
-        { title: "Edicion profesional", description: "Cada imagen se trabaja con estilo editorial." },
-        { title: "Entrega rapida", description: "Galeria completa en 3 a 4 semanas." },
-        { title: "Galeria digital", description: "Descarga en alta resolucion para toda la familia." },
+        { title: "Momentos completos", description: "Preparativos, ceremonia, fiesta: nada se queda sin contar." },
+        { title: "Imagen limpia", description: "Retoque fino sin perder la naturalidad de cada momento." },
+        { title: "Entregas puntuales", description: "Galeria lista en 3-4 semanas para compartir y imprimir." },
+        { title: "Tuya para siempre", description: "Descargas en alta resolucion para tus necesidades hoy y mañana." },
       ],
       urgency: {
-        headline: "Las fechas se reservan por orden de llegada",
-        description: "Cada mes aceptamos cupo limitado para mantener calidad y seguimiento cercano.",
-        cta: "Agenda una consulta sin costo",
+        headline: "Los meses mas solicitados se agotan rapido",
+        description: "Cada mes confirmamos pocas bodas. Reserva ahora para tu fecha soñada.",
+        cta: "Reservar mi boda",
       },
       faq: [
         { q: "Cuantas fotos se entregan", a: "Normalmente entre 400 y 600 fotos segun el paquete." },
@@ -87,20 +87,20 @@ export const landingContent: Record<string, BilingualContent> = {
   portrait: {
     es: {
       hero: {
-        headline: "Retratos que capturan tu esencia",
-        subheadline: "Sesiones profesionales con direccion y estilo editorial",
-        cta: "Cotizar retrato",
+        headline: "Retrato que te ve",
+        subheadline: "Sesion guiada donde te ves como realmente eres. Ideal para CV, LinkedIn o simple gusto.",
+        cta: "Disponibilidad y precios",
       },
-      socialProof: "Direccion clara para que te veas natural y autentico frente a camara.",
+      socialProof: "Direccion amable para que te sientas comodo y te veas autentico.",
       benefits: [
-        { title: "Direccion durante sesion", description: "Te guio en poses para resultados naturales." },
-        { title: "Edicion cuidada", description: "Retoque limpio manteniendo textura y expresion real." },
-        { title: "Sesion flexible", description: "Interior o exterior segun el estilo que buscas." },
-        { title: "Entrega digital", description: "Galeria lista para redes, CV y uso profesional." },
+        { title: "Te guio todo el proceso", description: "Poses, angulos, expresion: sin que nada sea forzado." },
+        { title: "Resultado limpio", description: "Retoque delicado que mantiene tu naturalidad." },
+        { title: "Tu espacio", description: "Estudio acogedor o exterior donde te sientas libre." },
+        { title: "Listo para usar", description: "Fotos optimizadas para redes, curriculum y mas." },
       ],
       urgency: {
-        headline: "Agenda en la semana que mejor te funcione",
-        description: "Los espacios por tarde y fin de semana se agotan primero.",
+        headline: "Espacios en agenda disponibles",
+        description: "Tardes y fines de semana se llenan rapidamente. Elige tu dia.",
         cta: "Reservar retrato",
       },
       faq: [
@@ -137,21 +137,21 @@ export const landingContent: Record<string, BilingualContent> = {
   couples: {
     es: {
       hero: {
-        headline: "Sesiones de pareja con historia real",
-        subheadline: "Momentos autenticos para guardar toda la vida",
-        cta: "Ver opciones",
+        headline: "Fotos de ustedes, de verdad",
+        subheadline: "Sin poses raras. Solo conexion real, luz hermosa y recuerdos que duran.",
+        cta: "Reservar sesion de pareja",
       },
-      socialProof: "Sesiones guiadas para conectar y disfrutar sin poses forzadas.",
+      socialProof: "Sesiones donde puedes ser tu mismo. Nosotros capturamos lo importante.",
       benefits: [
-        { title: "Direccion natural", description: "Indicaciones simples para expresiones reales." },
-        { title: "Locaciones recomendadas", description: "Te propongo spots con mejor luz y fondo." },
-        { title: "Flujo agil", description: "Sesion dinamica para aprovechar cada minuto." },
-        { title: "Galeria lista para compartir", description: "Entrega optimizada para impresion y redes." },
+        { title: "Fluidez sin forzar", description: "Indicaciones simples para momentos genuinos." },
+        { title: "Locaciones perfectas", description: "Te muestro spots con luz abierta y fondo hermoso." },
+        { title: "Tiempo bien usado", description: "Cada minuto cuenta. Sesion dinamica y tranquila." },
+        { title: "Para compartir y guardar", description: "Fotos listas para imprimir, redes y reliquias familiares." },
       ],
       urgency: {
-        headline: "Aprovecha temporada de luz ideal",
-        description: "Primavera y otono se reservan con mayor anticipacion.",
-        cta: "Separar fecha",
+        headline: "Las mejores luces se reservan primero",
+        description: "Primavera y otono tienen poco espacio. Elige tu temporada.",
+        cta: "Separar mi fecha",
       },
       faq: [
         { q: "Podemos llevar mascota", a: "Si, en locaciones permitidas y con aviso previo." },
@@ -187,21 +187,21 @@ export const landingContent: Record<string, BilingualContent> = {
   maternity: {
     es: {
       hero: {
-        headline: "Maternidad con estilo y sensibilidad",
-        subheadline: "Sesion comoda y guiada para esta etapa unica",
-        cta: "Cotizar maternidad",
+        headline: "La maternidad, hermosa y comoda",
+        subheadline: "Sesion elegante donde te sientes segura y bonita. Recuerdos para siempre.",
+        cta: "Conocer paquetes",
       },
-      socialProof: "Ambiente tranquilo, direccion amable y resultado elegante.",
+      socialProof: "Un espacio tranquilo donde te veras unica. Eso es lo que capturamos.",
       benefits: [
-        { title: "Direccion cuidadosa", description: "Poses favorecedoras y comodas durante la sesion." },
-        { title: "Ritmo tranquilo", description: "Tiempo para pausas y cambios sin prisa." },
-        { title: "Enfoque editorial", description: "Imagenes limpias y emotivas para conservar." },
-        { title: "Opciones de locacion", description: "Estudio, casa o exterior segun tu preferencia." },
+        { title: "Direccion que favorece", description: "Poses comodas que resaltan tu belleza en este momento." },
+        { title: "Sin prisa", description: "Pausas cuando necesites. Cambios de look sin estrés." },
+        { title: "Fotos emocionales", description: "Limpias, delicadas, lindas de guardar y compartir." },
+        { title: "Donde tu quieras", description: "Estudio calido, intimidad de casa o naturaleza afuera." },
       ],
       urgency: {
-        headline: "Ideal entre semana 28 y 34",
-        description: "Recomendamos reservar con anticipacion para elegir fecha ideal.",
-        cta: "Agendar asesoria",
+        headline: "Mejor entre semana 28 y 34",
+        description: "Reserva con tiempo para elegir la fecha y el estilo que imaginas.",
+        cta: "Agendar asesoria gratis",
       },
       faq: [
         { q: "En que semana se recomienda", a: "Generalmente entre semana 28 y 34 del embarazo." },
@@ -237,20 +237,20 @@ export const landingContent: Record<string, BilingualContent> = {
   commercial: {
     es: {
       hero: {
-        headline: "Fotografia comercial para tu marca",
-        subheadline: "Contenido profesional para vender mejor en digital",
+        headline: "Contenido que vende",
+        subheadline: "Fotos profesionales para tus redes, tienda y anuncios. Diseñadas para convertir.",
         cta: "Solicitar propuesta",
       },
-      socialProof: "Produccion visual enfocada en conversion y consistencia de marca.",
+      socialProof: "Produccion visual que alza tus ventas. Consistencia que genera confianza.",
       benefits: [
-        { title: "Enfoque comercial", description: "Imagenes pensadas para redes, web y pauta." },
-        { title: "Planeacion previa", description: "Brief, objetivos y shot list alineados." },
-        { title: "Entrega util", description: "Archivos optimizados por canal y uso." },
-        { title: "Consistencia", description: "Look visual uniforme para toda tu marca." },
+        { title: "Diseñado para vender", description: "Cada foto optimizada para redes, web, pauta publicitaria." },
+        { title: "Plan antes de disparar", description: "Brief claro, objetivos definidos, resultado garantizado." },
+        { title: "Entrega lista para usar", description: "Archivos en los formatos y tamaños que necesitas." },
+        { title: "Marca reconocible", description: "Foto tras foto, tus colores y estilo hablan solos." },
       ],
       urgency: {
-        headline: "Agenda produccion antes de tu siguiente campaña",
-        description: "Los lanzamientos funcionan mejor con contenido listo con tiempo.",
+        headline: "Planifica produccion ahora",
+        description: "Lanzamientos exitosos empiezan con contenido listo. No improvises.",
         cta: "Cotizar proyecto",
       },
       faq: [
@@ -287,21 +287,21 @@ export const landingContent: Record<string, BilingualContent> = {
   editorial: {
     es: {
       hero: {
-        headline: "Fotografia editorial de alto impacto",
-        subheadline: "Direccion creativa para imagenes con identidad",
-        cta: "Ver disponibilidad",
+        headline: "Fotografia que impacta",
+        subheadline: "Producciones de autor con direccion creativa. Imagenes que cuentan historias.",
+        cta: "Iniciar proyecto",
       },
-      socialProof: "Producciones con estilo artistico y ejecucion profesional.",
+      socialProof: "Cada produccion es unica. Arte y tecnica al mas alto nivel.",
       benefits: [
-        { title: "Direccion creativa", description: "Desarrollo visual alineado a concepto." },
-        { title: "Narrativa visual", description: "Secuencias de imagen coherentes y memorables." },
-        { title: "Control tecnico", description: "Luz, color y composicion con precision." },
-        { title: "Entrega para publicacion", description: "Formatos listos para medios y portafolio." },
+        { title: "Creacion desde cero", description: "Concepto visual que refleja tu marca o historia." },
+        { title: "Imagenes coherentes", description: "Secuencias memorables que funcionan como narrativa." },
+        { title: "Tecnica perfecta", description: "Luz, color, composicion: cada detalle cuenta." },
+        { title: "Pulida para publicar", description: "Listas para medios, portafolio, exposiciones." },
       ],
       urgency: {
-        headline: "Reserva fecha para preproduccion",
-        description: "Este tipo de proyecto requiere planeacion de locacion y estilo.",
-        cta: "Iniciar proyecto",
+        headline: "Proyectos requieren tiempo",
+        description: "Planificacion, locacion, produccion: reserva con anticipacion.",
+        cta: "Consulta disponibilidad",
       },
       faq: [
         { q: "Trabajas con agencias", a: "Si, colaboramos con equipos creativos y marcas." },
