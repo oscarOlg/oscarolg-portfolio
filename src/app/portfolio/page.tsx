@@ -3,6 +3,7 @@ import type { PortfolioImage } from "@/types/sanity";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import PortfolioClient from "./components/PortfolioClient";
+import PortfolioTracker from "@/app/components/PortfolioTracker";
 import {
   PORTFOLIO_CATEGORIES,
 } from "./portfolioConfig";
@@ -60,11 +61,14 @@ export default async function PortfolioPage() {
   // Pass to client component for instant client-side filtering
   // Wrapped in Suspense for useSearchParams() dynamic rendering
   return (
-    <Suspense fallback={<PortfolioLoadingFallback />}>
+    <>
+      <PortfolioTracker />
+      <Suspense fallback={<PortfolioLoadingFallback />}>
       <PortfolioClient
         allImages={portfolioData}
         categoryDisplayNames={categoryDisplayNames}
       />
-    </Suspense>
+      </Suspense>
+    </>
   );
 }

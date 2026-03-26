@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import NavbarSpacer from "./components/NavbarSpacer";
 import Footer from "./components/Footer";
 import HtmlLangUpdater from "./components/HtmlLangUpdater";
+import MetaPixel from "./components/MetaPixel";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 // Initialize fonts
@@ -49,6 +50,9 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${playfair.variable} ${lato.variable} font-sans bg-dominant text-secondary antialiased min-h-screen flex flex-col relative`}>
         <LanguageProvider>
+          {/* Meta Pixel Tracking */}
+          <MetaPixel />
+
           {/* Dynamic Navigation */}
           <Navbar />
           <NavbarSpacer />

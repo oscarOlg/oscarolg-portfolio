@@ -1,8 +1,8 @@
-import { SERVICES } from "@/config/services";
+import { getVisibleServices } from "@/config/services";
 
-export const PORTFOLIO_CATEGORIES = SERVICES.map((service) => ({
+export const PORTFOLIO_CATEGORIES = getVisibleServices().map((service) => ({
   key: service.portfolio_category,
   label: service.name,
 }));
 
-export type PortfolioCategoryKey = typeof SERVICES[number]['portfolio_category'];
+export type PortfolioCategoryKey = ReturnType<typeof getVisibleServices>[number]['portfolio_category'];

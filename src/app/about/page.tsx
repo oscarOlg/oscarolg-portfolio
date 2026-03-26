@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAboutContent } from "@/lib/sanity";
 import AboutPageContent from "./components/AboutPageContent";
+import AboutTracker from "@/app/components/AboutTracker";
 
 export const metadata: Metadata = {
   title: 'Acerca de',
@@ -18,7 +19,9 @@ export default async function AboutPage() {
   const about = await getAboutContent();
 
   return (
-    <AboutPageContent
+    <>
+      <AboutTracker />
+      <AboutPageContent
       heading={about?.heading}
       headingEn={about?.headingEn}
       paragraphs={about?.paragraphs}
@@ -27,5 +30,6 @@ export default async function AboutPage() {
       ctaTextEn={about?.ctaTextEn}
       imageUrl={about?.mainImage?.asset?.url ?? null}
     />
+    </>
   );
 }

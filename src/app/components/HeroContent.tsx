@@ -20,10 +20,10 @@ interface Props {
  * Uses mount-time animation (not scroll-triggered) so it plays on initial load.
  */
 export default function HeroContent({
-  heading = "Fotografía que captura",
-  headingEn,
-  headingItalic = "la esencia de tu historia",
-  headingItalicEn,
+  heading = "No eres modelo",
+  headingEn = "You're not a model",
+  headingItalic = "aquí no necesitas serlo",
+  headingItalicEn = "here, you don't need to be",
   cta1Text = "Ver mi portafolio",
   cta1TextEn,
   cta2Text = "Cotizar sesión",

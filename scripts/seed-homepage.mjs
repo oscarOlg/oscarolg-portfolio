@@ -36,8 +36,8 @@ const homepageContent = {
   _id: 'homepageContent-main',
 
   // Hero
-  heroHeading: 'Fotografía que captura',
-  heroHeadingItalic: 'la esencia de tu historia',
+  heroHeading: 'No eres modelo',
+  heroHeadingItalic: 'aquí no necesitas serlo',
   heroCta1Text: 'Ver mi portafolio',
   heroCta2Text: 'Cotizar sesión',
 

@@ -7,11 +7,14 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 import ServicePackageTemplate from "./components/ServicePackageTemplate";
-import { SERVICES, type ServiceKey } from "@/config/services";
+import { SERVICES, getVisibleServices, type ServiceKey } from "@/config/services";
 import { getImageUrl } from "@/lib/sanity";
 import type { ServiceConfig, ServicePackage, PortfolioImage } from "@/types/sanity";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { t } from "@/lib/translations";
+import { usePrimaryPromo } from "@/hooks/usePromotions";
+import { PromoHeaderBanner, PromoCard } from "@/app/components/PromoCard";
+import { UnifiedPortraitPricing } from "./components/UnifiedPortraitPricing";
 
 interface Props {
   configByKey: Record<string, ServiceConfig>;
@@ -53,14 +56,27 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
   const { lang } = useLanguage();
   const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
 
+  const visibleServices = getVisibleServices();
+
   const isValidTab = (tab: string | null): tab is ServiceKey =>
-    SERVICES.some((s) => s.key === tab);
+    visibleServices.some((s) => s.key === tab);
 
   const selectedService: ServiceKey = isValidTab(tabParam) ? tabParam : "weddings";
-  const selectedServiceObj = SERVICES.find((s) => s.key === selectedService);
+  const selectedServiceObj = visibleServices.find((s) => s.key === selectedService);
   const selectedServiceName = selectedServiceObj
     ? (lang === 'en' ? selectedServiceObj.nameEn : selectedServiceObj.name)
     : "Bodas";
+
+  // Get active promotions for this service
+  const portraitPromo = usePrimaryPromo({ 
+    service: 'portraits',
+    displayOn: 'services'
+  });
+  const weddingPromo = usePrimaryPromo({ 
+    service: 'weddings',
+    displayOn: 'services'
+  });
+  const activePromo = selectedService === 'portraits' ? portraitPromo : weddingPromo;
 
   const handleSelectService = (serviceKey: ServiceKey) => {
     const scrollY = window.scrollY;
@@ -91,6 +107,26 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
 
   return (
     <div className="flex flex-col w-full">
+      {/* ── PROMOTIONS HEADER ── */}
+      {activePromo && (
+        <div className="w-full mb-8">
+          <PromoHeaderBanner 
+            promo={activePromo}
+            onClick={() => {
+              // Smooth scroll to booking section
+              document.getElementById('service-card')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
+        </div>
+      )}
+
+      {/* ── PHASE 2 UNIFIED PRICING (Portraits Only) ── */}
+      {selectedService === 'portraits' && (
+        <div className="w-full mb-12">
+          <UnifiedPortraitPricing />
+        </div>
+      )}
+
       {/* ── Header visual ── */}
       <div className="w-full mb-16 flex flex-col items-center text-center">
         <p className="font-sans text-base md:text-lg text-gray-600 max-w-4xl leading-relaxed mb-8 px-4">
@@ -112,7 +148,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
       </div>
 
       {/* ── Service Content Card ── */}
-      <div className="w-full bg-dominant border border-gray-300 shadow-sm">
+      <div className="w-full bg-dominant border border-gray-300 shadow-sm" id="service-card">
         {/* ── Service Selector Dropdown (Inside Card) ── */}
         <div className="flex justify-center px-8 md:px-12 pt-8">
           <div ref={dropdownRef} className="relative w-full md:w-11/12 lg:w-5/6">
@@ -142,7 +178,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 >
-                  {SERVICES.map((service, idx) => {
+                  {visibleServices.map((service, idx) => {
                     const serviceImage = serviceImagesByKey[service.key];
                     const serviceImageUrl = serviceImage ? getImageUrl(serviceImage.image, 80) : null;
 
@@ -154,7 +190,7 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
                           selectedService === service.key
                             ? "bg-secondary text-dominant font-bold shadow-sm"
                             : "text-secondary hover:bg-gray-100 hover:shadow-sm"
-                        } ${idx < SERVICES.length - 1 ? "border-b border-gray-300" : ""}`}
+                        } ${idx < visibleServices.length - 1 ? "border-b border-gray-300" : ""}`}
                         initial={{ opacity: 0, y: -6 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.045, duration: 0.18, ease: "easeOut" }}
@@ -194,6 +230,20 @@ export default function ServicesContent({ configByKey, packagesByService, heroIm
             <ServicePackageTemplate config={config} packages={packages} />
           </motion.div>
         </AnimatePresence>
+
+        {/* ── PROMOTIONAL CARD (Below Packages) ── */}
+        {selectedService === 'portraits' && activePromo && (
+          <div className="px-8 md:px-12 pb-8">
+            <PromoCard 
+              promo={activePromo}
+              onClick={() => {
+                // Can trigger booking form or WhatsApp action here
+                const event = new CustomEvent('openBookingForm');
+                document.dispatchEvent(event);
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

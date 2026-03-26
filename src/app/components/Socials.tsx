@@ -3,10 +3,10 @@ import React from "react";
 import { InstagramIcon, WhatsappIcon, EmailIcon, FacebookIcon } from "./Icons";
 
 const socialsData = [
-    { name: "Email", url: "mailto:oscar.olg.photo@gmail.com", icon: <EmailIcon /> },
-    { name: "Facebook", url: "https://www.facebook.com/profile.php?id=100088045982178", icon: <FacebookIcon /> },
-    { name: "Instagram", url: "https://www.instagram.com/oscar.olg/", icon: <InstagramIcon /> },
-    { name: "WhatsApp", url: "whatsapp://send?phone=+526562932374", icon: <WhatsappIcon /> },
+  { name: "WhatsApp", url: "whatsapp://send?phone=+526562932374", icon: <WhatsappIcon /> },
+  { name: "Instagram", url: "https://www.instagram.com/oscar.olg/", icon: <InstagramIcon /> },
+  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=100088045982178", icon: <FacebookIcon /> },
+  { name: "Email", url: "mailto:oscar.olg.photo@gmail.com", icon: <EmailIcon /> },
 ];
 
 interface SocialsProps {

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { SERVICES } from "@/config/services";
+import { getVisibleServices } from "@/config/services";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { t } from "@/lib/translations";
 import { PORTFOLIO_CATEGORIES, type PortfolioCategoryKey } from "../portfolioConfig";
@@ -33,7 +33,7 @@ export default function PortfolioNav({ activeCategory }: PortfolioNavProps) {
         <Link href="/portfolio" className={linkClass(activeCategory === "all")}>
           {tr(t.portfolio.allLabel)}
         </Link>
-        {SERVICES.map((service) => (
+        {getVisibleServices().map((service) => (
           <Link
             key={service.portfolio_category}
             href={`/portfolio?category=${service.portfolio_category}`}

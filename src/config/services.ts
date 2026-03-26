@@ -17,6 +17,8 @@ export interface ServiceTypeConfig {
   portfolio_category: string;
   /** Display order (lower = earlier) */
   order: number;
+  /** Whether to show this service on the website */
+  visible: boolean;
 }
 
 export const SERVICES: ServiceTypeConfig[] = [
@@ -27,6 +29,7 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'WeddingPackages',
     portfolio_category: 'weddings',
     order: 1,
+    visible: true,
   },
   {
     key: 'portrait',
@@ -35,6 +38,7 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'IndividualPackages',
     portfolio_category: 'portraits',
     order: 2,
+    visible: true,
   },
   {
     key: 'couples',
@@ -43,6 +47,7 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'CouplePackages',
     portfolio_category: 'couples',
     order: 3,
+    visible: false,
   },
   {
     key: 'maternity',
@@ -51,6 +56,7 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'MaternityPackages',
     portfolio_category: 'maternity',
     order: 4,
+    visible: false,
   },
   {
     key: 'commercial',
@@ -59,6 +65,7 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'CommercialPackages',
     portfolio_category: 'commercial',
     order: 5,
+    visible: false,
   },
   {
     key: 'editorial',
@@ -67,12 +74,18 @@ export const SERVICES: ServiceTypeConfig[] = [
     component: 'EditorialPackages',
     portfolio_category: 'editorial',
     order: 6,
+    visible: false,
   },
 ];
 
 // Helper: Get service config by key
 export function getServiceByKey(key: string): ServiceTypeConfig | undefined {
   return SERVICES.find((s) => s.key === key);
+}
+
+// Helper: Get only visible services (for public display)
+export function getVisibleServices(): ServiceTypeConfig[] {
+  return SERVICES.filter((s) => s.visible).sort((a, b) => a.order - b.order);
 }
 
 // Helper: Get service config by portfolio category

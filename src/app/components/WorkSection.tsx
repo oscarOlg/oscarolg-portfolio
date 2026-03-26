@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "./AnimatedSection";
-import { SERVICES } from "@/config/services";
+import { SERVICES, getVisibleServices } from "@/config/services";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface WorkSectionProps {
@@ -47,7 +47,7 @@ export default function WorkSection({
             {displaySubtitle}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {SERVICES.map((service, i) => {
+            {getVisibleServices().map((service, i) => {
               const cover = categoryCover[service.portfolio_category];
               const imgUrl = cover?.imageUrl ?? "";
               const label = lang === 'en' ? service.nameEn : service.name;

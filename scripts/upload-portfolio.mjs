@@ -134,11 +134,10 @@ async function uploadPortfolioImages() {
       console.error('Please add images organized in category folders:')
       console.error('  portfolio-images/')
       console.error('  ├── weddings/')
+      console.error('  ├── portraits/     (all portrait types: individual, couples, maternity, XV, etc.)')
       console.error('  ├── commercial/')
       console.error('  ├── editorial/')
-      console.error('  ├── maternity/')
-      console.error('  ├── couples/')
-      console.error('  └── individual/')
+      console.error('  └── about/')
       process.exit(1)
     }
 

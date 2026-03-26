@@ -3,11 +3,12 @@ import { getServicePackages, getImageUrl, getPortfolioImageBySlug } from "@/lib/
 import ContactPageClient from "./components/ContactPageClient";
 
 export const metadata: Metadata = {
-  title: 'Contacto',
-  description: 'Reserva tu sesión fotográfica con Oscar Sanchez en Ciudad Juárez. Bodas, retratos, parejas y más. Cotiza ahora y recibe respuesta en 24 horas.',
+  title: 'Contacto | Oscar Olg Fotógrafo Juárez',
+  description: 'Contacta a Oscar Olg, fotógrafo en Juárez. Reserva tu sesión de retratos o bodas por WhatsApp. Respondo en 2 horas.',
+  keywords: 'fotógrafo Juárez, contacto fotógrafo, sesiones fotos, bodas Juárez',
   openGraph: {
-    title: 'Contacto | Oscar Sanchez Fotógrafo',
-    description: 'Agenda tu sesión. Bodas, retratos y más en Ciudad Juárez.',
+    title: 'Contacto | Oscar Olg Fotógrafo en Juárez',
+    description: 'Agenda tu sesión fotográfica en Juárez. Envíame un mensaje en WhatsApp y hablaremos de tu sesión perfecta.',
     url: '/contact',
   },
 };

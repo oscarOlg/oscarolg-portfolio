@@ -2,15 +2,16 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
+import ServicesTracker from "@/app/components/ServicesTracker";
 import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getServiceThumbnails } from "@/lib/sanity";
-import { SERVICES } from "@/config/services";
+import { SERVICES, getVisibleServices } from "@/config/services";
 
 export const metadata: Metadata = {
-  title: 'Servicios y Precios',
-  description: 'Paquetes fotográficos en Ciudad Juárez: bodas, retratos, parejas, maternidad, comercial y editorial. Precios claros y transparentes para cada sesión.',
+  title: 'Servicios y Precios | Oscar Olg Fotógrafo Juárez',
+  description: 'Paquetes fotográficos en Ciudad Juárez: bodas, retratos, parejas, maternidad. Precios claros y transparentes para cada sesión.',
   openGraph: {
-    title: 'Servicios y Precios | Oscar Sanchez Fotógrafo',
-    description: 'Paquetes fotográficos en Ciudad Juárez. Bodas, retratos, parejas y más.',
+    title: 'Servicios y Precios | Oscar Olg Fotógrafo',
+    description: 'Paquetes fotográficos. Bodas, retratos, parejas y maternidad en Ciudad Juárez.',
     url: '/services',
   },
 };
@@ -47,17 +48,20 @@ function ServicesLoadingFallback() {
 }
 
 export default async function ServicesPage() {
+  // Get only visible services for display
+  const visibleServices = getVisibleServices();
+
   // All data fetched in a single parallel batch (was: 2 sequential batches of 3+6 queries)
   const [configs, allPackages, heroImage, serviceImagesByKey] = await Promise.all([
     getServiceConfigs(),
     getServicePackages(),
     getPortfolioImageBySlug("weddings-dscf8029"),
-    getServiceThumbnails(SERVICES),
+    getServiceThumbnails(visibleServices),
   ]);
 
-  // Group packages by their service category
+  // Group packages by their service category (only visible services)
   const packagesByService: Record<string, typeof allPackages> = {};
-  SERVICES.forEach((s) => {
+  visibleServices.forEach((s) => {
     packagesByService[s.key] = allPackages.filter(
       (p) => p.category === s.key
     );
@@ -70,6 +74,7 @@ export default async function ServicesPage() {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12">
+      <ServicesTracker />
       <Suspense fallback={<ServicesLoadingFallback />}>
         <ServicesContent
           configByKey={configByKey}

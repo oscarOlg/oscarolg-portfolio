@@ -56,12 +56,12 @@ const done = (f, v) => {
 
 // ── 1. HOMEPAGE ───────────────────────────────────────────────────────────────
 const homepageEn = {
-  heroHeadingEn: 'Photography that captures',
-  heroHeadingItalicEn: 'the essence of your story',
-  heroCta1TextEn: 'View my portfolio',
-  heroCta2TextEn: 'Get a quote',
-  workSectionHeadingEn: 'My Work',
-  workSectionSubtitleEn: 'Explore by session type',
+  heroHeadingEn: "You're not a model",
+  heroHeadingItalicEn: "here, you don't need to be",
+  heroCta1TextEn: "View my portfolio",
+  heroCta2TextEn: "Get a quote",
+  workSectionHeadingEn: "My Work",
+  workSectionSubtitleEn: "Explore by session type",
   workSectionViewMoreTextEn: 'View more →',
   workSectionViewAllTextEn: 'View full portfolio →',
   investmentHeadingEn: 'The peace of mind of being in good hands.',
