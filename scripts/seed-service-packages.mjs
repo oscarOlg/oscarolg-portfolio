@@ -63,8 +63,8 @@ const packages = [
     name: 'Esencial',
     category: 'weddings',
     tier: 'essential',
-    price: 7000,
-    originalPrice: 8500,
+    price: 8500,
+    originalPrice: 9000,
     showPrice: true,
     description: 'Cobertura de 5 horas',
     features: [
@@ -77,6 +77,7 @@ const packages = [
     displayOrder: 2,
     duration: 5,
     deliverables: '50-60 fotos editadas por hora de cobertura',
+    gift: '🎁 GRATIS: Galería digital + 50 fotos impresas (4x6")',
     addOns: [
       { name: 'Colección de Recuerdos (50 fotos 4x6" + 2 ampliaciones 8x10")', price: 1500 },
       { name: 'Herencia Familiar (100 fotos 4x6" + 4 ampliaciones 8x10")', price: 2800 },
@@ -90,8 +91,8 @@ const packages = [
     name: 'Clásico',
     category: 'weddings',
     tier: 'premium',
-    price: 9500,
-    originalPrice: 10500,
+    price: 10500,
+    originalPrice: 11000,
     showPrice: true,
     description: 'Cobertura de 7 horas',
     features: [
@@ -106,7 +107,8 @@ const packages = [
     displayOrder: 3,
     duration: 7,
     deliverables: '50-60 fotos editadas por hora de cobertura',
-    gift: '50 fotografías impresas (4x6") + 2 ampliaciones (8x10")',
+    gift: '🎁 GRATIS: Photobook 10x10 + 100 fotos impresas (4x6")',
+    giftEn: '🎁 FREE: Photobook 10x10 + 100 printed photos (4x6")',
     addOns: [
       { name: 'Colección de Recuerdos (50 fotos 4x6" + 2 ampliaciones 8x10")', price: 1500 },
       { name: 'Herencia Familiar (100 fotos 4x6" + 4 ampliaciones 8x10")', price: 2800 },
@@ -120,8 +122,8 @@ const packages = [
     name: 'Premium',
     category: 'weddings',
     tier: 'deluxe',
-    price: 14500,
-    originalPrice: 16500,
+    price: 12500,
+    originalPrice: 13500,
     showPrice: true,
     description: 'Experiencia completa',
     features: [
@@ -136,7 +138,8 @@ const packages = [
     displayOrder: 4,
     duration: 9,
     deliverables: '50-60 fotos editadas por hora de cobertura',
-    gift: 'Photobook 10x10',
+    gift: '🎁 GRATIS: Photobook 12x12 + Engagement Session completa + 150 fotos impresas',
+    giftEn: '🎁 FREE: Photobook 12x12 + Full Engagement Session + 150 printed photos',
     addOns: [
       { name: 'Colección de Recuerdos (50 fotos 4x6" + 2 ampliaciones 8x10")', price: 1500 },
       { name: 'Herencia Familiar (100 fotos 4x6" + 4 ampliaciones 8x10")', price: 2800 },
@@ -176,7 +179,7 @@ const packages = [
     name: 'Esencial',
     category: 'portrait',
     tier: 'essential',
-    price: 1500,
+    price: 1800,
     showPrice: true,
     description: 'Sesión Express',
     features: [
@@ -188,6 +191,8 @@ const packages = [
     displayOrder: 1,
     duration: 1,
     deliverables: '10 fotos editadas',
+    gift: '🎁 GRATIS: Galería digital + 2 ampliaciones digitales para redes',
+    giftEn: '🎁 FREE: Digital gallery + 2 digital enlargements for social media',
     addOns: [
       { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
@@ -198,7 +203,7 @@ const packages = [
     name: 'Clásico',
     category: 'portrait',
     tier: 'premium',
-    price: 1800,
+    price: 2100,
     showPrice: true,
     description: 'La experiencia completa',
     features: [
@@ -211,6 +216,8 @@ const packages = [
     displayOrder: 2,
     duration: 1,
     deliverables: '20 fotos editadas',
+    gift: '🎁 GRATIS: Impresión 16x20" + Galería digital + Retratos optimizados para LinkedIn',
+    giftEn: '🎁 FREE: 16x20" print + Digital gallery + LinkedIn-optimized portraits',
     addOns: [
       { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
@@ -221,7 +228,7 @@ const packages = [
     name: 'Premium',
     category: 'portrait',
     tier: 'deluxe',
-    price: 2000,
+    price: 2400,
     showPrice: true,
     description: 'Sesión Editorial',
     features: [
@@ -233,6 +240,8 @@ const packages = [
     displayOrder: 3,
     duration: 2,
     deliverables: '30 fotos editadas',
+    gift: '🎁 GRATIS: Portafolio mini + 2 impresiones 16x20" + Session album en PDF',
+    giftEn: '🎁 FREE: Mini portfolio + 2 16x20" prints + Session album in PDF',
     addOns: [
       { name: 'Sesión en Estudio', price: 1200, description: 'Costo de renta del estudio (sesión de 2h)' },
       { name: 'Fotografía extra editada', price: 150, unit: 'c.u.' },
@@ -260,6 +269,8 @@ const packages = [
     displayOrder: 1,
     duration: 1,
     deliverables: '15 fotos editadas',
+    gift: '🎁 GRATIS: Galería digital + 1 impresión 8x10"',
+    giftEn: '🎁 FREE: Digital gallery + 1 8x10" print',
     addOns: [
       { name: 'Sesión en Estudio', price: 600, description: 'Costo de renta del estudio' },
       { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
@@ -285,6 +296,8 @@ const packages = [
     displayOrder: 2,
     duration: 2,
     deliverables: '20 fotos editadas',
+    gift: '🎁 GRATIS: Photobook 8x8 + 2 impresiones 11x14" + Cortesía Save the Date',
+    giftEn: '🎁 FREE: Photobook 8x8 + 2 11x14" prints + Save the Date courtesy',
     addOns: [
       { name: 'Sesión en Estudio', price: 1200, description: 'Costo de renta del estudio (sesión de 2h)' },
       { name: 'Persona o mascota extra', price: 250, unit: 'c.u.' },
@@ -298,6 +311,8 @@ const packages = [
     tier: 'deluxe',
     price: 2500,
     showPrice: true,
+    gift: '🎁 GRATIS: Photobook 10x10 + Album de sesión en vídeo + Sesión pre-boda de cortesía',
+    giftEn: '🎁 FREE: Photobook 10x10 + Video session album + Complimentary pre-wedding session',
     description: 'Memoria Documental',
     features: [
       'Base de 2 personas (+ $250 MXN por integrante extra)',

@@ -35,21 +35,66 @@ function PackageCard({
   const displayDescription = pickLang(lang, pkg.description, pkg.descriptionEn) ?? pkg.description;
   const displayPricePrefix = pickLang(lang, pkg.pricePrefix, pkg.pricePrefixEn);
 
-  const cardClass = isPopular
-    ? "border-2 border-accent p-8 flex flex-col relative shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[360px]"
-    : "border border-gray-200 p-8 flex flex-col hover:border-gray-300 transition-colors duration-300 min-h-[360px]";
+  // Tier differentiation logic
+  const tierName = displayName.toLowerCase();
+  const isEsencial = tierName.includes('esencial') || tierName.includes('essential');
+  const isClassico = tierName.includes('clásico') || tierName.includes('classic');
+  const isPremium = tierName.includes('premium');
+
+  // Tier-specific styling for conversion optimization
+  const getTierClass = () => {
+    if (isPremium) {
+      // Premium: Large, gradient, prominent
+      return 'border-2 border-gray-500 p-8 flex flex-col relative shadow-lg hover:shadow-xl transition-all duration-300 min-h-[420px] scale-105 md:scale-110 lg:scale-105 bg-gradient-to-b from-gray-50 to-white';
+    }
+    if (isClassico) {
+      // Clásico: Standard, highlighted with gold accent
+      return 'border-2 border-accent p-8 flex flex-col relative shadow-md hover:shadow-lg transition-all duration-300 min-h-[380px] scale-100 md:scale-100 lg:scale-100 border-t-4';
+    }
+    // Esencial: Smaller, recessed
+    return 'border border-gray-300 p-8 flex flex-col hover:border-gray-400 transition-all duration-300 min-h-[360px] scale-95 md:scale-95 lg:scale-95 opacity-90 hover:opacity-100';
+  };
+
+  const cardClass = getTierClass();
+
+  // Tier-specific badge messaging
+  const getTierBadge = () => {
+    if (isPopular) return badgeLabel; // Use existing badge if set
+    if (isEsencial) return lang === 'en' ? '💰 Budget-Friendly' : '💰 Presupuesto Amigable';
+    if (isClassico) return lang === 'en' ? '⭐ Most Popular' : '⭐ Más Popular';
+    if (isPremium) return lang === 'en' ? '✨ Best Value' : '✨ Mejor Valor';
+    return badgeLabel;
+  };
 
   return (
     <div className={cardClass}>
-      {isPopular && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-secondary text-[10px] uppercase tracking-widest px-3 py-1 font-bold whitespace-nowrap shadow-sm">
-          {badgeLabel}
+      {(isPopular || isClassico || isPremium || isEsencial) && (
+        <span className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 font-bold whitespace-nowrap shadow-sm text-[10px] uppercase tracking-widest ${
+          isClassico || isPopular
+            ? 'bg-accent text-secondary'
+            : isPremium
+            ? 'bg-gray-600 text-white'
+            : 'bg-gray-300 text-secondary'
+        }`}>
+          {getTierBadge()}
         </span>
       )}
       <h3 className="font-serif text-2xl font-bold mb-3 text-secondary">{displayName}</h3>
       <p className="font-sans text-xs uppercase tracking-widest text-gray-500 mb-6">
         {displayDescription}
       </p>
+      
+      {/* GIFT SECTION: Prominent Display */}
+      {pkg.gift && (
+        <div className="mb-6 p-4 bg-gradient-to-r from-accent/20 to-accent/10 border-2 border-accent/50 rounded-lg">
+          <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-2">
+            {lang === 'en' ? '🎁 Bonus Included' : '🎁 Bonus Incluido'}
+          </p>
+          <p className="font-sans font-semibold text-sm text-secondary leading-tight">
+            {pickLang(lang, pkg.gift, pkg.giftEn)}
+          </p>
+        </div>
+      )}
       {bodyParagraphs ? (
         <div className="flex-grow mb-8">
           <p className="font-sans text-sm text-gray-700 leading-relaxed mb-4">
@@ -74,59 +119,42 @@ function PackageCard({
         )
       )}
       <div className="mt-auto pt-4">
-        {pkg.gift && (
-          <div className="mb-6 p-3 bg-accent/10 border border-accent/30 rounded-sm">
-            <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
-              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
-            </p>
-            <p className="font-sans text-sm text-secondary">
-              {pickLang(lang, pkg.gift, pkg.giftEn)}
-            </p>
-          </div>
-        )}
         {showPrice && (
-          <div className="mb-6 p-4 bg-gray-50 border border-gray-100 rounded-sm">
+          <div className="mb-6 p-4 bg-gradient-to-br from-secondary/5 to-secondary/10 border-2 border-secondary/20 rounded-lg">
             {displayPricePrefix && (
               <p className="font-sans text-xs text-gray-500 mb-2 uppercase tracking-widest font-semibold">
                 {displayPricePrefix}
               </p>
             )}
-            <div className="flex items-baseline gap-3 mb-2">
-              {pkg.originalPrice && pkg.originalPrice > 0 && (
-                <p className="font-serif text-lg text-gray-400 line-through">
+            <div className="flex items-baseline gap-2 mb-1">
+              {pkg.originalPrice && pkg.originalPrice > 0 && pkg.originalPrice > pkg.price && (
+                <p className="font-serif text-sm text-gray-400 line-through">
                   {formatPrice(pkg.originalPrice)} MXN
                 </p>
               )}
-              <p className="font-serif text-3xl font-bold text-secondary">
+              <p className="font-serif text-4xl font-bold text-accent">
                 {formatPrice(pkg.price)}{" "}
-                <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
+                <span className="text-base font-sans text-gray-400 font-normal">MXN</span>
               </p>
             </div>
-            {pkg.originalPrice && pkg.originalPrice > 0 && (
-              <p className="font-sans text-xs text-accent font-semibold">
-                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+            {pkg.originalPrice && pkg.originalPrice > 0 && pkg.originalPrice > pkg.price && (
+              <p className="font-sans text-xs text-accent font-bold">
+                💰 {lang === 'en' ? 'Save' : 'Ahorras'} {formatPrice(pkg.originalPrice - pkg.price)} MXN
               </p>
             )}
           </div>
         )}
-        {isPopular ? (
+        {isClassico || isPopular || isPremium ? (
           <Link
             href="/contact"
             className="block text-center w-full bg-accent text-secondary uppercase tracking-widest text-xs py-4 hover:bg-opacity-95 transition-all duration-200 font-bold shadow-sm hover:shadow-md"
           >
             {ctaText}
           </Link>
-        ) : pkg.ctaVariant === "outline" ? (
-          <Link
-            href="/contact"
-            className="block text-center w-full bg-transparent border-2 border-secondary text-secondary uppercase tracking-widest text-xs py-3 hover:bg-secondary hover:text-dominant transition-all duration-200 font-semibold"
-          >
-            {ctaText}
-          </Link>
         ) : (
           <Link
             href="/contact"
-            className="block text-center w-full bg-secondary text-dominant uppercase tracking-widest text-xs py-4 hover:bg-accent transition-colors duration-200 font-bold shadow-sm hover:shadow-md"
+            className="block text-center w-full bg-transparent border-2 border-secondary text-secondary uppercase tracking-widest text-xs py-3 hover:bg-secondary hover:text-dominant transition-all duration-200 font-semibold"
           >
             {ctaText}
           </Link>
@@ -172,31 +200,31 @@ function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
       </div>
       <div>
         {pkg.gift && (
-          <div className="mb-4 p-2 bg-accent/10 border border-accent/30 rounded-sm">
+          <div className="mb-4 p-3 bg-gradient-to-r from-accent/20 to-accent/10 border-2 border-accent/50 rounded-lg">
             <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
-              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
+              {lang === 'en' ? '🎁 Bonus Included' : '🎁 Bonus Incluido'}
             </p>
-            <p className="font-sans text-xs text-secondary">
+            <p className="font-sans text-xs font-semibold text-secondary">
               {pickLang(lang, pkg.gift, pkg.giftEn)}
             </p>
           </div>
         )}
         {pkg.showPrice !== false && (
-          <div className="mb-4">
+          <div className="mb-4 p-3 bg-gradient-to-br from-secondary/5 to-secondary/10 border-2 border-secondary/20 rounded-lg">
             <div className="flex items-baseline gap-2 mb-1">
               {pkg.originalPrice && pkg.originalPrice > 0 && (
-                <p className="font-serif text-lg text-gray-400 line-through">
+                <p className="font-serif text-sm text-gray-400 line-through">
                   {formatPrice(pkg.originalPrice)} MXN
                 </p>
               )}
-              <p className="font-serif text-3xl font-bold text-secondary">
+              <p className="font-serif text-2xl font-bold text-accent">
                 {formatPrice(pkg.price)}{" "}
-                <span className="text-lg font-sans text-gray-400 font-normal">MXN</span>
+                <span className="text-sm font-sans text-gray-400 font-normal">MXN</span>
               </p>
             </div>
-            {pkg.originalPrice && pkg.originalPrice > 0 && (
-              <p className="font-sans text-xs text-accent font-semibold">
-                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+            {pkg.originalPrice && pkg.originalPrice > 0 && pkg.originalPrice > pkg.price && (
+              <p className="font-sans text-xs text-accent font-bold">
+                💰 {lang === 'en' ? 'Save' : 'Ahorras'} {formatPrice(pkg.originalPrice - pkg.price)} MXN
               </p>
             )}
           </div>
