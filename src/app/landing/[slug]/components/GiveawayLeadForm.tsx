@@ -122,7 +122,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               onChange={handleChange}
               required
               placeholder={content.form.namePlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base focus:outline-none focus:border-secondary transition-colors placeholder:text-xs md:placeholder:text-sm"
             />
           </div>
 
@@ -138,7 +138,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               onChange={handleChange}
               required
               placeholder={content.form.phonePlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base placeholder:text-gray-300 placeholder:text-xs md:placeholder:text-sm focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               onChange={handleChange}
               required
               placeholder={content.form.weddingDateVenuePlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base placeholder:text-gray-300 placeholder:text-xs md:placeholder:text-sm focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -170,7 +170,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               rows={5}
               required
               placeholder={content.form.storyPlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 resize-none placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base resize-none placeholder:text-gray-300 placeholder:text-xs md:placeholder:text-sm focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -186,7 +186,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               onChange={handleChange}
               required
               placeholder={content.form.photographerPlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base placeholder:text-gray-300 placeholder:text-xs md:placeholder:text-sm focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -195,14 +195,14 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
             <label htmlFor="considerOscar" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">
               {content.form.considerOscarLabel}
             </label>
-            <input
+            <textarea
               id="considerOscar"
-              type="text"
               value={formData.considerOscar}
               onChange={handleChange}
               required
+              rows={2}
               placeholder={content.form.considerOscarPlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-base md:text-lg resize-none placeholder:text-gray-300 placeholder:text-sm md:placeholder:text-base focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -218,7 +218,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               onChange={handleChange}
               required
               placeholder={content.form.budgetPlaceholder}
-              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base placeholder:text-gray-300 placeholder:text-xs md:placeholder:text-sm focus:outline-none focus:border-secondary transition-colors\"
             />
           </div>
 
