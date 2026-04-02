@@ -68,7 +68,11 @@ export interface PortfolioImage {
     current: string
   }
   description?: string
+  usageScope?: 'portfolio' | 'services' | 'testimonials' | 'homepage' | 'contact' | 'about' | 'landing' | 'general'
+  usageSection?: string
+  usageTags?: string[]
   category: 'weddings' | 'portraits' | 'couples' | 'commercial' | 'editorial' | 'maternity'
+  sourcePath?: string
   location?: string
   image: SanityImageAsset
   featured: boolean
@@ -246,34 +250,5 @@ export interface ServiceCategory {
 export interface HomepageContent {
   _id: string
   _type: 'homepageContent'
-  heroHeading?: string
-  heroHeadingEn?: string
-  heroHeadingItalic?: string
-  heroHeadingItalicEn?: string
-  heroCta1Text?: string
-  heroCta1TextEn?: string
-  heroCta2Text?: string
-  heroCta2TextEn?: string
-  workSectionHeading?: string
-  workSectionHeadingEn?: string
-  workSectionSubtitle?: string
-  workSectionSubtitleEn?: string
-  workSectionViewMoreText?: string
-  workSectionViewMoreTextEn?: string
-  workSectionViewAllText?: string
-  workSectionViewAllTextEn?: string
-  investmentHeading?: string
-  investmentHeadingEn?: string
-  investmentParagraph1?: string
-  investmentParagraph1En?: string
-  investmentParagraph2?: string
-  investmentParagraph2En?: string
-  investmentCtaText?: string
-  investmentCtaTextEn?: string
-  finalCtaHeading?: string
-  finalCtaHeadingEn?: string
-  finalCtaLocation?: string
-  finalCtaLocationEn?: string
-  finalCtaButtonText?: string
-  finalCtaButtonTextEn?: string
+  heroImages?: PortfolioImage[]
 }

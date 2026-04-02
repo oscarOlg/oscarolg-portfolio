@@ -1,200 +1,233 @@
 // src/app/services/ServicesContent.tsx
 "use client";
 
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
-import ServicePackageTemplate from "./components/ServicePackageTemplate";
-import { SERVICES, type ServiceKey } from "@/config/services";
+import PackagesShowcase from "./components/PackagesShowcase";
 import { getImageUrl } from "@/lib/sanity";
 import type { ServiceConfig, ServicePackage, PortfolioImage } from "@/types/sanity";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { t } from "@/lib/translations";
+import { getSiteLocale } from "@/i18n/locales";
 
 interface Props {
-  configByKey: Record<string, ServiceConfig>;
-  packagesByService: Record<string, ServicePackage[]>;
+  config: ServiceConfig;
+  packages: ServicePackage[];
   heroImage: PortfolioImage | null;
-  serviceImagesByKey: Record<string, PortfolioImage | null>;
+  weddingImages: PortfolioImage[];
+}
+type LocalizedTestimonial = {
+  author: string;
+  text: string;
+  highlight: string;
+  imageTitle?: string;
+  imageAlt: string;
+};
+
+function normalizeTitle(value?: string) {
+  return (value ?? "").trim().toLowerCase();
 }
 
-function ChevronIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <motion.svg
-      width="14"
-      height="8"
-      viewBox="0 0 14 8"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      animate={{ rotate: isOpen ? 180 : 0 }}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
-    >
-      <path
-        d="M1 1L7 7L13 1"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </motion.svg>
-  );
-}
-
-export default function ServicesContent({ configByKey, packagesByService, heroImage, serviceImagesByKey }: Props) {
-  const searchParams = useSearchParams();
-  const tabParam = searchParams.get("tab");
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+export default function ServicesContent({ config, packages, heroImage, weddingImages }: Props) {
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
-
-  const isValidTab = (tab: string | null): tab is ServiceKey =>
-    SERVICES.some((s) => s.key === tab);
-
-  const selectedService: ServiceKey = isValidTab(tabParam) ? tabParam : "weddings";
-  const selectedServiceObj = SERVICES.find((s) => s.key === selectedService);
-  const selectedServiceName = selectedServiceObj
-    ? (lang === 'en' ? selectedServiceObj.nameEn : selectedServiceObj.name)
-    : "Bodas";
-
-  const handleSelectService = (serviceKey: ServiceKey) => {
-    const scrollY = window.scrollY;
-    router.replace(`${pathname}?tab=${serviceKey}`, { scroll: false });
-    requestAnimationFrame(() => {
-      window.scrollTo(0, scrollY);
-    });
-    setIsDropdownOpen(false);
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const config = configByKey[selectedService];
-  const packages = packagesByService[selectedService] ?? [];
+  const locale = getSiteLocale(lang);
+  const services = locale.services as Record<string, unknown>;
   const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1200) : null;
+  const galleryTop = weddingImages.slice(0, 6);
 
-  if (!config) return null;
+  const testimonials = locale.testimonials as LocalizedTestimonial[];
+  const ketzia = testimonials.find((item) => /Ketzia/i.test(item.author));
+  const testimonialImage = ketzia?.imageTitle
+    ? weddingImages.find((img) => normalizeTitle(img.title) === normalizeTitle(ketzia.imageTitle))
+    : null;
+
+  const pricingFaqs =
+    lang === "en"
+      ? [
+          {
+            question: "What if we do not know how to pose? We feel shy in front of the camera.",
+            answer:
+              "This is the most common concern, so do not worry. My approach is not to force awkward poses, but to guide you subtly so interaction feels natural. The Save the Date session works as a relaxed rehearsal to break the ice and help you discover how easy it is to look incredible.",
+          },
+          {
+            question: "We do not want to spend hours taking photos on the wedding day. We want to enjoy the party. How do you handle timing?",
+            answer:
+              "Completely agree. We keep the formal couple session agile so you can return to your event quickly. The rest of the day is documentary coverage: my priority is capturing spontaneous moments, laughter, and real action without you needing to worry about the camera.",
+          },
+          {
+            question: "How long does it take to deliver our photos?",
+            answer:
+              "With Signature Collection, you receive a 30-photo Sneak Peek the next day so you can share immediately. The complete gallery with cinematic editing is delivered in approximately 4 to 6 weeks.",
+          },
+          {
+            question: "Are there hidden costs? What if the party is amazing and we want you to stay longer?",
+            answer:
+              "Zero hidden costs. Transparency is a priority. If the dance floor is on fire and you decide to extend coverage, extra hours are available at $2,000 MXN each. You always control that decision.",
+          },
+          {
+            question: "Do you deliver all raw files, or how does your cinematic style work?",
+            answer:
+              "I do not deliver raw files. I carefully curate the strongest moments and every delivered image includes our cinematic treatment: intentional color and light work that gives your memories a film-like finish.",
+          },
+          {
+            question: "Do you help us choose locations in Ciudad Juarez for our Save the Date session?",
+            answer:
+              "Absolutely. I share great location recommendations in the city and nearby areas, plus a quick guide on color palettes and outfits so everything stays aligned with the editorial style.",
+          },
+          {
+            question: "We love the experience. What is the next step to reserve our date?",
+            answer:
+              "Simple: we schedule a short video call, choose the collection that fits your day, and secure your date with a 30% retainer and digital contract. After that, I take care of the rest.",
+          },
+        ]
+      : [
+          {
+            question: "Que pasa si no sabemos posar? Somos super penosos frente a la camara.",
+            answer:
+              "Es lo mas comun, no se preocupen. Mi enfoque no es forzar poses incomodas, sino guiarlos sutilmente para que interactuen natural. La sesion previa Save the Date funciona como un ensayo relajado para romper el hielo y descubrir lo facil que es salir increibles.",
+          },
+          {
+            question: "No queremos pasarnos horas tomandonos fotos el dia de la boda. Queremos disfrutar la fiesta. Como manejas los tiempos?",
+            answer:
+              "Totalmente de acuerdo. Haremos la sesion formal de pareja de forma agil para que regresen a su evento. El resto del dia hago fotografia documental: mi prioridad es capturar momentos espontaneos, risas y accion real, sin que ustedes esten pendientes de la camara.",
+          },
+          {
+            question: "Cuanto tiempo tardas en entregarnos nuestras fotografias?",
+            answer:
+              "Con Signature reciben un Sneak Peek de 30 fotos al dia siguiente para compartir de inmediato. La galeria completa con edicion cinematografica se entrega en un plazo aproximado de 4 a 6 semanas.",
+          },
+          {
+            question: "Hay costos ocultos? Que pasa si la fiesta esta increible y queremos que te quedes mas tiempo?",
+            answer:
+              "Cero costos ocultos. La transparencia es prioridad. Si el dia de la boda la pista esta a tope y deciden extender cobertura, pueden solicitar horas extra por $2,000 MXN cada una. Ustedes siempre tienen el control de esa decision.",
+          },
+          {
+            question: "Entregas todas las fotos crudas o como funciona el estilo cinematografico?",
+            answer:
+              "No entrego archivos crudos RAW. Hago una curaduria cuidadosa de los mejores momentos y cada fotografia incluye nuestra edicion cinematografica: tratamiento de color e iluminacion que le da acabado de pelicula a sus recuerdos.",
+          },
+          {
+            question: "Tu nos ayudas a decidir lugares en Ciudad Juarez para la sesion previa?",
+            answer:
+              "Claro. Les comparto recomendaciones de locaciones increibles en la ciudad y alrededores, ademas de una guia rapida de colores y outfits para que todo armonice con el estilo fotografico.",
+          },
+          {
+            question: "Nos encanta la experiencia. Cual es el siguiente paso para apartar fecha?",
+            answer:
+              "Es sencillo. Agendamos una videollamada corta, eligen la coleccion ideal para su dia, y apartamos fecha con un anticipo del 30% y contrato digital. Despues de eso, yo me encargo del resto.",
+          },
+        ];
 
   return (
     <div className="flex flex-col w-full">
-      {/* ── Header visual ── */}
-      <div className="w-full mb-16 flex flex-col items-center text-center">
-        <p className="font-sans text-base md:text-lg text-gray-600 max-w-4xl leading-relaxed mb-8 px-4">
-          {tr(t.services.subheading)}
-        </p>
-        <div className="relative w-full h-64 shadow-sm overflow-hidden rounded-none">
-          {heroImageUrl ? (
-            <Image
-              src={heroImageUrl}
-              alt={heroImage?.title || tr(t.services.heroAlt)}
-              fill
-              className="object-cover transition-all duration-700"
-              priority
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-100" />
-          )}
-        </div>
-      </div>
-
-      {/* ── Service Content Card ── */}
-      <div className="w-full bg-dominant border border-gray-300 shadow-sm">
-        {/* ── Service Selector Dropdown (Inside Card) ── */}
-        <div className="flex justify-center px-8 md:px-12 pt-8">
-          <div ref={dropdownRef} className="relative w-full md:w-11/12 lg:w-5/6">
-            <motion.button
-              key={selectedService}
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full flex justify-between items-center px-6 py-4 bg-dominant border-2 border-gray-300 text-secondary font-serif text-lg font-bold hover:border-accent transition-all duration-200 cursor-pointer"
-              initial={{ scale: 0.98, opacity: 0.9 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <span>
-                {selectedServiceName}
-              </span>
-              <div className="flex items-center">
-                <ChevronIcon isOpen={isDropdownOpen} />
-              </div>
-            </motion.button>
-
-            {/* Dropdown Menu with Thumbnails */}
-            <AnimatePresence>
-              {isDropdownOpen && (
-                <motion.div
-                  className="absolute top-full left-0 right-0 mt-1 bg-dominant backdrop-blur-sm border-2 border-gray-300 border-t-0 shadow-lg z-10 rounded-b-sm overflow-hidden"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  {SERVICES.map((service, idx) => {
-                    const serviceImage = serviceImagesByKey[service.key];
-                    const serviceImageUrl = serviceImage ? getImageUrl(serviceImage.image, 80) : null;
-
-                    return (
-                      <motion.button
-                        key={service.key}
-                        onClick={() => handleSelectService(service.key as ServiceKey)}
-                        className={`w-full flex items-center gap-3 text-left px-6 py-3 font-serif text-base transition-all duration-150 cursor-pointer ${
-                          selectedService === service.key
-                            ? "bg-secondary text-dominant font-bold shadow-sm"
-                            : "text-secondary hover:bg-gray-100 hover:shadow-sm"
-                        } ${idx < SERVICES.length - 1 ? "border-b border-gray-300" : ""}`}
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: idx * 0.045, duration: 0.18, ease: "easeOut" }}
-                      >
-                        {serviceImageUrl && (
-                          <div className="relative w-12 h-12 flex-shrink-0 border border-gray-300 overflow-hidden rounded-sm group-hover:shadow-md transition-shadow">
-                            <Image
-                              src={serviceImageUrl}
-                              alt={lang === 'en' ? service.nameEn : service.name}
-                              fill
-                              className="object-cover object-top"
-                            />
-                          </div>
-                        )}
-                        <span className="flex-grow font-medium">
-                          {lang === 'en' ? service.nameEn : service.name}
-                        </span>
-                      </motion.button>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
+      <section className="mb-10 md:mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 h-[22rem] md:h-[30rem] overflow-hidden">
+          <div className="relative col-span-2 row-span-2">
+            {galleryTop[0] ? (
+              <Image src={getImageUrl(galleryTop[0].image, 1200)} alt={galleryTop[0].title || "Wedding story"} fill className="object-cover" priority />
+            ) : (
+              <div className="w-full h-full bg-secondary/15" />
+            )}
           </div>
+          {galleryTop.slice(1, 5).map((img) => (
+            <div key={img._id} className="relative">
+              <Image src={getImageUrl(img.image, 800)} alt={img.title || "Wedding frame"} fill className="object-cover" />
+            </div>
+          ))}
         </div>
+      </section>
 
-        {/* ── Packages Grid ── */}
-        <AnimatePresence mode="sync">
-          <motion.div
-            key={selectedService}
-            className="px-8 md:px-12 pb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <ServicePackageTemplate config={config} packages={packages} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      <section className="mb-14 text-center px-3">
+        <p className="text-xs uppercase tracking-[0.22em] text-gray-500 font-semibold mb-3">
+          {(services.eyebrow as string | undefined) ?? "Inversion para bodas"}
+        </p>
+        <h1 className="font-serif text-4xl md:text-6xl text-secondary leading-tight max-w-4xl mx-auto mb-4">
+          {(services.title as string | undefined) ?? "No es solo un dia, es una vida"}
+        </h1>
+        <p className="font-sans text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          {lang === "en"
+            ? "Your wedding goes by fast. What stays for decades is your visual legacy. This page is designed to guide you clearly from value to action."
+            : "Tu boda pasa rapido. Lo que se queda por decadas es su legado visual. Esta pagina esta disenada para guiarlos con claridad del valor a la accion."}
+        </p>
+      </section>
+
+      <section id="collections" className="w-full mb-12">
+        <PackagesShowcase />
+      </section>
+
+      {ketzia && (
+        <section className="mb-14 border border-gray-200 bg-white overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-[0.75fr_1.25fr]">
+            <div className="relative min-h-[16rem] md:min-h-full">
+              {testimonialImage ? (
+                <Image
+                  src={getImageUrl(testimonialImage.image, 900)}
+                  alt={ketzia.imageAlt}
+                  fill
+                  className="object-cover"
+                />
+              ) : heroImageUrl ? (
+                <Image
+                  src={heroImageUrl}
+                  alt={ketzia.imageAlt}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-secondary/10" />
+              )}
+            </div>
+            <div className="p-6 md:p-10">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-4">
+                {lang === "en" ? "Client Story" : "Prueba Real"}
+              </p>
+              <p className="font-serif text-2xl md:text-3xl text-secondary leading-relaxed mb-5">
+                "{ketzia.highlight}"
+              </p>
+              <p className="font-sans text-gray-700 leading-relaxed mb-6">
+                {ketzia.text}
+              </p>
+              <p className="font-medium text-secondary">{ketzia.author}</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {pricingFaqs.length > 0 && (
+        <section className="mb-12 border border-gray-200 bg-gray-50 px-8 md:px-12 py-10">
+          <h2 className="font-serif text-3xl text-secondary mb-3 text-center">
+            {(services.faqTitle as string | undefined) ?? "Preguntas frecuentes"}
+          </h2>
+          <p className="text-sm text-gray-600 text-center mb-8 max-w-3xl mx-auto">
+            {(services.faqIntro as string | undefined) ?? "Resolvemos dudas comunes antes de reservar."}
+          </p>
+          <div className="max-w-4xl mx-auto space-y-4">
+            {pricingFaqs.map((faq, idx) => (
+              <details key={idx} className="bg-white border border-gray-200 p-4">
+                <summary className="cursor-pointer font-semibold text-secondary">
+                  {faq.question}
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-gray-700">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="bg-secondary text-dominant px-8 py-10 text-center border border-secondary">
+        <h2 className="font-serif text-3xl md:text-4xl mb-4">
+          {(services.finalCtaTitle as string | undefined) ?? "Si su fecha es importante, asegurala hoy"}
+        </h2>
+        <p className="text-sm md:text-base text-gray-300 max-w-3xl mx-auto mb-7">
+          {(services.finalCtaBody as string | undefined) ?? "Trabajo fechas limitadas para mantener calidad y acompanamiento."}
+        </p>
+        <Link
+          href="/contact"
+          className="inline-block bg-accent text-secondary px-8 py-3 uppercase tracking-widest text-xs font-bold hover:bg-accent/90 transition-colors"
+        >
+          {(services.ctaPrimary as string | undefined) ?? "Consultar disponibilidad"}
+        </Link>
+      </section>
     </div>
   );
 }

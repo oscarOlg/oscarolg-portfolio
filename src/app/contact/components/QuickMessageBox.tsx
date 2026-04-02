@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import Socials from "../../components/Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { t } from "@/lib/translations";
@@ -13,6 +14,8 @@ export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
   const [copied, setCopied] = useState(false);
   const { lang } = useLanguage();
   const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+  const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "526562932374").replace(/\D/g, "");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(message);
@@ -37,7 +40,19 @@ export default function QuickMessageBox({ message }: QuickMessageBoxProps) {
         {message}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center gap-6">
+      <div className="flex flex-col sm:flex-row items-center gap-4">
+        <Link
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 bg-secondary text-dominant uppercase tracking-widest text-xs font-semibold py-4 px-8 hover:bg-secondary/90 transition-colors w-full sm:w-auto"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          {tr(t.contact.openWhatsappButton)}
+        </Link>
+
         <button
           onClick={handleCopy}
           className="flex items-center justify-center gap-2 bg-accent text-secondary uppercase tracking-widest text-xs font-semibold py-4 px-8 hover:bg-opacity-80 transition-colors w-full sm:w-auto"

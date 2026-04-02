@@ -28,6 +28,38 @@ export const portfolioImageType = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'usageScope',
+      title: 'Usage Scope',
+      type: 'string',
+      description: 'Where this image is intended to be used.',
+      options: {
+        list: [
+          {title: 'Portfolio Gallery', value: 'portfolio'},
+          {title: 'Services Page', value: 'services'},
+          {title: 'Testimonials', value: 'testimonials'},
+          {title: 'Homepage', value: 'homepage'},
+          {title: 'Contact Page', value: 'contact'},
+          {title: 'About Page', value: 'about'},
+          {title: 'Landing Page', value: 'landing'},
+          {title: 'General / Reusable', value: 'general'},
+        ],
+      },
+      initialValue: 'portfolio',
+    }),
+    defineField({
+      name: 'usageSection',
+      title: 'Usage Section',
+      type: 'string',
+      description: 'Optional fine-grained section identifier (e.g., services_featured_package, homepage_hero).',
+    }),
+    defineField({
+      name: 'usageTags',
+      title: 'Usage Tags',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Optional tags to group and query images by section intent.',
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
@@ -43,7 +75,21 @@ export const portfolioImageType = defineType({
       options: {
         list: getSanityPortfolioCategoryOptions(),
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          const usageScope = (context.document as {usageScope?: string} | undefined)?.usageScope
+          if (!usageScope || usageScope === 'portfolio') {
+            return value ? true : 'Category is required for portfolio gallery images.'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'sourcePath',
+      title: 'Source Path',
+      type: 'string',
+      description: 'Original local path used during scripted upload.',
+      readOnly: true,
     }),
     defineField({
       name: 'location',
@@ -88,11 +134,12 @@ export const portfolioImageType = defineType({
       title: 'title',
       media: 'image',
       category: 'category',
+      usageScope: 'usageScope',
     },
     prepare(selection) {
       return {
         title: selection.title,
-        subtitle: selection.category,
+        subtitle: selection.category || selection.usageScope || 'general',
         media: selection.media,
       }
     },

@@ -9,6 +9,8 @@ import NavbarSpacer from "./components/NavbarSpacer";
 import Footer from "./components/Footer";
 import HtmlLangUpdater from "./components/HtmlLangUpdater";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { LocalBusinessSchema, CreatorSchema } from "./components/SchemaMarkup";
+import { TestimonialsSchema } from "./components/TestimonialsSchema";
 
 // Initialize fonts
 const playfair = Playfair_Display({ subsets: ["latin"], variable: '--font-playfair', display: 'optional' });
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     template: '%s | Oscar Sanchez Fotógrafo',
     default: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
   },
-  description: 'Fotógrafo profesional en Ciudad Juárez. Especializado en bodas, retratos, parejas y maternidad. Capturando momentos que merecen perdurar.',
+  description: 'Fotógrafo de bodas en Ciudad Juárez con enfoque editorial. Cobertura auténtica para historias que merecen perdurar.',
   openGraph: {
     siteName: 'Oscar Sanchez Fotógrafo',
     locale: 'es_MX',
@@ -47,6 +49,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <LocalBusinessSchema />
+        <CreatorSchema />
+        <TestimonialsSchema lang="es" />
+      </head>
       <body className={`${playfair.variable} ${lato.variable} font-sans bg-dominant text-secondary antialiased min-h-screen flex flex-col relative`}>
         <LanguageProvider>
           {/* Dynamic Navigation */}

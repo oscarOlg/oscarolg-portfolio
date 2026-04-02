@@ -3,11 +3,11 @@ import { getAboutContent } from "@/lib/sanity";
 import AboutPageContent from "./components/AboutPageContent";
 
 export const metadata: Metadata = {
-  title: 'Acerca de',
-  description: 'Conoce a Oscar Sanchez, fotógrafo en Ciudad Juárez especializado en bodas, retratos y parejas. Su promesa: confianza y tranquilidad absoluta durante todo el proceso.',
+  title: 'Acerca de | Fotógrafo de Bodas en Ciudad Juárez',
+  description: 'Fotógrafo de bodas en Ciudad Juárez con enfoque editorial. Conoce el proceso detrás de cada cobertura pensado para que disfrutes tu boda sin estrés.',
   openGraph: {
-    title: 'Acerca de | Oscar Sanchez Fotógrafo',
-    description: 'Fotógrafo radicado en Ciudad Juárez. Documentando momentos que merecen perdurar.',
+    title: 'Acerca de | Fotógrafo de Bodas en Ciudad Juárez',
+    description: 'Cobertura editorial de bodas en Ciudad Juárez para parejas que quieren disfrutar su día y recordarlo con estilo.',
     url: '/about',
   },
 };
@@ -19,12 +19,6 @@ export default async function AboutPage() {
 
   return (
     <AboutPageContent
-      heading={about?.heading}
-      headingEn={about?.headingEn}
-      paragraphs={about?.paragraphs}
-      paragraphsEn={about?.paragraphsEn}
-      ctaText={about?.ctaText}
-      ctaTextEn={about?.ctaTextEn}
       imageUrl={about?.mainImage?.asset?.url ?? null}
     />
   );

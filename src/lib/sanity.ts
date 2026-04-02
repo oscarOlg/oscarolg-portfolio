@@ -25,7 +25,11 @@ export const portfolioImagesQuery = `
     title,
     slug,
     description,
+    usageScope,
+    usageSection,
+    usageTags,
     category,
+    sourcePath,
     location,
     featured,
     image {
@@ -54,7 +58,45 @@ export const portfolioImagesByCategoryQuery = (category: string) => `
     title,
     slug,
     description,
+    usageScope,
+    usageSection,
+    usageTags,
     category,
+    sourcePath,
+    location,
+    featured,
+    image {
+      asset-> {
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      hotspot,
+    },
+    photographyDetails,
+    displayOrder,
+    publishedAt
+  }
+`
+
+export const portfolioImagesByUsageQuery = `
+  *[_type == "portfolioImage" && usageScope == $usageScope && (!defined($usageSection) || usageSection == $usageSection)]
+    | order(displayOrder, publishedAt desc) {
+    _id,
+    title,
+    slug,
+    description,
+    usageScope,
+    usageSection,
+    usageTags,
+    category,
+    sourcePath,
     location,
     featured,
     image {
@@ -83,7 +125,11 @@ export const featuredPortfolioImagesQuery = `
     title,
     slug,
     description,
+    usageScope,
+    usageSection,
+    usageTags,
     category,
+    sourcePath,
     location,
     image {
       asset-> {
@@ -347,36 +393,24 @@ export const aboutContentQuery = `
 
 export const homepageContentQuery = `
   *[_type == "homepageContent"][0] {
-    heroHeading,
-    heroHeadingEn,
-    heroHeadingItalic,
-    heroHeadingItalicEn,
-    heroCta1Text,
-    heroCta1TextEn,
-    heroCta2Text,
-    heroCta2TextEn,
-    workSectionHeading,
-    workSectionHeadingEn,
-    workSectionSubtitle,
-    workSectionSubtitleEn,
-    workSectionViewMoreText,
-    workSectionViewMoreTextEn,
-    workSectionViewAllText,
-    workSectionViewAllTextEn,
-    investmentHeading,
-    investmentHeadingEn,
-    investmentParagraph1,
-    investmentParagraph1En,
-    investmentParagraph2,
-    investmentParagraph2En,
-    investmentCtaText,
-    investmentCtaTextEn,
-    finalCtaHeading,
-    finalCtaHeadingEn,
-    finalCtaLocation,
-    finalCtaLocationEn,
-    finalCtaButtonText,
-    finalCtaButtonTextEn
+    heroImages[]-> {
+      _id,
+      title,
+      image {
+        asset-> {
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        },
+        hotspot,
+      }
+    }
   }
 `
 
@@ -485,6 +519,26 @@ export async function getPortfolioImagesByCategory(category: string): Promise<Po
     return images || []
   } catch (error) {
     console.error(`Error fetching portfolio images for category ${category}:`, error)
+    return []
+  }
+}
+
+/**
+ * Fetch portfolio images by usage scope and optional section.
+ * Useful for page-specific sections such as campaign landing pages.
+ */
+export async function getPortfolioImagesByUsage(
+  usageScope: string,
+  usageSection?: string
+): Promise<PortfolioImage[]> {
+  try {
+    const images = await client.fetch<PortfolioImage[]>(portfolioImagesByUsageQuery, {
+      usageScope,
+      usageSection: usageSection ?? null,
+    })
+    return images || []
+  } catch (error) {
+    console.error(`Error fetching portfolio images for usage ${usageScope}/${usageSection ?? 'all'}:`, error)
     return []
   }
 }

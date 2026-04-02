@@ -96,19 +96,18 @@ describe('Navbar', () => {
   });
 
   it('marks the active link when pathname matches', () => {
-    mockUsePathname.mockReturnValue('/portfolio');
+    mockUsePathname.mockReturnValue('/services');
     render(React.createElement(Navbar));
-    // The active link gets text-accent class; find the desktop <a> for /portfolio
-    const portfolioLinks = screen.getAllByRole('link', { name: 'Portafolio' });
+    const servicesLinks = screen.getAllByRole('link', { name: 'Inversión' });
     // At least one of them should carry the active class
-    const activeLink = portfolioLinks.find((el) =>
+    const activeLink = servicesLinks.find((el) =>
       el.className.includes('text-accent')
     );
     expect(activeLink).toBeDefined();
   });
 
   it('does not mark a non-matching link as active', () => {
-    mockUsePathname.mockReturnValue('/portfolio');
+    mockUsePathname.mockReturnValue('/services');
     render(React.createElement(Navbar));
     const contactLinks = screen.getAllByRole('link', { name: 'Contacto' });
     // None of the Contacto links should have the active accent class

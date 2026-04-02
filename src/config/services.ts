@@ -28,46 +28,6 @@ export const SERVICES: ServiceTypeConfig[] = [
     portfolio_category: 'weddings',
     order: 1,
   },
-  {
-    key: 'portrait',
-    name: 'Retratos',
-    nameEn: 'Portraits',
-    component: 'IndividualPackages',
-    portfolio_category: 'portraits',
-    order: 2,
-  },
-  {
-    key: 'couples',
-    name: 'Parejas y Grupales',
-    nameEn: 'Couples & Groups',
-    component: 'CouplePackages',
-    portfolio_category: 'couples',
-    order: 3,
-  },
-  {
-    key: 'maternity',
-    name: 'Maternidad',
-    nameEn: 'Maternity',
-    component: 'MaternityPackages',
-    portfolio_category: 'maternity',
-    order: 4,
-  },
-  {
-    key: 'commercial',
-    name: 'Comercial',
-    nameEn: 'Commercial',
-    component: 'CommercialPackages',
-    portfolio_category: 'commercial',
-    order: 5,
-  },
-  {
-    key: 'editorial',
-    name: 'Editorial',
-    nameEn: 'Editorial',
-    component: 'EditorialPackages',
-    portfolio_category: 'editorial',
-    order: 6,
-  },
 ];
 
 // Helper: Get service config by key

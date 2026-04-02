@@ -32,8 +32,7 @@ export default function PortfolioLightbox({
 
   return (
     <>
-      {/* Pure CSS Masonry Grid */}
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 w-full space-y-6">
+      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1 md:gap-2.5 w-full space-y-2 md:space-y-2.5">
         {images.length > 0 ? (
           images.map((item, index) => {
             const imageUrl = getImageUrl(item.image)
@@ -48,13 +47,13 @@ export default function PortfolioLightbox({
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: Math.min(index * 0.025, 0.25), ease: [0.22, 1, 0.36, 1] }}
-                className="break-inside-avoid mb-6"
+                className="break-inside-avoid mb-2 md:mb-2.5"
               >
                 <motion.button
                   onClick={() => setLightboxIndex(index)}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="relative group overflow-hidden bg-gray-100 cursor-pointer w-full text-left border-0 p-0 outline-none hover:outline-none shadow-sm hover:shadow-md"
+                  whileHover={{ y: -0.5 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="relative group overflow-hidden cursor-pointer w-full text-left border-0 p-0 outline-none hover:outline-none"
                 >
                   <div
                     className="relative w-full overflow-hidden"
@@ -69,7 +68,7 @@ export default function PortfolioLightbox({
                         alt={displayCategory}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className={`object-cover transition-all duration-700 ease-out group-hover:scale-[1.02] ${
+                        className={`object-cover transition-all duration-700 ease-out group-hover:scale-[1.005] ${
                           isLoaded ? 'opacity-100' : 'opacity-0'
                         }`}
                         priority={item.featured}
@@ -77,6 +76,8 @@ export default function PortfolioLightbox({
                         onLoad={() => handleImageLoad(item._id)}
                       />
                     )}
+
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-colors duration-300" />
                   </div>
                 </motion.button>
               </motion.div>
@@ -89,6 +90,7 @@ export default function PortfolioLightbox({
             </p>
           </div>
         )}
+
       </div>
 
       {/* Lightbox Modal */}

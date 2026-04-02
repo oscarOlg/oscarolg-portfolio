@@ -2,39 +2,26 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteLocale } from "@/i18n/locales";
 
 interface Props {
   leftImageUrl?: string;
   rightImageUrl?: string;
-  heading?: string;
-  headingEn?: string;
-  paragraph1?: string;
-  paragraph1En?: string;
-  paragraph2?: string;
-  paragraph2En?: string;
-  ctaText?: string;
-  ctaTextEn?: string;
 }
 
 export default function InvestmentSection({
   leftImageUrl,
   rightImageUrl,
-  heading = "La tranquilidad de estar en buenas manos.",
-  headingEn,
-  paragraph1 = "Mi objetivo es transformar instantes efímeros en recuerdos tangibles. Te ofrezco calidad estética, calidez humana y tranquilidad absoluta para documentar los capítulos más importantes de tu vida.",
-  paragraph1En,
-  paragraph2 = "Sé que planear un evento requiere tiempo y dedicación. Por eso, mi enfoque es brindarte la confianza de que tu historia será capturada con cuidado y profesionalismo. Encuentra opciones claras y diseñadas para adaptarse a tu visión, permitiéndote enfocarte únicamente en disfrutar.",
-  paragraph2En,
-  ctaText = "Conocer paquetes y precios",
-  ctaTextEn,
 }: Props) {
   const { lang } = useLanguage();
+  const locale = getSiteLocale(lang);
+  const investment = locale.homepage.investment;
 
-  const displayHeading = pickLang(lang, heading, headingEn) ?? heading;
-  const displayP1 = pickLang(lang, paragraph1, paragraph1En) ?? paragraph1;
-  const displayP2 = pickLang(lang, paragraph2, paragraph2En) ?? paragraph2;
-  const displayCta = pickLang(lang, ctaText, ctaTextEn) ?? ctaText;
+  const displayHeading = investment.heading;
+  const displayP1 = investment.paragraph1;
+  const displayP2 = investment.paragraph2;
+  const displayCta = investment.cta;
 
   return (
     <section className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-dominant">

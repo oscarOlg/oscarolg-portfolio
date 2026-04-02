@@ -19,13 +19,16 @@
     "seed:serviceconfig": "node scripts/seed-service-config.mjs",
     "seed:services": "npm run seed:serviceconfig && npm run seed:packages",
     "upload-portfolio": "node scripts/upload-portfolio.mjs",
+    "archive:nonwedding": "node scripts/archive-non-wedding-content.mjs",
+    "archive:nonwedding:apply": "node scripts/archive-non-wedding-content.mjs --apply",
     "sync-portfolio-category": "node scripts/sync-portfolio-category.mjs",
     "cleanup-duplicates": "node scripts/cleanup-duplicates.mjs",
     "seed:about": "node scripts/seed-about.mjs",
     "upload:about-image": "node scripts/upload-about-image.mjs",
     "seed:homepage": "node scripts/seed-homepage.mjs",
     "translate:en": "node scripts/translate-en-fields.mjs",
-    "patch:en": "node scripts/patch-en-fields.mjs"
+    "patch:en": "node scripts/patch-en-fields.mjs",
+    "upload:imagery": "node scripts/upload-imagery.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

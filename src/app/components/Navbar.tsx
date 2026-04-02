@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { t } from "@/lib/translations";
+import { getSiteLocale } from "@/i18n/locales";
 
 function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
   return (
@@ -44,8 +44,11 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
   const { lang, setLang } = useLanguage();
+  const locale = getSiteLocale(lang);
   const headerRef = useRef<HTMLElement>(null);
+  const isHomepage = pathname === "/";
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -58,20 +61,40 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  const tr = (obj: { es: string; en: string }) => (lang === "en" ? obj.en : obj.es);
+  useEffect(() => {
+    if (!isHomepage) {
+      setIsAtTop(false);
+      return;
+    }
+
+    const handleScroll = () => setIsAtTop(window.scrollY < 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomepage]);
 
   const navLinks = [
-    { href: "/portfolio", label: tr(t.nav.portfolio) },
-    { href: "/services",  label: tr(t.nav.services) },
-    { href: "/about",     label: tr(t.nav.about) },
-    { href: "/contact",   label: tr(t.nav.contact) },
+    { href: "/portfolio", label: locale.nav.portfolio },
+    { href: "/services",  label: locale.nav.services },
+    { href: "/about",     label: locale.nav.about },
+    { href: "/contact",   label: locale.nav.contact },
   ];
 
   const isActive = (href: string) =>
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
+  const useTransparentStyle = isHomepage && isAtTop && !isMobileMenuOpen;
+
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 w-full z-50 bg-secondary/90 backdrop-blur-md text-dominant border-b border-white/10 shadow-md">
+    <header
+      ref={headerRef}
+      className={`fixed top-0 left-0 w-full z-50 text-dominant border-b transition-all duration-300 ${
+        useTransparentStyle
+          ? "bg-transparent border-transparent shadow-none backdrop-blur-0"
+          : "bg-secondary/90 backdrop-blur-md border-white/10 shadow-md"
+      }`}
+    >
       {/* ── Main bar ── */}
       <div className="h-16 px-6 lg:px-12 flex items-center justify-between lg:grid lg:grid-cols-[1fr_auto_1fr] max-w-7xl mx-auto w-full">
 
@@ -86,7 +109,7 @@ export default function Navbar() {
         </Link>
 
         {/* CENTER — Nav links (desktop only) */}
-        <nav className="hidden lg:flex items-center gap-8" aria-label={lang === "en" ? "Main navigation" : "Navegación principal"}>
+        <nav className="hidden lg:flex items-center gap-8" aria-label={locale.nav.mainAria}>
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
