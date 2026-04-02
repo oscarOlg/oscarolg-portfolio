@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
+import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImagesByUsage } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: 'Inversión | Fotógrafo de Bodas en Ciudad Juárez',
@@ -16,11 +16,6 @@ export const metadata: Metadata = {
 
 // Revalidate every 60 seconds (ISR with fresh Sanity data)
 export const revalidate = 60;
-
-const PACKAGE_IMAGE_SLUG_CANDIDATES: Record<string, string[]> = {
-  clasica: ["weddings-dscf8029", "weddings-dscf0232"],
-  save_the_date: ["weddings-p-e-8ca09067dscf3244", "weddings-dscf7956"],
-};
 
 function ServicesLoadingFallback() {
   return (
@@ -51,29 +46,41 @@ function ServicesLoadingFallback() {
 }
 
 export default async function ServicesPage() {
-  const [weddingConfig, weddingPackages, heroImage, weddingImages] = await Promise.all([
+  const [weddingConfig, weddingPackages, serviceImages] = await Promise.all([
     getServiceConfigByKey("weddings"),
     getServicePackagesByCategory("weddings"),
-    getPortfolioImageBySlug("weddings-dscf8029"),
-    getPortfolioImagesByCategory("weddings"),
+    getPortfolioImagesByUsage("services"),
   ]);
 
   if (!weddingConfig) {
     return null;
   }
 
-  const findBySlugCandidates = (candidates: string[]) => {
-    const match = weddingImages.find((img) => candidates.includes(img.slug?.current || ""));
-    return match ? getImageUrl(match.image, 1200) : "";
-  };
+  const curatedTopImages = serviceImages.filter((img) => img.usageSection === "curated-top");
+  const testimonialProofImages = serviceImages.filter((img) => img.usageSection === "testimonial-proof");
+  const featuredPackageImages = serviceImages.filter((img) => img.usageSection === "featured-package");
+  const saveTheDateImages = serviceImages.filter((img) => img.usageSection === "save-the-date");
+  const faqImages = serviceImages.filter((img) => img.usageSection === "faq");
+  const ctaImages = serviceImages.filter((img) => img.usageSection === "cta");
+
+  const orderedServiceImages = [
+    ...curatedTopImages,
+    ...testimonialProofImages,
+    ...featuredPackageImages,
+    ...saveTheDateImages,
+    ...faqImages,
+    ...ctaImages,
+  ].filter((item, index, array) => array.findIndex((candidate) => candidate._id === item._id) === index);
+
+  const heroImage = orderedServiceImages[0] ?? null;
 
   const packageImageOverrides: Record<string, string> = {
-    clasica:
-      findBySlugCandidates(PACKAGE_IMAGE_SLUG_CANDIDATES.clasica) ||
-      (weddingImages[0] ? getImageUrl(weddingImages[0].image, 1200) : ""),
-    save_the_date:
-      findBySlugCandidates(PACKAGE_IMAGE_SLUG_CANDIDATES.save_the_date) ||
-      (weddingImages[1] ? getImageUrl(weddingImages[1].image, 1200) : weddingImages[0] ? getImageUrl(weddingImages[0].image, 1200) : ""),
+    clasica: featuredPackageImages[0]
+      ? getImageUrl(featuredPackageImages[0].image, 1200)
+      : "",
+    save_the_date: saveTheDateImages[0]
+      ? getImageUrl(saveTheDateImages[0].image, 1200)
+      : "",
   };
 
   return (
@@ -83,7 +90,7 @@ export default async function ServicesPage() {
           config={weddingConfig}
           packages={weddingPackages}
           heroImage={heroImage}
-          weddingImages={weddingImages}
+          weddingImages={orderedServiceImages}
           packageImageOverrides={packageImageOverrides}
         />
       </Suspense>

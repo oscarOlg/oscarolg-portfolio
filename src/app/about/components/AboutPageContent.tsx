@@ -27,13 +27,17 @@ export default function AboutPageContent({
 
         {/* Left Column: Profile Image */}
         <div className="relative w-full aspect-[4/5] shadow-sm">
-          <Image
-            src={imageUrl ?? "https://images.unsplash.com/photo-1618077360395-f3068be8e001?q=80&w=1980&auto=format&fit=crop"}
-            alt={about.imageAlt}
-            fill
-            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-            priority
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={about.imageAlt}
+              fill
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              priority
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/10" />
+          )}
           {/* Subtle accent border framing the image */}
           <div className="absolute -inset-4 border border-accent/50 -z-10 hidden md:block"></div>
         </div>

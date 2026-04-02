@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getPortfolioImageBySlug, getPortfolioImagesByCategory, getImageUrl, getHomepageContent } from "@/lib/sanity";
+import { getImageUrl, getPortfolioImagesByUsage } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import InvestmentSection from "./components/InvestmentSection";
 import HeroContent from "./components/HeroContent";
@@ -19,76 +19,31 @@ export const metadata: Metadata = {
   },
 };
 
-const HOME_IMAGE_SLUGS = {
-  investmentLeft: "weddings-dscf1937",
-  investmentRight: "weddings-dscf1937",
-} as const;
-
-// Optional: set exact Sanity image titles to control homepage order/content.
-// If a title does not match, fallback images are used automatically.
-const HOME_HERO_IMAGE_TITLES: string[] = [
-  "Weddings - DSCF0128",
-  "Weddings - DSCF7956",
-  "Weddings - P&E_8CA09067DSCF3244",
-  "Weddings - DSCF2556",
-  "Weddings - DSCF1958",
-  "Weddings - DSCF8204"
-];
-
-function normalizeTitle(value: string) {
-  return value.trim().toLowerCase();
-}
-
-function selectImagesByTitle(
-  images: PortfolioImage[],
-  preferredTitles: string[],
-  fallbackCount: number,
-) {
-  if (preferredTitles.length === 0) {
-    return images.slice(0, fallbackCount);
-  }
-
-  const byTitle = new Map(images.map((img) => [normalizeTitle(img.title || ''), img]));
-  const selected = preferredTitles
-    .map((title) => byTitle.get(normalizeTitle(title)))
-    .filter((img): img is PortfolioImage => Boolean(img));
-
-  const unique = Array.from(new Map(selected.map((img) => [img._id, img])).values());
-  return unique.length > 0 ? unique.slice(0, fallbackCount) : images.slice(0, fallbackCount);
-}
-
 export const revalidate = 60;
 
 export default async function Home() {
-  const [allImages, pinnedInvestmentLeft, pinnedInvestmentRight, homepageContent] = await Promise.all([
-    getPortfolioImagesByCategory('weddings'),
-    getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentLeft),
-    getPortfolioImageBySlug(HOME_IMAGE_SLUGS.investmentRight),
-    getHomepageContent(),
-  ]);
+  const homepageImages: PortfolioImage[] = await getPortfolioImagesByUsage('homepage');
+  const homepageImages2: PortfolioImage[] = await getPortfolioImagesByUsage('Homepage');
+  
+  const homeCarouselImages = homepageImages.filter((img) => img.usageSection === 'carousel').slice(0, 6);
+  const homeGridImages = homepageImages.filter((img) => img.usageSection === 'grid').slice(0, 6);
+  const homeTestimonialImages = homepageImages.filter((img) => img.usageSection === 'testimonial').slice(0, 1);
+  const homeInvestmentImages = homepageImages.filter((img) => img.usageSection === 'investment').slice(0, 2);
 
-  const cmsHeroImages = (homepageContent?.heroImages ?? []).filter((img) => img?.image?.asset?.url);
-  const selectedHeroImages =
-    cmsHeroImages.length > 0
-      ? cmsHeroImages.slice(0, 8)
-      : selectImagesByTitle(allImages, HOME_HERO_IMAGE_TITLES, 8);
-
-  const weddingGallery = allImages.map((img: PortfolioImage) => ({
+  const weddingGallery = homeGridImages.map((img: PortfolioImage) => ({
     imageUrl: getImageUrl(img.image, 900),
     alt: img.title || 'Fotografia de boda',
   }));
 
-  const heroSlides = selectedHeroImages
+  const heroSlides = homeCarouselImages
     .map((img) => ({
       src: getImageUrl(img.image, 1800),
       alt: img.title || 'Wedding photography by Oscar Olg Photography',
     }));
 
-  const fallbackInvestLeft = allImages[0] ?? null;
-  const fallbackInvestRight = allImages[1] ?? allImages[0] ?? null;
-
-  const investLeft = pinnedInvestmentLeft ?? fallbackInvestLeft;
-  const investRight = pinnedInvestmentRight ?? fallbackInvestRight;
+  const testimonialImages = homeTestimonialImages;
+  const investLeft = homeInvestmentImages[0] ?? null;
+  const investRight = homeInvestmentImages[1] ?? null;
 
   return (
     <div className="flex flex-col w-full">
@@ -106,7 +61,7 @@ export default async function Home() {
       />
 
       {/* ── 2.5 CLIENT TESTIMONIALS ── */}
-      <TestimonialsSection weddingImages={allImages} />
+      <TestimonialsSection weddingImages={testimonialImages} />
 
       {/* ── 3. INVESTMENT / TRUST SECTION ── */}
       <AnimatedSection>

@@ -38,8 +38,8 @@ export default function PortfolioLightbox({
             const imageUrl = getImageUrl(item.image)
             const displayCategory = categoryDisplayNames[item.category] || item.category
             const isLoaded = loadedImages.has(item._id)
-            const dimensions = item.image.asset?.metadata?.dimensions
-            const aspectRatio = dimensions?.aspectRatio ?? 0.8 // Default to 4:5 portrait if no data
+            // Use stored aspect ratio or default to portrait
+            const aspectRatio = item.aspectRatio ?? 0.8 // Default to 4:5 portrait
 
             return (
               <motion.div

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getImageUrl, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
+import { getImageUrl, getPortfolioImagesByUsage } from "@/lib/sanity";
 import ContactPageClient from "./components/ContactPageClient";
 
 export const metadata: Metadata = {
@@ -16,13 +16,8 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function ContactPage() {
-  // Prefer pinned hero image, then fallback to first weddings image.
-  const [contactImage, weddingImages] = await Promise.all([
-    getPortfolioImageBySlug("weddings-p-e-8ca09067dscf3244"),
-    getPortfolioImagesByCategory("weddings"),
-  ]);
-  const fallbackContactImage = contactImage ?? weddingImages[0] ?? null;
-  const contactImageUrl = getImageUrl(fallbackContactImage?.image);
+  const contactImages = await getPortfolioImagesByUsage("contact", "hero");
+  const contactImageUrl = getImageUrl(contactImages[0]?.image) || undefined;
 
   return <ContactPageClient contactImageUrl={contactImageUrl} />;
 }

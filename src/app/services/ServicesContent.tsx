@@ -22,7 +22,6 @@ type LocalizedTestimonial = {
   author: string;
   text: string;
   highlight: string;
-  imageTitle?: string;
   imageAlt: string;
 };
 
@@ -31,22 +30,16 @@ type LocalizedFaq = {
   answer: string;
 };
 
-function normalizeTitle(value?: string) {
-  return (value ?? "").trim().toLowerCase();
-}
-
 export default function ServicesContent({ config, packages, heroImage, weddingImages, packageImageOverrides = {} }: Props) {
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
   const services = locale.services as Record<string, unknown>;
   const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1200) : null;
-  const galleryTop = weddingImages.slice(0, 6);
+  const galleryTop = weddingImages.filter((img) => img.usageSection === "curated-top").slice(0, 6);
 
   const testimonials = locale.testimonials as LocalizedTestimonial[];
   const ketzia = testimonials.find((item) => /Ketzia/i.test(item.author));
-  const testimonialImage = ketzia?.imageTitle
-    ? weddingImages.find((img) => normalizeTitle(img.title) === normalizeTitle(ketzia.imageTitle))
-    : null;
+  const testimonialImage = weddingImages.find((img) => img.usageSection === "testimonial-proof") || null;
 
   const pricingFaqs = (services.pricingFaqs as LocalizedFaq[] | undefined) ?? [];
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAboutContent } from "@/lib/sanity";
+import { getImageUrl, getPortfolioImagesByUsage } from "@/lib/sanity";
 import AboutPageContent from "./components/AboutPageContent";
 
 export const metadata: Metadata = {
@@ -15,11 +15,12 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function AboutPage() {
-  const about = await getAboutContent();
+  const profileImages = await getPortfolioImagesByUsage("about", "profile");
+  const profileImageUrl = getImageUrl(profileImages[0]?.image) || null;
 
   return (
     <AboutPageContent
-      imageUrl={about?.mainImage?.asset?.url ?? null}
+      imageUrl={profileImageUrl}
     />
   );
 }

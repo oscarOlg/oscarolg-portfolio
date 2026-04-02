@@ -1,5 +1,4 @@
 import {createClient} from 'next-sanity'
-import imageUrlBuilder from '@sanity/image-url'
 import type { PortfolioImage, ServicePackage, ServiceConfig, AboutContent, HomepageContent, Testimonial } from '@/types/sanity'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -10,11 +9,21 @@ if (!projectId || !dataset) {
   throw new Error('Missing Sanity environment variables')
 }
 
+// Public client for browser/unauthenticated requests
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: false,
+})
+
+// Server-side client with API token for authenticated requests (drafts, restricted data)
+export const serverClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
 })
 
 // GROQ queries for different content types
@@ -32,17 +41,10 @@ export const portfolioImagesQuery = `
     sourcePath,
     location,
     featured,
+    aspectRatio,
     image {
-      asset-> {
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height,
-            aspectRatio
-          }
-        }
+      asset {
+        _ref
       },
       hotspot,
     },
@@ -65,17 +67,10 @@ export const portfolioImagesByCategoryQuery = (category: string) => `
     sourcePath,
     location,
     featured,
+    aspectRatio,
     image {
-      asset-> {
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height,
-            aspectRatio
-          }
-        }
+      asset {
+        _ref
       },
       hotspot,
     },
@@ -85,39 +80,35 @@ export const portfolioImagesByCategoryQuery = (category: string) => `
   }
 `
 
-export const portfolioImagesByUsageQuery = `
-  *[_type == "portfolioImage" && usageScope == $usageScope && (!defined($usageSection) || usageSection == $usageSection)]
-    | order(displayOrder, publishedAt desc) {
-    _id,
-    title,
-    slug,
-    description,
-    usageScope,
-    usageSection,
-    usageTags,
-    category,
-    sourcePath,
-    location,
-    featured,
-    image {
-      asset-> {
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height,
-            aspectRatio
-          }
-        }
+export const portfolioImagesByUsageQuery = (usageScope: string, usageSection?: string) => {
+  const sectionFilter = usageSection ? `&& usageSection == "${usageSection}"` : ''
+  return `
+    *[_type == "portfolioImage" && usageScope == "${usageScope}" ${sectionFilter}]
+      | order(publishedAt desc, displayOrder desc) {
+      _id,
+      title,
+      slug,
+      description,
+      usageScope,
+      usageSection,
+      usageTags,
+      category,
+      sourcePath,
+      location,
+      featured,
+      aspectRatio,
+      image {
+        asset {
+          _ref
+        },
+        hotspot,
       },
-      hotspot,
-    },
-    photographyDetails,
-    displayOrder,
-    publishedAt
-  }
-`
+      photographyDetails,
+      displayOrder,
+      publishedAt
+    }
+  `
+}
 
 export const featuredPortfolioImagesQuery = `
   *[_type == "portfolioImage" && featured == true] | order(displayOrder, publishedAt desc) {
@@ -131,17 +122,11 @@ export const featuredPortfolioImagesQuery = `
     category,
     sourcePath,
     location,
+    featured,
+    aspectRatio,
     image {
-      asset-> {
-        _id,
-        url,
-        metadata {
-          dimensions {
-            width,
-            height,
-            aspectRatio
-          }
-        }
+      asset {
+        _ref
       },
       hotspot,
     },
@@ -397,16 +382,8 @@ export const homepageContentQuery = `
       _id,
       title,
       image {
-        asset-> {
-          _id,
-          url,
-          metadata {
-            dimensions {
-              width,
-              height,
-              aspectRatio
-            }
-          }
+        asset {
+          _ref
         },
         hotspot,
       }
@@ -424,16 +401,37 @@ export const homepageContentQuery = `
  * @returns URL string for the image
  */
 export function getImageUrl(image: PortfolioImage['image'] | undefined, width?: number, height?: number): string {
-  if (!image?.asset) return ''
+  if (!image?.asset?._ref) return ''
+
   try {
-    const builder = imageUrlBuilder(client).image(image)
+    const projectId = serverClient.config().projectId
+    const dataset = serverClient.config().dataset
 
-    // Add width and height if provided
-    if (width) builder.width(width)
-    if (height) builder.height(height)
+    // Parse asset reference: image-{hash}-{widthxheight}-{ext}
+    const assetRef = image.asset._ref
+    const match = assetRef.match(/^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/)
 
-    // Add auto format and quality optimization
-    return builder.auto('format').quality(90).url()
+    if (!match) {
+      console.error('Invalid asset reference format:', assetRef)
+      return ''
+    }
+
+    const [, hash, dimensions, ext] = match
+    let url = `https://cdn.sanity.io/images/${projectId}/${dataset}/${hash}-${dimensions}.${ext}`
+
+    // Add transformation parameters if width/height provided
+    if (width || height) {
+      const params: string[] = []
+      if (width) params.push(`w=${width}`)
+      if (height) params.push(`h=${height}`)
+      params.push('auto=format')
+      params.push('q=90')
+      url += `?${params.join('&')}`
+    } else {
+      url += '?auto=format&q=90'
+    }
+
+    return url
   } catch (error) {
     console.error('Error building image URL:', error)
     return ''
@@ -457,7 +455,7 @@ export function formatPrice(price: number | null): string {
  */
 export async function getPortfolioImages(): Promise<PortfolioImage[]> {
   try {
-    const images = await client.fetch<PortfolioImage[]>(portfolioImagesQuery)
+    const images = await serverClient.fetch<PortfolioImage[]>(portfolioImagesQuery)
     return images || []
   } catch (error) {
     console.error('Error fetching portfolio images:', error)
@@ -473,11 +471,11 @@ export async function getPortfolioImages(): Promise<PortfolioImage[]> {
 export async function getPortfolioImageBySlug(slug: string): Promise<PortfolioImage | null> {
   try {
     const query = `*[_type == "portfolioImage" && slug.current == $slug][0] {
-      _id, title, slug, description, category, location, featured,
-      image { asset-> { _id, url, metadata { dimensions { width, height, aspectRatio } } }, hotspot },
+      _id, title, slug, description, category, location, featured, aspectRatio,
+      image { asset { _ref }, hotspot },
       displayOrder, publishedAt
     }`
-    const image = await client.fetch<PortfolioImage>(query, { slug })
+    const image = await serverClient.fetch<PortfolioImage>(query, { slug })
     return image || null
   } catch (error) {
     console.error(`Error fetching portfolio image by slug "${slug}":`, error)
@@ -496,11 +494,11 @@ export async function getPortfolioImageByOrder(
 ): Promise<PortfolioImage | null> {
   try {
     const query = `*[_type == "portfolioImage" && category == $category && displayOrder == $order][0] {
-      _id, title, slug, description, category, location, featured,
-      image { asset-> { _id, url, metadata { dimensions { width, height, aspectRatio } } }, hotspot },
+      _id, title, slug, description, category, location, featured, aspectRatio,
+      image { asset { _ref }, hotspot },
       displayOrder, publishedAt
     }`
-    const image = await client.fetch<PortfolioImage>(query, { category, order })
+    const image = await serverClient.fetch<PortfolioImage>(query, { category, order })
     return image || null
   } catch (error) {
     console.error(`Error fetching portfolio image for ${category} order ${order}:`, error)
@@ -515,7 +513,7 @@ export async function getPortfolioImageByOrder(
 export async function getPortfolioImagesByCategory(category: string): Promise<PortfolioImage[]> {
   try {
     const query = portfolioImagesByCategoryQuery(category)
-    const images = await client.fetch<PortfolioImage[]>(query)
+    const images = await serverClient.fetch<PortfolioImage[]>(query)
     return images || []
   } catch (error) {
     console.error(`Error fetching portfolio images for category ${category}:`, error)
@@ -532,10 +530,8 @@ export async function getPortfolioImagesByUsage(
   usageSection?: string
 ): Promise<PortfolioImage[]> {
   try {
-    const images = await client.fetch<PortfolioImage[]>(portfolioImagesByUsageQuery, {
-      usageScope,
-      usageSection: usageSection ?? null,
-    })
+    const query = portfolioImagesByUsageQuery(usageScope, usageSection)
+    const images = await serverClient.fetch<PortfolioImage[]>(query)
     return images || []
   } catch (error) {
     console.error(`Error fetching portfolio images for usage ${usageScope}/${usageSection ?? 'all'}:`, error)
@@ -549,7 +545,7 @@ export async function getPortfolioImagesByUsage(
  */
 export async function getFeaturedPortfolioImages(): Promise<PortfolioImage[]> {
   try {
-    const images = await client.fetch<PortfolioImage[]>(featuredPortfolioImagesQuery)
+    const images = await serverClient.fetch<PortfolioImage[]>(featuredPortfolioImagesQuery)
     return images || []
   } catch (error) {
     console.error('Error fetching featured portfolio images:', error)
@@ -563,7 +559,7 @@ export async function getFeaturedPortfolioImages(): Promise<PortfolioImage[]> {
  */
 export async function getServicePackages(): Promise<ServicePackage[]> {
   try {
-    const packages = await client.fetch<ServicePackage[]>(servicePackagesQuery)
+    const packages = await serverClient.fetch<ServicePackage[]>(servicePackagesQuery)
     return packages || []
   } catch (error) {
     console.error('Error fetching service packages:', error)
@@ -578,7 +574,7 @@ export async function getServicePackages(): Promise<ServicePackage[]> {
 export async function getServicePackagesByCategory(category: string): Promise<ServicePackage[]> {
   try {
     const query = servicePackagesByCategoryQuery(category)
-    const packages = await client.fetch<ServicePackage[]>(query)
+    const packages = await serverClient.fetch<ServicePackage[]>(query)
     return packages || []
   } catch (error) {
     console.error(`Error fetching service packages for category ${category}:`, error)
@@ -591,7 +587,7 @@ export async function getServicePackagesByCategory(category: string): Promise<Se
  */
 export async function getServiceConfigs(): Promise<ServiceConfig[]> {
   try {
-    const configs = await client.fetch<ServiceConfig[]>(serviceConfigsQuery)
+    const configs = await serverClient.fetch<ServiceConfig[]>(serviceConfigsQuery)
     return configs || []
   } catch (error) {
     console.error('Error fetching service configs:', error)
@@ -606,7 +602,7 @@ export async function getServiceConfigs(): Promise<ServiceConfig[]> {
 export async function getServiceConfigByKey(serviceKey: string): Promise<ServiceConfig | null> {
   try {
     const query = serviceConfigByKeyQuery(serviceKey)
-    const config = await client.fetch<ServiceConfig>(query)
+    const config = await serverClient.fetch<ServiceConfig>(query)
     return config || null
   } catch (error) {
     console.error(`Error fetching service config for key "${serviceKey}":`, error)
@@ -620,7 +616,7 @@ export async function getServiceConfigByKey(serviceKey: string): Promise<Service
  */
 export async function getAboutContent(): Promise<AboutContent | null> {
   try {
-    const about = await client.fetch<AboutContent>(aboutContentQuery)
+    const about = await serverClient.fetch<AboutContent>(aboutContentQuery)
     return about || null
   } catch (error) {
     console.error('Error fetching about content:', error)
@@ -633,7 +629,7 @@ export async function getAboutContent(): Promise<AboutContent | null> {
  */
 export async function getHomepageContent(): Promise<HomepageContent | null> {
   try {
-    const content = await client.fetch<HomepageContent>(homepageContentQuery)
+    const content = await serverClient.fetch<HomepageContent>(homepageContentQuery)
     return content || null
   } catch (error) {
     console.error('Error fetching homepage content:', error)
@@ -646,7 +642,7 @@ export async function getHomepageContent(): Promise<HomepageContent | null> {
  */
 export async function getTestimonials(): Promise<Testimonial[]> {
   try {
-    const testimonials = await client.fetch<Testimonial[]>(testimonialsQuery)
+    const testimonials = await serverClient.fetch<Testimonial[]>(testimonialsQuery)
     return testimonials || []
   } catch (error) {
     console.error('Error fetching testimonials:', error)
@@ -660,7 +656,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
  */
 export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
   try {
-    const testimonials = await client.fetch<Testimonial[]>(featuredTestimonialsQuery)
+    const testimonials = await serverClient.fetch<Testimonial[]>(featuredTestimonialsQuery)
     return testimonials || []
   } catch (error) {
     console.error('Error fetching featured testimonials:', error)
@@ -680,11 +676,11 @@ export async function getServiceThumbnails(
   const projections = services
     .map(
       (s) =>
-        `"${s.key}": *[_type == "portfolioImage" && category == "${s.portfolio_category}"] | order(displayOrder, publishedAt desc) [0] { _id, image { asset-> { _id, url } } }`
+        `"${s.key}": *[_type == "portfolioImage" && category == "${s.portfolio_category}"] | order(displayOrder, publishedAt desc) [0] { _id, image { asset { _ref } } }`
     )
     .join(', ');
   try {
-    const result = await client.fetch<Record<string, PortfolioImage | null>>(
+    const result = await serverClient.fetch<Record<string, PortfolioImage | null>>(
       `{ ${projections} }`
     );
     return result || {};

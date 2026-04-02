@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import LandingPageClient from "./components/LandingPageClient";
 import { getLeadMagnetBySlug, getLeadMagnetSlugs } from "@/config/lead-magnets";
-import { getAboutContent, getImageUrl, getPortfolioImagesByCategory, getPortfolioImagesByUsage } from "@/lib/sanity";
+import { getAboutContent, getImageUrl, getPortfolioImagesByUsage } from "@/lib/sanity";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -25,23 +25,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const titleMap: Record<string, string> = {
-    'engagementGiveaway': 'Giveaway Sesión de Compromiso Gratis',
-  };
-
-  const descriptionMap: Record<string, string> = {
-    'engagementGiveaway': 'Participa en el giveaway de sesión de compromiso gratis y recibe una experiencia editorial guiada con contacto rápido por WhatsApp.',
-  };
-
-  const campaignTitle = titleMap[campaign.i18nKey] || 'Landing Page';
-  const campaignDesc = descriptionMap[campaign.i18nKey] || 'Exclusive giveaway landing page';
-
   return {
-    title: campaignTitle,
-    description: campaignDesc,
+    title: 'Giveaway Sesión de Compromiso Gratis',
+    description: 'Participa en el giveaway de sesión de compromiso gratis y recibe una experiencia editorial guiada con contacto rápido por WhatsApp.',
     openGraph: {
-      title: campaignTitle,
-      description: campaignDesc,
+      title: 'Giveaway Sesión de Compromiso Gratis',
+      description: 'Participa en el giveaway de sesión de compromiso gratis y recibe una experiencia editorial guiada con contacto rápido por WhatsApp.',
       url: `/landing/${campaign.slug}`,
     },
   };
@@ -55,17 +44,20 @@ export default async function LandingPage({ params }: PageProps) {
     notFound();
   }
 
-  const [aboutContent, stripByUsage, fallbackWeddingImages] = await Promise.all([
+  const [aboutContent, landingImages] = await Promise.all([
     getAboutContent(),
-    getPortfolioImagesByUsage("landing", `${campaign.slug}_strip`),
-    getPortfolioImagesByCategory("weddings"),
+    getPortfolioImagesByUsage("landing"),
   ]);
 
-  const stripSource = stripByUsage.length > 0 ? stripByUsage : fallbackWeddingImages;
-  const stripImageUrls = stripSource.slice(0, 6).map((item) => getImageUrl(item.image, 1200)).filter(Boolean);
+  const heroSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_hero`);
+  const aboutSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_about`);
+  const stripSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_strip`);
+  const packageSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_package`);
 
-  const heroImageUrl = stripImageUrls[0] || getImageUrl(fallbackWeddingImages[0]?.image, 1400);
-  const aboutImageUrl = getImageUrl(aboutContent?.mainImage, 1000) || heroImageUrl;
+  const heroImageUrl = heroSource.length > 0 ? getImageUrl(heroSource[0].image, 1200) : "";
+  const aboutImageUrl = aboutSource.length > 0 ? getImageUrl(aboutSource[0].image, 900) : "";
+  const stripImageUrls = stripSource.slice(0, 6).map((item) => getImageUrl(item.image, 1200)).filter(Boolean);
+  const packageImageUrl = packageSource.length > 0 ? getImageUrl(packageSource[0].image, 900) : "";
 
   return (
     <LandingPageClient
@@ -73,6 +65,7 @@ export default async function LandingPage({ params }: PageProps) {
       heroImageUrl={heroImageUrl}
       aboutImageUrl={aboutImageUrl}
       stripImageUrls={stripImageUrls}
+      packageImageUrl={packageImageUrl}
     />
   );
 }

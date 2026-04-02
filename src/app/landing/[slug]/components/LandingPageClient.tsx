@@ -26,6 +26,7 @@ interface LandingProps {
   heroImageUrl: string;
   aboutImageUrl: string;
   stripImageUrls: string[];
+  packageImageUrl?: string;
 }
 
 function formatPrice(price: number) {
@@ -37,6 +38,7 @@ export default function LandingPageClient({
   heroImageUrl,
   aboutImageUrl,
   stripImageUrls,
+  packageImageUrl,
 }: LandingProps) {
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
@@ -51,51 +53,57 @@ export default function LandingPageClient({
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative h-[28rem] md:h-[36rem] overflow-hidden">
-        <Image src={heroImageUrl} alt={content.hero.title} fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 py-12 md:py-16 text-dominant">
-          <p className="text-xs uppercase tracking-[0.2em] text-accent font-semibold mb-3">{content.hero.eyebrow}</p>
-          <h1 className="font-serif text-5xl md:text-7xl leading-tight max-w-4xl">{content.hero.title}</h1>
-          <p className="text-sm md:text-base text-gray-200 mt-6 max-w-3xl leading-relaxed">{content.hero.body}</p>
-        </div>
-      </section>
+      {/* Hero Section - only render if heroImageUrl exists */}
+      {heroImageUrl && (
+        <section className="relative h-[28rem] md:h-[36rem] overflow-hidden">
+          <Image src={heroImageUrl} alt={content.hero.title} fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 py-12 md:py-16 text-dominant">
+            <p className="text-xs uppercase tracking-[0.2em] text-accent font-semibold mb-3">{content.hero.eyebrow}</p>
+            <h1 className="font-serif text-5xl md:text-7xl leading-tight max-w-4xl">{content.hero.title}</h1>
+            <p className="text-sm md:text-base text-gray-200 mt-6 max-w-3xl leading-relaxed">{content.hero.body}</p>
+          </div>
+        </section>
+      )}
 
-      {/* About Section */}
-      <section className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold mb-4">{content.about.title}</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-secondary mb-6">Oscar Olg Photography</h2>
-            <p className="font-sans text-gray-700 leading-relaxed text-lg">{content.about.body}</p>
+      {/* About Section - only render if aboutImageUrl exists */}
+      {aboutImageUrl && (
+        <section className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold mb-4">{content.about.title}</p>
+              <h2 className="font-serif text-4xl md:text-5xl text-secondary mb-6">Oscar Olg Photography</h2>
+              <p className="font-sans text-gray-700 leading-relaxed text-lg">{content.about.body}</p>
+            </div>
+            <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 lg:justify-self-end overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
+              <Image src={aboutImageUrl} alt={content.about.imageAlt} fill className="object-cover object-top" />
+            </div>
           </div>
-          <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 lg:justify-self-end overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
-            <Image src={aboutImageUrl} alt={content.about.imageAlt} fill className="object-cover object-top" />
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Curated Image Strip */}
-      <section className="bg-gray-50 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-8 text-center">{content.strip.title}</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            {stripImageUrls.slice(0, 6).map((url, index) => (
-              <div key={`${url}-${index}`} className="group relative block aspect-[4/5] overflow-hidden bg-secondary/20 rounded-sm">
-                <Image
-                  src={url}
-                  alt={`${content.strip.momentAltPrefix} ${index + 1}`}
-                  fill
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-black/18 group-hover:bg-black/8 transition-colors duration-300" />
-              </div>
-            ))}
+      {/* Curated Image Strip - only render if stripImageUrls exist */}
+      {stripImageUrls.length > 0 && (
+        <section className="bg-gray-50 py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-6 md:px-8">
+            <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-8 text-center">{content.strip.title}</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+              {stripImageUrls.slice(0, 4).map((url, index) => (
+                <div key={`${url}-${index}`} className="group relative block aspect-[4/5] overflow-hidden bg-secondary/20 rounded-sm">
+                  <Image
+                    src={url}
+                    alt={`${content.strip.momentAltPrefix} ${index + 1}`}
+                    fill
+                    className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-black/18 group-hover:bg-black/8 transition-colors duration-300" />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Main Form + Instructions */}
       <section className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
@@ -141,8 +149,8 @@ export default function LandingPageClient({
         </div>
       </section>
 
-      {/* Featured Package */}
-      {featuredPackage && (
+      {/* Featured Package - only render if packageImageUrl exists */}
+      {featuredPackage && packageImageUrl && (
         <section className="bg-gray-50 py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6 md:px-8">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-6 text-center">{content.package.title}</p>
@@ -150,7 +158,7 @@ export default function LandingPageClient({
               <div className="grid grid-cols-1 md:grid-cols-[0.78fr_1.22fr]">
                 <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[16rem] overflow-hidden">
                   <Image
-                    src={featuredPackage.imageUrl.includes("[PLACEHOLDER") ? heroImageUrl : featuredPackage.imageUrl}
+                    src={packageImageUrl}
                     alt={featuredPackage.name}
                     fill
                     className="object-cover object-top"

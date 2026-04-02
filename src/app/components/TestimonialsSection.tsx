@@ -22,12 +22,7 @@ type TestimonialLocaleItem = {
   highlight: string;
   date: string;
   imageAlt: string;
-  imageTitle?: string;
 };
-
-function normalizeTitle(value?: string) {
-  return (value ?? "").trim().toLowerCase();
-}
 
 export default function TestimonialsSection({
   weddingImages = [],
@@ -38,18 +33,7 @@ export default function TestimonialsSection({
   const preferred = allTestimonials.filter((item) => /Analaura\s*&\s*Job/i.test(item.author));
   const testimonials = preferred.length > 0 ? preferred : allTestimonials.slice(0, 1);
   const testimonial = testimonials[0];
-
-  // Fast lookup map for matching by exact Sanity title.
-  const imageByTitle = new Map(
-    weddingImages.map((img) => [normalizeTitle(img.title), img])
-  );
-
-  const fallbackImage = weddingImages[0] || weddingImages[Math.floor(weddingImages.length / 2)] || null;
-
-  const mappedImage = testimonial?.imageTitle
-    ? imageByTitle.get(normalizeTitle(testimonial.imageTitle)) || null
-    : null;
-  const testimonialImage = mappedImage || fallbackImage;
+  const testimonialImage = weddingImages[0] || null;
 
   return (
     <AnimatedSection className="w-full py-14 md:py-16 px-6 md:px-12 bg-dominant">

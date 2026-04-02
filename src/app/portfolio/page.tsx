@@ -1,4 +1,4 @@
-import { getPortfolioImagesByCategory } from "@/lib/sanity";
+import { getPortfolioImagesByCategory, getPortfolioImagesByUsage } from "@/lib/sanity";
 import type { PortfolioImage } from "@/types/sanity";
 import type { Metadata } from "next";
 import { Suspense } from "react";
@@ -42,7 +42,7 @@ function PortfolioLoadingFallback() {
 }
 
 export default async function PortfolioPage() {
-  const portfolioData: PortfolioImage[] = await getPortfolioImagesByCategory('weddings');
+  const portfolioData: PortfolioImage[] = await getPortfolioImagesByUsage('portfolio', 'portfolio_grid');
 
   // Pass to client component for instant client-side filtering
   // Wrapped in Suspense for useSearchParams() dynamic rendering

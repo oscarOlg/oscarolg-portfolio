@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "./AnimatedSection";
-import { SERVICES } from "@/config/services";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
 
@@ -91,37 +90,9 @@ export default function WorkSection({
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-              {SERVICES.map((service, i) => {
-                const cover = categoryCover[service.portfolio_category];
-                const imgUrl = cover?.imageUrl ?? "";
-                const label = lang === 'en' ? service.nameEn : service.name;
-                return (
-                  <AnimatedSection key={service.portfolio_category} delay={i * 0.07}>
-                    <Link
-                      href={`/portfolio?category=${service.portfolio_category}`}
-                      className="group relative block aspect-[3/4] overflow-hidden"
-                    >
-                      {imgUrl ? (
-                        <Image
-                          src={imgUrl}
-                          alt={label}
-                          fill
-                          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                          sizes="(max-width: 768px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-secondary/40" />
-                      )}
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                        <span className="font-serif text-xl md:text-2xl text-white tracking-wide drop-shadow">
-                          {label}
-                        </span>
-                      </div>
-                    </Link>
-                  </AnimatedSection>
-                );
-              })}
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="relative block aspect-[4/5] overflow-hidden bg-secondary/25" />
+              ))}
             </div>
           )}
 

@@ -9,15 +9,7 @@
 export interface SanityImageAsset {
   _type: 'image'
   asset: {
-    _id: string
-    url: string
-    metadata?: {
-      dimensions?: {
-        width: number
-        height: number
-        aspectRatio: number
-      }
-    }
+    _ref: string
   }
   hotspot?: {
     x: number
@@ -76,6 +68,7 @@ export interface PortfolioImage {
   location?: string
   image: SanityImageAsset
   featured: boolean
+  aspectRatio?: number
   displayOrder?: number
   photographyDetails?: {
     _type: 'object'

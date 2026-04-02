@@ -16,21 +16,22 @@ export default function ContactPageClient({
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
   const contact = locale.contact;
-  const safeContactImageUrl =
-    contactImageUrl ||
-    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop";
 
   return (
     <div className="w-full max-w-6xl mx-auto pt-8 px-4 md:px-8 pb-12">
       <div className="w-full flex flex-col">
         <section className="relative w-full h-[24rem] md:h-[30rem] mb-12 overflow-hidden rounded-2xl border border-gray-200 shadow-[0_14px_36px_rgba(15,23,42,0.12)]">
-          <Image
-            src={safeContactImageUrl}
-            alt={contact.imageAlt}
-            fill
-            className="object-cover"
-            priority
-          />
+          {contactImageUrl ? (
+            <Image
+              src={contactImageUrl}
+              alt={contact.imageAlt}
+              fill
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/10" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/35 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-10 pb-8 md:pb-10">
             <h1 className="font-serif text-4xl md:text-6xl text-dominant leading-tight max-w-3xl">

@@ -42,6 +42,7 @@ function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
 }
 
 export default function Navbar() {
+  const TOP_TRANSPARENCY_THRESHOLD = 96;
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
@@ -67,12 +68,12 @@ export default function Navbar() {
       return;
     }
 
-    const handleScroll = () => setIsAtTop(window.scrollY < 24);
+    const handleScroll = () => setIsAtTop(window.scrollY < TOP_TRANSPARENCY_THRESHOLD);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomepage]);
+  }, [isHomepage, TOP_TRANSPARENCY_THRESHOLD]);
 
   const navLinks = [
     { href: "/portfolio", label: locale.nav.portfolio },

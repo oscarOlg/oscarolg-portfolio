@@ -54,20 +54,28 @@ export default function InvestmentSection({
       {/* Lado Derecho: Composición Editorial */}
       <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex gap-4 md:gap-6">
         <div className="relative w-1/2 h-[80%] mt-auto shadow-sm overflow-hidden group">
-          <Image
-            src={leftImageUrl ?? "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"}
-            fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-            alt="Fotografía de sesión"
-          />
+          {leftImageUrl ? (
+            <Image
+              src={leftImageUrl}
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              alt="Fotografía de sesión"
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/15" />
+          )}
         </div>
         <div className="relative w-1/2 h-[90%] shadow-sm overflow-hidden group">
-          <Image
-            src={rightImageUrl ?? "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"}
-            fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-            alt="Fotografía de retrato"
-          />
+          {rightImageUrl ? (
+            <Image
+              src={rightImageUrl}
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              alt="Fotografía de retrato"
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/10" />
+          )}
         </div>
       </div>
 
