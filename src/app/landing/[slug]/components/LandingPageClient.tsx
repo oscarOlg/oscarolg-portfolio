@@ -7,6 +7,7 @@ import type { LeadMagnetConfig } from "@/config/lead-magnets";
 import GiveawayLeadForm from "./GiveawayLeadForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
+import InlineBoldText from "@/app/components/InlineBoldText";
 
 interface Package {
   id: string;
@@ -42,9 +43,10 @@ export default function LandingPageClient({
   const content = (locale.landing as any)?.[campaign.i18nKey];
   const allPackages = packagesData.packages as Package[];
   const featuredPackage = allPackages.find((item) => item.mostChosen) || allPackages[0] || null;
+  const teaserDescription = featuredPackage?.description?.split(".").find((part) => part.trim().length > 0)?.trim();
 
   if (!content) {
-    return <div className="w-full text-center py-24">Loading...</div>;
+    return <div className="w-full text-center py-24">{locale.landing.loading}</div>;
   }
 
   return (
@@ -65,11 +67,11 @@ export default function LandingPageClient({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold mb-4">{content.about.title}</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-secondary mb-6">Oscar OLG Photography</h2>
+            <h2 className="font-serif text-4xl md:text-5xl text-secondary mb-6">Oscar Olg Photography</h2>
             <p className="font-sans text-gray-700 leading-relaxed text-lg">{content.about.body}</p>
           </div>
-          <div className="relative h-[24rem] md:h-[30rem] overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
-            <Image src={aboutImageUrl} alt="Oscar photographer portrait" fill className="object-cover" />
+          <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 lg:justify-self-end overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
+            <Image src={aboutImageUrl} alt={content.about.imageAlt} fill className="object-cover object-top" />
           </div>
         </div>
       </section>
@@ -80,8 +82,15 @@ export default function LandingPageClient({
           <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-8 text-center">{content.strip.title}</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {stripImageUrls.slice(0, 6).map((url, index) => (
-              <div key={`${url}-${index}`} className="relative aspect-square overflow-hidden rounded-lg">
-                <Image src={url} alt={`Moment ${index + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" />
+              <div key={`${url}-${index}`} className="group relative block aspect-[4/5] overflow-hidden bg-secondary/20 rounded-sm">
+                <Image
+                  src={url}
+                  alt={`${content.strip.momentAltPrefix} ${index + 1}`}
+                  fill
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-black/18 group-hover:bg-black/8 transition-colors duration-300" />
               </div>
             ))}
           </div>
@@ -92,7 +101,19 @@ export default function LandingPageClient({
       <section className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
           {/* Instructions sidebar */}
-          <aside className="border border-gray-200 rounded-xl p-8 bg-gradient-to-b from-white to-gray-50/70 h-fit lg:sticky lg:top-24">
+          <aside className="min-w-0 border border-gray-200 rounded-xl p-8 bg-gradient-to-b from-white to-gray-50/70 h-fit lg:sticky lg:top-24">
+            <div className="border border-accent/40 bg-accent/10 p-5 md:p-6 rounded-lg mb-8">
+              <p className="font-serif text-2xl md:text-3xl text-secondary leading-tight mb-2">
+                {content.form.preTitle}
+              </p>
+              <p className="font-sans text-xs uppercase tracking-[0.16em] text-secondary/80 mb-4">
+                {content.form.preValue}
+              </p>
+              <p className="text-sm text-secondary leading-relaxed">
+                <InlineBoldText text={content.form.intro} />
+              </p>
+            </div>
+
             <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold mb-5">{content.instructions.title}</p>
             <ol className="space-y-4 text-sm text-gray-700 leading-relaxed">
               {content.instructions.items.map((item: string, idx: number) => (
@@ -114,7 +135,7 @@ export default function LandingPageClient({
           </aside>
 
           {/* Form */}
-          <div>
+          <div className="min-w-0">
             <GiveawayLeadForm campaignSlug={campaign.slug} />
           </div>
         </div>
@@ -125,42 +146,44 @@ export default function LandingPageClient({
         <section className="bg-gray-50 py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6 md:px-8">
             <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-6 text-center">{content.package.title}</p>
-            <div className="border border-gray-200 bg-white overflow-hidden rounded-2xl shadow-lg">
-              <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
-                <div className="relative min-h-[20rem] lg:min-h-full overflow-hidden">
+            <div className="max-w-4xl mx-auto border border-gray-200 bg-white overflow-hidden rounded-2xl shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-[0.78fr_1.22fr]">
+                <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[16rem] overflow-hidden">
                   <Image
                     src={featuredPackage.imageUrl.includes("[PLACEHOLDER") ? heroImageUrl : featuredPackage.imageUrl}
                     alt={featuredPackage.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
-                <div className="p-8 md:p-10 flex flex-col">
-                  <h3 className="font-serif text-4xl text-secondary leading-tight mb-3">{featuredPackage.name}</h3>
+                <div className="p-5 md:p-6">
+                  <h3 className="font-serif text-2xl md:text-3xl text-secondary leading-tight mb-1">{featuredPackage.name}</h3>
                   {featuredPackage.subtitle && (
-                    <p className="font-serif italic text-gray-600 mb-4">{featuredPackage.subtitle}</p>
+                    <p className="font-serif italic text-gray-600 text-sm md:text-base mb-2">{featuredPackage.subtitle}</p>
                   )}
-                  <p className="text-gray-700 leading-relaxed mb-6">{featuredPackage.description}</p>
-                  <ul className="space-y-2 mb-8">
-                    {(featuredPackage.features || []).slice(0, 4).map((item) => (
-                      <li key={item} className="text-sm text-gray-700 flex items-start gap-2">
+                  <p className="text-gray-700 leading-relaxed mb-4 text-sm">
+                    {teaserDescription ? `${teaserDescription}.` : featuredPackage.description}
+                  </p>
+                  <ul className="space-y-1.5 mb-4">
+                    {(featuredPackage.features || []).slice(0, 2).map((item) => (
+                      <li key={item} className="text-xs md:text-sm text-gray-700 flex items-start gap-2">
                         <span className="text-accent mt-1">•</span>
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-6 border-t border-gray-200 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                  <div className="pt-4 border-t border-gray-200 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">Duracion</p>
-                      <p className="font-serif text-lg text-secondary">{featuredPackage.duration}</p>
+                      <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">{content.package.durationLabel}</p>
+                      <p className="font-serif text-sm md:text-base text-secondary">{featuredPackage.duration}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">Inversion</p>
-                      <p className="font-serif text-3xl md:text-4xl text-secondary">MXN {formatPrice(featuredPackage.price)}</p>
+                    <div className="text-left sm:text-right">
+                      <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">{content.package.investmentLabel}</p>
+                      <p className="font-serif text-xl md:text-2xl text-secondary">MXN {formatPrice(featuredPackage.price)}</p>
                     </div>
                   </div>
-                  <Link href="/services" className="mt-6 inline-block bg-secondary text-dominant px-8 py-4 uppercase tracking-widest text-xs font-bold hover:bg-secondary/90 transition-colors w-full text-center">
-                    Ver paquete completo
+                  <Link href="/services" className="mt-4 inline-block bg-secondary text-dominant px-6 py-3 uppercase tracking-widest text-[11px] font-bold hover:bg-secondary/90 transition-colors w-full text-center">
+                    {content.package.viewPackageCta}
                   </Link>
                 </div>
               </div>

@@ -71,7 +71,7 @@ export default function WorkSection({
                   <Link
                     href="/portfolio"
                     className="group relative block aspect-[4/5] overflow-hidden bg-secondary/30"
-                    aria-label={lang === 'en' ? 'View wedding portfolio' : 'Ver portafolio de bodas'}
+                    aria-label={work.viewWeddingAria}
                   >
                     {item.imageUrl ? (
                       <Image

@@ -19,12 +19,12 @@ const lato = Lato({ weight: ['300', '400', '700'], subsets: ["latin"], variable:
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   title: {
-    template: '%s | Oscar Sanchez Fotógrafo',
-    default: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
+    template: '%s | Oscar Olg Photography',
+    default: 'Oscar Olg Photography | Fotógrafo en Ciudad Juárez',
   },
   description: 'Fotógrafo de bodas en Ciudad Juárez con enfoque editorial. Cobertura auténtica para historias que merecen perdurar.',
   openGraph: {
-    siteName: 'Oscar Sanchez Fotógrafo',
+    siteName: 'Oscar Olg Photography',
     locale: 'es_MX',
     type: 'website',
     images: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Oscar Sanchez — Fotógrafo en Ciudad Juárez',
+        alt: 'Oscar Olg Photography — Fotógrafo en Ciudad Juárez',
       },
     ],
   },

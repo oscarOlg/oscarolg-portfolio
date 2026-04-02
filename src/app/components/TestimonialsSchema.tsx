@@ -15,7 +15,7 @@ export function TestimonialsSchema({ lang = "es" }: { lang?: Language }) {
     "name": "Fotografía Editorial de Bodas en Ciudad Juárez",
     "creator": {
       "@type": "Person",
-      "name": "Oscar Sanchez",
+      "name": "Oscar Olg",
       "image": "https://oscarolg.com/oscar-profile.jpg"
     },
     "aggregateRating": {

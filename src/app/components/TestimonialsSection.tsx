@@ -73,7 +73,7 @@ export default function TestimonialsSection({
 
               <div className="p-6 md:p-10">
                 <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold mb-4">
-                  {lang === "es" ? "Prueba real" : "Client Story"}
+                  {locale.services.clientStoryLabel}
                 </p>
                 <p className="font-serif text-2xl md:text-3xl text-secondary leading-relaxed mb-5">
                   "{testimonial.highlight}"

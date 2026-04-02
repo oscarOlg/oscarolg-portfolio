@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
+import InlineBoldText from "@/app/components/InlineBoldText";
 
 interface Props {
   leftImageUrl?: string;
@@ -33,11 +34,11 @@ export default function InvestmentSection({
         </h2>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-6">
-          {displayP1}
+          <InlineBoldText text={displayP1} />
         </p>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-10">
-          {displayP2}
+          <InlineBoldText text={displayP2} />
         </p>
 
         <div className="flex flex-col sm:flex-row items-start gap-6">

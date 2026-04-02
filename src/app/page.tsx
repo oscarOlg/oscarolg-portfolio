@@ -10,11 +10,11 @@ import WorkSection from "./components/WorkSection";
 import HomepageFinalCta from "./components/HomepageFinalCta";
 
 export const metadata: Metadata = {
-  title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
-  description: 'Fotógrafo de bodas en Ciudad Juárez con enfoque editorial y narrativo. Tu historia merece perdurar.',
+  title: 'Oscar Olg Photography | Fotógrafo en Ciudad Juárez',
+  description: 'Fotografía de bodas editorial en Ciudad Juárez para parejas que quieren una experiencia elegante, clara y sin estrés.',
   openGraph: {
-    title: 'Oscar Sanchez | Fotógrafo en Ciudad Juárez',
-    description: 'Fotografía editorial de bodas en Ciudad Juárez.',
+    title: 'Oscar Olg Photography | Fotógrafo en Ciudad Juárez',
+    description: 'Fotografía editorial de bodas en Ciudad Juárez para parejas que valoran una experiencia premium.',
     url: '/',
   },
 };
@@ -81,7 +81,7 @@ export default async function Home() {
   const heroSlides = selectedHeroImages
     .map((img) => ({
       src: getImageUrl(img.image, 1800),
-      alt: img.title || 'Wedding photography by Oscar Olg',
+      alt: img.title || 'Wedding photography by Oscar Olg Photography',
     }));
 
   const fallbackInvestLeft = allImages[0] ?? null;

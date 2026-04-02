@@ -12,8 +12,8 @@ export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Oscar Sanchez | Fotógrafo de Bodas",
-    "alternateName": "Oscar Sanchez Photography",
+    "name": "Oscar Olg Photography | Fotógrafo de Bodas",
+    "alternateName": "Oscar Olg Photography",
     "description": "Fotografía editorial de bodas en Ciudad Juárez con enfoque narrativo. Cobertura auténtica para historias que merecen perdurar.",
     "url": siteUrl,
     "telephone": whatsappPhone,
@@ -63,7 +63,7 @@ export function CreatorSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Oscar Sanchez",
+    "name": "Oscar Olg",
     "jobTitle": "Fotógrafo de Bodas",
     "image": profileImageUrl,
     "knowsLanguage": ["Spanish", "English"],

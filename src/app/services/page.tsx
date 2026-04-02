@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
+import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImageBySlug, getPortfolioImagesByCategory } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: 'Inversión | Fotógrafo de Bodas en Ciudad Juárez',
@@ -16,6 +16,11 @@ export const metadata: Metadata = {
 
 // Revalidate every 60 seconds (ISR with fresh Sanity data)
 export const revalidate = 60;
+
+const PACKAGE_IMAGE_SLUG_CANDIDATES: Record<string, string[]> = {
+  clasica: ["weddings-dscf8029", "weddings-dscf0232"],
+  save_the_date: ["weddings-p-e-8ca09067dscf3244", "weddings-dscf7956"],
+};
 
 function ServicesLoadingFallback() {
   return (
@@ -57,6 +62,20 @@ export default async function ServicesPage() {
     return null;
   }
 
+  const findBySlugCandidates = (candidates: string[]) => {
+    const match = weddingImages.find((img) => candidates.includes(img.slug?.current || ""));
+    return match ? getImageUrl(match.image, 1200) : "";
+  };
+
+  const packageImageOverrides: Record<string, string> = {
+    clasica:
+      findBySlugCandidates(PACKAGE_IMAGE_SLUG_CANDIDATES.clasica) ||
+      (weddingImages[0] ? getImageUrl(weddingImages[0].image, 1200) : ""),
+    save_the_date:
+      findBySlugCandidates(PACKAGE_IMAGE_SLUG_CANDIDATES.save_the_date) ||
+      (weddingImages[1] ? getImageUrl(weddingImages[1].image, 1200) : weddingImages[0] ? getImageUrl(weddingImages[0].image, 1200) : ""),
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12">
       <Suspense fallback={<ServicesLoadingFallback />}>
@@ -65,6 +84,7 @@ export default async function ServicesPage() {
           packages={weddingPackages}
           heroImage={heroImage}
           weddingImages={weddingImages}
+          packageImageOverrides={packageImageOverrides}
         />
       </Suspense>
     </div>

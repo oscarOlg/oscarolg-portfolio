@@ -11,7 +11,7 @@ interface FormData {
   phone: string;
   date: string;
   venue: string;
-  budgetRange: string;
+  photoPriority: string;
   weddingDetails: string;
 }
 
@@ -29,22 +29,22 @@ export default function ContactFormClient() {
     phone: "",
     date: "",
     venue: "",
-    budgetRange: "",
+    photoPriority: "",
     weddingDetails: "",
   });
 
-  const budgetOptions = contact.budgetOptions;
+  const priorityOptions = contact.photoPriorityOptions;
 
   const generatedMessage = useMemo(() => {
-    const { name, phone, date, venue, budgetRange, weddingDetails } = formData;
+    const { name, phone, date, venue, photoPriority, weddingDetails } = formData;
 
     const lines: string[] = [];
     lines.push(`${contact.msgHello} ${name || contact.msgDefaultName}.`);
     lines.push(`${contact.msgInterestedIn}.`);
     if (date) lines.push(`${contact.msgDate} ${date}.`);
     if (venue) lines.push(`${contact.msgVenue} ${venue}.`);
-    if (budgetRange) lines.push(`${contact.msgBudget} ${budgetRange}.`);
-    if (phone) lines.push(`${contact.phoneLabel.replace(" (Opcional)", "")}: ${phone}.`);
+    if (photoPriority) lines.push(`${contact.msgPhotoPriority} ${photoPriority}.`);
+    if (phone) lines.push(`${contact.phoneLabel.replace(/\s*\(.*\)\s*/, "")}: ${phone}.`);
 
     if (weddingDetails) {
       lines.push("");
@@ -163,18 +163,18 @@ export default function ContactFormClient() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="budgetRange" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-              {contact.budgetLabel}
+            <label htmlFor="photoPriority" className="font-sans uppercase tracking-widest text-xs text-gray-500">
+              {contact.photoPriorityLabel}
             </label>
             <select
-              id="budgetRange"
-              value={formData.budgetRange}
+              id="photoPriority"
+              value={formData.photoPriority}
               onChange={handleChange}
               required
               className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans text-gray-700 cursor-pointer appearance-none rounded-none"
             >
-              <option value="">{contact.budgetSelectPlaceholder}</option>
-              {budgetOptions.map((option) => (
+              <option value="">{contact.photoPriorityPlaceholder}</option>
+              {priorityOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
@@ -217,7 +217,7 @@ export default function ContactFormClient() {
             </div>
           )}
 
-          <div className="sticky bottom-0 -mx-8 md:mx-0 px-4 md:px-0 py-3 bg-white/95 backdrop-blur border-t border-gray-200 md:border-0 md:bg-transparent md:backdrop-blur-none md:py-0">
+          <div className="sticky md:static bottom-0 -mx-8 md:mx-0 px-4 md:px-0 py-3 bg-white/95 backdrop-blur border-t border-gray-200 md:border-0 md:bg-transparent md:backdrop-blur-none md:py-0">
             <div className="md:hidden border border-accent/40 bg-accent/10 p-3 mb-3 shadow-sm">
               <p className="font-sans text-xs uppercase tracking-widest text-secondary/80 mb-2 font-semibold">
                 {contact.quickHeading}

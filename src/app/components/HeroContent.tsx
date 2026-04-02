@@ -23,7 +23,7 @@ export default function HeroContent() {
 
   return (
     <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center px-6 text-center">
-      <motion.h2
+      <motion.h1
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -31,16 +31,16 @@ export default function HeroContent() {
       >
         {displayHeading}{" "}
         <span className="italic text-accent">{displayHeadingItalic}</span>
-      </motion.h2>
+      </motion.h1>
 
-      <motion.p
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
         className="font-sans text-sm md:text-base text-white/90 max-w-2xl leading-relaxed mb-8"
       >
         {promiseLine}
-      </motion.p>
+      </motion.h2>
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}

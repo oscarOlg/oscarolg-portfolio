@@ -83,15 +83,6 @@ export default function Footer() {
             />
           </div>
         </div>
-
-        <div className="mt-16 pt-8 border-t border-gray-200/70 flex flex-col md:flex-row gap-3 items-center justify-between text-center md:text-left">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-secondary/45">
-            Oscar Olg Photography
-          </p>
-          <p className="font-sans text-xs text-secondary/50">
-            {locale.footer.tagline2}
-          </p>
-        </div>
       </div>
     </footer>
   );

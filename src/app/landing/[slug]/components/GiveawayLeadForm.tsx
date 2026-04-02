@@ -5,6 +5,7 @@ import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
 import { getLeadMagnetBySlug } from "@/config/lead-magnets";
+import Socials from "@/app/components/Socials";
 
 interface GiveawayLeadFormProps {
   campaignSlug: string;
@@ -12,6 +13,7 @@ interface GiveawayLeadFormProps {
 
 interface GiveawayFormData {
   name: string;
+  phone: string;
   weddingDateAndVenue: string;
   story: string;
   hasPhotographer: string;
@@ -28,6 +30,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
 
   const [formData, setFormData] = useState<GiveawayFormData>({
     name: "",
+    phone: "",
     weddingDateAndVenue: "",
     story: "",
     hasPhotographer: "",
@@ -40,30 +43,31 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
   const [errorMessage, setErrorMessage] = useState("");
 
   if (!content) {
-    return <div className="text-center py-12">Loading form...</div>;
+    return <div className="text-center py-12">{locale.landing.loadingForm}</div>;
   }
 
   const generatedMessage = useMemo(() => {
     const lines: string[] = [];
-    lines.push(`Hola Oscar, queremos participar en el giveaway.`);
+    lines.push(content.form.msgIntro);
     lines.push("");
-    lines.push(`Nombre: ${formData.name || "Sin dato"}`);
-    lines.push(`Fecha de boda y ubicacion: ${formData.weddingDateAndVenue || "Sin dato"}`);
+    lines.push(`${content.form.msgName} ${formData.name || content.form.msgNoData}`);
+    lines.push(`${content.form.msgPhone} ${formData.phone || content.form.msgNoData}`);
+    lines.push(`${content.form.msgDateVenue} ${formData.weddingDateAndVenue || content.form.msgNoData}`);
     lines.push("");
-    lines.push("Nuestra historia:");
-    lines.push(formData.story || "Sin historia compartida");
+    lines.push(content.form.msgStoryHeading);
+    lines.push(formData.story || content.form.msgNoStory);
     lines.push("");
     if (formData.hasPhotographer) {
-      lines.push(`¿Ya tienen fotografo? ${formData.hasPhotographer}`);
+      lines.push(`${content.form.msgHasPhotographer} ${formData.hasPhotographer}`);
     }
     if (formData.considerOscar) {
-      lines.push(`¿Me considerarian como su fotografo? ${formData.considerOscar}`);
+      lines.push(`${content.form.msgConsiderOscar} ${formData.considerOscar}`);
     }
     if (formData.budget) {
-      lines.push(`Presupuesto: ${formData.budget}`);
+      lines.push(`${content.form.msgBudget} ${formData.budget}`);
     }
     return lines.join("\n");
-  }, [formData]);
+  }, [formData, content]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -90,7 +94,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
     } catch (error) {
       console.error("WhatsApp open error:", error);
       setSubmitStatus("error");
-      setErrorMessage("No se pudo abrir WhatsApp. Copia el mensaje y pegalo manualmente.");
+      setErrorMessage(content.form.errorMsg);
     }
   };
 
@@ -101,13 +105,9 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="border border-gray-200 bg-white p-8 rounded-2xl shadow-lg">
-        <div className="border border-accent/40 bg-accent/10 p-4 mb-6 rounded">
-          <p className="text-sm text-secondary leading-relaxed">
-            {content.form.intro}
-          </p>
-        </div>
+    <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 min-w-0">
+        <div className="border border-gray-200 bg-white p-8 rounded-2xl shadow-lg min-w-0 overflow-x-hidden">
 
         <div className="space-y-6">
           {/* Full Name */}
@@ -121,7 +121,24 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               value={formData.name}
               onChange={handleChange}
               required
+              placeholder={content.form.namePlaceholder}
               className="border-b border-gray-300 bg-transparent py-3 focus:outline-none focus:border-secondary transition-colors"
+            />
+          </div>
+
+          {/* Phone Number */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="phone" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">
+              {content.form.phoneLabel}
+            </label>
+            <input
+              id="phone"
+              type="text"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              placeholder={content.form.phonePlaceholder}
+              className="border-b border-gray-300 bg-transparent py-3 placeholder:text-gray-300 focus:outline-none focus:border-secondary transition-colors"
             />
           </div>
 
@@ -208,7 +225,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
           {/* Message Preview */}
           <div className="border border-gray-200 bg-gray-50 p-4 rounded">
             <p className="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-3">{content.form.messagePreview}</p>
-            <pre className="whitespace-pre-wrap text-sm text-secondary leading-relaxed max-h-48 overflow-y-auto font-sans">
+            <pre className="whitespace-pre-wrap break-words text-sm text-secondary leading-relaxed max-h-48 overflow-y-auto overflow-x-hidden font-sans w-full max-w-full">
               {generatedMessage}
             </pre>
           </div>
@@ -243,8 +260,10 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               {copied ? content.form.copiedButton : content.form.copyButton}
             </button>
           </div>
+            <Socials />
         </div>
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
   );
 }
