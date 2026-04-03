@@ -313,5 +313,172 @@
       "question": "What cities do you serve besides Ciudad Juárez?",
       "answer": "My focus is Ciudad Juárez, though I can consider special requests. If your wedding is here, I have availability and deep knowledge of the best venues."
     }
-  ]
+  ],
+  "privateInvestmentGuide": {
+    "welcome": {
+      "philosophyIntro": "We know planning a wedding is demanding—it requires time, energy, and budget. That is why on your special day you shouldn't worry about posing stiffly in front of a camera or feel like you're missing your own celebration.",
+      "philosophyApproach": "Through a 100% documentary approach and cinematic editing, we capture the real emotion of your day. We give you absolute freedom to laugh, toast, and be present with those you love most. We don't intervene in the magic—we simply make sure to document it from the best angles.",
+      "philosophyCore": "The cake will be gone, but your story deserves to be lived without stress and remembered with style.",
+      "philosophyClosing": "You live the moment; we transform it into the first great visual legacy of your new family."
+    },
+    "hero": {
+      "title": "Enjoy your wedding. I'll document it with style.",
+      "subtitle": "Private Guide to Collections and Photography Services"
+    },
+    "complements": {
+      "heading": "Keepsake Pieces and Complements",
+      "subheading": "Expand your visual legacy with products to cherish forever.",
+      "items": [
+        {
+          "price": 1500,
+          "name": "Keepsake Collection",
+          "description": "50 photos (4x6\") + 2 enlargements (8x10\")"
+        },
+        {
+          "price": 2800,
+          "name": "Family Heritage",
+          "description": "100 photos (4x6\") + 4 enlargements (8x10\")"
+        },
+        {
+          "price": 3500,
+          "name": "Art for Home",
+          "description": "1 large (16x20\") + 2 medium (11x14\")"
+        },
+        {
+          "price": 4500,
+          "name": "Premium Photobook 10x10",
+          "description": "Hardcover binding"
+        },
+        {
+          "price": 6000,
+          "name": "Large Format Photobook 12x12",
+          "description": "Hardcover binding"
+        },
+        {
+          "price": 2000,
+          "name": "Extra Coverage Hour",
+          "description": "One additional hour of documentation on your wedding day"
+        }
+      ]
+    },
+    "session": {
+      "heading": "Engagement Session",
+      "price": 2500,
+      "description": "A 1.5-hour session in Ciudad Juárez designed to help us connect, ease any camera tension, and capture the real chemistry between you.",
+      "subheading": "Let's break the ice before the big day.",
+      "title": "Save the Date"
+    },
+    "closing": {
+      "ctaSecondary": "Message on WhatsApp",
+      "subheading": "Let's make sure your wedding day is documented with the style it deserves.",
+      "ctaPrimary": "Schedule Confirmation Call",
+      "secondaryLabel": "Ready to chat?",
+      "heading": "Ready to secure your date?",
+      "finalMessage": "It's not just an investment in photography. It's an investment in remembering."
+    },
+    "packages": {
+      "heading": "Our Collections",
+      "investmentLabel": "Investment",
+      "experienceLabel": "What's Included:",
+      "subheading": "Each one is designed for you. Compare and choose what resonates with your vision.",
+      "collections": [
+        {
+          "id": "signature",
+          "name": "Collection: Signature",
+          "displayName": "Signature",
+          "subtitle": "The Complete Legacy",
+          "price": 14500,
+          "audience": "Designed for the couple who wants to leave everything to us and enjoy their day with zero stress.",
+          "promise": "I'll be with you for 10 hours, capturing everything invisibly from the nervous excitement of makeup to the climax of the dance floor. This is for those who want not just a digital gallery, but the peace of mind knowing their story already includes a premium Photobook for their new home and a sneak peek for social media the next day. You focus on enjoying the celebration; I'll handle the family legacy.",
+          "features": [
+            "10 hours of continuous coverage",
+            "Getting Ready documentation",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Complete Reception coverage",
+            "Premium Digital Gallery in high resolution",
+            "The Family Legacy: Premium 10x10 Photobook",
+            "VIP BONUS: 30-photo sneak peek the next day",
+            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+          ],
+          "badge": null
+        },
+        {
+          "id": "clasica",
+          "name": "Collection: Classic",
+          "displayName": "Classic",
+          "subtitle": "The Smart Investment",
+          "price": 10500,
+          "audience": "The perfect balance. This collection is for couples who want to enjoy their wedding without interruptions, with the certainty that no key moment will be missed.",
+          "promise": "During 8 hours I'll document the final grooming details, the entire ceremony, a fluid and naturally-posed couple session, and the best of the reception. You'll have the complete story of your big day told in a cinematic style, giving you total freedom to have that drink and dance with your guests.",
+          "features": [
+            "8 hours of continuous coverage",
+            "Final grooming details documentation",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Main Reception coverage",
+            "Premium Digital Gallery in high resolution",
+            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+          ],
+          "badge": "Most Popular"
+        },
+        {
+          "id": "esencial",
+          "name": "Collection: Essential",
+          "displayName": "Essential",
+          "subtitle": "The Right Coverage",
+          "price": 7000,
+          "audience": "Ideal for dynamic and practical weddings where the priority is documenting the heart of the event without extending too many hours.",
+          "promise": "I'll be with you for 5 hours—the exact time needed to capture the ceremony, direct a quick but magazine-worthy couple session, family portraits, and your grand entrance at the reception.",
+          "features": [
+            "5 hours of continuous coverage",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Reception entrance and protocol coverage",
+            "Premium Private Digital Gallery in high resolution"
+          ],
+          "badge": null
+        },
+        {
+          "id": "civil",
+          "name": "Collection: Civil & Intimate",
+          "displayName": "Civil & Intimate",
+          "subtitle": "The Essentials",
+          "price": 4500,
+          "audience": "Designed exclusively for civil ceremonies or very small celebrations.",
+          "promise": "For 3 hours, I'll be a discreet presence documenting the civil ceremony and creating a relaxed couple and family session.",
+          "features": [
+            "3 hours of continuous coverage",
+            "Civil/Intimate Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Premium Private Digital Gallery in high resolution"
+          ],
+          "badge": null
+        }
+      ]
+    },
+    "about": {
+      "heading": "My name is Oscar Sanchez.",
+      "headingHighlight": "YOUR PHOTOGRAPHER.",
+      "description": "My mission is to help you preserve what that day has that is most valuable: the truth of your emotions. I know a wedding passes in a blink. My job isn't to interrupt those moments to ask you to smile at the camera, but to be there, documenting the magic as it naturally unfolds. With a documentary style and cinematic aesthetic, I don't just deliver photographs; I deliver the atmosphere, the colors, and the essence of your big day."
+    },
+    "sessionFeatures": {
+      "description": "A 1.5-hour session in Ciudad Juárez designed to help us connect, ease any camera tension, and capture the real chemistry between you.",
+      "features": [
+        {
+          "label": "Natural Direction",
+          "detail": "zero stiff poses"
+        },
+        {
+          "label": "Style Coaching",
+          "detail": "and posture guidance"
+        },
+        {
+          "label": "Digital Gallery",
+          "detail": "with 20-30 edited photos"
+        }
+      ],
+      "specialOffer": "If after this session you decide to book our Classic or Signature Collection for your wedding, the full value of this session will be credited toward your final package."
+    }
+  }
 }

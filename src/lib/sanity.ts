@@ -484,6 +484,28 @@ export async function getPortfolioImageBySlug(slug: string): Promise<PortfolioIm
 }
 
 /**
+ * Fetch multiple portfolio images by their slugs.
+ * Use this to pin specific photos in a gallery or across multiple sections.
+ * @example getPortfolioImagesBySlugs(['weddings-dscf0001', 'couples-dscf0721', 'editorial-dscf0042'])
+ */
+export async function getPortfolioImagesBySlugs(slugs: string[]): Promise<PortfolioImage[]> {
+  try {
+    const query = `*[_type == "portfolioImage" && slug.current in $slugs] {
+      _id, title, slug, description, category, location, featured, aspectRatio,
+      image { asset { _ref }, hotspot },
+      displayOrder, publishedAt
+    }`
+    const images = await serverClient.fetch<PortfolioImage[]>(query, { slugs })
+    // Return images in the order provided in slugs array
+    const imageMap = new Map(images.map(img => [img.slug.current, img]))
+    return slugs.map(slug => imageMap.get(slug)).filter(Boolean) as PortfolioImage[]
+  } catch (error) {
+    console.error(`Error fetching portfolio images by slugs:`, error)
+    return []
+  }
+}
+
+/**
  * Fetch photos that have a specific displayOrder value within a category.
  * Use this to pick exactly which photo shows as a cover/hero for a category.
  * @example getPortfolioImageByOrder('weddings', 1)  → hero wedding photo

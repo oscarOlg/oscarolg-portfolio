@@ -313,5 +313,172 @@
       "question": "¿Qué ciudades cubres además de Ciudad Juárez?",
       "answer": "Mi enfoque es Ciudad Juárez, aunque puedo analizar solicitudes especiales. Si tu boda es aquí, tengo disponibilidad y conocimiento profundo de los mejores espacios."
     }
-  ]
+  ],
+  "privateInvestmentGuide": {
+    "welcome": {
+      "philosophyIntro": "Sabemos que planear una boda es un reto que exige tiempo, energía y presupuesto. Por eso, el día de tu evento no deberías preocuparte por posar rígidamente frente a una cámara, ni sentir que te pierdes tu propia fiesta.",
+      "philosophyApproach": "A través de un enfoque 100% documental y una edición cinematográfica, capturamos la emoción real de su día. Les damos la libertad absoluta de reír, brindar y estar presentes con quienes más aman. No intervenimos en la magia, solo nos aseguramos de documentarla desde los mejores ángulos.",
+      "philosophyCore": "El pastel se terminará, pero tu historia merece vivirse sin estrés y recordarse con estilo.",
+      "philosophyClosing": "Ustedes viven el momento; nosotros lo convertimos en el primer gran legado visual de su nueva familia."
+    },
+    "hero": {
+      "title": "Disfruten su boda. Yo me encargo de documentarla con estilo.",
+      "subtitle": "Guía Privada de Colecciones y Servicios Fotográficos"
+    },
+    "complements": {
+      "heading": "Piezas de Conservación y Complementos",
+      "subheading": "Amplía tu legado visual con productos de archivar para siempre.",
+      "items": [
+        {
+          "price": 1500,
+          "name": "Colección de Recuerdos",
+          "description": "50 fotos (4x6\") + 2 ampliaciones (8x10\")"
+        },
+        {
+          "price": 2800,
+          "name": "Herencia Familiar",
+          "description": "100 fotos (4x6\") + 4 ampliaciones (8x10\")"
+        },
+        {
+          "price": 3500,
+          "name": "Arte en Casa",
+          "description": "1 grande (16x20\") + 2 medianas (11x14\")"
+        },
+        {
+          "price": 4500,
+          "name": "Photobook Premium 10x10",
+          "description": "Encuadernación de pasta dura"
+        },
+        {
+          "price": 6000,
+          "name": "Photobook Gran Formato 12x12",
+          "description": "Encuadernación de pasta dura"
+        },
+        {
+          "price": 2000,
+          "name": "Hora de Cobertura Extra",
+          "description": "Una hora adicional de documentación el día del evento"
+        }
+      ]
+    },
+    "session": {
+      "heading": "Sesión Previa",
+      "price": 2500,
+      "description": "Una sesión de 1.5 horas en Ciudad Juárez diseñada para conocernos, romper la tensión frente a la cámara y capturar la química real entre ustedes.",
+      "subheading": "Rompamos el hielo antes del gran día.",
+      "title": "Save the Date"
+    },
+    "closing": {
+      "ctaSecondary": "Escribir por WhatsApp",
+      "subheading": "Aseguremos que el día de su boda sea documentado con el estilo que merece.",
+      "ctaPrimary": "Agendar Videollamada de Confirmación",
+      "secondaryLabel": "¿Listos para conversar?",
+      "heading": "¿Listos para apartar su fecha?",
+      "finalMessage": "No es solo una inversión en fotografía. Es invertir en recordar."
+    },
+    "packages": {
+      "heading": "Nuestras Colecciones",
+      "investmentLabel": "Inversión",
+      "experienceLabel": "La Experiencia Incluye:",
+      "subheading": "Cada una está diseñada para ustedes. Compara y elige la que resuene con su visión.",
+      "collections": [
+        {
+          "id": "signature",
+          "name": "Colección: Signature",
+          "displayName": "Signature",
+          "subtitle": "El Legado Completo",
+          "price": 14500,
+          "audience": "Diseñada para la pareja que quiere delegarlo absolutamente todo y vivir su día con cero estrés.",
+          "promise": "Estaré con ustedes durante 10 horas, capturando de manera invisible desde los nervios bonitos del maquillaje hasta el clímax de la pista de baile. Es para quienes no solo quieren una galería digital, sino la tranquilidad de saber que su historia ya incluye un Photobook de arte para su nuevo hogar y un adelanto para sus redes sociales al día siguiente. Ustedes dedíquense a disfrutar la fiesta; yo me encargo del legado familiar.",
+          "features": [
+            "10 horas de cobertura continua",
+            "Cobertura de preparativos (Getting Ready)",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura total de la Recepción",
+            "Galería Digital Premium en alta resolución",
+            "El Legado Familiar: Photobook Premium 10x10",
+            "BONO VIP: Adelanto de 30 fotos al día siguiente ('Sneak Peek')",
+            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+          ],
+          "badge": null
+        },
+        {
+          "id": "clasica",
+          "name": "Colección: Clásica",
+          "displayName": "Clásica",
+          "subtitle": "La Inversión Inteligente",
+          "price": 10500,
+          "audience": "El equilibrio perfecto. Esta colección es para las parejas que quieren disfrutar de su boda sin interrupciones, con la seguridad de que ningún momento clave se quedará fuera.",
+          "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico, dándoles total libertad para tomarse ese trago y bailar con sus invitados.",
+          "features": [
+            "8 horas de cobertura continua",
+            "Cobertura de últimos detalles del arreglo",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura principal de la Recepción",
+            "Galería Digital Premium en alta resolución",
+            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+          ],
+          "badge": "La Más Elegida"
+        },
+        {
+          "id": "esencial",
+          "name": "Colección: Esencial",
+          "displayName": "Esencial",
+          "subtitle": "La Cobertura Justa",
+          "price": 7000,
+          "audience": "Ideal para bodas dinámicas y prácticas donde la prioridad es documentar el corazón del evento sin extenderse demasiadas horas.",
+          "promise": "Estaré con ustedes durante 5 horas, el tiempo exacto y necesario para capturar la ceremonia, dirigir una sesión de esposos rápida pero de revista, los retratos familiares y su gran entrada triunfal a la recepción.",
+          "features": [
+            "5 horas de cobertura continua",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura de entrada y protocolo en Recepción",
+            "Galería Digital Privada en alta resolución"
+          ],
+          "badge": null
+        },
+        {
+          "id": "civil",
+          "name": "Colección: Civil e Íntima",
+          "displayName": "Civil e Íntima",
+          "subtitle": "Lo Esencial",
+          "price": 4500,
+          "audience": "Pensada exclusivamente para bodas por el civil o celebraciones muy pequeñas.",
+          "promise": "Durante 3 horas, seré una presencia discreta para documentar la ceremonia legal y realizar una sesión relajada de pareja y familia.",
+          "features": [
+            "3 horas de cobertura continua",
+            "Cobertura de Ceremonia legal / íntima",
+            "Sesión formal de pareja y retratos familiares",
+            "Galería Digital Privada en alta resolución"
+          ],
+          "badge": null
+        }
+      ]
+    },
+    "about": {
+      "heading": "Me llamo Oscar Sanchez.",
+      "headingHighlight": "TU FOTÓGRAFO.",
+      "description": "Mi misión es ayudarte a conservar lo que ese día tiene de más valioso: la verdad de sus emociones. Sé que una boda pasa en un suspiro. Mi trabajo no es interrumpir esos momentos para pedirles que sonrían a la cámara, sino estar ahí, documentando la magia mientras sucede de forma natural. Con un estilo documental y una estética cinematográfica, no solo entrego fotografías; entrego la atmósfera, los colores y la esencia de su gran día."
+    },
+    "sessionFeatures": {
+      "description": "Una sesión de 1.5 horas en Ciudad Juárez diseñada para conocernos, romper la tensión frente a la cámara y capturar la química real entre ustedes.",
+      "features": [
+        {
+          "label": "Dirección natural",
+          "detail": "cero poses acartonadas"
+        },
+        {
+          "label": "Asesoría de estilo",
+          "detail": "y postura"
+        },
+        {
+          "label": "Galería digital",
+          "detail": "con 20-30 fotos editadas"
+        }
+      ],
+      "specialOffer": "Si después de esta sesión deciden invertir en nuestra Colección Clásica o Signature para el día de su boda, el valor de esta sesión se bonificará íntegramente a su paquete final."
+    }
+  }
 }

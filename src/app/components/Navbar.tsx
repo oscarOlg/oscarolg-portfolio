@@ -49,8 +49,7 @@ export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const locale = getSiteLocale(lang);
   const headerRef = useRef<HTMLElement>(null);
-  const isHomepage = pathname === "/";
-
+  const isHomepage = pathname === "/";  const isPrivateGuide = pathname.includes('/private-investment-guide');
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     function handleClickOutside(e: MouseEvent) {
@@ -63,7 +62,7 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    if (!isHomepage) {
+    if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
       return;
     }
@@ -73,7 +72,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomepage, TOP_TRANSPARENCY_THRESHOLD]);
+  }, [isHomepage, isPrivateGuide, TOP_TRANSPARENCY_THRESHOLD]);
 
   const navLinks = [
     { href: "/portfolio", label: locale.nav.portfolio },
@@ -85,7 +84,7 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
-  const useTransparentStyle = isHomepage && isAtTop && !isMobileMenuOpen;
+  const useTransparentStyle = (isHomepage || isPrivateGuide) && isAtTop && !isMobileMenuOpen;
 
   return (
     <header
