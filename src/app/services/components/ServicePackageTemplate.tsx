@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ServicePackage, ServiceConfig } from "@/types/sanity";
 import { useLanguage, pickLang } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
+import { trackServicesPackageInterest, trackCTAClick } from "@/lib/analytics";
 
 function formatPrice(price: number) {
   return "$" + price.toLocaleString("es-MX");
@@ -117,6 +118,10 @@ function PackageCard({
         {isPopular ? (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-accent text-secondary uppercase tracking-widest text-xs py-4 hover:bg-opacity-95 transition-all duration-200 font-bold shadow-sm hover:shadow-md"
           >
             {ctaText}
@@ -124,6 +129,10 @@ function PackageCard({
         ) : pkg.ctaVariant === "outline" ? (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-transparent border-2 border-secondary text-secondary uppercase tracking-widest text-xs py-3 hover:bg-secondary hover:text-dominant transition-all duration-200 font-semibold"
           >
             {ctaText}
@@ -131,6 +140,10 @@ function PackageCard({
         ) : (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-secondary text-dominant uppercase tracking-widest text-xs py-4 hover:bg-accent transition-colors duration-200 font-bold shadow-sm hover:shadow-md"
           >
             {ctaText}

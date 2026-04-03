@@ -1,11 +1,20 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
 import { getLeadMagnetBySlug } from "@/config/lead-magnets";
 import Socials from "@/app/components/Socials";
+import {
+  trackCampaignLandingView,
+  trackLeadFormView,
+  trackLeadFormStarted,
+  trackLeadFormFieldFilled,
+  trackLeadFormCompleted,
+  trackCampaignSignup,
+  trackLeadFormError,
+} from "@/lib/analytics";
 
 interface GiveawayLeadFormProps {
   campaignSlug: string;
@@ -41,6 +50,13 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
   const [copied, setCopied] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [formStarted, setFormStarted] = useState(false);
+
+  // Track campaign landing page view on component mount
+  useEffect(() => {
+    trackCampaignLandingView(campaignSlug, lang);
+    trackLeadFormView("giveaway_engagement", lang);
+  }, [campaignSlug, lang]);
 
   if (!content) {
     return <div className="text-center py-12">{locale.landing.loadingForm}</div>;
@@ -66,22 +82,46 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
     if (formData.budget) {
       lines.push(`${content.form.msgBudget} ${formData.budget}`);
     }
+
     return lines.join("\n");
   }, [formData, content]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+
+    // Track first field interaction (form start)
+    if (!formStarted && value.length > 0) {
+      setFormStarted(true);
+      trackLeadFormStarted("giveaway_engagement", lang);
+    }
+
+    // Track field completion
+    if (value.length > 0) {
+      trackLeadFormFieldFilled("giveaway_engagement", id, value, lang);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitStatus("idle");
-    setErrorMessage("");
-
+    
     try {
+      // Track form completion (all fields filled)
+      const fieldsCount = Object.values(formData).filter((val) => val.length > 0).length;
+      trackLeadFormCompleted("giveaway_engagement", fieldsCount, lang);
+
+      // Track campaign signup (primary conversion for campaign)
+      trackCampaignSignup(
+        campaignSlug,
+        formData.phone || formData.name,
+        lang
+      );
+
       const whatsappUrl = getWhatsAppUrl(generatedMessage);
       if (!whatsappUrl) {
         throw new Error("Missing NEXT_PUBLIC_WHATSAPP_NUMBER");
@@ -93,6 +133,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
       setSubmitStatus("success");
     } catch (error) {
       console.error("WhatsApp open error:", error);
+      trackLeadFormError("giveaway_engagement", "whatsapp_failed", lang);
       setSubmitStatus("error");
       setErrorMessage(content.form.errorMsg);
     }

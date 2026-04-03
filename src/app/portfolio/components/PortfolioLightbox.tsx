@@ -7,6 +7,8 @@ import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import type { PortfolioImage } from '@/types/sanity'
 import { getImageUrl } from '@/lib/sanity'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { trackPortfolioGalleryOpen, trackPortfolioImageView } from '@/lib/analytics'
 
 interface PortfolioLightboxProps {
   images: PortfolioImage[]
@@ -17,6 +19,7 @@ export default function PortfolioLightbox({
   images,
   categoryDisplayNames,
 }: PortfolioLightboxProps) {
+  const { lang } = useLanguage()
   const [lightboxIndex, setLightboxIndex] = useState(-1)
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
 
@@ -50,7 +53,11 @@ export default function PortfolioLightbox({
                 className="break-inside-avoid mb-2 md:mb-2.5"
               >
                 <motion.button
-                  onClick={() => setLightboxIndex(index)}
+                  onClick={() => {
+                    trackPortfolioGalleryOpen(item.category, lang)
+                    trackPortfolioImageView(item.category, index, images.length, lang)
+                    setLightboxIndex(index)
+                  }}
                   whileHover={{ y: -0.5 }}
                   transition={{ duration: 0.18, ease: 'easeOut' }}
                   className="relative group overflow-hidden cursor-pointer w-full text-left border-0 p-0 outline-none hover:outline-none"
@@ -97,6 +104,11 @@ export default function PortfolioLightbox({
       <Lightbox
         open={lightboxIndex >= 0}
         index={lightboxIndex}
+        on={{ view: ({ index: currentIndex }) => {
+          if (currentIndex >= 0 && currentIndex < images.length) {
+            trackPortfolioImageView(images[currentIndex].category, currentIndex, images.length, lang)
+          }
+        }}}
         close={() => setLightboxIndex(-1)}
         slides={lightboxSlides}
         styles={{

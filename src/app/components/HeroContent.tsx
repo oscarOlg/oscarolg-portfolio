@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
+import { useScrollTracking } from "@/lib/analytics";
 
 /**
  * Client component for above-the-fold hero animations.
@@ -13,6 +14,9 @@ export default function HeroContent() {
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
   const hero = locale.homepage.hero;
+
+  // Track homepage scroll engagement
+  useScrollTracking("homepage");
 
   const displayHeading = hero.title;
   const displayHeadingItalic = hero.titleAccent;

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getSiteLocale } from '@/i18n/locales'
+import { trackCTAClick } from '@/lib/analytics'
 
 interface FloatingCTAProps {
   category?: string
@@ -51,6 +52,7 @@ export default function FloatingCTA({ category }: FloatingCTAProps) {
       {/* Contact Button */}
       <Link
         href="/contact"
+        onClick={() => trackCTAClick('floating_contact', 'portfolio_page', lang)}
         className="flex items-center justify-center gap-2 bg-accent/90 backdrop-blur-sm hover:bg-accent text-secondary font-sans font-semibold text-[11px] uppercase tracking-[0.14em] px-5 py-3 rounded-full shadow-lg shadow-secondary/20 transition-all transform hover:scale-[1.03]"
       >
         <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,6 +64,7 @@ export default function FloatingCTA({ category }: FloatingCTAProps) {
       {/* Pricing Button */}
       <Link
         href={servicesHref}
+        onClick={() => trackCTAClick('floating_services', 'portfolio_page', lang)}
         className="flex items-center justify-center gap-2 bg-secondary/82 backdrop-blur-sm hover:bg-secondary/95 text-dominant font-sans font-semibold text-[11px] uppercase tracking-[0.14em] px-5 py-3 rounded-full shadow-lg shadow-secondary/20 transition-all transform hover:scale-[1.03]"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

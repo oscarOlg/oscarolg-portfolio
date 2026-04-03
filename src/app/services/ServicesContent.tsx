@@ -10,6 +10,7 @@ import type { ServiceConfig, ServicePackage, PortfolioImage } from "@/types/sani
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
 import InlineBoldText from "@/app/components/InlineBoldText";
+import { useScrollTracking } from "@/lib/analytics";
 
 interface Props {
   config: ServiceConfig;
@@ -18,21 +19,32 @@ interface Props {
   weddingImages: PortfolioImage[];
   packageImageOverrides?: Record<string, string>;
 }
-type LocalizedTestimonial = {
-  author: string;
-  text: string;
-  highlight: string;
-  imageAlt: string;
-};
 
-type LocalizedFaq = {
-  question: string;
-  answer: string;
-};
-
-export default function ServicesContent({ config, packages, heroImage, weddingImages, packageImageOverrides = {} }: Props) {
+export default function ServicesContent({
+  config,
+  packages,
+  heroImage,
+  weddingImages,
+  packageImageOverrides,
+}: Props) {
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
+
+  // Track services page scroll engagement
+  useScrollTracking("services_page");
+
+  type LocalizedTestimonial = {
+    author: string;
+    text: string;
+    highlight: string;
+    imageAlt: string;
+  };
+
+  type LocalizedFaq = {
+    question: string;
+    answer: string;
+  };
+
   const services = locale.services as Record<string, unknown>;
   const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1200) : null;
   const galleryTop = weddingImages.filter((img) => img.usageSection === "curated-top").slice(0, 6);
