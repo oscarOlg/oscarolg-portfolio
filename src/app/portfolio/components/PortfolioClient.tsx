@@ -1,76 +1,50 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PortfolioLightbox from './PortfolioLightbox';
-import PortfolioNav, {
-  PORTFOLIO_CATEGORIES,
-  type PortfolioCategoryKey,
-} from './PortfolioNav';
 import FloatingCTA from '../components/FloatingCTA';
 import type { PortfolioImage } from '@/types/sanity';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { t } from '@/lib/translations';
+import { getSiteLocale } from '@/i18n/locales';
 
 interface PortfolioClientProps {
   allImages: PortfolioImage[];
   categoryDisplayNames: Record<string, string>;
 }
 
-const isPortfolioCategory = (value: string): value is PortfolioCategoryKey =>
-  PORTFOLIO_CATEGORIES.some((category) => category.key === value);
-
 export default function PortfolioClient({
   allImages,
   categoryDisplayNames,
 }: PortfolioClientProps) {
-  const searchParams = useSearchParams();
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
-
-  // Get active category from URL
-  const categoryParam = searchParams?.get('category');
-  const activeCategory: 'all' | PortfolioCategoryKey =
-    categoryParam && isPortfolioCategory(categoryParam) ? categoryParam : 'all';
-
-  // Filter images client-side (instant, no API call)
-  const filteredImages =
-    activeCategory === 'all'
-      ? allImages
-      : allImages.filter((image) => image.category === activeCategory);
+  const locale = getSiteLocale(lang);
+  const portfolio = locale.portfolio;
 
   return (
     <div className="w-full flex flex-col items-center">
-      <PortfolioNav activeCategory={activeCategory} />
-
-      {/* Main Content */}
-      <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 flex flex-col items-center">
-        {/* Show loading state with fade effect when switching categories */}
+      <div className="w-full max-w-[1700px] mx-auto px-3 md:px-5 pt-6 md:pt-8">
         <div className="w-full">
           <PortfolioLightbox
-            images={filteredImages}
+            images={allImages}
             categoryDisplayNames={categoryDisplayNames}
           />
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-24 text-center">
+        <div className="mt-16 md:mt-20 text-center pb-8">
           <h3 className="font-serif text-2xl mb-6">
-            {tr(t.portfolio.ctaHeading)}
+            {portfolio.ctaHeading}
           </h3>
           <Link
             href="/contact"
             className="inline-block bg-accent text-secondary font-sans uppercase tracking-widest text-sm py-4 px-10 hover:bg-opacity-90 transition-all font-semibold"
           >
-            {tr(t.portfolio.ctaButton)}
+            {portfolio.ctaButton}
           </Link>
         </div>
       </div>
 
       {/* Floating CTA Buttons */}
-      <FloatingCTA
-        category={activeCategory === 'all' ? undefined : activeCategory}
-      />
+      <FloatingCTA category="weddings" />
     </div>
   );
 }

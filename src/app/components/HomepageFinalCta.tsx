@@ -2,30 +2,17 @@
 
 import Link from "next/link";
 import AnimatedSection from "./AnimatedSection";
-import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteLocale } from "@/i18n/locales";
 
-interface HomepageFinalCtaProps {
-  headingEs?: string;
-  headingEn?: string;
-  locationEs?: string;
-  locationEn?: string;
-  buttonTextEs?: string;
-  buttonTextEn?: string;
-}
-
-export default function HomepageFinalCta({
-  headingEs = "¿Listo para crear algo hermoso e irrepetible?",
-  headingEn,
-  locationEs = "Ciudad Juárez & México",
-  locationEn,
-  buttonTextEs = "Reservar fecha",
-  buttonTextEn,
-}: HomepageFinalCtaProps) {
+export default function HomepageFinalCta() {
   const { lang } = useLanguage();
+  const locale = getSiteLocale(lang);
+  const finalCta = locale.homepage.finalCta;
 
-  const displayHeading = pickLang(lang, headingEs, headingEn) ?? headingEs;
-  const displayLocation = pickLang(lang, locationEs, locationEn) ?? locationEs;
-  const displayButtonText = pickLang(lang, buttonTextEs, buttonTextEn) ?? buttonTextEs;
+  const displayHeading = finalCta.heading;
+  const displayLocation = finalCta.location;
+  const displayButtonText = finalCta.button;
 
   return (
     <AnimatedSection>

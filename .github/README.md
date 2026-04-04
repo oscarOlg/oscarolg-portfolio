@@ -41,6 +41,19 @@ oscarolg-portfolio/
   - File structure knowledge base
   - Interaction guidelines and best practices
 
+### `design-strategy.agent.md`
+- **Purpose:** Senior web developer with marketing & design specialization
+- **Expertise:** Translating business logic into conversion-optimized, responsive web experiences
+- **Best for:**
+  - Component design and page layout optimization
+  - Lead generation funnel optimization
+  - Responsive design patterns and mobile-first architecture
+  - Design system consistency
+  - Analytics-aware UX decisions
+  - Service/pricing package presentation
+  - Gallery and portfolio interaction patterns
+- **Usage:** Mention "design strategy" or ask about UX/conversion optimization
+
 ---
 
 ## Files in `.github/reports/`
@@ -100,6 +113,7 @@ This keeps the project history organized and accessible.
 
 ## Quick Links
 
-- **Agent:** [`.github/agents/portfolio-dev.agent.md`](.github/agents/portfolio-dev.agent.md)
+- **Portfolio Dev Agent:** [`.github/agents/portfolio-dev.agent.md`](.github/agents/portfolio-dev.agent.md)
+- **Design Strategy Agent:** [`.github/agents/design-strategy.agent.md`](.github/agents/design-strategy.agent.md)
 - **Issue Report:** [`.github/reports/ISSUE-data-inconsistency-analysis.md`](.github/reports/ISSUE-data-inconsistency-analysis.md)
 - **Solution Report:** [`.github/reports/SOLUTION-unified-data-implementation.md`](.github/reports/SOLUTION-unified-data-implementation.md)

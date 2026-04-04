@@ -1,12 +1,15 @@
 // src/components/Socials.tsx
 import React from "react";
 import { InstagramIcon, WhatsappIcon, EmailIcon, FacebookIcon } from "./Icons";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
+
+const whatsappUrl = getWhatsAppUrl();
 
 const socialsData = [
     { name: "Email", url: "mailto:oscar.olg.photo@gmail.com", icon: <EmailIcon /> },
     { name: "Facebook", url: "https://www.facebook.com/profile.php?id=100088045982178", icon: <FacebookIcon /> },
     { name: "Instagram", url: "https://www.instagram.com/oscar.olg/", icon: <InstagramIcon /> },
-    { name: "WhatsApp", url: "whatsapp://send?phone=+526562932374", icon: <WhatsappIcon /> },
+  ...(whatsappUrl ? [{ name: "WhatsApp", url: whatsappUrl, icon: <WhatsappIcon /> }] : []),
 ];
 
 interface SocialsProps {

@@ -3,17 +3,20 @@
 import Link from 'next/link';
 import Socials from './Socials';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { t } from '@/lib/translations';
+import { getSiteLocale } from '@/i18n/locales';
+import { getWhatsAppDisplayNumber, getWhatsAppUrl } from '@/lib/whatsapp';
 
 export default function Footer() {
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => (lang === 'en' ? obj.en : obj.es);
+  const locale = getSiteLocale(lang);
+  const whatsappUrl = getWhatsAppUrl();
+  const whatsappDisplayNumber = getWhatsAppDisplayNumber();
 
   const footerLinks = [
-    { href: '/portfolio', label: tr(t.footer.links.portfolio) },
-    { href: '/services',  label: tr(t.footer.links.services) },
-    { href: '/about',     label: tr(t.footer.links.about) },
-    { href: '/contact',   label: tr(t.footer.links.contact) },
+    { href: '/portfolio', label: locale.footer.links.portfolio },
+    { href: '/services',  label: locale.footer.links.services },
+    { href: '/about',     label: locale.footer.links.about },
+    { href: '/contact',   label: locale.footer.links.contact },
   ];
 
   return (
@@ -30,7 +33,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="font-serif italic text-lg text-secondary/80 max-w-md mb-5">
-              {tr(t.footer.tagline)}
+              {locale.footer.tagline}
             </p>
             <a
               href="mailto:oscar.olg.photo@gmail.com"
@@ -42,7 +45,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-center text-center">
             <p className="font-sans text-[11px] uppercase tracking-[0.24em] text-secondary/45 mb-5">
-              {tr(t.footer.navHeading)}
+              {locale.footer.navHeading}
             </p>
             <div className="flex flex-col gap-3 items-center">
               {footerLinks.map(({ href, label }) => (
@@ -59,33 +62,26 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-end text-center md:text-right">
             <p className="font-sans text-[11px] uppercase tracking-[0.24em] text-secondary/45 mb-5">
-              {tr(t.footer.contactHeading)}
+              {locale.footer.contactHeading}
             </p>
             <p className="font-sans text-sm text-secondary/80 mb-2">
-              {tr(t.footer.city)}
+              {locale.footer.city}
             </p>
-            <a
-              href="https://wa.me/526562932374"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-sans text-sm text-secondary/80 hover:text-accent transition-colors mb-5"
-            >
-              WhatsApp: +52 656 293 2374
-            </a>
+            {whatsappUrl && whatsappDisplayNumber && (
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-sm text-secondary/80 hover:text-accent transition-colors mb-5"
+              >
+                WhatsApp: {whatsappDisplayNumber}
+              </a>
+            )}
             <Socials
               containerClassName="flex gap-5"
               itemClassName="text-secondary/70 hover:text-accent transition-colors"
             />
           </div>
-        </div>
-
-        <div className="mt-16 pt-8 border-t border-gray-200/70 flex flex-col md:flex-row gap-3 items-center justify-between text-center md:text-left">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-secondary/45">
-            Oscar Olg Photography
-          </p>
-          <p className="font-sans text-xs text-secondary/50">
-            {tr(t.footer.tagline2)}
-          </p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,491 @@
+{
+  "nav": {
+    "portfolio": "Portafolio",
+    "services": "Inversión",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "mainAria": "Navegación principal"
+  },
+  "footer": {
+    "tagline": "Fotografía de bodas en Ciudad Juárez para vivir su día sin estrés y recordarlo con estilo.",
+    "navHeading": "Navegación",
+    "contactHeading": "Contacto",
+    "city": "Ciudad Juárez, México",
+    "tagline2": "Vivan su día sin estrés. Recuérdenlo con estilo.",
+    "links": {
+      "portfolio": "Portafolio",
+      "services": "Servicios",
+      "about": "Acerca de",
+      "contact": "Contacto"
+    }
+  },
+  "homepage": {
+    "hero": {
+      "title": "Vivan su boda sin estrés,",
+      "titleAccent": "Recuérdenla con estilo.",
+      "subtitle": "Fotografía cinematográfica en Ciudad Juárez que retrata la emoción real de su día, mientras ustedes disfrutan cada segundo de su evento.",
+      "ctaPrimary": "Consultar disponibilidad",
+      "ctaSecondary": "Ver Portafolio",
+      "urgency": "Fechas de fin de semana limitadas para 2026"
+    },
+    "work": {
+      "heading": "Historias reales, emoción auténtica",
+      "subtitle": "Una selección de bodas reales con mirada editorial, emociones auténticas y una experiencia sin estrés.",
+      "viewAll": "Ver portafolio completo",
+      "viewWeddingAria": "Ver portafolio de bodas"
+    },
+    "investment": {
+      "heading": "Disfruten su boda. Yo me encargo de convertirla en memoria con estilo.",
+      "paragraph1": "Mi enfoque combina **narrativa documental** y mirada editorial para que cada imagen se sienta auténtica, elegante y profundamente viva.",
+      "paragraph2": "Desde la planeación hasta la entrega final, reciben **acompañamiento cercano**, comunicación clara y una cobertura adaptada a su ritmo para vivir el evento con **total tranquilidad**.",
+      "cta": "Ver inversión"
+    },
+    "finalCta": {
+      "heading": "Tu historia merece vivirse de forma especial. Conversemos sobre cómo podemos acompañarte.",
+      "location": "Fechas de fin de semana limitadas para 2026",
+      "button": "Consultar disponibilidad"
+    }
+  },
+  "about": {
+    "heading": "Oscar Olg Photography — Fotógrafo de Bodas en Ciudad Juárez",
+    "paragraphs": [
+      "Soy Oscar, la persona detrás de Oscar Olg Photography. Trabajo desde Ciudad Juárez con una especialidad clara: fotografía editorial de bodas, retratos y parejas con un proceso pensado para que se sientan acompañados de principio a fin.",
+      "Combino atención técnica al detalle con sensibilidad artística para capturar personas, vínculos y momentos que merecen permanecer. No busco intervenir cada segundo; creo el espacio para que vivan su día con libertad mientras documento lo esencial con intención editorial.",
+      "Creo en una fotografía de boda natural, elegante y profundamente humana. Mi promesa no es solo entregar imágenes bonitas, sino transformar la emoción de hoy en un legado visual tangible que puedan revivir por años.",
+      "Desde la primera conversación, mi objetivo es darles claridad, acompañamiento y tranquilidad total para que disfruten el proceso sin estrés. Quiero que sepan que cada instante irrepetible está en manos seguras."
+    ],
+    "cta": "Consultar disponibilidad",
+    "imageAlt": "Oscar Olg Photography - Fotógrafo de bodas"
+  },
+  "contact": {
+    "heading": "Consulten disponibilidad para su boda",
+    "intro": "Compartan los datos clave de su fecha y abriremos un WhatsApp listo para enviar. Respuesta rápida, proceso claro y sin fricción.",
+    "heroEyebrow": "Construyamos su historia",
+    "imageAlt": "Fotografía de contacto",
+    "nameLabel": "Nombre *",
+    "phoneLabel": "Teléfono",
+    "dateLabel": "Fecha de boda *",
+    "venueLabel": "Lugar*",
+    "photoPriorityLabel": "¿Qué es lo más importante para ustedes en sus fotos de boda? *",
+    "photoPriorityPlaceholder": "Selecciona una opción",
+    "photoPriorityOptions": [
+      "Vivir el día sin estrés y que todo fluya",
+      "Tener fotos naturales y elegantes, sin poses forzadas",
+      "Conservar momentos reales con valor emocional",
+      "Recibir acompañamiento claro antes, durante y después"
+    ],
+    "weddingDetailsLabel": "Detalles clave de su boda",
+    "weddingDetailsPlaceholder": "Ej.: tipo de ceremonia, horario aproximado, momentos importantes...",
+    "submitButton": "Enviar por WhatsApp",
+    "sentButton": "WhatsApp abierto",
+    "successMsg": "✓ Abriendo WhatsApp con su mensaje precargado.",
+    "errorMsg": "No se pudo abrir WhatsApp. Usa el botón de copiar mensaje y pégalo en el chat.",
+    "copyButton": "Copiar Mensaje",
+    "copiedButton": "¡Copiado al Portapapeles!",
+    "quickHeading": "Vista previa del mensaje",
+    "quickLead": "Comparte los datos clave de tu boda.",
+    "quickBody": "Generaremos un mensaje precargado en WhatsApp para que me contactes en un solo toque.",
+    "nextStepsTitle": "Qué sigue después",
+    "nextStepsItems": [
+      "1. Revisamos los detalles de su evento.",
+      "2. Confirmamos disponibilidad y la colección ideal.",
+      "3. Reciben un siguiente paso claro para reservar su fecha."
+    ],
+    "sidebarQuestion": "¿Prefieren ver historias reales primero?",
+    "sidebarPortfolioCta": "Ver portafolio",
+    "msgHello": "¡Hola Oscar! Soy",
+    "msgInterestedIn": "Me interesa cobertura de boda",
+    "msgDate": "La fecha de boda es",
+    "msgVenue": "Lugar o ciudad:",
+    "msgPhotoPriority": "Lo más importante para nosotros es:",
+    "msgDetails": "Te comparto más detalles:",
+    "msgDefaultName": "[Tu Nombre]"
+  },
+  "services": {
+    "mainPromise": "Disfruten su boda. **Yo me encargo de su historia.**",
+    "oscarStory": "La planeación, la emoción de los meses anteriores, y de repente, el día de tu boda pasa en un suspiro. Cuando vuelvas a ver estas imágenes dentro de 10 o 20 años —en la sala de tu casa o compartiéndolas con tu familia— no quieres recordar lo cansado que fue posar para la cámara; necesitas revivir exactamente **la magia y la conexión** que sintieron en ese instante.\n\nPor eso me tomo tan en serio cada evento, porque no se trata solo de entregar imágenes bonitas, sino de crear un **legado visual**. Cada historia es única y merece ser documentada con la misma autenticidad con la que se vive. He diseñado estas colecciones pensando en diferentes ritmos de celebración, pero todas comparten mi promesa innegociable: **libertad total para disfrutar**, **cero poses incómodas** y una **estética cinematográfica** impecable.",
+    "customizableNote": "Cada paquete abajo es totalmente personalizable. Si necesitas ajustes, complementos o una configuración distinta, simplemente comparte tus detalles y definimos la opción ideal para tu visión.",
+    "investmentGuideHeading": "¿Listos para ver todas las opciones y precios?",
+    "investmentGuideBody": "Cuéntenme un poco sobre su gran día y continuemos la plática por **WhatsApp**. Les haré llegar mi **guía de inversión detallada con total transparencia**, para que tengan toda la claridad que necesitan desde el primer momento.",
+    "sendGuideButtonText": "SOLICITAR GUÍA DE INVERSIÓN COMPLETA",
+    "beforePricingNote": "Los precios abajo son nuestra estructura base. Veremos juntos cualquier personalización que necesites.",
+    "eyebrow": "Inversión",
+    "title": "La propuesta principal para su boda sin estrés",
+    "subheading": "Cobertura pensada para acompañarlos con claridad y tranquilidad. Si después quieren ver ajustes, complementos o una configuración distinta, les comparto todo por WhatsApp.",
+    "heroAlt": "Detalle de fotografía elegante",
+    "ctaPrimary": "Consultar disponibilidad",
+    "ctaSecondary": "Ver colecciones",
+    "trustBullets": [
+      "Acompañamiento cercano desde la planeación hasta la entrega final",
+      "Cobertura editorial que prioriza momentos reales sobre poses forzadas",
+      "Inversión transparente para decidir con tranquilidad"
+    ],
+    "qualifierTitle": "Esta propuesta es para ustedes si...",
+    "qualifierItems": [
+      "Quieren disfrutar su boda sin sentirse en sesión todo el día",
+      "Buscan imágenes elegantes que conserven emoción real",
+      "Valoran comunicación clara y un proceso sin fricción"
+    ],
+    "collectionsTitle": "La Colección Más Elegida",
+    "collectionsIntro": "",
+    "sessionTitle": "Sesión previa y casual",
+    "sessionIntro": "Ideal para conectar con cámara y llegar al gran día con total naturalidad.",
+    "addOnsTitle": "Piezas de conservación y complementos",
+    "addOnsIntro": "Transformen sus recuerdos en piezas físicas para su hogar y su familia.",
+    "faqTitle": "Preguntas frecuentes",
+    "faqIntro": "Respondemos lo más importante antes de reservar para que tomen una decisión segura.",
+    "finalCtaTitle": "Si sienten que conectamos, revisemos disponibilidad",
+    "finalCtaBody": "Trabajo un número limitado de bodas por temporada para cuidar cada historia con atención total.",
+    "badgeDefault": "Más Popular",
+    "defaultCta": "Reservar fecha",
+    "quoteCta": "Cotizar",
+    "giftIncluded": "Bono incluido",
+    "specialOffer": "Oferta especial",
+    "complementosHeading": "Complementos",
+    "globalBenefitsFallback": "Incluido en todas las colecciones",
+    "noteLabel": "Nota",
+    "introLead": "Tu boda pasa rápido. Lo que se queda por décadas es su legado visual. Esta página está diseñada para guiarlos con claridad del valor a la acción.",
+    "clientStoryLabel": "Prueba real",
+    "galleryAltStory": "Historia de boda",
+    "galleryAltFrame": "Fotograma de boda",
+    "packages": {
+      "mostPopularLabel": "La colección más elegida",
+      "includedLabel": "QUÉ INCLUYE",
+      "bonusesLabel": "Bonos",
+      "durationLabel": "DURACIÓN",
+      "investmentLabel": "INVERSIÓN",
+      "fullGuideCta": "Solicitar Guía de Inversión Completa",
+      "sessionLabel": "Sesión previa y casual",
+      "sessionCta": "Consultar fechas para sesión",
+      "addOnsLabel": "Complementos y agregados",
+      "aLaCarteLabel": "Opciones a la carta",
+      "placeholderImageText": "Reemplaza con imagen de la colección destacada"
+    },
+    "pricingFaqs": [
+      {
+        "question": "¿Qué pasa si no sabemos posar?",
+        "answer": "Es lo más común, no se preocupen. Mi enfoque no es forzar poses incómodas, sino guiarlos sutilmente para que interactúen de forma natural. La sesión previa Save the Date funciona como un ensayo relajado para romper el hielo y descubrir lo fácil que es salir increíbles."
+      },
+      {
+        "question": "No queremos pasar horas tomándonos fotos el día de la boda. Queremos disfrutar la fiesta. ¿Cómo manejas los tiempos?",
+        "answer": "Totalmente de acuerdo. Hacemos la sesión formal de pareja de forma ágil para que regresen a su evento. El resto del día hago fotografía documental: mi prioridad es capturar momentos espontáneos, risas y acción real, sin que ustedes estén pendientes de la cámara."
+      },
+      {
+        "question": "¿Cuánto tiempo tardas en entregarnos nuestras fotografías?",
+        "answer": "Con Signature reciben un Sneak Peek de 30 fotos al día siguiente para compartir de inmediato. La galería completa con edición cinematográfica se entrega en un plazo aproximado de 4 a 6 semanas."
+      },
+      {
+        "question": "¿Hay costos ocultos? ¿Qué pasa si la fiesta está increíble y queremos que te quedes más tiempo?",
+        "answer": "Cero costos ocultos. La transparencia es prioridad. Si el día de la boda la pista está a tope y deciden extender cobertura, pueden solicitar horas extra por $2,000 MXN cada una. Ustedes siempre tienen el control de esa decisión."
+      },
+      {
+        "question": "¿Entregas todos los archivos RAW o cómo funciona el estilo cinematográfico?",
+        "answer": "No entrego archivos RAW. Hago una curaduría cuidadosa de los mejores momentos y cada fotografía incluye nuestra edición cinematográfica: tratamiento de color e iluminación que da acabado de película a sus recuerdos."
+      },
+      {
+        "question": "¿Nos ayudas a decidir lugares en Ciudad Juárez para la sesión previa?",
+        "answer": "Claro. Les comparto recomendaciones de locaciones increíbles en la ciudad y alrededores, además de una guía rápida de colores y outfits para que todo armonice con el estilo fotográfico."
+      },
+      {
+        "question": "Nos encanta la experiencia. ¿Cuál es el siguiente paso para apartar fecha?",
+        "answer": "Es sencillo: agendamos una videollamada corta, eligen la colección ideal para su día y apartamos fecha con un anticipo del 30% y contrato digital. Después de eso, yo me encargo del resto."
+      }
+    ]
+  },
+  "portfolio": {
+    "ctaHeading": "¿Listos para preservar su historia con estilo?",
+    "ctaButton": "Consultar Disponibilidad",
+    "floatingContact": "Contactar",
+    "floatingPrices": "Inversión"
+  },
+  "testimonials": [
+    {
+      "author": "Ketzia & Marcos",
+      "text": "Oscar logró captar momentos que ni siquiera nos dimos cuenta que estaban pasando. Ver nuestras fotos fue revivir la boda completa. Su estilo es súper natural y nos hizo sentir súper cómodos.",
+      "highlight": "Ver nuestras fotos fue revivir la boda completa.",
+      "date": "2025-06-15",
+      "imageTitle": "Weddings - DSCF8121",
+      "imageAlt": "Ketzia & Marcos - Fotografía de boda editorial"
+    },
+    {
+      "author": "Analaura & Job",
+      "text": "No queríamos las típicas fotos posadas y aburridas. Oscar entendió perfecto lo que buscábamos. Las fotos del arreglo y de la fiesta parecen sacadas de una película. ¡100% recomendado!",
+      "highlight": "Nuestras fotos parecen sacadas de una película.",
+      "date": "2025-08-20",
+      "imageTitle": "Weddings - DSCF0232",
+      "imageAlt": "Analaura & Job - Fotografía de boda cinematográfica"
+    }
+  ],
+  "landing": {
+    "loading": "Cargando...",
+    "loadingForm": "Cargando formulario...",
+    "engagementGiveaway": {
+      "hero": {
+        "eyebrow": "¿Recién comprometidos?",
+        "title": "¡Giveaway de Sesión de Compromiso!",
+        "body": "Esta sesión de compromiso de cortesía es una oportunidad para conectar y ver cómo es trabajar juntos antes del día de su boda."
+      },
+      "about": {
+        "title": "Sobre mi enfoque",
+        "body": "Soy Oscar, fotógrafo de bodas en Ciudad Juárez. Los acompaño con una guía suave para que se vean naturales, conectados y seguros frente a cámara.",
+        "imageAlt": "Retrato del fotógrafo Oscar"
+      },
+      "strip": {
+        "title": "Historias reales y momentos que sí se sienten",
+        "momentAltPrefix": "Momento"
+      },
+      "instructions": {
+        "title": "Cómo participar:",
+        "items": [
+          "Compartan su historia. Cuéntenme un poco sobre ustedes en el formulario de abajo.",
+          "Agenden una llamada breve. Si son seleccionados, tendremos una videollamada corta para confirmar detalles y asegurar su sesión."
+        ]
+      },
+      "whatsapp": {
+        "title": "Después de enviar el formulario",
+        "steps": [
+          "Se abrirá WhatsApp con tu mensaje listo para enviar.",
+          "Revisamos tu solicitud y respondemos en el mismo chat.",
+          "Si prefieres, puedes copiar el mensaje y enviarlo manualmente."
+        ]
+      },
+      "package": {
+        "title": "Si conectamos, este es el paquete más popular",
+        "durationLabel": "Duración",
+        "investmentLabel": "Inversión",
+        "viewPackageCta": "Ver paquete completo"
+      },
+      "form": {
+        "preTitle": "¡Participa para ganar una sesión de compromiso!",
+        "preValue": "(Valorada en $2500)",
+        "intro": "Estoy seleccionando a un **grupo pequeño de parejas** para vivir una **sesión de compromiso** conmigo. Es una oportunidad para conocer cómo es trabajar juntos antes de su boda y recibir fotos que van a amar por años. Estas sesiones están pensadas para parejas que están **buscando activamente a su fotógrafo de boda**.",
+        "nameLabel": "Nombre completo *",
+        "namePlaceholder": "Escribe tu nombre",
+        "phoneLabel": "Número de teléfono *",
+        "phonePlaceholder": "Escribe tu número de teléfono",
+        "weddingDateVenueLabel": "Fecha y lugar de la boda *",
+        "weddingDateVenuePlaceholder": "¿Cuál es la fecha y el lugar de su boda?",
+        "storyLabel": "Comparte su historia y sugiere una locación para sus fotos de compromiso *",
+        "storyPlaceholder": "Cuéntame cómo se conocieron y sus ideas de locación.",
+        "photographerLabel": "¿Ya tienen fotógrafo de boda apartado? *",
+        "photographerPlaceholder": "Si sí, cuéntame quién es. ¡Puede que lo conozca! :)",
+        "considerOscarLabel": "Si aún no apartan uno, ¿me considerarían como su fotógrafo de boda? *",
+        "considerOscarPlaceholder": "Con gusto les comparto mis paquetes y precios si les interesa.",
+        "budgetLabel": "¿Cuál es su presupuesto para fotografía de boda? *",
+        "budgetPlaceholder": "ejemplo: $8,000 - $10,000",
+        "messagePreview": "Mensaje que se enviará",
+        "submitButton": "Enviar por WhatsApp",
+        "submitSuccess": "Mensaje enviado ✓",
+        "copyButton": "Copiar mensaje",
+        "copiedButton": "Copiado ✓",
+        "successMsg": "✓ WhatsApp abierto con tu mensaje precargado.",
+        "errorMsg": "No se pudo abrir WhatsApp. Copia el mensaje y pégalo manualmente.",
+        "msgIntro": "Hola Oscar, queremos participar en el giveaway.",
+        "msgName": "Nombre:",
+        "msgPhone": "Teléfono:",
+        "msgDateVenue": "Fecha de boda y ubicación:",
+        "msgStoryHeading": "Nuestra historia:",
+        "msgHasPhotographer": "¿Ya tienen fotógrafo?",
+        "msgConsiderOscar": "¿Te consideraríamos como nuestro fotógrafo?",
+        "msgBudget": "Presupuesto:",
+        "msgNoData": "Sin dato",
+        "msgNoStory": "Sin historia compartida"
+      },
+      "cta": {
+        "heading": "¿Dudas antes de enviar?",
+        "body": "Revisa nuestro portafolio o contáctanos directamente.",
+        "portfolioButton": "Ver portafolio",
+        "contactButton": "Contacto"
+      }
+    }
+  },
+  "faqs": [
+    {
+      "question": "¿Qué diferencia hay entre fotografía editorial y tradicional?",
+      "answer": "La fotografía editorial captura la narrativa genuina de tu boda con un enfoque de storytelling. Cada foto cuenta una parte de tu historia, momentos auténticos y detalles que importan, no posadas incómodas."
+    },
+    {
+      "question": "¿Qué incluye la cobertura de bodas en Ciudad Juárez?",
+      "answer": "Cobertura completa desde preparativos hasta la recepción, con enfoque en momentos genuinos, detalles elegantes y conexiones entre ustedes. Un proceso pensado para que vivan cada segundo sin estrés."
+    },
+    {
+      "question": "¿Cuál es el proceso para contratar tus servicios?",
+      "answer": "Contacta vía WhatsApp o formulario, discutimos tu visión y necesidades especiales, revisamos disponibilidad de fechas, y entregamos una propuesta clara con inversión, detalles de cobertura y siguientes pasos."
+    },
+    {
+      "question": "¿Cómo preservas la historia de nuestra boda?",
+      "answer": "A través de fotografía narrativa que captura emociones auténticas, la conexión entre ustedes, y momentos únicos de tu día. Cada imagen es una escena de la película de su historia."
+    },
+    {
+      "question": "¿Qué ciudades cubres además de Ciudad Juárez?",
+      "answer": "Mi enfoque es Ciudad Juárez, aunque puedo analizar solicitudes especiales. Si tu boda es aquí, tengo disponibilidad y conocimiento profundo de los mejores espacios."
+    }
+  ],
+  "privateInvestmentGuide": {
+    "welcome": {
+      "philosophyIntro": "Sabemos que planear una boda es un reto que exige tiempo, energía y presupuesto. Por eso, el día de tu evento no deberías preocuparte por posar rígidamente frente a una cámara, ni sentir que te pierdes tu propia fiesta.",
+      "philosophyApproach": "A través de un enfoque 100% documental y una edición cinematográfica, capturamos la emoción real de su día. Les damos la libertad absoluta de reír, brindar y estar presentes con quienes más aman. No intervenimos en la magia, solo nos aseguramos de documentarla desde los mejores ángulos.",
+      "philosophyCore": "El pastel se terminará, pero tu historia merece vivirse sin estrés y recordarse con estilo.",
+      "philosophyClosing": "Ustedes viven el momento; nosotros lo convertimos en el primer gran legado visual de su nueva familia."
+    },
+    "hero": {
+      "title": "Disfruten su boda. Yo me encargo de documentarla con estilo.",
+      "subtitle": "Guía Privada de Colecciones y Servicios Fotográficos"
+    },
+    "complements": {
+      "heading": "Piezas de Conservación y Complementos",
+      "subheading": "Amplía tu legado visual con productos de archivar para siempre.",
+      "items": [
+        {
+          "price": 1500,
+          "name": "Colección de Recuerdos",
+          "description": "50 fotos (4x6\") + 2 ampliaciones (8x10\")"
+        },
+        {
+          "price": 2800,
+          "name": "Herencia Familiar",
+          "description": "100 fotos (4x6\") + 4 ampliaciones (8x10\")"
+        },
+        {
+          "price": 3500,
+          "name": "Arte en Casa",
+          "description": "1 grande (16x20\") + 2 medianas (11x14\")"
+        },
+        {
+          "price": 4500,
+          "name": "Photobook Premium 10x10",
+          "description": "Encuadernación de pasta dura"
+        },
+        {
+          "price": 6000,
+          "name": "Photobook Gran Formato 12x12",
+          "description": "Encuadernación de pasta dura"
+        },
+        {
+          "price": 2000,
+          "name": "Hora de Cobertura Extra",
+          "description": "Una hora adicional de documentación el día del evento"
+        }
+      ]
+    },
+    "session": {
+      "heading": "Sesión Previa",
+      "price": 2500,
+      "description": "Una sesión de 1.5 horas en Ciudad Juárez diseñada para conocernos, romper la tensión frente a la cámara y capturar la química real entre ustedes.",
+      "subheading": "Rompamos el hielo antes del gran día.",
+      "title": "Save the Date"
+    },
+    "closing": {
+      "ctaSecondary": "Escribir por WhatsApp",
+      "subheading": "Aseguremos que el día de su boda sea documentado con el estilo que merece.",
+      "ctaPrimary": "Agendar Videollamada de Confirmación",
+      "secondaryLabel": "¿Listos para conversar?",
+      "heading": "¿Listos para apartar su fecha?",
+      "finalMessage": "No es solo una inversión en fotografía. Es invertir en recordar."
+    },
+    "packages": {
+      "heading": "Nuestras Colecciones",
+      "investmentLabel": "Inversión",
+      "experienceLabel": "La Experiencia Incluye:",
+      "subheading": "Cada una está diseñada para ustedes. Compara y elige la que resuene con su visión.",
+      "collections": [
+        {
+          "id": "signature",
+          "name": "Colección: Signature",
+          "displayName": "Signature",
+          "subtitle": "El Legado Completo",
+          "price": 14500,
+          "audience": "Diseñada para la pareja que quiere delegarlo absolutamente todo y vivir su día con cero estrés.",
+          "promise": "Estaré con ustedes durante 10 horas, capturando de manera invisible desde los nervios bonitos del maquillaje hasta el clímax de la pista de baile. Es para quienes no solo quieren una galería digital, sino la tranquilidad de saber que su historia ya incluye un Photobook de arte para su nuevo hogar y un adelanto para sus redes sociales al día siguiente. Ustedes dedíquense a disfrutar la fiesta; yo me encargo del legado familiar.",
+          "features": [
+            "10 horas de cobertura continua",
+            "Cobertura de preparativos (Getting Ready)",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura total de la Recepción",
+            "Galería Digital Premium en alta resolución",
+            "El Legado Familiar: Photobook Premium 10x10",
+            "BONO VIP: Adelanto de 30 fotos al día siguiente ('Sneak Peek')",
+            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+          ],
+          "badge": null
+        },
+        {
+          "id": "clasica",
+          "name": "Colección: Clásica",
+          "displayName": "Clásica",
+          "subtitle": "La Inversión Inteligente",
+          "price": 10500,
+          "audience": "El equilibrio perfecto. Esta colección es para las parejas que quieren disfrutar de su boda sin interrupciones, con la seguridad de que ningún momento clave se quedará fuera.",
+          "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico, dándoles total libertad para tomarse ese trago y bailar con sus invitados.",
+          "features": [
+            "8 horas de cobertura continua",
+            "Cobertura de últimos detalles del arreglo",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura principal de la Recepción",
+            "Galería Digital Premium en alta resolución",
+            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+          ],
+          "badge": "La Más Elegida"
+        },
+        {
+          "id": "esencial",
+          "name": "Colección: Esencial",
+          "displayName": "Esencial",
+          "subtitle": "La Cobertura Justa",
+          "price": 7000,
+          "audience": "Ideal para bodas dinámicas y prácticas donde la prioridad es documentar el corazón del evento sin extenderse demasiadas horas.",
+          "promise": "Estaré con ustedes durante 5 horas, el tiempo exacto y necesario para capturar la ceremonia, dirigir una sesión de esposos rápida pero de revista, los retratos familiares y su gran entrada triunfal a la recepción.",
+          "features": [
+            "5 horas de cobertura continua",
+            "Cobertura de Ceremonia",
+            "Sesión formal de pareja y retratos familiares",
+            "Cobertura de entrada y protocolo en Recepción",
+            "Galería Digital Privada en alta resolución"
+          ],
+          "badge": null
+        },
+        {
+          "id": "civil",
+          "name": "Colección: Civil e Íntima",
+          "displayName": "Civil e Íntima",
+          "subtitle": "Lo Esencial",
+          "price": 4500,
+          "audience": "Pensada exclusivamente para bodas por el civil o celebraciones muy pequeñas.",
+          "promise": "Durante 3 horas, seré una presencia discreta para documentar la ceremonia legal y realizar una sesión relajada de pareja y familia.",
+          "features": [
+            "3 horas de cobertura continua",
+            "Cobertura de Ceremonia legal / íntima",
+            "Sesión formal de pareja y retratos familiares",
+            "Galería Digital Privada en alta resolución"
+          ],
+          "badge": null
+        }
+      ]
+    },
+    "about": {
+      "heading": "Me llamo Oscar Sanchez.",
+      "headingHighlight": "TU FOTÓGRAFO.",
+      "description": "Mi misión es ayudarte a conservar lo que ese día tiene de más valioso: la verdad de sus emociones. Sé que una boda pasa en un suspiro. Mi trabajo no es interrumpir esos momentos para pedirles que sonrían a la cámara, sino estar ahí, documentando la magia mientras sucede de forma natural. Con un estilo documental y una estética cinematográfica, no solo entrego fotografías; entrego la atmósfera, los colores y la esencia de su gran día."
+    },
+    "sessionFeatures": {
+      "description": "Una sesión de 1.5 horas en Ciudad Juárez diseñada para conocernos, romper la tensión frente a la cámara y capturar la química real entre ustedes.",
+      "features": [
+        {
+          "label": "Dirección natural",
+          "detail": "cero poses acartonadas"
+        },
+        {
+          "label": "Asesoría de estilo",
+          "detail": "y postura"
+        },
+        {
+          "label": "Galería digital",
+          "detail": "con 20-30 fotos editadas"
+        }
+      ],
+      "specialOffer": "Si después de esta sesión deciden invertir en nuestra Colección Clásica o Signature para el día de su boda, el valor de esta sesión se bonificará íntegramente a su paquete final."
+    }
+  }
+}

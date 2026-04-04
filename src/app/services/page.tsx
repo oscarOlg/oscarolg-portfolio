@@ -2,15 +2,14 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getServiceConfigs, getServicePackages, getPortfolioImageBySlug, getServiceThumbnails } from "@/lib/sanity";
-import { SERVICES } from "@/config/services";
+import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImagesByUsage } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: 'Servicios y Precios',
-  description: 'Paquetes fotográficos en Ciudad Juárez: bodas, retratos, parejas, maternidad, comercial y editorial. Precios claros y transparentes para cada sesión.',
+  title: 'Inversión | Fotógrafo de Bodas en Ciudad Juárez',
+  description: 'Paquetes de fotografía de bodas en Ciudad Juárez con inversión clara y cobertura editorial para disfrutar tu día sin estrés.',
   openGraph: {
-    title: 'Servicios y Precios | Oscar Sanchez Fotógrafo',
-    description: 'Paquetes fotográficos en Ciudad Juárez. Bodas, retratos, parejas y más.',
+    title: 'Inversión | Fotógrafo de Bodas en Ciudad Juárez',
+    description: 'Servicios de fotografía de boda en Ciudad Juárez con propuesta clara y cobertura elegante.',
     url: '/services',
   },
 };
@@ -47,35 +46,52 @@ function ServicesLoadingFallback() {
 }
 
 export default async function ServicesPage() {
-  // All data fetched in a single parallel batch (was: 2 sequential batches of 3+6 queries)
-  const [configs, allPackages, heroImage, serviceImagesByKey] = await Promise.all([
-    getServiceConfigs(),
-    getServicePackages(),
-    getPortfolioImageBySlug("weddings-dscf8029"),
-    getServiceThumbnails(SERVICES),
+  const [weddingConfig, weddingPackages, serviceImages] = await Promise.all([
+    getServiceConfigByKey("weddings"),
+    getServicePackagesByCategory("weddings"),
+    getPortfolioImagesByUsage("services"),
   ]);
 
-  // Group packages by their service category
-  const packagesByService: Record<string, typeof allPackages> = {};
-  SERVICES.forEach((s) => {
-    packagesByService[s.key] = allPackages.filter(
-      (p) => p.category === s.key
-    );
-  });
+  if (!weddingConfig) {
+    return null;
+  }
 
-  // Map configs by serviceKey for quick lookup
-  const configByKey = Object.fromEntries(
-    configs.map((c) => [c.serviceKey, c])
-  );
+  const curatedTopImages = serviceImages.filter((img) => img.usageSection === "curated-top");
+  const testimonialProofImages = serviceImages.filter((img) => img.usageSection === "testimonial-proof");
+  const featuredPackageImages = serviceImages.filter((img) => img.usageSection === "featured-package");
+  const saveTheDateImages = serviceImages.filter((img) => img.usageSection === "save-the-date");
+  const faqImages = serviceImages.filter((img) => img.usageSection === "faq");
+  const ctaImages = serviceImages.filter((img) => img.usageSection === "cta");
+
+  const orderedServiceImages = [
+    ...curatedTopImages,
+    ...testimonialProofImages,
+    ...featuredPackageImages,
+    ...saveTheDateImages,
+    ...faqImages,
+    ...ctaImages,
+  ].filter((item, index, array) => array.findIndex((candidate) => candidate._id === item._id) === index);
+
+  const heroImage = orderedServiceImages[0] ?? null;
+
+  const packageImageOverrides: Record<string, string> = {
+    clasica: featuredPackageImages[0]
+      ? getImageUrl(featuredPackageImages[0].image, 1200)
+      : "",
+    save_the_date: saveTheDateImages[0]
+      ? getImageUrl(saveTheDateImages[0].image, 1200)
+      : "",
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12 px-6 md:px-12">
       <Suspense fallback={<ServicesLoadingFallback />}>
         <ServicesContent
-          configByKey={configByKey}
-          packagesByService={packagesByService}
+          config={weddingConfig}
+          packages={weddingPackages}
           heroImage={heroImage}
-          serviceImagesByKey={serviceImagesByKey}
+          weddingImages={orderedServiceImages}
+          packageImageOverrides={packageImageOverrides}
         />
       </Suspense>
     </div>
