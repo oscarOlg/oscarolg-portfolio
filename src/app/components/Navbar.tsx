@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,6 +46,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
   const { lang, setLang } = useLanguage();
   const locale = getSiteLocale(lang);
   const headerRef = useRef<HTMLElement>(null);
@@ -61,15 +62,16 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Initialize navbar state on mount/reload based on current scroll position (before paint)
-  useLayoutEffect(() => {
+  // Initialize navbar state on mount/reload based on current scroll position
+  useEffect(() => {
     if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
       return;
     }
     
-    // Set initial state synchronously on mount before browser paints
+    // Set initial state synchronously on mount
     const currentScrollY = window.scrollY;
+    setScrollY(currentScrollY);
     setIsAtTop(currentScrollY < TOP_TRANSPARENCY_THRESHOLD);
   }, [isHomepage, isPrivateGuide]);
 
@@ -79,7 +81,11 @@ export default function Navbar() {
       return;
     }
 
-    const handleScroll = () => setIsAtTop(window.scrollY < TOP_TRANSPARENCY_THRESHOLD);
+    const handleScroll = () => {
+      const current = window.scrollY;
+      setScrollY(current);
+      setIsAtTop(current < TOP_TRANSPARENCY_THRESHOLD);
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -96,14 +102,18 @@ export default function Navbar() {
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
   const useTransparentStyle = (isHomepage || isPrivateGuide) && isAtTop && !isMobileMenuOpen;
+  // Use dark text when scrolling in the transition range to survive white-space glitch
+  const useDarkText = (isHomepage || isPrivateGuide) && scrollY > 0 && scrollY < TOP_TRANSPARENCY_THRESHOLD && !isMobileMenuOpen;
 
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 w-full z-50 text-dominant border-b transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 border-b transition-all duration-300 ${
+        useDarkText ? "text-black bg-white/90 backdrop-blur-sm border-white/30" : "text-dominant"
+      } ${
         useTransparentStyle
           ? "bg-transparent border-transparent shadow-none backdrop-blur-0"
-          : "bg-secondary/90 backdrop-blur-md border-white/10 shadow-md"
+          : !useDarkText ? "bg-secondary/90 backdrop-blur-md border-white/10 shadow-md" : ""
       }`}
     >
       {/* ── Main bar ── */}
