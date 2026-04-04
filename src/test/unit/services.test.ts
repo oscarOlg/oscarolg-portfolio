@@ -9,8 +9,9 @@ import {
 } from '@/config/services';
 
 describe('SERVICES config', () => {
-  it('contains 6 services', () => {
-    expect(SERVICES).toHaveLength(6);
+  it('contains only weddings service', () => {
+    expect(SERVICES).toHaveLength(1);
+    expect(SERVICES[0]?.key).toBe('weddings');
   });
 
   it('each service has required fields', () => {
@@ -44,18 +45,16 @@ describe('getServiceByKey', () => {
     expect(getServiceByKey('nonexistent')).toBeUndefined();
   });
 
-  it('finds all six service keys', () => {
-    const keys = ['weddings', 'portrait', 'couples', 'maternity', 'commercial', 'editorial'];
-    for (const key of keys) {
-      expect(getServiceByKey(key)).toBeDefined();
-    }
+  it('finds the wedding service key', () => {
+    expect(getServiceByKey('weddings')).toBeDefined();
+    expect(getServiceByKey('portrait')).toBeUndefined();
   });
 });
 
 describe('getServiceByPortfolioCategory', () => {
   it('returns the correct service for a portfolio category', () => {
-    const service = getServiceByPortfolioCategory('portraits');
-    expect(service?.key).toBe('portrait');
+    const service = getServiceByPortfolioCategory('weddings');
+    expect(service?.key).toBe('weddings');
   });
 
   it('returns undefined for an unknown category', () => {
@@ -72,7 +71,7 @@ describe('getServiceKeys', () => {
   it('includes all expected service types', () => {
     const keys = getServiceKeys();
     expect(keys).toContain('weddings');
-    expect(keys).toContain('editorial');
+    expect(keys).toHaveLength(1);
   });
 });
 

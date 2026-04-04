@@ -120,14 +120,13 @@ describe('ServicePackageTemplate', () => {
   });
 
   it('renders complementos section when config has complementos', () => {
-    const config: ServiceConfig = {
-      ...baseConfig,
-      complementos: [
-        { _key: 'c1', name: 'Álbum Impreso', price: 1500 },
-        { _key: 'c2', name: 'Hora Extra', price: 800, unit: 'hora' },
+    const config: ServiceConfig = { ...baseConfig };
+    const pkg = makePackage({
+      addOns: [
+        { _key: 'a1', name: 'Álbum Impreso', price: 1500 },
+        { _key: 'a2', name: 'Hora Extra', price: 800, unit: 'hora' },
       ],
-    };
-    const pkg = makePackage();
+    });
     render(React.createElement(ServicePackageTemplate, { config, packages: [pkg] }));
     expect(screen.getByText('Complementos')).toBeInTheDocument();
     expect(screen.getByText('Álbum Impreso')).toBeInTheDocument();

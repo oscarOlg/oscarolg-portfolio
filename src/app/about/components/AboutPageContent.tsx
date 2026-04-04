@@ -3,34 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import Socials from "../../components/Socials";
-import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteLocale } from "@/i18n/locales";
 
 interface AboutPageContentProps {
-  heading?: string;
-  headingEn?: string;
-  paragraphs?: string[];
-  paragraphsEn?: string[];
-  ctaText?: string;
-  ctaTextEn?: string;
   imageUrl?: string | null;
 }
 
 export default function AboutPageContent({
-  heading = "El enfoque detrás del lente.",
-  headingEn,
-  paragraphs = [],
-  paragraphsEn,
-  ctaText = "Hablemos de tu proyecto",
-  ctaTextEn,
   imageUrl,
 }: AboutPageContentProps) {
   const { lang } = useLanguage();
+  const locale = getSiteLocale(lang);
+  const about = locale.about;
 
-  const displayHeading = (lang === 'en' && headingEn) ? headingEn : heading;
-  const displayParagraphs = (lang === 'en' && paragraphsEn && paragraphsEn.length > 0)
-    ? paragraphsEn
-    : paragraphs;
-  const displayCtaText = pickLang(lang, ctaText, ctaTextEn) ?? ctaText;
+  const displayHeading = about.heading;
+  const displayParagraphs = about.paragraphs;
+  const displayCtaText = about.cta;
 
   return (
     <div className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12">
@@ -38,13 +27,17 @@ export default function AboutPageContent({
 
         {/* Left Column: Profile Image */}
         <div className="relative w-full aspect-[4/5] shadow-sm">
-          <Image
-            src={imageUrl ?? "https://images.unsplash.com/photo-1618077360395-f3068be8e001?q=80&w=1980&auto=format&fit=crop"}
-            alt="Oscar Sanchez - Fotógrafo de Bodas, Retratos y Parejas"
-            fill
-            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-            priority
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={about.imageAlt}
+              fill
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              priority
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/10" />
+          )}
           {/* Subtle accent border framing the image */}
           <div className="absolute -inset-4 border border-accent/50 -z-10 hidden md:block"></div>
         </div>

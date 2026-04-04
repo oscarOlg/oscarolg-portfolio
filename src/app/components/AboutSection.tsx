@@ -11,7 +11,7 @@ export default function AboutSection() {
         <div className="relative w-full aspect-[4/5] shadow-sm">
           <Image 
             src="https://images.unsplash.com/photo-1618077360395-f3068be8e001?q=80&w=1980&auto=format&fit=crop" 
-            alt="Oscar Sanchez - Fotógrafo"
+            alt="Oscar Olg Photography - Fotógrafo"
             fill
             className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
           />
@@ -26,7 +26,7 @@ export default function AboutSection() {
           
           <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-gray-700">
             <p>
-              Soy <b>Oscar Sanchez</b>, fotógrafo e ingeniero radicado en Ciudad Juárez. Mi trabajo visual combina la técnica y atención al detalle de mi formación, con la sensibilidad artística necesaria para documentar la esencia humana.
+              Soy <b>Oscar Olg Photography</b>, fotógrafo e ingeniero radicado en Ciudad Juárez. Mi trabajo visual combina la técnica y atención al detalle de mi formación, con la sensibilidad artística necesaria para documentar la esencia humana.
             </p>
             <p>
               Me especializo en la <b>fotografía de bodas, eventos y retrato</b>. Entiendo que elegir a la persona que documentará tus memorias es un acto de fe. Por eso, mi promesa principal no es solo entregarte imágenes con calidad estética, sino brindarte <b>confianza y tranquilidad absoluta</b> durante todo el proceso.

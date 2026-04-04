@@ -5,181 +5,25 @@ export const homepageContentType = defineType({
   title: 'Página Principal',
   type: 'document',
   fields: [
-    // ── Hero ──────────────────────────────────────────────
+    // ── Hero Images (managed from CMS) ───────────────────
     defineField({
-      name: 'heroHeading',
-      title: 'Hero — Título (parte normal)',
-      type: 'string',
-      description: 'Ej.: "Fotografía que captura"',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'heroHeadingEn',
-      title: 'Hero — Título parte normal (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'heroHeadingItalic',
-      title: 'Hero — Título (parte en cursiva/acento)',
-      type: 'string',
-      description: 'Ej.: "la esencia de tu historia" — se muestra en cursiva con color acento',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'heroHeadingItalicEn',
-      title: 'Hero — Título cursiva/acento (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'heroCta1Text',
-      title: 'Hero — Botón principal (relleno)',
-      type: 'string',
-      description: 'Ej.: "Ver mi portafolio"',
-    }),
-    defineField({
-      name: 'heroCta1TextEn',
-      title: 'Hero — Botón principal (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'heroCta2Text',
-      title: 'Hero — Botón secundario (contorno)',
-      type: 'string',
-      description: 'Ej.: "Cotizar sesión"',
-    }),
-    defineField({
-      name: 'heroCta2TextEn',
-      title: 'Hero — Botón secundario (EN)',
-      type: 'string',
-    }),
-
-    // ── Sección Mi Trabajo ────────────────────────────────
-    defineField({
-      name: 'workSectionHeading',
-      title: 'Mi Trabajo — Título de sección',
-      type: 'string',
-      description: 'Ej.: "Mi Trabajo"',
-    }),
-    defineField({
-      name: 'workSectionHeadingEn',
-      title: 'Mi Trabajo — Título de sección (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'workSectionSubtitle',
-      title: 'Mi Trabajo — Subtítulo',
-      type: 'string',
-      description: 'Ej.: "Explora por tipo de sesión"',
-    }),
-    defineField({
-      name: 'workSectionSubtitleEn',
-      title: 'Mi Trabajo — Subtítulo (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'workSectionViewMoreText',
-      title: 'Mi Trabajo — Texto hover en tarjetas',
-      type: 'string',
-      description: 'Ej.: "Ver más →"',
-    }),
-    defineField({
-      name: 'workSectionViewMoreTextEn',
-      title: 'Mi Trabajo — Texto hover en tarjetas (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'workSectionViewAllText',
-      title: 'Mi Trabajo — Enlace "ver todo"',
-      type: 'string',
-      description: 'Ej.: "Ver todo el portafolio →"',
-    }),
-    defineField({
-      name: 'workSectionViewAllTextEn',
-      title: 'Mi Trabajo — Enlace "ver todo" (EN)',
-      type: 'string',
-    }),
-
-    // ── Sección Inversión ─────────────────────────────────
-    defineField({
-      name: 'investmentHeading',
-      title: 'Inversión — Título',
-      type: 'string',
-      description: 'Ej.: "La tranquilidad de estar en buenas manos."',
-    }),
-    defineField({
-      name: 'investmentHeadingEn',
-      title: 'Inversión — Título (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'investmentParagraph1',
-      title: 'Inversión — Párrafo 1',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'investmentParagraph1En',
-      title: 'Inversión — Párrafo 1 (EN)',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'investmentParagraph2',
-      title: 'Inversión — Párrafo 2',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'investmentParagraph2En',
-      title: 'Inversión — Párrafo 2 (EN)',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'investmentCtaText',
-      title: 'Inversión — Texto del botón',
-      type: 'string',
-      description: 'Ej.: "Conocer paquetes y precios"',
-    }),
-    defineField({
-      name: 'investmentCtaTextEn',
-      title: 'Inversión — Texto del botón (EN)',
-      type: 'string',
-    }),
-
-    // ── CTA Final ─────────────────────────────────────────
-    defineField({
-      name: 'finalCtaHeading',
-      title: 'CTA Final — Título',
-      type: 'string',
-      description: 'Ej.: "¿Listo para crear algo hermoso e irrepetible?"',
-    }),
-    defineField({
-      name: 'finalCtaHeadingEn',
-      title: 'CTA Final — Título (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'finalCtaLocation',
-      title: 'CTA Final — Texto de ubicación',
-      type: 'string',
-      description: 'Ej.: "Ciudad Juárez & México"',
-    }),
-    defineField({
-      name: 'finalCtaLocationEn',
-      title: 'CTA Final — Texto de ubicación (EN)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'finalCtaButtonText',
-      title: 'CTA Final — Texto del botón',
-      type: 'string',
-      description: 'Ej.: "Reservar fecha"',
-    }),
-    defineField({
-      name: 'finalCtaButtonTextEn',
-      title: 'CTA Final — Texto del botón (EN)',
-      type: 'string',
+      name: 'heroImages',
+      title: 'Hero — Imágenes del carrusel (ordenadas)',
+      type: 'array',
+      description: 'Selecciona y ordena las imágenes de portada para el hero. El orden aquí será el orden del carrusel.',
+      of: [
+        {
+          type: 'reference',
+          to: [{type: 'portfolioImage'}],
+          options: {
+            disableNew: true,
+          },
+        },
+      ],
+      options: {
+        sortable: true,
+      },
+      validation: (Rule) => Rule.max(12),
     }),
   ],
 })

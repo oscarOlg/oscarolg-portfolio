@@ -1,0 +1,491 @@
+{
+  "nav": {
+    "portfolio": "Portfolio",
+    "services": "Investment",
+    "about": "About",
+    "contact": "Contact",
+    "mainAria": "Main navigation"
+  },
+  "footer": {
+    "tagline": "Wedding photography in Ciudad Juárez to live your day without stress and remember it with style.",
+    "navHeading": "Navigation",
+    "contactHeading": "Contact",
+    "city": "Ciudad Juárez, Mexico",
+    "tagline2": "Live your day without stress. Remember it with style.",
+    "links": {
+      "portfolio": "Portfolio",
+      "services": "Services",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "homepage": {
+    "hero": {
+      "title": "Live your wedding without stress.",
+      "titleAccent": "Remember it with style.",
+      "subtitle": "Cinematic wedding photography in Ciudad Juarez that captures the true essence of your connection while you enjoy every second of your event.",
+      "ctaPrimary": "Check Availability",
+      "ctaSecondary": "View Portfolio",
+      "urgency": "Limited weekend dates for 2026"
+    },
+    "work": {
+      "heading": "Real stories, authentic emotion",
+      "subtitle": "A selection designed to show how a wedding looks and feels when it is lived with style, without tension or artifice.",
+      "viewAll": "View full portfolio",
+      "viewWeddingAria": "View wedding portfolio"
+    },
+    "investment": {
+      "heading": "Enjoy your wedding. I will turn it into a memory with style.",
+      "paragraph1": "My approach blends **documentary storytelling** and an editorial eye so every image feels authentic, elegant, and deeply alive.",
+      "paragraph2": "From planning to final delivery, you get **close guidance**, clear communication, and coverage tailored to your rhythm so you can fully enjoy your day with **peace of mind**.",
+      "cta": "View investment"
+    },
+    "finalCta": {
+      "heading": "If your story deserves to be lived this way, let's check availability today.",
+      "location": "Weddings in Ciudad Juárez with limited dates.",
+      "button": "Check availability"
+    }
+  },
+  "about": {
+    "heading": "Oscar Olg Photography — Editorial Wedding Photographer in Ciudad Juárez",
+    "paragraphs": [
+      "I'm Oscar, the person behind Oscar Olg Photography. I work from Ciudad Juarez with a clear specialty: editorial wedding photography, portraits, and couple sessions designed to feel supported from the first conversation to delivery.",
+      "My work combines technical attention to detail with the artistic sensitivity needed to capture what matters most: people, connections, and moments worth preserving. I do not direct every second; I create the space for you to live your day freely while I document the essential with editorial intention.",
+      "I believe in wedding photography that feels natural, elegant, and deeply human. My promise is not only to deliver beautiful images, but to turn today's emotion into a tangible visual legacy you can relive for years.",
+      "From the first conversation, my goal is to give you clarity, guidance, and peace of mind so you can enjoy the process without stress. I want you to know that every irreplaceable moment is in safe hands."
+    ],
+    "cta": "Check availability",
+    "imageAlt": "Oscar Olg Photography - Wedding Photographer"
+  },
+  "contact": {
+    "heading": "Check availability for your wedding",
+    "intro": "Share the key details of your date and I will open a ready-to-send WhatsApp message. Fast response, clear process, zero friction.",
+    "heroEyebrow": "Let us craft your story",
+    "imageAlt": "Contact photography",
+    "nameLabel": "Full Name *",
+    "phoneLabel": "Phone",
+    "dateLabel": "Wedding Date *",
+    "venueLabel": "Venue / City *",
+    "photoPriorityLabel": "What matters most to you in your wedding photos? *",
+    "photoPriorityPlaceholder": "Select an option",
+    "photoPriorityOptions": [
+      "Enjoying the day without stress and with a smooth flow",
+      "Natural and elegant images without forced posing",
+      "Preserving real moments with emotional value",
+      "Clear guidance before, during, and after the wedding"
+    ],
+    "weddingDetailsLabel": "Key wedding details",
+    "weddingDetailsPlaceholder": "E.g. ceremony type, approximate timeline, preferred photo style, or important moments.",
+    "submitButton": "Send via WhatsApp",
+    "sentButton": "WhatsApp opened",
+    "successMsg": "✓ Opening WhatsApp with your preloaded message.",
+    "errorMsg": "Could not open WhatsApp. Use the copy button and paste the message in chat.",
+    "copyButton": "Copy Message",
+    "copiedButton": "Copied to Clipboard!",
+    "quickHeading": "Message preview",
+    "quickLead": "Share your key wedding details.",
+    "quickBody": "We will generate a preloaded WhatsApp message so you can contact me in one tap.",
+    "nextStepsTitle": "What happens next",
+    "nextStepsItems": [
+      "1. We review your event details.",
+      "2. We confirm availability and the best-fit collection.",
+      "3. You receive a clear next step to reserve your date."
+    ],
+    "sidebarQuestion": "Prefer to see real stories first?",
+    "sidebarPortfolioCta": "View portfolio",
+    "msgHello": "Hi Oscar! I'm",
+    "msgInterestedIn": "I'm interested in wedding coverage",
+    "msgDate": "The wedding date is",
+    "msgVenue": "Venue or city:",
+    "msgPhotoPriority": "What matters most to us is:",
+    "msgDetails": "Here are more details:",
+    "msgDefaultName": "[Your Name]"
+  },
+  "services": {
+    "mainPromise": "NOT JUST A DAY, A LIFETIME",
+    "oscarStory": "Your wedding goes fast. The planning, the months of anticipation, and then it's over in a blink of an eye. What stays with you forever are the memories and the photos. When you look back at those images years later—sharing them on your couch with your partner, showing your kids, on an anniversary—they need to reflect exactly how that day felt. That's why I take every wedding so seriously. It's not just about beautiful images. It's about creating a visual legacy that you can revisit 10, 20 years from now and feel that magic all over again. Every package I offer is built with you in mind: complete coverage without rigid formulas, cinematic editing that honors what's real, and a process from start to finish where you feel supported. Your wedding isn't just for today. It's for the moment you remember it forever.",
+    "customizableNote": "Every package below is completely customizable. If you need adjustments, add-ons, or a different configuration, just share your details and we'll define the ideal option for your vision.",
+    "investmentGuideHeading": "Ready to see all options and pricing?",
+    "investmentGuideBody": "Share your key details and I'll send you the complete investment guide directly via WhatsApp. No surprises, complete clarity so you can decide with confidence.",
+    "sendGuideButtonText": "Send Me the Full Investment Guide",
+    "beforePricingNote": "The pricing below is our base structure. We'll discuss any customization you need together.",
+    "eyebrow": "Investment",
+    "title": "The main wedding proposal for a stress-free day",
+    "subheading": "Coverage designed to support you with clarity and peace of mind. If you want adjustments, add-ons, or a different configuration, I can share them via WhatsApp.",
+    "heroAlt": "Elegant photography detail",
+    "ctaPrimary": "Check availability",
+    "ctaSecondary": "View collections",
+    "trustBullets": [
+      "Close guidance from planning to final delivery",
+      "Editorial coverage focused on real moments over forced poses",
+      "Transparent investment so you can decide with confidence"
+    ],
+    "qualifierTitle": "This proposal is for you if...",
+    "qualifierItems": [
+      "You want to enjoy your wedding without feeling in a photoshoot all day",
+      "You want elegant images that preserve real emotion",
+      "You value clear communication and a frictionless process"
+    ],
+    "collectionsTitle": "Main package",
+    "collectionsIntro": "This is the anchor offer. If you need a different coverage setup, deliverables, or add-ons, we can tailor it by WhatsApp.",
+    "sessionTitle": "Pre-wedding and casual session",
+    "sessionIntro": "Perfect for getting comfortable on camera before the wedding day.",
+    "addOnsTitle": "Preservation pieces and add-ons",
+    "addOnsIntro": "Turn your memories into physical artwork for your home and family.",
+    "faqTitle": "Frequently asked questions",
+    "faqIntro": "We answer what matters most before booking so you can make a confident decision.",
+    "finalCtaTitle": "If this feels aligned, let's review availability",
+    "finalCtaBody": "I take a limited number of weddings each season to give every story full attention.",
+    "badgeDefault": "Most popular",
+    "defaultCta": "Reserve your date",
+    "quoteCta": "Get quote",
+    "giftIncluded": "Bonus included",
+    "specialOffer": "Special offer",
+    "complementosHeading": "Add-ons",
+    "globalBenefitsFallback": "Included in every collection",
+    "noteLabel": "Note",
+    "introLead": "Your wedding goes by fast. What stays for decades is your visual legacy. This page is designed to guide you clearly from value to action.",
+    "clientStoryLabel": "Client story",
+    "galleryAltStory": "Wedding story",
+    "galleryAltFrame": "Wedding frame",
+    "packages": {
+      "mostPopularLabel": "The most popular collection",
+      "includedLabel": "Included",
+      "bonusesLabel": "Bonuses",
+      "durationLabel": "Duration",
+      "investmentLabel": "Investment",
+      "fullGuideCta": "Request Full Investment Guide",
+      "sessionLabel": "Pre-wedding and casual session",
+      "sessionCta": "Check session dates",
+      "addOnsLabel": "Complements and add-ons",
+      "aLaCarteLabel": "A la carte options",
+      "placeholderImageText": "Replace with featured collection image"
+    },
+    "pricingFaqs": [
+      {
+        "question": "What if we don't know how to pose?",
+        "answer": "This is the most common concern, so don't worry. My approach is not to force awkward poses, but to guide you subtly so interaction feels natural. The Save the Date session works as a relaxed rehearsal to break the ice and help you discover how easy it is to look incredible."
+      },
+      {
+        "question": "We don't want to spend hours taking photos on the wedding day. We want to enjoy the party. How do you handle timing?",
+        "answer": "Completely agree. We keep the formal couple session agile so you can quickly return to your event. The rest of the day is documentary coverage: my priority is capturing spontaneous moments, laughter, and real action without you worrying about the camera."
+      },
+      {
+        "question": "How long does it take to deliver our photos?",
+        "answer": "With Signature, you receive a 30-photo Sneak Peek the next day so you can share immediately. The complete gallery with cinematic editing is delivered in approximately 4 to 6 weeks."
+      },
+      {
+        "question": "Are there hidden costs? What if the party is amazing and we want you to stay longer?",
+        "answer": "Zero hidden costs. Transparency is a priority. If the dance floor is on fire and you decide to extend coverage, extra hours are available at $2,000 MXN each. You always control that decision."
+      },
+      {
+        "question": "Do you deliver all RAW files, or how does your cinematic style work?",
+        "answer": "I do not deliver RAW files. I carefully curate the strongest moments and every delivered image includes our cinematic treatment: intentional color and light work that gives your memories a film-like finish."
+      },
+      {
+        "question": "Do you help us choose locations in Ciudad Juarez for our pre-wedding session?",
+        "answer": "Absolutely. I share great location recommendations in the city and nearby areas, plus a quick guide on color palettes and outfits so everything stays aligned with the editorial style."
+      },
+      {
+        "question": "We love the experience. What's the next step to reserve our date?",
+        "answer": "Simple: we schedule a short video call, choose the right collection for your day, and secure your date with a 30% retainer and digital contract. After that, I handle the rest."
+      }
+    ]
+  },
+  "portfolio": {
+    "ctaHeading": "Ready to preserve your story with style?",
+    "ctaButton": "Check Availability",
+    "floatingContact": "Contact",
+    "floatingPrices": "Investment"
+  },
+  "testimonials": [
+    {
+      "author": "Ketzia & Marcos",
+      "text": "Oscar captured moments we didn't even notice were happening. Seeing our photos was reliving our wedding completely. His style is super natural and made us feel really comfortable.",
+      "highlight": "Seeing our photos was reliving our wedding completely.",
+      "date": "2025-06-15",
+      "imageTitle": "Weddings - DSCF8121",
+      "imageAlt": "Ketzia & Marcos - Editorial wedding photography"
+    },
+    {
+      "author": "Analaura & Job",
+      "text": "We didn't want typical boring posed photos. Oscar understood perfectly what we were looking for. Our photos from the prep and the party look like they came straight out of a movie. Highly recommended!",
+      "highlight": "Our photos look like they came straight out of a movie.",
+      "date": "2025-08-20",
+      "imageTitle": "Weddings - DSCF0232",
+      "imageAlt": "Analaura & Job - Cinematic wedding photography"
+    }
+  ],
+  "landing": {
+    "loading": "Loading...",
+    "loadingForm": "Loading form...",
+    "engagementGiveaway": {
+      "hero": {
+        "eyebrow": "Recently engaged?",
+        "title": "Engagement Session Giveaway!",
+        "body": "This complimentary engagement session is a chance to connect and see what it's like to work together before your wedding day."
+      },
+      "about": {
+        "title": "About my approach",
+        "body": "I'm Oscar, wedding photographer in Ciudad Juárez. I guide you gently so you appear natural, connected, and confident in front of the camera.",
+        "imageAlt": "Portrait of photographer Oscar"
+      },
+      "strip": {
+        "title": "Real stories and moments that truly feel",
+        "momentAltPrefix": "Moment"
+      },
+      "instructions": {
+        "title": "How to Enter:",
+        "items": [
+          "Share your story. Tell me a little about you two in the form below.",
+          "Book a quick intro call. If chosen, you'll hop on a short video call with me to confirm details and secure your session."
+        ]
+      },
+      "whatsapp": {
+        "title": "After sending the form",
+        "steps": [
+          "WhatsApp will open with your message ready to send.",
+          "We review your request and respond in the same chat.",
+          "If you prefer, you can copy the message and send it manually."
+        ]
+      },
+      "package": {
+        "title": "If we connect, this is the most chosen package for your wedding",
+        "durationLabel": "Duration",
+        "investmentLabel": "Investment",
+        "viewPackageCta": "View full package"
+      },
+      "form": {
+        "preTitle": "Enter for your chance to win an engagement session!",
+        "preValue": "(Valued $2500)",
+        "intro": "I'm selecting a **handful of couples** to experience an **engagement session** with me. This is a chance to preview what it's like working together before your wedding day and receive photos you'll love for years. These sessions are intended for couples who are **actively looking for their wedding photographer**.",
+        "nameLabel": "Full Name *",
+        "namePlaceholder": "Enter Your Name",
+        "phoneLabel": "Phone Number *",
+        "phonePlaceholder": "Enter Phone Number",
+        "weddingDateVenueLabel": "Wedding Date & Venue *",
+        "weddingDateVenuePlaceholder": "What is your wedding date venue?",
+        "storyLabel": "Share your love story and suggest a location for your engagement photos! *",
+        "storyPlaceholder": "Tell me how you met and your location ideas.",
+        "photographerLabel": "Do you have a wedding photographer booked? *",
+        "photographerPlaceholder": "If so, let me know who! I might know them :)",
+        "considerOscarLabel": "If you don't have one booked yet, would you consider me as your wedding photographer? *",
+        "considerOscarPlaceholder": "I'd be happy to send you my packages and pricing if you're interested!",
+        "budgetLabel": "What is your wedding photography budget? *",
+        "budgetPlaceholder": "e.g., $8,000 - $10,000",
+        "messagePreview": "Message that will be sent",
+        "submitButton": "Send via WhatsApp",
+        "submitSuccess": "Message sent ✓",
+        "copyButton": "Copy message",
+        "copiedButton": "Copied ✓",
+        "successMsg": "✓ WhatsApp opened with your preloaded message.",
+        "errorMsg": "Could not open WhatsApp. Copy the message and paste it manually.",
+        "msgIntro": "Hi Oscar, we want to participate in the giveaway.",
+        "msgName": "Name:",
+        "msgPhone": "Phone:",
+        "msgDateVenue": "Wedding date and location:",
+        "msgStoryHeading": "Our story:",
+        "msgHasPhotographer": "Do you already have a photographer?",
+        "msgConsiderOscar": "Would we consider you as our photographer?",
+        "msgBudget": "Budget:",
+        "msgNoData": "No data",
+        "msgNoStory": "No story shared"
+      },
+      "cta": {
+        "heading": "Questions before sending?",
+        "body": "Check out our portfolio or contact us directly.",
+        "portfolioButton": "View portfolio",
+        "contactButton": "Contact"
+      }
+    }
+  },
+  "faqs": [
+    {
+      "question": "What's the difference between editorial and traditional wedding photography?",
+      "answer": "Editorial photography captures the genuine narrative of your wedding with a storytelling approach. Each photo tells part of your story—authentic moments and details that matter, not uncomfortable posed shots."
+    },
+    {
+      "question": "What does wedding coverage in Ciudad Juárez include?",
+      "answer": "Full coverage from preparations through reception, focusing on genuine moments, elegant details, and your connection. A process designed so you can fully enjoy every second without stress."
+    },
+    {
+      "question": "What's the process to hire your services?",
+      "answer": "Contact me via WhatsApp or the contact form, we discuss your vision and special needs, confirm date availability, and I provide a clear proposal with investment, coverage details, and next steps."
+    },
+    {
+      "question": "How do you preserve our wedding story?",
+      "answer": "Through narrative photography that captures authentic emotions, your connection as a couple, and unique moments from your day. Each image is a scene in the movie of your story."
+    },
+    {
+      "question": "What cities do you serve besides Ciudad Juárez?",
+      "answer": "My focus is Ciudad Juárez, though I can consider special requests. If your wedding is here, I have availability and deep knowledge of the best venues."
+    }
+  ],
+  "privateInvestmentGuide": {
+    "welcome": {
+      "philosophyIntro": "We know planning a wedding is demanding—it requires time, energy, and budget. That is why on your special day you shouldn't worry about posing stiffly in front of a camera or feel like you're missing your own celebration.",
+      "philosophyApproach": "Through a 100% documentary approach and cinematic editing, we capture the real emotion of your day. We give you absolute freedom to laugh, toast, and be present with those you love most. We don't intervene in the magic—we simply make sure to document it from the best angles.",
+      "philosophyCore": "The cake will be gone, but your story deserves to be lived without stress and remembered with style.",
+      "philosophyClosing": "You live the moment; we transform it into the first great visual legacy of your new family."
+    },
+    "hero": {
+      "title": "Enjoy your wedding. I'll document it with style.",
+      "subtitle": "Private Guide to Collections and Photography Services"
+    },
+    "complements": {
+      "heading": "Keepsake Pieces and Complements",
+      "subheading": "Expand your visual legacy with products to cherish forever.",
+      "items": [
+        {
+          "price": 1500,
+          "name": "Keepsake Collection",
+          "description": "50 photos (4x6\") + 2 enlargements (8x10\")"
+        },
+        {
+          "price": 2800,
+          "name": "Family Heritage",
+          "description": "100 photos (4x6\") + 4 enlargements (8x10\")"
+        },
+        {
+          "price": 3500,
+          "name": "Art for Home",
+          "description": "1 large (16x20\") + 2 medium (11x14\")"
+        },
+        {
+          "price": 4500,
+          "name": "Premium Photobook 10x10",
+          "description": "Hardcover binding"
+        },
+        {
+          "price": 6000,
+          "name": "Large Format Photobook 12x12",
+          "description": "Hardcover binding"
+        },
+        {
+          "price": 2000,
+          "name": "Extra Coverage Hour",
+          "description": "One additional hour of documentation on your wedding day"
+        }
+      ]
+    },
+    "session": {
+      "heading": "Engagement Session",
+      "price": 2500,
+      "description": "A 1.5-hour session in Ciudad Juárez designed to help us connect, ease any camera tension, and capture the real chemistry between you.",
+      "subheading": "Let's break the ice before the big day.",
+      "title": "Save the Date"
+    },
+    "closing": {
+      "ctaSecondary": "Message on WhatsApp",
+      "subheading": "Let's make sure your wedding day is documented with the style it deserves.",
+      "ctaPrimary": "Schedule Confirmation Call",
+      "secondaryLabel": "Ready to chat?",
+      "heading": "Ready to secure your date?",
+      "finalMessage": "It's not just an investment in photography. It's an investment in remembering."
+    },
+    "packages": {
+      "heading": "Our Collections",
+      "investmentLabel": "Investment",
+      "experienceLabel": "What's Included:",
+      "subheading": "Each one is designed for you. Compare and choose what resonates with your vision.",
+      "collections": [
+        {
+          "id": "signature",
+          "name": "Collection: Signature",
+          "displayName": "Signature",
+          "subtitle": "The Complete Legacy",
+          "price": 14500,
+          "audience": "Designed for the couple who wants to leave everything to us and enjoy their day with zero stress.",
+          "promise": "I'll be with you for 10 hours, capturing everything invisibly from the nervous excitement of makeup to the climax of the dance floor. This is for those who want not just a digital gallery, but the peace of mind knowing their story already includes a premium Photobook for their new home and a sneak peek for social media the next day. You focus on enjoying the celebration; I'll handle the family legacy.",
+          "features": [
+            "10 hours of continuous coverage",
+            "Getting Ready documentation",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Complete Reception coverage",
+            "Premium Digital Gallery in high resolution",
+            "The Family Legacy: Premium 10x10 Photobook",
+            "VIP BONUS: 30-photo sneak peek the next day",
+            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+          ],
+          "badge": null
+        },
+        {
+          "id": "clasica",
+          "name": "Collection: Classic",
+          "displayName": "Classic",
+          "subtitle": "The Smart Investment",
+          "price": 10500,
+          "audience": "The perfect balance. This collection is for couples who want to enjoy their wedding without interruptions, with the certainty that no key moment will be missed.",
+          "promise": "During 8 hours I'll document the final grooming details, the entire ceremony, a fluid and naturally-posed couple session, and the best of the reception. You'll have the complete story of your big day told in a cinematic style, giving you total freedom to have that drink and dance with your guests.",
+          "features": [
+            "8 hours of continuous coverage",
+            "Final grooming details documentation",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Main Reception coverage",
+            "Premium Digital Gallery in high resolution",
+            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+          ],
+          "badge": "Most Popular"
+        },
+        {
+          "id": "esencial",
+          "name": "Collection: Essential",
+          "displayName": "Essential",
+          "subtitle": "The Right Coverage",
+          "price": 7000,
+          "audience": "Ideal for dynamic and practical weddings where the priority is documenting the heart of the event without extending too many hours.",
+          "promise": "I'll be with you for 5 hours—the exact time needed to capture the ceremony, direct a quick but magazine-worthy couple session, family portraits, and your grand entrance at the reception.",
+          "features": [
+            "5 hours of continuous coverage",
+            "Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Reception entrance and protocol coverage",
+            "Premium Private Digital Gallery in high resolution"
+          ],
+          "badge": null
+        },
+        {
+          "id": "civil",
+          "name": "Collection: Civil & Intimate",
+          "displayName": "Civil & Intimate",
+          "subtitle": "The Essentials",
+          "price": 4500,
+          "audience": "Designed exclusively for civil ceremonies or very small celebrations.",
+          "promise": "For 3 hours, I'll be a discreet presence documenting the civil ceremony and creating a relaxed couple and family session.",
+          "features": [
+            "3 hours of continuous coverage",
+            "Civil/Intimate Ceremony coverage",
+            "Formal couple session and family portraits",
+            "Premium Private Digital Gallery in high resolution"
+          ],
+          "badge": null
+        }
+      ]
+    },
+    "about": {
+      "heading": "My name is Oscar Sanchez.",
+      "headingHighlight": "YOUR PHOTOGRAPHER.",
+      "description": "My mission is to help you preserve what that day has that is most valuable: the truth of your emotions. I know a wedding passes in a blink. My job isn't to interrupt those moments to ask you to smile at the camera, but to be there, documenting the magic as it naturally unfolds. With a documentary style and cinematic aesthetic, I don't just deliver photographs; I deliver the atmosphere, the colors, and the essence of your big day."
+    },
+    "sessionFeatures": {
+      "description": "A 1.5-hour session in Ciudad Juárez designed to help us connect, ease any camera tension, and capture the real chemistry between you.",
+      "features": [
+        {
+          "label": "Natural Direction",
+          "detail": "zero stiff poses"
+        },
+        {
+          "label": "Style Coaching",
+          "detail": "and posture guidance"
+        },
+        {
+          "label": "Digital Gallery",
+          "detail": "with 20-30 edited photos"
+        }
+      ],
+      "specialOffer": "If after this session you decide to book our Classic or Signature Collection for your wedding, the full value of this session will be credited toward your final package."
+    }
+  }
+}

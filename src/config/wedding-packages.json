@@ -1,0 +1,397 @@
+{
+  "metadata": {
+    "description": "Wedding package structure - independent of Sanity, marketing-optimized for conversion",
+    "source": "PACKAGES.md (authoritative source of truth)",
+    "lastUpdated": "2026-03-31",
+    "notes": "Edit image URL placeholders with actual portfolio image titles. Structure supports bilingual content. Pricing and offerings match PACKAGES.md exactly."
+  },
+  "packages": [
+    {
+      "id": "esencial",
+      "order": 3,
+      "name": "Esencial",
+      "nameEn": "Essential",
+      "subtitle": "Enfoque Agil",
+      "subtitleEn": "Agile Focus",
+      "imageUrl": "[PLACEHOLDER: wedding-ceremony-moment]",
+      "duration": "5 horas",
+      "durationEn": "5 hours",
+      "targetAudience": "Ideal para bodas dinamicas y practicas donde la prioridad es documentar el corazon del evento sin extenderse demasiadas horas.",
+      "targetAudienceEn": "Ideal for dynamic, practical weddings where the priority is documenting the heart of the event without extending for too many hours.",
+      "promise": "Estare con ustedes durante 5 horas, el tiempo exacto y necesario para capturar la ceremonia, dirigir una sesion de esposos rapida pero de revista, los retratos familiares y su gran entrada triunfal a la recepcion. Es para quienes quieren nuestro caracteristico estilo documental enfocado directamente en la accion principal.",
+      "promiseEn": "I will be with you for 5 hours, the exact time needed to capture the ceremony, direct a quick magazine-worthy couple session, family portraits, and your grand entrance to the reception. It is for couples who want our signature documentary style focused directly on the core action.",
+      "features": [
+        "Cobertura Esencial (5 horas): Ceremonia, sesion formal, retratos familiares y entrada a recepcion.",
+        "Galeria Digital Privada: Alta resolucion, listas para descargar y compartir."
+      ],
+      "featuresEn": [
+        "Essential Coverage (5 hours): Ceremony, formal session, family portraits, and reception entrance.",
+        "Private Digital Gallery: High resolution, ready to download and share."
+      ],
+      "bonuses": [],
+      "bonusesEn": [],
+      "positioning": "Para celebraciones dinámicas donde la prioridad es documentar lo principal con un enfoque ágil",
+      "positioningEn": "For dynamic celebrations where the priority is capturing what matters most with an agile approach",
+      "description": "Cobertura esencial del tiempo preciso para documentar la ceremonia, la sesión formal de novios, retratos familiares y tu gran entrada a la recepción. Nuestro enfoque cinematográfico en un formato conciso.",
+      "descriptionEn": "Essential coverage with the precise time to document the ceremony, formal couple session, family portraits, and your grand entrance to the reception. Our cinematic style in a concise format.",
+      "keyFeature": "Cobertura esencial sin comprometer estilo cinematográfico",
+      "keyFeatureEn": "Essential coverage without compromising cinematic style",
+      "price": 7000,
+      "originalPrice": 0,
+      "badge": null,
+      "showBadge": false,
+      "mostChosen": false,
+      "gift": "Galería digital privada en alta resolución",
+      "giftEn": "Private digital gallery in high resolution",
+      "cta": "Consultar disponibilidad",
+      "ctaEn": "Check Availability",
+      "whyThis": "Perfecto para eventos donde buscas documentación profesional sin la cobertura extendida.",
+      "whyThisEn": "Perfect for events where you want professional documentation without extended coverage.",
+      "highlights": [
+        "Ceremonia completa",
+        "Sesión formal de novios",
+        "Retratos familiares",
+        "Entrada a recepción",
+        "Edición cinematográfica"
+      ],
+      "highlightsEn": [
+        "Complete ceremony",
+        "Formal couple session",
+        "Family portraits",
+        "Reception grand entrance",
+        "Cinematic editing"
+      ]
+    },
+    {
+      "id": "civil",
+      "order": 4,
+      "name": "Civil e Íntima",
+      "nameEn": "Civil & Intimate",
+      "subtitle": "Cobertura Discreta",
+      "subtitleEn": "Discrete Coverage",
+      "imageUrl": "[PLACEHOLDER: wedding-civil-intimate]",
+      "duration": "3 horas",
+      "durationEn": "3 hours",
+      "targetAudience": "Pensada exclusivamente para bodas por el civil o celebraciones muy pequenas. Que su evento sea intimo no significa que sus recuerdos deban verse comunes.",
+      "targetAudienceEn": "Designed exclusively for civil weddings or very small celebrations. An intimate event should never mean common-looking memories.",
+      "promise": "Durante 3 horas, sere una presencia discreta para documentar la ceremonia legal y realizar una sesion relajada de pareja y familia. Para quienes buscan alta calidad estetica y profesionalismo en un formato corto, directo y sin complicaciones logisticas.",
+      "promiseEn": "For 3 hours, I will be a discreet presence documenting the legal ceremony and creating a relaxed couple and family session. For couples seeking high aesthetic quality and professionalism in a short, direct format with no logistics stress.",
+      "features": [
+        "Cobertura Concisa (3 horas): Ceremonia legal y sesion fotografica de pareja/familia.",
+        "Galeria Digital Privada: Alta resolucion con edicion de color e iluminacion."
+      ],
+      "featuresEn": [
+        "Concise Coverage (3 hours): Legal ceremony and couple/family photo session.",
+        "Private Digital Gallery: High resolution with color and lighting editing."
+      ],
+      "bonuses": [],
+      "bonusesEn": [],
+      "positioning": "Para bodas por el civil o celebraciones pequeñas que requieren cobertura profesional y discreta",
+      "positioningEn": "For civil ceremonies or small celebrations requiring professional and discreet coverage",
+      "description": "Diseñada específicamente para documentar la ceremonia legal y realizar una sesión fotográfica dedicada de pareja y familia. Cobertura concisa con edición de color e iluminación profesional.",
+      "descriptionEn": "Specifically designed to document the legal ceremony and dedicate a photography session for couple and family. Concise coverage with professional color grading and lighting.",
+      "keyFeature": "Cobertura concisa y dedicada para eventos íntimos",
+      "keyFeatureEn": "Concise and dedicated coverage for intimate events",
+      "price": 4500,
+      "originalPrice": 0,
+      "badge": null,
+      "showBadge": false,
+      "mostChosen": false,
+      "gift": "Galería digital privada en alta resolución",
+      "giftEn": "Private digital gallery in high resolution",
+      "cta": "Consultar disponibilidad",
+      "ctaEn": "Check Availability",
+      "whyThis": "La solución perfecta para celebraciones íntimas donde cada detalle cuenta sin presupuesto extenso.",
+      "whyThisEn": "The perfect solution for intimate celebrations where every detail matters without an extended budget.",
+      "highlights": [
+        "Ceremonia legal documentada",
+        "Sesión de pareja dedicada",
+        "Retratos familiares",
+        "Edición profesional",
+        "Entrega rápida"
+      ],
+      "highlightsEn": [
+        "Legal ceremony documented",
+        "Dedicated couple session",
+        "Family portraits",
+        "Professional editing",
+        "Quick delivery"
+      ]
+    },
+    {
+      "id": "clasica",
+      "order": 2,
+      "name": "",
+      "nameEn": "Classic",
+      "subtitle": "",
+      "subtitleEn": "",
+      "imageUrl": "[PLACEHOLDER: wedding-reception-emotion]",
+      "duration": "8 horas",
+      "durationEn": "8 hours",
+      "targetAudience": "El equilibrio perfecto. Esta colección es para las parejas que quieren disfrutar de su boda sin interrupciones, con la seguridad de que ningún momento clave se quedará fuera.",
+      "targetAudienceEn": "**The perfect balance.** This collection is for couples who want to enjoy their wedding **without interruptions**, with the certainty that **no key moment will be missed**.",
+      "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico, dándoles total libertad para tomarse ese trago y bailar con sus invitados.\n\nCada celebración tiene su propio ritmo. Si desean adaptar la cobertura a los tiempos de su evento o agregar complementos exclusivos, lo afinaremos juntos para asegurar que su experiencia sea perfecta.",
+      "promiseEn": "For 8 hours I will document your final getting-ready details, the full ceremony, a fluid newlywed session with no forced posing, and the best moments of the reception. You will receive the full story of your day told with a cinematic style, while you stay free to enjoy **every toast and dance** with your guests.",
+      "features": [
+        "Cobertura Principal del Evento (8 horas): Detalles del arreglo, ceremonia, sesión formal y recepción.",
+        "Galería Digital Premium: Memorias entregadas en plataforma privada de alta calidad."
+      ],
+      "featuresEn": [
+        "Main Event Coverage (8 hours): Getting-ready details, ceremony, fluid session, and reception.",
+        "Premium Digital Gallery: Memories delivered in a high-quality private platform."
+      ],
+      "bonuses": [
+        "BONO: Sesion Save the Date (Valorada en $2,500 MXN, 1.5 hrs para romper el hielo)."
+      ],
+      "bonusesEn": [
+        "BONUS: Save the Date Session (Valued at $2,500 MXN, 1.5 hours to break the ice)."
+      ],
+      "positioning": "Para parejas que buscan el equilibrio perfecto: cobertura de los momentos clave sin perder la tranquilidad de que nada importante se quedará fuera",
+      "positioningEn": "For couples seeking the perfect balance: coverage of key moments with the peace of mind that nothing important will be missed",
+      "description": "Nuestra opción más elegida. Cobertura principal del evento iniciando con los últimos detalles de arreglo, la ceremonia, una sesión de pareja fluida y sin poses forzadas, y lo mejor de la recepción. Incluye BONO: Sesión 'Save the Date' valorada en $2,500 MXN para romper el hielo antes del gran día.",
+      "descriptionEn": "Our most chosen option. Main event coverage starting with the final styling details, ceremony, a fluid couple session without forced poses, and the best of the reception. Includes BONUS: 'Save the Date' session valued at $2,500 MXN to break the ice before your big day.",
+      "keyFeature": "Equilibrio perfecto entre cobertura completa y libertad para disfrutar",
+      "keyFeatureEn": "Perfect balance between complete coverage and freedom to enjoy",
+      "price": 10500,
+      "originalPrice": 0,
+      "badge": "Más Popular",
+      "showBadge": true,
+      "mostChosen": true,
+      "gift": "Galería digital premium + BONO: Sesión Save the Date ($2,500 valor)",
+      "giftEn": "Premium digital gallery + BONUS: Save the Date session ($2,500 value)",
+      "cta": "Reservar fecha",
+      "ctaEn": "Book Date",
+      "whyThis": "La mayoría de parejas eligen esta porque documenta cada momento importante mientras tienes libertad total para vivir tu boda sin preocupaciones.",
+      "whyThisEn": "Most couples choose this because it documents every important moment while you have complete freedom to live your wedding worry-free.",
+      "highlights": [
+        "8 horas de cobertura inmersiva",
+        "Detalles finales de arreglo",
+        "Ceremonia completa",
+        "Sesión de pareja fluida",
+        "Recepción documentada",
+        "BONO: Sesión Save the Date (1.5h)",
+        "Edición cinematográfica",
+        "Galería digital premium"
+      ],
+      "highlightsEn": [
+        "8 hours of immersive coverage",
+        "Final styling details",
+        "Complete ceremony",
+        "Fluid couple session",
+        "Reception documented",
+        "BONUS: Save the Date session (1.5h)",
+        "Cinematic editing",
+        "Premium digital gallery"
+      ]
+    },
+    {
+      "id": "signature",
+      "order": 1,
+      "name": "Signature",
+      "nameEn": "Signature",
+      "subtitle": "El Legado Completo",
+      "subtitleEn": "The Complete Legacy",
+      "imageUrl": "[PLACEHOLDER: wedding-complete-legacy]",
+      "duration": "10 horas",
+      "durationEn": "10 hours",
+      "targetAudience": "Disenada para la pareja que quiere delegarlo absolutamente todo y vivir su dia con cero estres.",
+      "targetAudienceEn": "Designed for the couple that wants to delegate absolutely everything and live the day with zero stress.",
+      "promise": "Estare con ustedes durante 10 horas, capturando de manera invisible desde los nervios bonitos del maquillaje hasta el climax de la pista de baile. Es para quienes no solo quieren una galeria digital, sino la tranquilidad de saber que su historia ya incluye un Photobook de arte para su nuevo hogar y un adelanto para sus redes sociales al dia siguiente. Ustedes dediquense a disfrutar la fiesta; yo me encargo del legado familiar.",
+      "promiseEn": "I will be with you for 10 hours, capturing everything discreetly from the beautiful getting-ready nerves to the dance floor climax. This is for couples who want more than a digital gallery: the peace of mind of a story that already includes an art photobook for your new home and a next-day preview for social media. You enjoy your celebration; I take care of your family legacy.",
+      "features": [
+        "Cobertura Inmersiva del Dia (10 horas): Desde el Getting Ready hasta la recepcion.",
+        "El Legado Familiar: Photobook Premium 10x10 (Pasta dura de alta calidad).",
+        "Galeria Digital Premium: Toda la historia en alta resolucion con edicion cinematografica."
+      ],
+      "featuresEn": [
+        "Immersive Day Coverage (10 hours): From Getting Ready through reception.",
+        "Family Legacy: Premium 10x10 Photobook (High-quality hardcover).",
+        "Premium Digital Gallery: The full story in high resolution with cinematic editing."
+      ],
+      "bonuses": [
+        "BONO VIP: Sneak Peek (Adelanto de 30 fotos al dia siguiente).",
+        "BONO: Sesion Save the Date (Valorada en $2,500 MXN, 1.5 hrs en exteriores)."
+      ],
+      "bonusesEn": [
+        "VIP BONUS: Sneak Peek (30-photo next-day preview).",
+        "BONUS: Save the Date Session (Valued at $2,500 MXN, 1.5 outdoor hours)."
+      ],
+      "positioning": "Para la pareja que desea delegar todo y asegurar que la historia de su gran día queda plasmada en una verdadera obra de arte familiar",
+      "positioningEn": "For the couple that wants to entrust everything and ensure your big day's story becomes a true family heirloom",
+      "description": "Cobertura inmersiva completa de 10 horas documentando desde la intimidad de los preparativos (Getting Ready), ceremonia, hasta la euforia total de la recepción. BONOS VIP: 'Sneak Peek' — 30 fotos espectaculares enviadas al día siguiente. Sesión 'Save the Date' previa de 1.5 horas valorada en $2,500 MXN. Todo materializado en nuestro Photobook Premium de arte familiar que perdurará generaciones.",
+      "descriptionEn": "Complete immersive coverage of 10 hours documenting from the intimacy of preparations (Getting Ready), ceremony, to the full euphoria of the reception. VIP BONUSES: 'Sneak Peek' — 30 spectacular photos sent the next day. Previous 'Save the Date' session of 1.5 hours valued at $2,500 MXN. Everything materialized in our Premium family art Photobook that will endure for generations.",
+      "keyFeature": "Cobertura total + sesión previa + entrega exprés + Photobook Premium de arte familiar",
+      "keyFeatureEn": "Complete coverage + prior session + express delivery + Premium family art Photobook",
+      "price": 14500,
+      "originalPrice": 0,
+      "badge": "Experiencia Completa",
+      "showBadge": true,
+      "mostChosen": false,
+      "gift": "Photobook Premium 10x10 en pasta dura + Galería digital cinematográfica premium",
+      "giftEn": "Premium 10x10 hardcover Photobook + Premium cinematic digital gallery",
+      "cta": "Consultar disponibilidad",
+      "ctaEn": "Check Availability",
+      "whyThis": "Para parejas que saben exactamente qué quieren: cada detalle, cada emoción documentado con atención editorial única, sin preocupación alguna. El legado de una vida.",
+      "whyThisEn": "For couples who know exactly what they want: every detail, every emotion documented with uniquely editorial attention, without a care in the world. The legacy of a lifetime.",
+      "highlights": [
+        "10 horas de cobertura total",
+        "Intimidad de preparativos (Getting Ready extendido)",
+        "Ceremonia completa",
+        "Sesión de pareja fluida",
+        "Recepción íntegra",
+        "BONO VIP: Sneak Peek (30 fotos al día siguiente)",
+        "BONO: Sesión Save the Date (1.5h, $2,500 valor)",
+        "Photobook Premium 10x10 pasta dura",
+        "Edición cinematográfica de nivel galería",
+        "Galería digital premium con respaldo en la nube"
+      ],
+      "highlightsEn": [
+        "10 hours of complete coverage",
+        "Intimacy of preparations (extended Getting Ready)",
+        "Complete ceremony",
+        "Fluid couple session",
+        "Full reception",
+        "VIP BONUS: Sneak Peek (30 photos next day)",
+        "BONUS: Save the Date session (1.5h, $2,500 value)",
+        "Premium 10x10 hardcover Photobook",
+        "Gallery-level cinematic editing",
+        "Premium digital gallery with cloud backup"
+      ]
+    }
+        ,
+      {
+        "id": "save_the_date",
+        "order": 5,
+        "name": "Sesión de Compromiso",
+        "nameEn": "Engagement Session",
+        "subtitle": "Save the Date",
+        "subtitleEn": "Save the Date",
+        "imageUrl": "[PLACEHOLDER: engagement-connection]",
+        "duration": "1.5 horas",
+        "durationEn": "1.5 hours",
+        "targetAudience": "**Mas que unas fotos para sus invitaciones**, este es su ensayo general para perderle el miedo a la camara antes de la boda.",
+        "targetAudienceEn": "**More than invitation photos**, this is your dress rehearsal to feel confident in front of the camera before the wedding.",
+        "promise": "Es para las parejas que piensan somos pesimos posando y quieren descubrir lo facil y divertido que es verse increibles. Pasaremos 1.5 horas conectando, riendo y creando **fotos 100% naturales**, para que cuando llegue el dia de su boda, pararse frente a mi lente sea **la parte mas relajante de su dia**.",
+        "promiseEn": "It is for couples who think they are terrible at posing and want to discover how easy and fun it is to look incredible. We will spend 1.5 hours connecting, laughing, and creating **100% natural photos**, so on your wedding day standing in front of my lens feels like **the most relaxed part of the day**.",
+        "features": [
+          "Sesion Relajada (1.5 horas): En la locacion de su preferencia en Ciudad Juarez.",
+          "Direccion Natural: Interaccion 100% autentica y organica, cero poses acartonadas.",
+          "Asesoria de Estilo: Recomendaciones de paletas de colores y outfits.",
+          "Galeria Digital Privada: Fotografias seleccionadas en alta resolucion."
+        ],
+        "featuresEn": [
+          "Relaxed Session (1.5 hours): At your preferred location in Ciudad Juarez.",
+          "Natural Direction: 100% authentic, organic interaction with zero stiff poses.",
+          "Style Guidance: Recommendations on palettes and outfits.",
+          "Private Digital Gallery: Selected photographs in high resolution."
+        ],
+        "bonuses": [
+          "Si despues de esta sesion deciden invertir en la Coleccion Clasica o Signature, el valor de esta sesion se bonificara integramente a su paquete final."
+        ],
+        "bonusesEn": [
+          "If after this session you invest in the Classic or Signature Collection, this session value is fully credited to your final package."
+        ],
+        "positioning": "Para parejas que quieren conectar frente a la cámara sin presión, generando fotos únicas para sus invitaciones y redes sociales",
+        "positioningEn": "For couples who want to connect in front of the camera without pressure, creating unique photos for invitations and social media",
+        "description": "Sesión de fotos cinematográficas dedicada a ustedes, en cualquier locación que elijan. Nos encargamos de la dirección, la luz, y el storytelling visual. Perfecto para perderle el miedo a la cámara y construir confianza juntos. Plus: Si contratan Clásica o Signature después, este valor se acredita íntegramente.",
+        "descriptionEn": "Dedicated cinematographic photo session for you, at any location you choose. We handle direction, lighting, and visual storytelling. Perfect for getting comfortable with the camera and building trust together. Plus: If you book Classic or Signature later, this value is fully credited.",
+        "keyFeature": "Conexión auténtica en fotos, confianza construida juntos",
+        "keyFeatureEn": "Authentic connection on camera, building trust as a couple",
+        "price": 2500,
+        "originalPrice": 0,
+        "badge": null,
+        "showBadge": false,
+        "mostChosen": false,
+        "gift": "Galería digital privada en alta resolución (30-40 fotos editadas)",
+        "giftEn": "Private digital gallery in high resolution (30-40 edited photos)",
+        "cta": "Agendar sesión",
+        "ctaEn": "Book Session",
+        "whyThis": "Construir confianza antes del gran día, genera invitaciones hermosas, y si luego contratan un paquete mayor, se acredita el 100% de este valor.",
+        "whyThisEn": "Build confidence before the big day, create beautiful invitations, and if you later book a larger package, 100% of this value is credited.",
+        "highlights": [
+          "Locación de tu preferencia",
+          "Dirección auténtica y natural",
+          "Asesoría de estilo y paletas de color",
+          "30-40 fotos editadas profesionalmente",
+          "Galería digital privada",
+          "100% acreditable a Clásica o Signature"
+        ],
+        "highlightsEn": [
+          "Your preferred location",
+          "Authentic and natural direction",
+          "Style and color palette guidance",
+          "30-40 professionally edited photos",
+          "Private digital gallery",
+          "100% creditable to Classic or Signature"
+        ]
+      }
+  ],
+  "addOns": [
+    {
+      "id": "recuerdos",
+      "name": "Colección de Recuerdos",
+      "nameEn": "Memory Collection",
+      "price": 1500,
+      "description": "50 fotografías impresas (4x6\") + 2 ampliaciones para enmarcar (8x10\")",
+      "descriptionEn": "50 printed photographs (4x6\") + 2 enlargements for framing (8x10\")"
+    },
+    {
+      "id": "herencia",
+      "name": "Herencia Familiar",
+      "nameEn": "Family Heritage",
+      "price": 2800,
+      "description": "100 fotografías impresas (4x6\") + 4 ampliaciones (8x10\")",
+      "descriptionEn": "100 printed photographs (4x6\") + 4 enlargements (8x10\")"
+    },
+    {
+      "id": "arte-en-casa",
+      "name": "Arte en Casa",
+      "nameEn": "Art at Home",
+      "price": 3500,
+      "description": "1 ampliación grande para el centro (16x20\") + 2 ampliaciones medianas para los lados (11x14\")",
+      "descriptionEn": "1 large centerpiece enlargement (16x20\") + 2 medium side enlargements (11x14\")"
+    },
+    {
+      "id": "photobook-10x10",
+      "name": "Photobook Premium (10x10)",
+      "nameEn": "Premium Photobook (10x10)",
+      "price": 4500,
+      "description": "Libro de arte de alta calidad en pasta dura para perdurar generaciones",
+      "descriptionEn": "High-quality art book in hardcover to last generations"
+    },
+    {
+      "id": "photobook-12x12",
+      "name": "Photobook Gran Formato (12x12)",
+      "nameEn": "Grand Format Photobook (12x12)",
+      "price": 6000,
+      "description": "Libro de arte gran formato en pasta dura para máximo impacto visual",
+      "descriptionEn": "Grand format art book in hardcover for maximum visual impact"
+    },
+    {
+      "id": "extra-hour",
+      "name": "Hora de Servicio Extra",
+      "nameEn": "Extra Service Hour",
+      "price": 2000,
+      "description": "Extensión de cobertura por hora adicional",
+      "descriptionEn": "Coverage extension per additional hour"
+    }
+  ],
+  "sectionCopy": {
+    "title": "Elige la colección ideal para vivir tu boda sin estrés",
+    "titleEn": "Choose the perfect collection to enjoy your wedding stress-free",
+    "intro": "Cada colección está diseñada para un tipo de pareja y celebración. Lee qué te resuena, mira la imagen, y selecciona desde dónde quieres comenzar esta conversación.",
+    "introEn": "Each collection is designed for a different type of couple and celebration. Read what resonates, look at the image, and choose where you want to start this conversation.",
+    "noteBelow": "¿No estoy seguro cuál es la indicada? Consulta con nosotros. Estudiamos cada caso y adaptamos la solución a tu historia.",
+    "noteBelowEn": "Unsure which is right for you? Let's talk. We study each case and adapt the solution to your story."
+  },
+  "conversionNotes": {
+    "mostChosenBadge": "Clásica es el ancla de precio — packager psicológicamente entre lo esencial y lo completo",
+    "positioning": "Parejas se ven a sí mismas en la descripción — lenguaje conversacional, no transaccional",
+    "gift": "Deliverables tangibles — lo que recordarán y mostrarán en el hogar",
+    "duration": "Valor primario — parejas compran TIEMPO, debe ser escaneable",
+    "fullWidthImage": "Generador de confianza — conexión emocional antes de leer copy",
+    "oneAtATime": "Descubrimiento progresivo — reduce sobrecarga cognitiva",
+    "keyFeature": "Diferenciador único — qué hace CADA colección especial (no listas largas)",
+    "bonuses": "VIP bonuses drive premium perception y eliminate hesitation en decisión"
+  }
+}

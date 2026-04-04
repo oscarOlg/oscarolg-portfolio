@@ -3,7 +3,8 @@
 import Link from "next/link";
 import type { ServicePackage, ServiceConfig } from "@/types/sanity";
 import { useLanguage, pickLang } from "@/contexts/LanguageContext";
-import { t } from "@/lib/translations";
+import { getSiteLocale } from "@/i18n/locales";
+import { trackServicesPackageInterest, trackCTAClick } from "@/lib/analytics";
 
 function formatPrice(price: number) {
   return "$" + price.toLocaleString("es-MX");
@@ -12,15 +13,20 @@ function formatPrice(price: number) {
 function PackageCard({
   pkg,
   defaultCta,
+  labels,
 }: {
   pkg: ServicePackage;
   defaultCta: string;
+  labels: {
+    badgeDefault: string;
+    giftIncluded: string;
+    specialOffer: string;
+  };
 }) {
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
 
   const isPopular = pkg.popular;
-  const badgeLabel = pickLang(lang, pkg.badgeLabel, pkg.badgeLabelEn) ?? tr(t.services.badgeDefault);
+  const badgeLabel = pickLang(lang, pkg.badgeLabel, pkg.badgeLabelEn) ?? labels.badgeDefault;
   const ctaText = pickLang(lang, pkg.ctaText, pkg.ctaTextEn) ?? defaultCta;
   const showPrice = pkg.showPrice !== false;
 
@@ -77,7 +83,7 @@ function PackageCard({
         {pkg.gift && (
           <div className="mb-6 p-3 bg-accent/10 border border-accent/30 rounded-sm">
             <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
-              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
+              {labels.giftIncluded}
             </p>
             <p className="font-sans text-sm text-secondary">
               {pickLang(lang, pkg.gift, pkg.giftEn)}
@@ -104,7 +110,7 @@ function PackageCard({
             </div>
             {pkg.originalPrice && pkg.originalPrice > 0 && (
               <p className="font-sans text-xs text-accent font-semibold">
-                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+                {labels.specialOffer}
               </p>
             )}
           </div>
@@ -112,6 +118,10 @@ function PackageCard({
         {isPopular ? (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-accent text-secondary uppercase tracking-widest text-xs py-4 hover:bg-opacity-95 transition-all duration-200 font-bold shadow-sm hover:shadow-md"
           >
             {ctaText}
@@ -119,6 +129,10 @@ function PackageCard({
         ) : pkg.ctaVariant === "outline" ? (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-transparent border-2 border-secondary text-secondary uppercase tracking-widest text-xs py-3 hover:bg-secondary hover:text-dominant transition-all duration-200 font-semibold"
           >
             {ctaText}
@@ -126,6 +140,10 @@ function PackageCard({
         ) : (
           <Link
             href="/contact"
+            onClick={() => {
+              trackServicesPackageInterest(displayName, pkg.price, lang);
+              trackCTAClick('services_package_cta', 'services_page', lang);
+            }}
             className="block text-center w-full bg-secondary text-dominant uppercase tracking-widest text-xs py-4 hover:bg-accent transition-colors duration-200 font-bold shadow-sm hover:shadow-md"
           >
             {ctaText}
@@ -138,9 +156,13 @@ function PackageCard({
 
 function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+  const locale = getSiteLocale(lang);
+  const services = locale.services as Record<string, unknown>;
 
-  const ctaText = pickLang(lang, pkg.ctaText, pkg.ctaTextEn) ?? tr(t.services.cotizar);
+  const ctaText =
+    pickLang(lang, pkg.ctaText, pkg.ctaTextEn) ??
+    (services.quoteCta as string | undefined) ??
+    "Cotizar";
   const displayName = pickLang(lang, pkg.name, pkg.nameEn) ?? pkg.name;
   const displayDescription = pickLang(lang, pkg.description, pkg.descriptionEn) ?? pkg.description;
   const displayBodyText = pickLang(lang, pkg.bodyText, pkg.bodyTextEn);
@@ -174,7 +196,7 @@ function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
         {pkg.gift && (
           <div className="mb-4 p-2 bg-accent/10 border border-accent/30 rounded-sm">
             <p className="font-sans text-xs uppercase tracking-widest text-accent font-bold mb-1">
-              {lang === 'en' ? 'Gift Included' : 'Regalo:'}
+              {(services.giftIncluded as string | undefined) ?? "Regalo"}
             </p>
             <p className="font-sans text-xs text-secondary">
               {pickLang(lang, pkg.gift, pkg.giftEn)}
@@ -196,7 +218,7 @@ function SpecialVariantCard({ pkg }: { pkg: ServicePackage }) {
             </div>
             {pkg.originalPrice && pkg.originalPrice > 0 && (
               <p className="font-sans text-xs text-accent font-semibold">
-                {lang === 'en' ? 'Special offer' : 'Oferta especial'}
+                {(services.specialOffer as string | undefined) ?? "Oferta especial"}
               </p>
             )}
           </div>
@@ -219,10 +241,12 @@ interface Props {
 
 export default function ServicePackageTemplate({ config, packages }: Props) {
   const { lang } = useLanguage();
-  const tr = (obj: { es: string; en: string }) => lang === 'en' ? obj.en : obj.es;
+  const locale = getSiteLocale(lang);
+  const services = locale.services as Record<string, unknown>;
 
   const defaultCta = pickLang(lang, config.ctaButtonText, config.ctaButtonTextEn)
-    ?? tr(t.services.defaultCtaFallback);
+    ?? (services.defaultCta as string | undefined)
+    ?? "Reservar";
   const gridCols = config.gridColumns || 3;
 
   const gridPackages = packages
@@ -233,15 +257,28 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
     .filter((p) => p.isSpecialVariant)
     .sort((a, b) => (a.displayOrder ?? 99) - (b.displayOrder ?? 99));
 
-  // Extract add-ons from first regular package for display
-  const packageAddOns = gridPackages.length > 0 && gridPackages[0].addOns 
-    ? gridPackages[0].addOns 
-    : [];
+  // Prefer dedicated complementos from serviceConfig; keep package addOns fallback for backward compatibility.
+  const packageAddOns =
+    gridPackages.length > 0 && gridPackages[0].addOns
+      ? gridPackages[0].addOns.map((item) => ({
+          _key: item._key,
+          name: item.name,
+          nameEn: item.nameEn,
+          price: item.price,
+          unit: item.unit,
+          note: item.description,
+          noteEn: undefined,
+        }))
+      : [];
+
+  const serviceAddOns = (config.complementos && config.complementos.length > 0)
+    ? config.complementos
+    : packageAddOns;
 
   const hasComplementos =
     config.hasAddOns !== false &&
-    Array.isArray(packageAddOns) &&
-    packageAddOns.length > 0;
+    Array.isArray(serviceAddOns) &&
+    serviceAddOns.length > 0;
 
   const hasRightPanel =
     config.infoCardVariant === "right_panel" && !!config.infoCardHeading;
@@ -263,7 +300,8 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
   const displayCustomBlockHeading = pickLang(lang, config.customBlockHeading, config.customBlockHeadingEn);
   const displayCustomBlockContent = pickLang(lang, config.customBlockContent, config.customBlockContentEn);
   const displayGlobalBenefitsHeading = pickLang(lang, config.globalBenefitsHeading, config.globalBenefitsHeadingEn)
-    ?? tr(t.services.globalBenefitsFallback);
+    ?? (services.globalBenefitsFallback as string | undefined)
+    ?? "Incluido en todas las colecciones";
   const displayGlobalBenefitsText = pickLang(lang, config.globalBenefitsText, config.globalBenefitsTextEn);
   const displayProcessTitle = pickLang(lang, config.processTitle, config.processTitleEn);
 
@@ -287,7 +325,16 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
 
       <div className={gridClass}>
         {gridPackages.map((pkg) => (
-          <PackageCard key={pkg._id} pkg={pkg} defaultCta={defaultCta} />
+          <PackageCard
+            key={pkg._id}
+            pkg={pkg}
+            defaultCta={defaultCta}
+            labels={{
+              badgeDefault: (services.badgeDefault as string | undefined) ?? "Más Popular",
+              giftIncluded: (services.giftIncluded as string | undefined) ?? "Regalo incluido",
+              specialOffer: (services.specialOffer as string | undefined) ?? "Oferta especial",
+            }}
+          />
         ))}
       </div>
 
@@ -297,9 +344,9 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
             {hasComplementos && (
               <div className="border border-gray-200 p-6 bg-gray-50">
                 <h4 className="font-serif text-lg font-bold mb-5 text-secondary uppercase tracking-wide">
-                  {tr(t.services.complementosHeading)}
+                  {(services.complementosHeading as string | undefined) ?? "Complementos"}
                 </h4>
-                {packageAddOns.map((item, i) => (
+                {serviceAddOns.map((item, i) => (
                   <div
                     key={item._key ?? i}
                     className="flex justify-between items-start sm:items-center border-b border-gray-200 pb-4 mb-4 gap-4 last:border-b-0 last:pb-0 last:mb-0"
@@ -308,9 +355,9 @@ export default function ServicePackageTemplate({ config, packages }: Props) {
                       <span className="font-sans text-sm font-semibold text-secondary block">
                         {pickLang(lang, item.name, item.nameEn) ?? item.name}
                       </span>
-                      {item.description && (
+                      {(item.note || item.noteEn) && (
                         <span className="block text-xs italic text-accent font-semibold mt-1">
-                          {item.description}
+                          {pickLang(lang, item.note, item.noteEn)}
                         </span>
                       )}
                     </div>

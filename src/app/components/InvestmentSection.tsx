@@ -2,39 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage, pickLang } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getSiteLocale } from "@/i18n/locales";
+import InlineBoldText from "@/app/components/InlineBoldText";
 
 interface Props {
   leftImageUrl?: string;
   rightImageUrl?: string;
-  heading?: string;
-  headingEn?: string;
-  paragraph1?: string;
-  paragraph1En?: string;
-  paragraph2?: string;
-  paragraph2En?: string;
-  ctaText?: string;
-  ctaTextEn?: string;
 }
 
 export default function InvestmentSection({
   leftImageUrl,
   rightImageUrl,
-  heading = "La tranquilidad de estar en buenas manos.",
-  headingEn,
-  paragraph1 = "Mi objetivo es transformar instantes efímeros en recuerdos tangibles. Te ofrezco calidad estética, calidez humana y tranquilidad absoluta para documentar los capítulos más importantes de tu vida.",
-  paragraph1En,
-  paragraph2 = "Sé que planear un evento requiere tiempo y dedicación. Por eso, mi enfoque es brindarte la confianza de que tu historia será capturada con cuidado y profesionalismo. Encuentra opciones claras y diseñadas para adaptarse a tu visión, permitiéndote enfocarte únicamente en disfrutar.",
-  paragraph2En,
-  ctaText = "Conocer paquetes y precios",
-  ctaTextEn,
 }: Props) {
   const { lang } = useLanguage();
+  const locale = getSiteLocale(lang);
+  const investment = locale.homepage.investment;
 
-  const displayHeading = pickLang(lang, heading, headingEn) ?? heading;
-  const displayP1 = pickLang(lang, paragraph1, paragraph1En) ?? paragraph1;
-  const displayP2 = pickLang(lang, paragraph2, paragraph2En) ?? paragraph2;
-  const displayCta = pickLang(lang, ctaText, ctaTextEn) ?? ctaText;
+  const displayHeading = investment.heading;
+  const displayP1 = investment.paragraph1;
+  const displayP2 = investment.paragraph2;
+  const displayCta = investment.cta;
 
   return (
     <section className="w-full max-w-7xl mx-auto py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-dominant">
@@ -46,11 +34,11 @@ export default function InvestmentSection({
         </h2>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-6">
-          {displayP1}
+          <InlineBoldText text={displayP1} />
         </p>
 
         <p className="font-sans text-base md:text-lg leading-relaxed text-gray-700 mb-10">
-          {displayP2}
+          <InlineBoldText text={displayP2} />
         </p>
 
         <div className="flex flex-col sm:flex-row items-start gap-6">
@@ -66,20 +54,28 @@ export default function InvestmentSection({
       {/* Lado Derecho: Composición Editorial */}
       <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-square flex gap-4 md:gap-6">
         <div className="relative w-1/2 h-[80%] mt-auto shadow-sm overflow-hidden group">
-          <Image
-            src={leftImageUrl ?? "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop"}
-            fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-            alt="Fotografía de sesión"
-          />
+          {leftImageUrl ? (
+            <Image
+              src={leftImageUrl}
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              alt="Fotografía de sesión"
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/15" />
+          )}
         </div>
         <div className="relative w-1/2 h-[90%] shadow-sm overflow-hidden group">
-          <Image
-            src={rightImageUrl ?? "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"}
-            fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-            alt="Fotografía de retrato"
-          />
+          {rightImageUrl ? (
+            <Image
+              src={rightImageUrl}
+              fill
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              alt="Fotografía de retrato"
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary/10" />
+          )}
         </div>
       </div>
 
