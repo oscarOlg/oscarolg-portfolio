@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -61,14 +61,14 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Initialize navbar state on mount/reload based on current scroll position
-  useEffect(() => {
+  // Initialize navbar state on mount/reload based on current scroll position (before paint)
+  useLayoutEffect(() => {
     if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
       return;
     }
     
-    // Set initial state synchronously on mount
+    // Set initial state synchronously on mount before browser paints
     const currentScrollY = window.scrollY;
     setIsAtTop(currentScrollY < TOP_TRANSPARENCY_THRESHOLD);
   }, [isHomepage, isPrivateGuide]);
