@@ -17,6 +17,7 @@ import {
 
 interface FormData {
   name: string;
+  fianceName: string;
   phone: string;
   date: string;
   venue: string;
@@ -36,6 +37,7 @@ export default function ContactFormClient() {
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
+    fianceName: "",
     phone: "",
     date: "",
     venue: "",
@@ -51,10 +53,11 @@ export default function ContactFormClient() {
   }, [lang]);
 
   const generatedMessage = useMemo(() => {
-    const { name, phone, date, venue, photoPriority, weddingDetails } = formData;
+    const { name, fianceName, phone, date, venue, photoPriority, weddingDetails } = formData;
 
     const lines: string[] = [];
-    lines.push(`${contact.msgHello} ${name || contact.msgDefaultName}.`);
+    const nameDisplay = fianceName ? `${name} & ${fianceName}` : name;
+    lines.push(`${contact.msgHello} ${nameDisplay || contact.msgDefaultName}.`);
     lines.push(`${contact.msgInterestedIn}.`);
     if (date) lines.push(`${contact.msgDate} ${date}.`);
     if (venue) lines.push(`${contact.msgVenue} ${venue}.`);
@@ -140,7 +143,7 @@ export default function ContactFormClient() {
   return (
     <div className="w-full">
       <div className="bg-white p-8 md:p-12 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-8 pb-24 md:pb-0">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="border border-accent/50 bg-accent/15 p-5 md:p-6 shadow-sm">
             <p className="font-sans text-base md:text-lg text-secondary font-medium leading-relaxed">
               {contact.quickLead}
@@ -153,18 +156,35 @@ export default function ContactFormClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                {contact.nameLabel}
+                Nombre *
               </label>
               <input
                 type="text"
                 id="name"
+                placeholder="Tu nombre"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans"
+                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans placeholder:text-gray-400"
               />
             </div>
 
+            <div className="flex flex-col gap-2">
+              <label htmlFor="fianceName" className="font-sans uppercase tracking-widest text-xs text-gray-500">
+                Nombre de tu pareja
+              </label>
+              <input
+                type="text"
+                id="fianceName"
+                placeholder="El Nombre de tu pareja"
+                value={formData.fianceName}
+                onChange={handleChange}
+                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans placeholder:text-gray-400"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
               <label htmlFor="phone" className="font-sans uppercase tracking-widest text-xs text-gray-500">
                 {contact.phoneLabel}
@@ -172,25 +192,10 @@ export default function ContactFormClient() {
               <input
                 type="tel"
                 id="phone"
+                placeholder="Ej.: 656 999 9999"
                 value={formData.phone}
                 onChange={handleChange}
-                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="date" className="font-sans uppercase tracking-widest text-xs text-gray-500">
-                {contact.dateLabel}
-              </label>
-              <input
-                type="date"
-                id="date"
-                value={formData.date}
-                onChange={handleChange}
-                required
-                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans text-gray-700"
+                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans placeholder:text-gray-400"
               />
             </div>
 
@@ -201,32 +206,42 @@ export default function ContactFormClient() {
               <input
                 type="text"
                 id="venue"
+                placeholder="Ej.: Iglesia Santa Rita, Salon Las Fuentes"
                 value={formData.venue}
                 onChange={handleChange}
                 required
-                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans"
+                className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans placeholder:text-gray-400"
               />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
+            <label htmlFor="date" className="font-sans uppercase tracking-widest text-xs text-gray-500">
+              {contact.dateLabel}
+            </label>
+            <input
+              type="date"
+              id="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans text-gray-700 placeholder:text-gray-400"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2 mt-2">
             <label htmlFor="photoPriority" className="font-sans uppercase tracking-widest text-xs text-gray-500">
               {contact.photoPriorityLabel}
             </label>
-            <select
+            <textarea
               id="photoPriority"
               value={formData.photoPriority}
               onChange={handleChange}
+              rows={3}
+              placeholder="Cuéntanos qué es lo más importante para ustedes, que estilo les gustaria, que les preocupa..."
               required
-              className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans text-gray-700 cursor-pointer appearance-none rounded-none"
-            >
-              <option value="">{contact.photoPriorityPlaceholder}</option>
-              {priorityOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+              className="border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-secondary transition-colors font-sans resize-none placeholder:text-gray-400"
+            ></textarea>
           </div>
 
           <div className="flex flex-col gap-2 mt-2">
@@ -264,17 +279,7 @@ export default function ContactFormClient() {
             </div>
           )}
 
-          <div className="sticky md:static bottom-0 -mx-8 md:mx-0 px-4 md:px-0 py-3 bg-white/95 backdrop-blur border-t border-gray-200 md:border-0 md:bg-transparent md:backdrop-blur-none md:py-0">
-            <div className="md:hidden border border-accent/40 bg-accent/10 p-3 mb-3 shadow-sm">
-              <p className="font-sans text-xs uppercase tracking-widest text-secondary/80 mb-2 font-semibold">
-                {contact.quickHeading}
-              </p>
-              <pre className="whitespace-pre-wrap font-sans text-sm text-secondary leading-relaxed max-h-28 overflow-y-auto">
-                {generatedMessage}
-              </pre>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 mt-8">
             <button
               type="submit"
               disabled={submitStatus === "success"}
@@ -294,11 +299,10 @@ export default function ContactFormClient() {
             >
               {copied ? contact.copiedButton : contact.copyButton}
             </button>
-            </div>
+          </div>
 
-            <div className="pt-6">
-              <Socials containerClassName="flex gap-5" itemClassName="hover:text-accent transition-colors text-gray-600" />
-            </div>
+          <div className="pt-6">
+            <Socials containerClassName="flex gap-5" itemClassName="hover:text-accent transition-colors text-gray-600" />
           </div>
         </form>
       </div>

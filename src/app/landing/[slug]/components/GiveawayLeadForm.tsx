@@ -22,6 +22,7 @@ interface GiveawayLeadFormProps {
 
 interface GiveawayFormData {
   name: string;
+  fianceName: string;
   phone: string;
   weddingDateAndVenue: string;
   story: string;
@@ -39,6 +40,7 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
 
   const [formData, setFormData] = useState<GiveawayFormData>({
     name: "",
+    fianceName: "",
     phone: "",
     weddingDateAndVenue: "",
     story: "",
@@ -66,7 +68,8 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
     const lines: string[] = [];
     lines.push(content.form.msgIntro);
     lines.push("");
-    lines.push(`${content.form.msgName} ${formData.name || content.form.msgNoData}`);
+    const nameDisplay = formData.fianceName ? `${formData.name} & ${formData.fianceName}` : formData.name;
+    lines.push(`${content.form.msgName} ${nameDisplay || content.form.msgNoData}`);
     lines.push(`${content.form.msgPhone} ${formData.phone || content.form.msgNoData}`);
     lines.push(`${content.form.msgDateVenue} ${formData.weddingDateAndVenue || content.form.msgNoData}`);
     lines.push("");
@@ -164,6 +167,21 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               required
               placeholder={content.form.namePlaceholder}
               className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base focus:outline-none focus:border-secondary transition-colors placeholder:text-xs md:placeholder:text-sm"
+            />
+          </div>
+
+          {/* Partner Name */}
+          <div className="flex flex-col gap-2">
+            <label htmlFor="fianceName" className="text-xs uppercase tracking-widest text-gray-500 font-semibold">
+              Nombre de tu pareja
+            </label>
+            <input
+              id="fianceName"
+              type="text"
+              value={formData.fianceName}
+              onChange={handleChange}
+              placeholder="Escribe el nombre de tu pareja"
+              className="border-b border-gray-300 bg-transparent py-3 text-sm md:text-base focus:outline-none focus:border-secondary transition-colors placeholder:text-xs md:placeholder:text-sm placeholder:text-gray-400"
             />
           </div>
 

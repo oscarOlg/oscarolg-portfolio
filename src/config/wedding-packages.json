@@ -121,20 +121,20 @@
     {
       "id": "clasica",
       "order": 2,
-      "name": "Clásica",
+      "name": "",
       "nameEn": "Classic",
-      "subtitle": "La Inversión Inteligente",
-      "subtitleEn": "The Smart Investment",
+      "subtitle": "",
+      "subtitleEn": "",
       "imageUrl": "[PLACEHOLDER: wedding-reception-emotion]",
       "duration": "8 horas",
       "durationEn": "8 hours",
-      "targetAudience": "**El equilibrio perfecto.** Esta coleccion es para las parejas que quieren disfrutar de su boda **sin interrupciones**, con la seguridad de que **ningun momento clave se quedara fuera**.",
+      "targetAudience": "El equilibrio perfecto. Esta colección es para las parejas que quieren disfrutar de su boda sin interrupciones, con la seguridad de que ningún momento clave se quedará fuera.",
       "targetAudienceEn": "**The perfect balance.** This collection is for couples who want to enjoy their wedding **without interruptions**, with the certainty that **no key moment will be missed**.",
-      "promise": "Durante 8 horas documentare los ultimos detalles de su arreglo, toda la ceremonia, una sesion de recien casados fluida y sin poses forzadas, y lo mejor de la recepcion. Tendran la historia completa de su gran dia narrada con un estilo cinematografico, dandoles **total libertad** para tomarse ese trago y bailar con sus invitados.",
+      "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico, dándoles total libertad para tomarse ese trago y bailar con sus invitados.\n\nCada celebración tiene su propio ritmo. Si desean adaptar la cobertura a los tiempos de su evento o agregar complementos exclusivos, lo afinaremos juntos para asegurar que su experiencia sea perfecta.",
       "promiseEn": "For 8 hours I will document your final getting-ready details, the full ceremony, a fluid newlywed session with no forced posing, and the best moments of the reception. You will receive the full story of your day told with a cinematic style, while you stay free to enjoy **every toast and dance** with your guests.",
       "features": [
-        "Cobertura Principal del Evento (8 horas): Detalles del arreglo, ceremonia, sesion fluida y recepcion.",
-        "Galeria Digital Premium: Memorias entregadas en plataforma privada de alta calidad."
+        "Cobertura Principal del Evento (8 horas): Detalles del arreglo, ceremonia, sesión formal y recepción.",
+        "Galería Digital Premium: Memorias entregadas en plataforma privada de alta calidad."
       ],
       "featuresEn": [
         "Main Event Coverage (8 hours): Getting-ready details, ceremony, fluid session, and reception.",

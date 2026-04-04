@@ -75,7 +75,7 @@
       "Recibir acompañamiento claro antes, durante y después"
     ],
     "weddingDetailsLabel": "Detalles clave de su boda",
-    "weddingDetailsPlaceholder": "Ej.: tipo de ceremonia, horario aproximado, estilo de fotos que les gusta o momentos importantes.",
+    "weddingDetailsPlaceholder": "Ej.: tipo de ceremonia, horario aproximado, momentos importantes...",
     "submitButton": "Enviar por WhatsApp",
     "sentButton": "WhatsApp abierto",
     "successMsg": "✓ Abriendo WhatsApp con su mensaje precargado.",
@@ -102,10 +102,17 @@
     "msgDefaultName": "[Tu Nombre]"
   },
   "services": {
+    "mainPromise": "Disfruten su boda. **Yo me encargo de su historia.**",
+    "oscarStory": "La planeación, la emoción de los meses anteriores, y de repente, el día de tu boda pasa en un suspiro. Cuando vuelvas a ver estas imágenes dentro de 10 o 20 años —en la sala de tu casa o compartiéndolas con tu familia— no quieres recordar lo cansado que fue posar para la cámara; necesitas revivir exactamente **la magia y la conexión** que sintieron en ese instante.\n\nPor eso me tomo tan en serio cada evento, porque no se trata solo de entregar imágenes bonitas, sino de crear un **legado visual**. Cada historia es única y merece ser documentada con la misma autenticidad con la que se vive. He diseñado estas colecciones pensando en diferentes ritmos de celebración, pero todas comparten mi promesa innegociable: **libertad total para disfrutar**, **cero poses incómodas** y una **estética cinematográfica** impecable.",
+    "customizableNote": "Cada paquete abajo es totalmente personalizable. Si necesitas ajustes, complementos o una configuración distinta, simplemente comparte tus detalles y definimos la opción ideal para tu visión.",
+    "investmentGuideHeading": "¿Listos para ver todas las opciones y precios?",
+    "investmentGuideBody": "Cuéntenme un poco sobre su gran día y continuemos la plática por **WhatsApp**. Les haré llegar mi **guía de inversión detallada con total transparencia**, para que tengan toda la claridad que necesitan desde el primer momento.",
+    "sendGuideButtonText": "SOLICITAR GUÍA DE INVERSIÓN COMPLETA",
+    "beforePricingNote": "Los precios abajo son nuestra estructura base. Veremos juntos cualquier personalización que necesites.",
     "eyebrow": "Inversión",
     "title": "La propuesta principal para su boda sin estrés",
     "subheading": "Cobertura pensada para acompañarlos con claridad y tranquilidad. Si después quieren ver ajustes, complementos o una configuración distinta, les comparto todo por WhatsApp.",
-    "heroAlt": "Detalle de fotografia elegante",
+    "heroAlt": "Detalle de fotografía elegante",
     "ctaPrimary": "Consultar disponibilidad",
     "ctaSecondary": "Ver colecciones",
     "trustBullets": [
@@ -119,8 +126,8 @@
       "Buscan imágenes elegantes que conserven emoción real",
       "Valoran comunicación clara y un proceso sin fricción"
     ],
-    "collectionsTitle": "Paquete principal",
-    "collectionsIntro": "Esta es la opción ancla. Si necesitan ajustar cobertura, entregables o complementos, se define después por WhatsApp.",
+    "collectionsTitle": "La Colección Más Elegida",
+    "collectionsIntro": "",
     "sessionTitle": "Sesión previa y casual",
     "sessionIntro": "Ideal para conectar con cámara y llegar al gran día con total naturalidad.",
     "addOnsTitle": "Piezas de conservación y complementos",
@@ -143,10 +150,10 @@
     "galleryAltFrame": "Fotograma de boda",
     "packages": {
       "mostPopularLabel": "La colección más elegida",
-      "includedLabel": "Qué incluye",
+      "includedLabel": "QUÉ INCLUYE",
       "bonusesLabel": "Bonos",
-      "durationLabel": "Duración",
-      "investmentLabel": "Inversión",
+      "durationLabel": "DURACIÓN",
+      "investmentLabel": "INVERSIÓN",
       "fullGuideCta": "Solicitar Guía de Inversión Completa",
       "sessionLabel": "Sesión previa y casual",
       "sessionCta": "Consultar fechas para sesión",

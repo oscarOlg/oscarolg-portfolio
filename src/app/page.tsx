@@ -23,7 +23,6 @@ export const revalidate = 60;
 
 export default async function Home() {
   const homepageImages: PortfolioImage[] = await getPortfolioImagesByUsage('homepage');
-  const homepageImages2: PortfolioImage[] = await getPortfolioImagesByUsage('Homepage');
   
   const homeCarouselImages = homepageImages.filter((img) => img.usageSection === 'carousel').slice(0, 6);
   const homeGridImages = homepageImages.filter((img) => img.usageSection === 'grid').slice(0, 6);
@@ -49,7 +48,7 @@ export default async function Home() {
     <div className="flex flex-col w-full">
 
       {/* ── 1. HERO ── */}
-      <section className="relative w-full h-[100dvh] flex items-center justify-center">
+      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
         <HeroCarousel slides={heroSlides} />
         <HeroContent />
       </section>
