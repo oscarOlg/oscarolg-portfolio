@@ -328,34 +328,10 @@
   ],
   "addOns": [
     {
-      "id": "recuerdos",
-      "name": "Colección de Recuerdos",
-      "nameEn": "Memory Collection",
-      "price": 1500,
-      "description": "50 fotografías impresas (4x6\") + 2 ampliaciones para enmarcar (8x10\")",
-      "descriptionEn": "50 printed photographs (4x6\") + 2 enlargements for framing (8x10\")"
-    },
-    {
-      "id": "herencia",
-      "name": "Herencia Familiar",
-      "nameEn": "Family Heritage",
-      "price": 2800,
-      "description": "100 fotografías impresas (4x6\") + 4 ampliaciones (8x10\")",
-      "descriptionEn": "100 printed photographs (4x6\") + 4 enlargements (8x10\")"
-    },
-    {
-      "id": "arte-en-casa",
-      "name": "Arte en Casa",
-      "nameEn": "Art at Home",
-      "price": 3500,
-      "description": "1 ampliación grande para el centro (16x20\") + 2 ampliaciones medianas para los lados (11x14\")",
-      "descriptionEn": "1 large centerpiece enlargement (16x20\") + 2 medium side enlargements (11x14\")"
-    },
-    {
       "id": "photobook-10x10",
       "name": "Photobook Premium (10x10)",
       "nameEn": "Premium Photobook (10x10)",
-      "price": 4500,
+      "price": 4000,
       "description": "Libro de arte de alta calidad en pasta dura para perdurar generaciones",
       "descriptionEn": "High-quality art book in hardcover to last generations"
     },
@@ -363,7 +339,7 @@
       "id": "photobook-12x12",
       "name": "Photobook Gran Formato (12x12)",
       "nameEn": "Grand Format Photobook (12x12)",
-      "price": 6000,
+      "price": 5500,
       "description": "Libro de arte gran formato en pasta dura para máximo impacto visual",
       "descriptionEn": "Grand format art book in hardcover for maximum visual impact"
     },
