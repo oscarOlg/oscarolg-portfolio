@@ -61,6 +61,18 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  // Initialize navbar state on mount/reload based on current scroll position
+  useEffect(() => {
+    if (!isHomepage && !isPrivateGuide) {
+      setIsAtTop(false);
+      return;
+    }
+    
+    // Set initial state synchronously on mount
+    const currentScrollY = window.scrollY;
+    setIsAtTop(currentScrollY < TOP_TRANSPARENCY_THRESHOLD);
+  }, [isHomepage, isPrivateGuide]);
+
   useEffect(() => {
     if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
@@ -68,7 +80,6 @@ export default function Navbar() {
     }
 
     const handleScroll = () => setIsAtTop(window.scrollY < TOP_TRANSPARENCY_THRESHOLD);
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
