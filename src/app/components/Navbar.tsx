@@ -46,6 +46,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isHydrated, setIsHydrated] = useState(false);
   const { lang, setLang } = useLanguage();
   const locale = getSiteLocale(lang);
   const headerRef = useRef<HTMLElement>(null);
@@ -62,6 +63,11 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
+
+  // Mark hydration complete immediately
+  useLayoutEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   // Initialize nav state BEFORE paint based on current scroll
   useLayoutEffect(() => {
@@ -106,7 +112,7 @@ export default function Navbar() {
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-50 border-b transition-all duration-300 ${
-        isTransparent
+        !isHydrated || isTransparent
           ? "bg-transparent border-transparent shadow-none backdrop-blur-0 text-dominant"
           : "bg-white/85 backdrop-blur-md border-white/20 shadow-sm text-secondary"
       }`}
