@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Socials from "./Socials";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -63,6 +63,17 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  // Initialize nav state BEFORE paint based on current scroll
+  useLayoutEffect(() => {
+    if (!isHomepage && !isPrivateGuide) {
+      setIsAtTop(false);
+      return;
+    }
+    
+    const currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    setIsAtTop(currentScrollY < TOP_TRANSPARENCY_THRESHOLD);
+  }, [isHomepage, isPrivateGuide, TOP_TRANSPARENCY_THRESHOLD]);
+
   useEffect(() => {
     if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
@@ -73,8 +84,6 @@ export default function Navbar() {
       setIsAtTop(window.scrollY < TOP_TRANSPARENCY_THRESHOLD);
     };
 
-    // Set initial state before adding listener
-    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
