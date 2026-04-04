@@ -50,6 +50,8 @@ export default async function Home() {
       {/* ── 1. HERO ── */}
       <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
         <HeroCarousel slides={heroSlides} />
+        {/* Overlay for readability and scroll stability */}
+        <div className="absolute inset-0 bg-black/[0.45] pointer-events-none z-0" />
         <HeroContent />
       </section>
 
