@@ -46,11 +46,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-  const [scrollY, setScrollY] = useState(0);
   const { lang, setLang } = useLanguage();
   const locale = getSiteLocale(lang);
   const headerRef = useRef<HTMLElement>(null);
-  const isHomepage = pathname === "/";  const isPrivateGuide = pathname.includes('/private-investment-guide');
+  const isHomepage = pathname === "/";
+  const isPrivateGuide = pathname.includes('/private-investment-guide');
+  
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     function handleClickOutside(e: MouseEvent) {
@@ -62,19 +63,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Initialize navbar state on mount/reload based on current scroll position
-  useEffect(() => {
-    if (!isHomepage && !isPrivateGuide) {
-      setIsAtTop(false);
-      return;
-    }
-    
-    // Set initial state synchronously on mount
-    const currentScrollY = window.scrollY;
-    setScrollY(currentScrollY);
-    setIsAtTop(currentScrollY < TOP_TRANSPARENCY_THRESHOLD);
-  }, [isHomepage, isPrivateGuide]);
-
   useEffect(() => {
     if (!isHomepage && !isPrivateGuide) {
       setIsAtTop(false);
@@ -82,14 +70,15 @@ export default function Navbar() {
     }
 
     const handleScroll = () => {
-      const current = window.scrollY;
-      setScrollY(current);
-      setIsAtTop(current < TOP_TRANSPARENCY_THRESHOLD);
+      setIsAtTop(window.scrollY < TOP_TRANSPARENCY_THRESHOLD);
     };
+
+    // Set initial state before adding listener
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomepage, isPrivateGuide, TOP_TRANSPARENCY_THRESHOLD]);
+  }, [isHomepage, isPrivateGuide]);
 
   const navLinks = [
     { href: "/portfolio", label: locale.nav.portfolio },
@@ -101,19 +90,16 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href !== "/" && href !== "/#about" && pathname.startsWith(href);
 
-  const useTransparentStyle = (isHomepage || isPrivateGuide) && isAtTop && !isMobileMenuOpen;
-  // Use dark text when scrolling in the transition range to survive white-space glitch
-  const useDarkText = (isHomepage || isPrivateGuide) && scrollY > 0 && scrollY < TOP_TRANSPARENCY_THRESHOLD && !isMobileMenuOpen;
+  // Only two states: transparent at top, or solid background
+  const isTransparent = (isHomepage || isPrivateGuide) && isAtTop && !isMobileMenuOpen;
 
   return (
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 w-full z-50 border-b transition-all duration-300 ${
-        useDarkText ? "text-black bg-white/90 backdrop-blur-sm border-white/30" : "text-dominant"
-      } ${
-        useTransparentStyle
-          ? "bg-transparent border-transparent shadow-none backdrop-blur-0"
-          : !useDarkText ? "bg-secondary/90 backdrop-blur-md border-white/10 shadow-md" : ""
+        isTransparent
+          ? "bg-transparent border-transparent shadow-none backdrop-blur-0 text-dominant"
+          : "bg-white/85 backdrop-blur-md border-white/20 shadow-sm text-secondary"
       }`}
     >
       {/* ── Main bar ── */}
@@ -149,7 +135,9 @@ export default function Navbar() {
         {/* RIGHT — Language toggle + Socials (desktop) | Hamburger (mobile) */}
         <div className="hidden lg:flex items-center justify-end gap-5">
           {/* Language toggle */}
-          <div className="flex items-center gap-1.5 font-sans text-[10px] uppercase tracking-[0.2em] pr-5 border-r border-white/20">
+          <div className={`flex items-center gap-1.5 font-sans text-[10px] uppercase tracking-[0.2em] pr-5 border-r ${
+            isTransparent ? "border-white/20" : "border-black/15"
+          }`}>
             <button
               onClick={() => setLang("es")}
               className={`transition-opacity ${lang === "es" ? "opacity-100" : "opacity-35 hover:opacity-65"}`}
@@ -168,7 +156,11 @@ export default function Navbar() {
           </div>
           <Socials
             containerClassName="flex gap-5"
-            itemClassName="hover:text-accent transition-colors"
+            itemClassName={`transition-colors ${
+              isTransparent 
+                ? "hover:text-accent" 
+                : "text-secondary hover:text-accent"
+            }`}
           />
         </div>
 
@@ -187,7 +179,11 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="lg:hidden bg-secondary text-dominant border-t border-white/10 shadow-lg overflow-hidden"
+            className={`lg:hidden border-t shadow-lg overflow-hidden ${
+              isTransparent
+                ? "bg-white/85 text-secondary border-white/20"
+                : "bg-white/85 text-secondary border-white/20"
+            }`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -204,7 +200,7 @@ export default function Navbar() {
                   <Link
                     href={href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block font-sans text-sm uppercase tracking-widest border-b border-white/10 py-4 transition-colors ${
+                    className={`block font-sans text-sm uppercase tracking-widest border-b border-black/10 py-4 transition-colors ${
                       isActive(href) ? "text-accent" : "hover:text-accent"
                     }`}
                   >
@@ -215,7 +211,7 @@ export default function Navbar() {
 
               {/* Language toggle — mobile */}
               <motion.div
-                className="flex items-center gap-3 py-4 border-b border-white/10"
+                className="flex items-center gap-3 py-4 border-b border-black/10"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.055, duration: 0.22, ease: "easeOut" }}
@@ -249,7 +245,7 @@ export default function Navbar() {
               >
                 <Socials
                   containerClassName="flex gap-6"
-                  itemClassName="hover:text-accent transition-colors text-dominant/60"
+                  itemClassName="hover:text-accent transition-colors text-secondary"
                 />
               </motion.div>
             </div>
