@@ -48,7 +48,7 @@ export default async function Home() {
     <div className="flex flex-col w-full">
 
       {/* ── 1. HERO ── */}
-      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative w-full min-h-[calc(100vh+4rem)] flex items-center justify-center overflow-hidden -mt-16">
         <HeroCarousel slides={heroSlides} />
         {/* Overlay for readability and scroll stability */}
         <div className="absolute inset-0 bg-black/[0.45] pointer-events-none z-0" />
