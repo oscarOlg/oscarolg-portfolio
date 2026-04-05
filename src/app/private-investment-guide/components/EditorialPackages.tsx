@@ -28,7 +28,7 @@ interface PackageCardProps {
 }
 
 function PackageCard({ pkg, index, image, experienceLabel, investmentLabel }: PackageCardProps) {
-  const imageUrl = image ? getImageUrl(image.image, 550, 687) : null
+  const imageUrl = image ? getImageUrl(image.image) : null
   
   return (
     <motion.article

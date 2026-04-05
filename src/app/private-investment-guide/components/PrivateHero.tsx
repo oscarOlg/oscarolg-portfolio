@@ -15,7 +15,7 @@ export default function PrivateHero({ heroImage }: PrivateHeroProps) {
   const { lang } = useLanguage()
   const locale = getSiteLocale(lang)
   const hero = locale.privateInvestmentGuide.hero
-  const heroImageUrl = heroImage ? getImageUrl(heroImage.image, 1920, 1080) : null
+  const heroImageUrl = heroImage ? getImageUrl(heroImage.image) : null
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden -mt-16">

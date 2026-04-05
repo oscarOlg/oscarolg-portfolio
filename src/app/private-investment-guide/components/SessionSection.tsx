@@ -16,7 +16,7 @@ export default function SessionSection({ sessionImage }: SessionSectionProps) {
   const locale = getSiteLocale(lang)
   const session = locale.privateInvestmentGuide.session
   const sessionFeatures = locale.privateInvestmentGuide.sessionFeatures
-  const sessionImageUrl = sessionImage ? getImageUrl(sessionImage.image, 500, 625) : null
+  const sessionImageUrl = sessionImage ? getImageUrl(sessionImage.image) : null
   
   return (
     <section className="w-full py-20 md:py-32 px-4 md:px-8 bg-gray-50 border-y border-gray-200">
