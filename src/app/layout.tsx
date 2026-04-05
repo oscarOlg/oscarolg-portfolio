@@ -106,6 +106,11 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: ['/og-image.jpg'],
   },
+  verification: {
+    other: {
+      'facebook-domain-verification': ['dq5ti1txc68uwmf50o8itmpyrDbt', 'gmxul2t3faqdmevo2kxOzf0e5jBj8y'],
+    },
+  },
 };
 
 export default function RootLayout({

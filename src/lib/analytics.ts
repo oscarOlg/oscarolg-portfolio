@@ -74,10 +74,17 @@ export function trackLeadFormStarted(
   formName: string,
   language: string = 'es'
 ) {
-  trackConversion('event_form_start', {
+  // Send to GA4
+  trackGA4Event('event_form_start', {
     form_name: formName,
     language: language,
     timestamp: new Date().toISOString(),
+  });
+
+  // Send to Meta Pixel
+  trackPixelEvent('InitiateCheckout', {
+    content_type: 'lead_form',
+    content_name: formName,
   });
 }
 
@@ -113,12 +120,16 @@ export function trackLeadFormCompleted(
   fieldsCount: number = 5,
   language: string = 'es'
 ) {
-  trackConversion('event_form_complete', {
+  // Send to GA4 with full detail
+  trackGA4Event('event_form_complete', {
     form_name: formName,
     fields_completed: fieldsCount,
     language: language,
     timestamp: new Date().toISOString(),
   });
+
+  // Send to Meta Pixel (no standard event for form complete, so skip for now)
+  // Meta will track this through Lead event on submission
 }
 
 /**
@@ -139,19 +150,23 @@ export function trackLeadFormSubmitted(
 ) {
   // Infer lead quality signals from form data
   const urgency = inferUrgency(weddingDate);
-  const contentQuality = story.length > 100 ? 'high' : story.length > 30 ? 'medium' : 'low';
 
-  trackConversion('purchase', {
+  // Send to both GA4 (with custom params) and Meta (with standard params)
+  trackGA4Event('lead_form_submitted', {
     form_name: formName,
     email: email,
     wedding_date: weddingDate,
     urgency_level: urgency,
-    content_quality: contentQuality,
-    story_length: story.length,
     language: language,
     timestamp: new Date().toISOString(),
+  });
+
+  // Send simplified event to Meta Pixel with only standard parameters
+  trackPixelEvent('Lead', {
+    content_name: formName,
+    content_type: 'lead_form',
+    value: 2500,
     currency: 'MXN',
-    value: 2500, // Giveaway value in pesos
   });
 }
 
@@ -163,10 +178,17 @@ export function trackLeadFormWhatsAppOpened(
   formName: string,
   language: string = 'es'
 ) {
-  trackConversion('WhatsApp_Window_Opened', {
+  // Send to GA4
+  trackGA4Event('whatsapp_opened', {
     form_name: formName,
     language: language,
     timestamp: new Date().toISOString(),
+  });
+
+  // Send to Meta Pixel (track as custom event)
+  trackPixelEvent('Contact', {
+    content_name: `WhatsApp from ${formName}`,
+    content_type: 'whatsapp_contact',
   });
 }
 
@@ -331,7 +353,8 @@ export function trackCampaignSignup(
 ) {
   const utmParams = getUTMParams();
 
-  trackConversion('purchase', {
+  // Send to GA4 with full data
+  trackGA4Event('campaign_signup', {
     event_type: 'campaign_signup',
     campaign_slug: campaignSlug,
     email: email,
@@ -340,8 +363,14 @@ export function trackCampaignSignup(
     utm_campaign: utmParams.utm_campaign || campaignSlug,
     language: language,
     timestamp: new Date().toISOString(),
+  });
+
+  // Send to Meta Pixel with standard parameters
+  trackPixelEvent('Lead', {
+    content_name: `Campaign: ${campaignSlug}`,
+    content_type: 'campaign_signup',
+    value: 0,
     currency: 'MXN',
-    value: 2500,
   });
 }
 

@@ -12,6 +12,7 @@ import {
   trackLeadFormStarted,
   trackLeadFormFieldFilled,
   trackLeadFormCompleted,
+  trackLeadFormSubmitted,
   trackCampaignSignup,
   trackLeadFormError,
 } from "@/lib/analytics";
@@ -114,16 +115,24 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
     e.preventDefault();
     
     try {
-      // Track form completion (all fields filled)
-      const fieldsCount = Object.values(formData).filter((val) => val.length > 0).length;
-      trackLeadFormCompleted("giveaway_engagement", fieldsCount, lang);
+      // Track form completion (all fields filled) - don't let analytics errors block submission
+      try {
+        const fieldsCount = Object.values(formData).filter((val) => val.length > 0).length;
+        trackLeadFormCompleted("giveaway_engagement", fieldsCount, lang);
+      } catch (analyticsError) {
+        console.error("Analytics tracking error (non-blocking):", analyticsError);
+      }
 
       // Track campaign signup (primary conversion for campaign)
-      trackCampaignSignup(
-        campaignSlug,
-        formData.phone || formData.name,
-        lang
-      );
+      try {
+        trackCampaignSignup(
+          campaignSlug,
+          formData.phone || formData.name,
+          lang
+        );
+      } catch (analyticsError) {
+        console.error("Analytics tracking error (non-blocking):", analyticsError);
+      }
 
       const whatsappUrl = getWhatsAppUrl(generatedMessage);
       if (!whatsappUrl) {
@@ -133,10 +142,25 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
       if (!popup) {
         throw new Error("Popup blocked");
       }
+
+      // Track WhatsApp window opened (confirmed conversion)
+      setTimeout(() => {
+        try {
+          trackLeadFormSubmitted("giveaway_engagement", formData.phone || formData.name, formData.weddingDateAndVenue, formData.story, lang);
+        } catch (analyticsError) {
+          console.error("Analytics tracking error (non-blocking):", analyticsError);
+        }
+      }, 500);
+
       setSubmitStatus("success");
+
     } catch (error) {
       console.error("WhatsApp open error:", error);
-      trackLeadFormError("giveaway_engagement", "whatsapp_failed", lang);
+      try {
+        trackLeadFormError("giveaway_engagement", "whatsapp_failed", lang);
+      } catch (analyticsError) {
+        console.error("Analytics error tracking failed:", analyticsError);
+      }
       setSubmitStatus("error");
       setErrorMessage(content.form.errorMsg);
     }
@@ -288,19 +312,6 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
               {generatedMessage}
             </pre>
           </div>
-
-          {/* Status Messages */}
-          {submitStatus === "success" && (
-            <div className="bg-green-50 border border-green-200 p-4 text-green-800 text-sm rounded">
-              {content.form.successMsg}
-            </div>
-          )}
-
-          {submitStatus === "error" && (
-            <div className="bg-red-50 border border-red-200 p-4 text-red-800 text-sm rounded">
-              {content.form.errorMsg}
-            </div>
-          )}
 
           {/* Submit Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">

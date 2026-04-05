@@ -98,18 +98,26 @@ export default function ContactFormClient() {
     e.preventDefault();
     
     try {
-      // Track form completion (all fields filled)
-      const fieldsCount = Object.values(formData).filter((val) => val.length > 0).length;
-      trackLeadFormCompleted("contact_wedding", fieldsCount, lang);
+      // Track form completion (all fields filled) - don't let analytics errors block submission
+      try {
+        const fieldsCount = Object.values(formData).filter((val) => val.length > 0).length;
+        trackLeadFormCompleted("contact_wedding", fieldsCount, lang);
+      } catch (analyticsError) {
+        console.error("Analytics tracking error (non-blocking):", analyticsError);
+      }
 
       // Track form submission (primary conversion) BEFORE opening WhatsApp
-      trackLeadFormSubmitted(
-        "contact_wedding",
-        formData.phone || formData.name,
-        formData.date,
-        formData.weddingDetails,
-        lang
-      );
+      try {
+        trackLeadFormSubmitted(
+          "contact_wedding",
+          formData.phone || formData.name,
+          formData.date,
+          formData.weddingDetails,
+          lang
+        );
+      } catch (analyticsError) {
+        console.error("Analytics tracking error (non-blocking):", analyticsError);
+      }
 
       const whatsappUrl = getWhatsAppUrl(generatedMessage);
       if (!whatsappUrl) {
@@ -120,15 +128,23 @@ export default function ContactFormClient() {
         throw new Error("Popup blocked");
       }
 
-      // Track WhatsApp window opened (confirmed conversion)
+      // Track WhatsApp window opened (confirmed conversion) - don't let analytics errors affect success status
       setTimeout(() => {
-        trackLeadFormWhatsAppOpened("contact_wedding", lang);
+        try {
+          trackLeadFormWhatsAppOpened("contact_wedding", lang);
+        } catch (analyticsError) {
+          console.error("Analytics tracking error (non-blocking):", analyticsError);
+        }
       }, 500);
 
       setSubmitStatus("success");
     } catch (error) {
       console.error("WhatsApp open error:", error);
-      trackLeadFormError("contact_wedding", "whatsapp_failed", lang);
+      try {
+        trackLeadFormError("contact_wedding", "whatsapp_failed", lang);
+      } catch (analyticsError) {
+        console.error("Analytics error tracking failed:", analyticsError);
+      }
       setSubmitStatus("error");
       setErrorMessage(contact.errorMsg);
     }
@@ -266,18 +282,6 @@ export default function ContactFormClient() {
               {generatedMessage}
             </pre>
           </div>
-
-          {submitStatus === "success" && (
-            <div className="bg-green-50 border border-green-200 p-4 text-green-800 text-sm font-sans">
-              {contact.successMsg}
-            </div>
-          )}
-
-          {submitStatus === "error" && (
-            <div className="bg-red-50 border border-red-200 p-4 text-red-800 text-sm font-sans">
-              ✕ {errorMessage}
-            </div>
-          )}
 
           <div className="flex flex-col sm:flex-row gap-3 mt-8">
             <button
