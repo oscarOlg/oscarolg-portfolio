@@ -12,6 +12,7 @@ import {
   trackLeadFormStarted,
   trackLeadFormFieldFilled,
   trackLeadFormCompleted,
+  trackLeadFormSubmitted,
   trackCampaignSignup,
   trackLeadFormError,
 } from "@/lib/analytics";
@@ -141,7 +142,18 @@ export default function GiveawayLeadForm({ campaignSlug }: GiveawayLeadFormProps
       if (!popup) {
         throw new Error("Popup blocked");
       }
+
+      // Track WhatsApp window opened (confirmed conversion)
+      setTimeout(() => {
+        try {
+          trackLeadFormSubmitted("giveaway_engagement", formData.phone || formData.name, formData.weddingDateAndVenue, formData.story, lang);
+        } catch (analyticsError) {
+          console.error("Analytics tracking error (non-blocking):", analyticsError);
+        }
+      }, 500);
+
       setSubmitStatus("success");
+
     } catch (error) {
       console.error("WhatsApp open error:", error);
       try {
