@@ -32,7 +32,7 @@ export default function AboutPageContent({
               src={imageUrl}
               alt={about.imageAlt}
               fill
-              className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="object-cover transition-all duration-700"
               priority
             />
           ) : (

@@ -2,7 +2,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import ServicesContent from "./ServicesContent";
-import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImagesByUsage } from "@/lib/sanity";
+import { getImageUrl, getServiceConfigByKey, getServicePackagesByCategory, getPortfolioImagesByUsage, getPortfolioImagesBySlugs } from "@/lib/sanity";
+import type { PortfolioImage } from "@/types/sanity";
 
 export const metadata: Metadata = {
   title: 'Inversión | Fotógrafo de Bodas en Ciudad Juárez',
@@ -16,6 +17,14 @@ export const metadata: Metadata = {
 
 // Revalidate every 60 seconds (ISR with fresh Sanity data)
 export const revalidate = 60;
+
+// Configuration: Package images in order (Signature, Clásica, Esencial, Civil e Íntima)
+const PACKAGE_IMAGE_SLUGS = [
+  'portfolio-weddings-dscf8204-jpg-dscf8204', // Signature
+  'portfolio-weddings-dscf2343-jpg-dscf2343', // Clásica
+  'portfolio-weddings-p-e-8ca09067dscf3850-jpg-p-e-8ca09067dscf3850', // Esencial
+  'portfolio-weddings-ost30818-jpg-ost30818', // Civil e Íntima
+]
 
 function ServicesLoadingFallback() {
   return (
@@ -46,10 +55,11 @@ function ServicesLoadingFallback() {
 }
 
 export default async function ServicesPage() {
-  const [weddingConfig, weddingPackages, serviceImages] = await Promise.all([
+  const [weddingConfig, weddingPackages, serviceImages, packageImages] = await Promise.all([
     getServiceConfigByKey("weddings"),
     getServicePackagesByCategory("weddings"),
     getPortfolioImagesByUsage("services"),
+    getPortfolioImagesBySlugs(PACKAGE_IMAGE_SLUGS),
   ]);
 
   if (!weddingConfig) {
@@ -92,6 +102,7 @@ export default async function ServicesPage() {
           heroImage={heroImage}
           weddingImages={orderedServiceImages}
           packageImageOverrides={packageImageOverrides}
+          portfolioImages={packageImages}
         />
       </Suspense>
     </div>
