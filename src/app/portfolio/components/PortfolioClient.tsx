@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import PortfolioLightbox from './PortfolioLightbox';
-import FloatingCTA from '../components/FloatingCTA';
+
 import type { PortfolioImage } from '@/types/sanity';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getSiteLocale } from '@/i18n/locales';
@@ -42,9 +42,6 @@ export default function PortfolioClient({
           </Link>
         </div>
       </div>
-
-      {/* Floating CTA Buttons */}
-      <FloatingCTA category="weddings" />
     </div>
   );
 }

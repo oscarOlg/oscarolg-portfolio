@@ -10,6 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { getSiteLocale } from "@/i18n/locales";
 import InlineBoldText from "@/app/components/InlineBoldText";
 import { useScrollTracking } from "@/lib/analytics";
+import EditorialPackages from "@/app/private-investment-guide/components/EditorialPackages";
 import packagesData from "@/config/wedding-packages.json";
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
   heroImage: PortfolioImage | null;
   weddingImages: PortfolioImage[];
   packageImageOverrides?: Record<string, string>;
+  portfolioImages?: PortfolioImage[];
 }
 
 interface Package {
@@ -65,6 +67,7 @@ export default function ServicesContent({
   heroImage,
   weddingImages,
   packageImageOverrides,
+  portfolioImages = [],
 }: Props) {
   const { lang } = useLanguage();
   const locale = getSiteLocale(lang);
@@ -166,99 +169,10 @@ export default function ServicesContent({
         </div>
       </section>
 
-      {/* ── 3. MOST POPULAR PACKAGE SECTION - HERO BACKGROUND ── */}
-      {featuredData && (
-        <section 
-          className="w-full py-20 md:py-28 relative overflow-hidden"
-          style={{
-            backgroundImage: featuredData.displayImageUrl 
-              ? `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${featuredData.displayImageUrl}')`
-              : 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 25%',
-            backgroundAttachment: 'fixed'
-          }}
-        >
-          <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10">
-            {/* Section Heading */}
-            <h2 className="font-serif text-4xl md:text-5xl text-dominant mb-6">
-              {String(services.collectionsTitle || "")}
-            </h2>
+      {/* ── 3. ALL PACKAGES SECTION ── */}
+      <EditorialPackages packageImages={portfolioImages} />
 
-            {/* Intro Text */}
-            <p className="font-sans text-lg text-gray-200 leading-relaxed mb-10">
-              {String(services.collectionsIntro || "")}
-            </p>
-
-            {/* Package Name */}
-            <div className="mb-10">
-              <h3 className="font-serif text-3xl md:text-4xl text-dominant mb-2">
-                {featuredData.name}
-              </h3>
-              {featuredData.subtitle && (
-                <p className="font-serif italic text-lg text-gray-300">
-                  {featuredData.subtitle}
-                </p>
-              )}
-            </div>
-
-            {/* Target Audience */}
-            <p className="font-sans text-lg text-gray-200 leading-relaxed mb-8 italic">
-              <InlineBoldText text={featuredData.targetAudience} boldClassName="font-semibold text-dominant" />
-            </p>
-
-            {/* Promise/Description */}
-            <p className="font-sans text-lg text-gray-200 leading-relaxed mb-8">
-              <InlineBoldText text={featuredData.promise.split('\n\n')[0]} boldClassName="font-semibold text-dominant" />
-            </p>
-            
-            {featuredData.promise.includes('\n\n') && (
-              <p className="font-sans text-base text-gray-300 leading-relaxed mb-10 italic">
-                <InlineBoldText text={featuredData.promise.split('\n\n')[1]} boldClassName="font-semibold text-gray-200" />
-              </p>
-            )}
-
-            {/* Features List - Simple bullets */}
-            {featuredData.features.length > 0 && (
-              <div className="mb-10">
-                <ul className="space-y-3">
-                  {featuredData.features.map((feature, idx) => (
-                    <li key={idx} className="text-gray-200 font-sans text-base flex items-start gap-3">
-                      <span className="text-accent flex-shrink-0 mt-1">•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* CTA Text flows naturally */}
-            <p className="font-sans text-lg text-gray-200 leading-relaxed mb-8">
-              <InlineBoldText text={String(services.investmentGuideBody || "")} boldClassName="font-semibold text-dominant" />
-            </p>
-
-            {/* Button */}
-            <Link
-              href="/contact"
-              className="inline-block bg-accent text-secondary px-8 md:px-10 py-4 md:py-5 uppercase tracking-widest text-sm font-bold hover:bg-accent/90 transition-colors mb-8"
-            >
-              {String(services.sendGuideButtonText || "")}
-            </Link>
-
-            {/* Price */}
-            <div>
-              <p className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">
-                {String(labels.investmentLabel || "Investment")}
-              </p>
-              <p className="font-serif text-4xl md:text-5xl text-dominant font-bold">
-                MXN {formatPrice(featuredPackage.price)}
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── 3. ADD-ONS SECTION ── */}
+      {/* ── 4. ADD-ONS SECTION ── */}
       {addOns.length > 0 && (
         <section className="w-full py-16 md:py-20 bg-gray-50">
           <div className="max-w-5xl mx-auto px-4 md:px-8">

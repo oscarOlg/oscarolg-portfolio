@@ -36,9 +36,11 @@ const aboutContent = {
   _id: 'aboutContent-main',
   heading: 'El enfoque detrás del lente.',
   paragraphs: [
-    'Soy Oscar Sanchez, fotógrafo radicado en Ciudad Juárez. Mi trabajo combina atención técnica al detalle con la sensibilidad artística necesaria para documentar lo que más importa: personas, vínculos y los momentos que merecen perdurar.',
-    'Me especializo en la fotografía de bodas, retratos y parejas. Entiendo que elegir a la persona que documentará tus memorias es un acto de fe. Por eso, mi promesa principal no es solo entregarte imágenes con calidad estética, sino brindarte confianza y tranquilidad absoluta durante todo el proceso.',
-    'Quiero que vivas cada experiencia sabiendo que cada instante irrepetible está en manos seguras. Mi objetivo es simple: transformar la emoción de hoy en un legado visual tangible que te permita volver a vivir el momento.',
+    'Soy Oscar, la persona detrás de la lente en Oscar Olg Photography. Trabajo desde Ciudad Juárez con una especialidad clara: fotografía editorial de bodas, retratos y parejas, con un proceso diseñado para que se sientan acompañados de principio a fin.',
+    'Mi camino hacia la fotografía tiene un origen distinto. Estudié Ingeniería en Mecatrónica y trabajé como desarrollador web. Aunque siempre me había gustado la fotografía, fue en 2021 cuando decidí dedicarme seriamente a este arte. Esa etapa no fue en vano; mi formación técnica me dejó una rigurosa atención al detalle y una mente analítica que hoy aplico para cuidar cada aspecto visual de su evento.',
+    'Por naturaleza, soy una persona introvertida. La cámara ha sido la herramienta perfecta para salir de mi zona de confort, acercarme a las personas y conocer sus historias. Esta forma de ser es precisamente la que define mi estilo de trabajo: no busco intervenir cada segundo ni forzar poses. Prefiero observar y crear un espacio tranquilo para que ustedes vivan su día con libertad, mientras yo documento lo esencial con intención editorial.',
+    'Esa conexión me ha llevado a disfrutar retratar a las personas en todas sus facetas, desde la cercanía de un retrato individual hasta los momentos irrepetibles de un gran evento. Al final, mi propósito va mucho más allá de los ajustes técnicos de la cámara; me enfoco en sus emociones y en lograr que vean reflejado justo lo que querían mostrar en sus fotografías.',
+    'Creo en una fotografía natural, elegante y profundamente humana. Desde nuestra primera conversación, mi objetivo es brindarles claridad, acompañamiento y tranquilidad total para que disfruten su proceso sin estrés. Mi promesa no es solo entregar imágenes estéticas, sino transformar la emoción del presente en un legado visual tangible, con la certeza de que cada instante irrepetible está en manos seguras.',
   ],
   ctaText: 'Hablemos de tu proyecto',
 }

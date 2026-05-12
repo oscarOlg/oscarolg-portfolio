@@ -47,12 +47,13 @@
     }
   },
   "about": {
-    "heading": "Oscar Olg Photography — Editorial Wedding Photographer in Ciudad Juárez",
+    "heading": "Oscar Olg Photography — Wedding Photographer in Ciudad Juárez",
     "paragraphs": [
-      "I'm Oscar, the person behind Oscar Olg Photography. I work from Ciudad Juarez with a clear specialty: editorial wedding photography, portraits, and couple sessions designed to feel supported from the first conversation to delivery.",
-      "My work combines technical attention to detail with the artistic sensitivity needed to capture what matters most: people, connections, and moments worth preserving. I do not direct every second; I create the space for you to live your day freely while I document the essential with editorial intention.",
-      "I believe in wedding photography that feels natural, elegant, and deeply human. My promise is not only to deliver beautiful images, but to turn today's emotion into a tangible visual legacy you can relive for years.",
-      "From the first conversation, my goal is to give you clarity, guidance, and peace of mind so you can enjoy the process without stress. I want you to know that every irreplaceable moment is in safe hands."
+      "I'm Oscar, the person behind the lens at Oscar Olg Photography. I work from Ciudad Juárez with a clear specialty: editorial wedding photography, portraits, and couple sessions, with a process designed to make you feel supported from beginning to end.",
+      "My journey to photography has a unique origin. I studied Mechatronics Engineering and worked as a web developer. While I always loved photography, it wasn't until 2021 that I decided to pursue it seriously. That background was not wasted; my technical training left me with meticulous attention to detail and an analytical mind that I apply today to care for every visual aspect of your event.",
+      "By nature, I'm an introverted person. The camera became the perfect tool to step out of my comfort zone, connect with people, and learn their stories. This is precisely what defines my work style: I don't aim to direct every second or force poses. I prefer to observe and create a calm space for you to live your day freely, while I document what matters.",
+      "That connection has led me to enjoy capturing people in all their facets, from the intimacy of a portrait to the irreplaceable moments of a major event. Ultimately, my purpose goes far beyond the technical adjustments of the camera; I focus on your emotions and on ensuring you see reflected exactly what you wanted to show in your photographs.",
+      "I believe in photography that feels natural, elegant, and deeply human. From our first conversation, my goal is to give you clarity, guidance, and complete peace of mind so you can enjoy your process without stress. My promise is not just to deliver beautiful images, but to transform the emotion of the present into a tangible visual legacy, with the certainty that every irreplaceable moment is in safe hands."
     ],
     "cta": "Check availability",
     "imageAlt": "Oscar Olg Photography - Wedding Photographer"
@@ -394,19 +395,20 @@
           "name": "Collection: Signature",
           "displayName": "Signature",
           "subtitle": "The Complete Legacy",
-          "price": 14500,
-          "audience": "Designed for the couple who wants to leave everything to us and enjoy their day with zero stress.",
-          "promise": "I'll be with you for 10 hours, capturing everything invisibly from the nervous excitement of makeup to the climax of the dance floor. This is for those who want not just a digital gallery, but the peace of mind knowing their story already includes a premium Photobook for their new home and a sneak peek for social media the next day. You focus on enjoying the celebration; I'll handle the family legacy.",
+          "price": 18000,
+          "audience": "For the couple that wants to delegate everything and ensure their story becomes a true family heirloom.",
+          "promise": "I'll be with you for 10 hours, capturing everything invisibly from the nervous excitement of makeup to the climax of the dance floor. This is for those who want not just a digital gallery, but the peace of mind knowing their story already includes art-quality printed photos, a Premium Photobook for their new home, and a sneak peek for social media the next day. You focus on enjoying the celebration; I'll handle the family legacy.",
           "features": [
             "10 hours of continuous coverage",
-            "Getting Ready documentation",
+            "Getting Ready preparation coverage",
             "Ceremony coverage",
-            "Formal couple session and family portraits",
+            "Formal couple session on wedding day",
             "Complete Reception coverage",
-            "Premium Digital Gallery in high resolution",
-            "The Family Legacy: Premium 10x10 Photobook",
-            "VIP BONUS: 30-photo sneak peek the next day",
-            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+            "Casual 'Save the Date' session",
+            "50 printed photos (4x6\") + 2 enlargements (8x10\")",
+            "Premium 10x10 Photobook",
+            "30-photo next-day preview ('Sneak Peek')",
+            "Premium Digital Gallery in high resolution"
           ],
           "badge": null
         },
@@ -415,17 +417,18 @@
           "name": "Collection: Classic",
           "displayName": "Classic",
           "subtitle": "The Smart Investment",
-          "price": 10500,
-          "audience": "The perfect balance. This collection is for couples who want to enjoy their wedding without interruptions, with the certainty that no key moment will be missed.",
-          "promise": "During 8 hours I'll document the final grooming details, the entire ceremony, a fluid and naturally-posed couple session, and the best of the reception. You'll have the complete story of your big day told in a cinematic style, giving you total freedom to have that drink and dance with your guests.",
+          "price": 12900,
+          "audience": "Our most chosen option. For couples seeking coverage of key moments with the peace of mind of having their memories printed.",
+          "promise": "During 8 hours I'll document the final grooming details, the entire ceremony, a fluid and naturally-posed couple session, and the best of the reception. You'll have the complete story of your big day told in a cinematic style through printed photographs and a premium digital gallery, giving you total freedom to have that drink and dance with your guests.",
           "features": [
             "8 hours of continuous coverage",
             "Final grooming details documentation",
             "Ceremony coverage",
-            "Formal couple session and family portraits",
+            "Formal couple session on wedding day",
             "Main Reception coverage",
-            "Premium Digital Gallery in high resolution",
-            "BONUS: Casual 'Save the Date' session (1.5 hrs)"
+            "Casual 'Save the Date' session",
+            "50 printed photos (4x6\") + 2 enlargements (8x10\")",
+            "Premium Digital Gallery in high resolution"
           ],
           "badge": "Most Popular"
         },
@@ -433,16 +436,16 @@
           "id": "esencial",
           "name": "Collection: Essential",
           "displayName": "Essential",
-          "subtitle": "The Right Coverage",
-          "price": 8000,
-          "audience": "Ideal for dynamic and practical weddings where the priority is documenting the heart of the event without extending too many hours.",
-          "promise": "I'll be with you for 5 hours—the exact time needed to capture the ceremony, direct a quick but magazine-worthy couple session, family portraits, and your grand entrance at the reception.",
+          "subtitle": "Agile Focus",
+          "price": 8700,
+          "audience": "For dynamic celebrations where the priority is documenting what matters most with a cinematic approach.",
+          "promise": "I'll be with you for 6 hours to capture the ceremony, direct a formal couple session, document key reception moments, and deliver your memories in a private digital gallery. It is for couples who want our signature documentary style focused directly on the core action.",
           "features": [
-            "5 hours of continuous coverage",
+            "6 hours of continuous coverage",
             "Ceremony coverage",
-            "Formal couple session and family portraits",
-            "Reception entrance and protocol coverage",
-            "Premium Private Digital Gallery in high resolution"
+            "Formal couple session on wedding day",
+            "Important reception moment coverage",
+            "Private Digital Gallery in high resolution"
           ],
           "badge": null
         },

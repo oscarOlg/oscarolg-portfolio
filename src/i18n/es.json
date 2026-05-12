@@ -49,10 +49,11 @@
   "about": {
     "heading": "Oscar Olg Photography — Fotógrafo de Bodas en Ciudad Juárez",
     "paragraphs": [
-      "Soy Oscar, la persona detrás de Oscar Olg Photography. Trabajo desde Ciudad Juárez con una especialidad clara: fotografía editorial de bodas, retratos y parejas con un proceso pensado para que se sientan acompañados de principio a fin.",
-      "Combino atención técnica al detalle con sensibilidad artística para capturar personas, vínculos y momentos que merecen permanecer. No busco intervenir cada segundo; creo el espacio para que vivan su día con libertad mientras documento lo esencial con intención editorial.",
-      "Creo en una fotografía de boda natural, elegante y profundamente humana. Mi promesa no es solo entregar imágenes bonitas, sino transformar la emoción de hoy en un legado visual tangible que puedan revivir por años.",
-      "Desde la primera conversación, mi objetivo es darles claridad, acompañamiento y tranquilidad total para que disfruten el proceso sin estrés. Quiero que sepan que cada instante irrepetible está en manos seguras."
+      "Soy Oscar, la persona detrás de la lente en Oscar Olg Photography. Trabajo desde Ciudad Juárez con una especialidad clara: fotografía editorial de bodas, retratos y parejas, con un proceso diseñado para que se sientan acompañados de principio a fin.",
+      "Mi camino hacia la fotografía tiene un origen distinto. Estudié Ingeniería en Mecatrónica y trabajé como desarrollador web. Aunque siempre me había gustado la fotografía, fue en 2021 cuando decidí dedicarme seriamente a este arte. Esa etapa no fue en vano; mi formación técnica me dejó una rigurosa atención al detalle y una mente analítica que hoy aplico para cuidar cada aspecto visual de su evento.",
+      "Por naturaleza, soy una persona introvertida. La cámara ha sido la herramienta perfecta para salir de mi zona de confort, acercarme a las personas y conocer sus historias. Esta forma de ser es precisamente la que define mi estilo de trabajo: no busco intervenir cada segundo ni forzar poses. Prefiero observar y crear un espacio tranquilo para que ustedes vivan su día con libertad, mientras yo documento lo esencial.",
+      "Esa conexión me ha llevado a disfrutar retratar a las personas en todas sus facetas, desde la cercanía de un retrato individual hasta los momentos irrepetibles de un gran evento. Al final, mi propósito va mucho más allá de los ajustes técnicos de la cámara; me enfoco en sus emociones y en lograr que vean reflejado justo lo que querían mostrar en sus fotografías.",
+      "Creo en una fotografía natural, elegante y profundamente humana. Desde nuestra primera conversación, mi objetivo es brindarles claridad, acompañamiento y tranquilidad total para que disfruten su proceso sin estrés. Mi promesa no es solo entregar imágenes estéticas, sino transformar la emoción del presente en un legado visual tangible, con la certeza de que cada instante irrepetible está en manos seguras."
     ],
     "cta": "Consultar disponibilidad",
     "imageAlt": "Oscar Olg Photography - Fotógrafo de bodas"
@@ -394,19 +395,20 @@
           "name": "Colección: Signature",
           "displayName": "Signature",
           "subtitle": "El Legado Completo",
-          "price": 14500,
-          "audience": "Diseñada para la pareja que quiere delegarlo absolutamente todo y vivir su día con cero estrés.",
-          "promise": "Estaré con ustedes durante 10 horas, capturando de manera invisible desde los nervios bonitos del maquillaje hasta el clímax de la pista de baile. Es para quienes no solo quieren una galería digital, sino la tranquilidad de saber que su historia ya incluye un Photobook de arte para su nuevo hogar y un adelanto para sus redes sociales al día siguiente. Ustedes dedíquense a disfrutar la fiesta; yo me encargo del legado familiar.",
+          "price": 18000,
+          "audience": "Para la pareja que desea delegar todo y asegurar que su historia queda plasmada en una verdadera obra de arte familiar.",
+          "promise": "Estaré con ustedes durante 10 horas, capturando de manera invisible desde los nervios bonitos del maquillaje hasta el clímax de la pista de baile. Es para quienes no solo quieren una galería digital, sino la tranquilidad de saber que su historia ya incluye fotografías impresas de arte, un Photobook Premium para su nuevo hogar y un adelanto para sus redes sociales al día siguiente. Ustedes dedíquense a disfrutar la fiesta; yo me encargo del legado familiar.",
           "features": [
-            "10 horas de cobertura continua",
+            "10 horas de cobertura contínua",
             "Cobertura de preparativos (Getting Ready)",
             "Cobertura de Ceremonia",
-            "Sesión formal de pareja y retratos familiares",
+            "Sesión formal de pareja el día de la boda",
             "Cobertura total de la Recepción",
-            "Galería Digital Premium en alta resolución",
-            "El Legado Familiar: Photobook Premium 10x10",
-            "BONO VIP: Adelanto de 30 fotos al día siguiente ('Sneak Peek')",
-            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+            "Sesión casual 'Save the Date'",
+            "50 fotografías impresas (4x6\"), más 2 ampliaciones (8x10\")",
+            "Photobook Premium 10x10",
+            "Adelanto de 30 fotos al día siguiente ('Sneak Peek')",
+            "Galería Digital Premium en alta resolución"
           ],
           "badge": null
         },
@@ -415,17 +417,18 @@
           "name": "Colección: Clásica",
           "displayName": "Clásica",
           "subtitle": "La Inversión Inteligente",
-          "price": 10500,
-          "audience": "El equilibrio perfecto. Esta colección es para las parejas que quieren disfrutar de su boda sin interrupciones, con la seguridad de que ningún momento clave se quedará fuera.",
-          "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico, dándoles total libertad para tomarse ese trago y bailar con sus invitados.",
+          "price": 12900,
+          "audience": "Nuestra opción más elegida. Para quienes buscan cobertura de los momentos clave y la tranquilidad de tener sus recuerdos impresos.",
+          "promise": "Durante 8 horas documentaré los últimos detalles de su arreglo, toda la ceremonia, una sesión de recién casados fluida y sin poses forzadas, y lo mejor de la recepción. Tendrán la historia completa de su gran día narrada con un estilo cinematográfico a través de fotografías impresas y una galería digital premium, dándoles total libertad para tomarse ese trago y bailar con sus invitados.",
           "features": [
-            "8 horas de cobertura continua",
+            "8 horas de cobertura contínua",
             "Cobertura de últimos detalles del arreglo",
             "Cobertura de Ceremonia",
-            "Sesión formal de pareja y retratos familiares",
+            "Sesión formal de pareja el día de la boda",
             "Cobertura principal de la Recepción",
-            "Galería Digital Premium en alta resolución",
-            "BONO: Sesión casual 'Save the Date' de 1.5 hrs."
+            "Sesión casual 'Save the Date'",
+            "50 fotografías impresas (4x6\"), más 2 ampliaciones (8x10\")",
+            "Galería Digital Premium en alta resolución"
           ],
           "badge": "La Más Elegida"
         },
@@ -433,15 +436,15 @@
           "id": "esencial",
           "name": "Colección: Esencial",
           "displayName": "Esencial",
-          "subtitle": "La Cobertura Justa",
-          "price": 8000,
-          "audience": "Ideal para bodas dinámicas y prácticas donde la prioridad es documentar el corazón del evento sin extenderse demasiadas horas.",
-          "promise": "Estaré con ustedes durante 5 horas, el tiempo exacto y necesario para capturar la ceremonia, dirigir una sesión de esposos rápida pero de revista, los retratos familiares y su gran entrada triunfal a la recepción.",
+          "subtitle": "Enfoque Ágil",
+          "price": 8700,
+          "audience": "Para celebraciones dinámicas donde la prioridad es documentar lo principal con un enfoque cinematográfico.",
+          "promise": "Estaré con ustedes durante 6 horas para capturar la ceremonia, dirigir una sesión formal de pareja, documentar los momentos importantes de la recepción y entregar sus recuerdos en una galería digital privada. Es para quienes quieren nuestro característico estilo documental enfocado directamente en la acción principal.",
           "features": [
-            "5 horas de cobertura continua",
+            "6 horas de cobertura contínua",
             "Cobertura de Ceremonia",
-            "Sesión formal de pareja y retratos familiares",
-            "Cobertura de entrada y protocolo en Recepción",
+            "Sesión formal de pareja el día de la boda",
+            "Cobertura de momentos importantes en Recepción",
             "Galería Digital Privada en alta resolución"
           ],
           "badge": null

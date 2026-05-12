@@ -8,6 +8,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import NavbarSpacer from "./components/NavbarSpacer";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton";
 import HtmlLangUpdater from "./components/HtmlLangUpdater";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { LocalBusinessSchema, CreatorSchema } from "./components/SchemaMarkup";
@@ -145,6 +146,9 @@ export default function RootLayout({
           {/* Global Footer */}
           <Footer />
         </LanguageProvider>
+
+        {/* Floating WhatsApp CTA */}
+        <WhatsAppButton />
 
         <Analytics />
         <SpeedInsights />
