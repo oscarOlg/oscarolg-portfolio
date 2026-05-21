@@ -25,6 +25,7 @@ interface LandingProps {
   campaign: LeadMagnetConfig;
   heroImageUrl: string;
   aboutImageUrl: string;
+  aboutContent?: any;
   stripImageUrls: string[];
   packageImageUrl?: string;
 }
@@ -37,6 +38,7 @@ export default function LandingPageClient({
   campaign,
   heroImageUrl,
   aboutImageUrl,
+  aboutContent,
   stripImageUrls,
   packageImageUrl,
 }: LandingProps) {
@@ -68,15 +70,20 @@ export default function LandingPageClient({
 
       {/* About Section - only render if aboutImageUrl exists */}
       {aboutImageUrl && (
-        <section className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div className="flex flex-col order-2 md:order-1">
               <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold mb-4">{content.about.title}</p>
-              <h2 className="font-serif text-4xl md:text-5xl text-secondary mb-6">Oscar Olg Photography</h2>
-              <p className="font-sans text-gray-700 leading-relaxed text-lg">{content.about.body}</p>
+              <h2 className="font-serif text-4xl md:text-5xl tracking-wide text-secondary mb-8">Oscar Olg Photography</h2>
+              <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-gray-700">
+                {content.about.paragraphs?.map((paragraph: string, i: number) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
             </div>
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 lg:justify-self-end overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
-              <Image src={aboutImageUrl} alt={content.about.imageAlt} fill className="object-cover object-top" />
+            <div className="relative w-full aspect-[4/5] shadow-sm order-1 md:order-2">
+              <Image src={aboutImageUrl} alt={content.about.imageAlt} fill className="object-cover object-top transition-all duration-700" />
+              <div className="absolute -inset-4 border border-accent/50 -z-10 hidden md:block"></div>
             </div>
           </div>
         </section>

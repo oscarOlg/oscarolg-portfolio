@@ -44,9 +44,10 @@ export default async function LandingPage({ params }: PageProps) {
     notFound();
   }
 
-  const [aboutContent, landingImages] = await Promise.all([
+  const [aboutContent, landingImages, aboutImages] = await Promise.all([
     getAboutContent(),
     getPortfolioImagesByUsage("landing"),
+    getPortfolioImagesByUsage("about", "profile"),
   ]);
 
   const heroSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_hero`);
@@ -54,16 +55,17 @@ export default async function LandingPage({ params }: PageProps) {
   const stripSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_strip`);
   const packageSource = landingImages.filter((item) => item.usageSection === `${campaign.slug}_package`);
 
-  const heroImageUrl = heroSource.length > 0 ? getImageUrl(heroSource[0].image, 1200) : "";
-  const aboutImageUrl = aboutSource.length > 0 ? getImageUrl(aboutSource[0].image, 900) : "";
-  const stripImageUrls = stripSource.slice(0, 6).map((item) => getImageUrl(item.image, 1200)).filter(Boolean);
-  const packageImageUrl = packageSource.length > 0 ? getImageUrl(packageSource[0].image, 900) : "";
+  const heroImageUrl = heroSource.length > 0 ? getImageUrl(heroSource[0].image) : "";
+  const aboutImageUrl = aboutImages.length > 0 ? getImageUrl(aboutImages[0].image) : "";
+  const stripImageUrls = stripSource.slice(0, 6).map((item) => getImageUrl(item.image)).filter(Boolean);
+  const packageImageUrl = packageSource.length > 0 ? getImageUrl(packageSource[0].image) : "";
 
   return (
     <LandingPageClient
       campaign={campaign}
       heroImageUrl={heroImageUrl}
       aboutImageUrl={aboutImageUrl}
+      aboutContent={aboutContent}
       stripImageUrls={stripImageUrls}
       packageImageUrl={packageImageUrl}
     />
