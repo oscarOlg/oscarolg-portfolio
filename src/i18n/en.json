@@ -228,8 +228,11 @@
       },
       "about": {
         "title": "About my approach",
-        "body": "I'm Oscar, wedding photographer in Ciudad Juárez. I guide you gently so you appear natural, connected, and confident in front of the camera.",
-        "imageAlt": "Portrait of photographer Oscar"
+        "body": "I'm Oscar, wedding photographer in Ciudad Juárez. I guide you gently so you appear natural, connected, and confident in front of the camera.",        "paragraphs": [
+          "I'm Oscar, a wedding photographer in Ciudad Juárez. My specialty is editorial photography that prioritizes real moments, authentic emotions, and a process designed for you to enjoy your day stress-free.",
+          "By nature, I'm introverted, and the camera has allowed me to approach people and document their stories up close. I don't seek to intervene every second or force poses; I prefer to observe and create a calm space for you to live your wedding with freedom.",
+          "I believe in natural, elegant, and deeply human photography. My promise is to transform the emotion of the present into a tangible visual legacy, with the certainty that every irreplaceable moment is in safe hands."
+        ],        "imageAlt": "Portrait of photographer Oscar"
       },
       "strip": {
         "title": "Real stories and moments that truly feel",
@@ -262,8 +265,6 @@
         "intro": "I'm selecting a **handful of couples** to experience an **engagement session** with me. This is a chance to preview what it's like working together before your wedding day and receive photos you'll love for years. These sessions are intended for couples who are **actively looking for their wedding photographer**.",
         "nameLabel": "Full Name *",
         "namePlaceholder": "Enter Your Name",
-        "phoneLabel": "Phone Number *",
-        "phonePlaceholder": "Enter Phone Number",
         "weddingDateVenueLabel": "Wedding Date & Venue *",
         "weddingDateVenuePlaceholder": "What is your wedding date venue?",
         "storyLabel": "Share your love story and suggest a location for your engagement photos! *",
@@ -283,7 +284,6 @@
         "errorMsg": "Could not open WhatsApp. Copy the message and paste it manually.",
         "msgIntro": "Hi Oscar, we want to participate in the giveaway.",
         "msgName": "Name:",
-        "msgPhone": "Phone:",
         "msgDateVenue": "Wedding date and location:",
         "msgStoryHeading": "Our story:",
         "msgHasPhotographer": "Do you already have a photographer?",

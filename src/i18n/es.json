@@ -229,6 +229,11 @@
       "about": {
         "title": "Sobre mi enfoque",
         "body": "Soy Oscar, fotógrafo de bodas en Ciudad Juárez. Los acompaño con una guía suave para que se vean naturales, conectados y seguros frente a cámara.",
+        "paragraphs": [
+          "Soy Oscar, fotógrafo de bodas en Ciudad Juárez. Mi especialidad es fotografía editorial que prioriza momentos reales, emociones auténticas y un proceso diseñado para que disfruten su día sin estrés.",
+          "Por naturaleza soy introvertido, y la cámara me ha permitido acercarme a las personas y documentar sus historias de forma cercana. No busco intervenir cada segundo ni forzar poses; prefiero observar y crear un espacio tranquilo para que vivan su boda con libertad.",
+          "Creo en una fotografía natural, elegante y profundamente humana. Mi promesa es transformar la emoción del presente en un legado visual tangible, con la certeza de que cada instante irrepetible está en manos seguras."
+        ],
         "imageAlt": "Retrato del fotógrafo Oscar"
       },
       "strip": {
@@ -258,22 +263,20 @@
       },
       "form": {
         "preTitle": "¡Participa para ganar una sesión de compromiso!",
-        "preValue": "(Valorada en $2500)",
+        "preValue": "(Valorada en $3000)",
         "intro": "Estoy seleccionando a un **grupo pequeño de parejas** para vivir una **sesión de compromiso** conmigo. Es una oportunidad para conocer cómo es trabajar juntos antes de su boda y recibir fotos que van a amar por años. Estas sesiones están pensadas para parejas que están **buscando activamente a su fotógrafo de boda**.",
         "nameLabel": "Nombre completo *",
         "namePlaceholder": "Escribe tu nombre",
-        "phoneLabel": "Número de teléfono *",
-        "phonePlaceholder": "Escribe tu número de teléfono",
-        "weddingDateVenueLabel": "Fecha y lugar de la boda *",
+        "weddingDateVenueLabel": "Fecha, año y lugar de la boda *",
         "weddingDateVenuePlaceholder": "¿Cuál es la fecha y el lugar de su boda?",
-        "storyLabel": "Comparte su historia y sugiere una locación para sus fotos de compromiso *",
+        "storyLabel": "Comparte su historia y sugiere una locación o que tipo de lugar les gustaria para sus fotos de compromiso *",
         "storyPlaceholder": "Cuéntame cómo se conocieron y sus ideas de locación.",
         "photographerLabel": "¿Ya tienen fotógrafo de boda apartado? *",
         "photographerPlaceholder": "Si sí, cuéntame quién es. ¡Puede que lo conozca! :)",
         "considerOscarLabel": "Si aún no apartan uno, ¿me considerarían como su fotógrafo de boda? *",
         "considerOscarPlaceholder": "Con gusto les comparto mis paquetes y precios si les interesa.",
         "budgetLabel": "¿Cuál es su presupuesto para fotografía de boda? *",
-        "budgetPlaceholder": "ejemplo: $8,000 - $10,000",
+        "budgetPlaceholder": "ejemplo: $10,000 - $12,000",
         "messagePreview": "Mensaje que se enviará",
         "submitButton": "Enviar por WhatsApp",
         "submitSuccess": "Mensaje enviado ✓",
@@ -283,7 +286,6 @@
         "errorMsg": "No se pudo abrir WhatsApp. Copia el mensaje y pégalo manualmente.",
         "msgIntro": "Hola Oscar, queremos participar en el giveaway.",
         "msgName": "Nombre:",
-        "msgPhone": "Teléfono:",
         "msgDateVenue": "Fecha de boda y ubicación:",
         "msgStoryHeading": "Nuestra historia:",
         "msgHasPhotographer": "¿Ya tienen fotógrafo?",

@@ -30,7 +30,7 @@ export function LocalBusinessSchema() {
       "Cobertura cinematográfica"
     ],
     "sameAs": [
-      "https://www.instagram.com/oscar.olg/",
+      "https://www.instagram.com/oscar.olg.ph/",
       "https://www.facebook.com/profile.php?id=100088045982178",
       "mailto:oscar.olg.photo@gmail.com"
     ],
@@ -78,7 +78,7 @@ export function CreatorSchema() {
       "availableLanguage": "Spanish"
     },
     "sameAs": [
-      "https://www.instagram.com/oscar.olg/",
+      "https://www.instagram.com/oscar.olg.ph/",
       "https://www.facebook.com/profile.php?id=100088045982178",
       "mailto:oscar.olg.photo@gmail.com"
     ],
