@@ -7,7 +7,7 @@ const whatsappUrl = getWhatsAppUrl();
 
 const socialsData = [
     { name: "Facebook", url: "https://www.facebook.com/profile.php?id=100088045982178", icon: <FacebookIcon /> },
-    { name: "Instagram", url: "https://www.instagram.com/oscar.olg.ph/", icon: <InstagramIcon /> },
+    { name: "Instagram", url: "https://www.instagram.com/oscar.olg/", icon: <InstagramIcon /> },
   ...(whatsappUrl ? [{ name: "WhatsApp", url: whatsappUrl, icon: <WhatsappIcon /> }] : []),
 ];
 
